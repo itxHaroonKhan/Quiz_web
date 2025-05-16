@@ -31,5 +31,5 @@ Before running the app, ensure you have:
 ### 1. Clone or Download
 
 ```bash
-git clone https://github.com/your-username/js-quiz-pro.git
-cd js-quiz-pro
+git clone https://github.com/itxHaroonKhan/Quiz_web?tab=readme-ov-file
+cd /Quiz_web
