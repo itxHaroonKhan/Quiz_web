@@ -4,617 +4,381 @@ from datetime import datetime
 import streamlit.components.v1 as components
 
 # Corrected Quiz Data (fixed the block-scoping question)
-
 quiz = [
+    # Alerts
     {
-        "question": "Which of the following is a valid variable name in JavaScript?",
-        "options": ["1name", "my-name", "_username", "let"],
-        "answer": "_username"
-    },
-    {
-        "question": "What will happen if you declare a variable like this: let 123abc;",
+        "question": "Which method displays an alert dialog box with a message?",
         "options": [
-            "It will store the value 123.",
-            "It will give a syntax error.",
-            "It will work as expected.",
-            "It will be ignored."
-        ],
-        "answer": "It will give a syntax error."
-    },
-    {
-        "question": "Which of the following characters are allowed at the beginning of a variable name?",
-        "options": ["@", "#", "$", "*"],
-        "answer": "$"
-    },
-    {
-        "question": "Choose the illegal variable name:",
-        "options": ["user_name", "user-name", "username1", "myName"],
-        "answer": "user-name"
-    },
-    {
-        "question": "What does it mean that variable names are case-sensitive?",
-        "options": [
-            "MyVar and myvar are same",
-            "JavaScript doesn't care about case",
-            "MyVar and myvar are different variables",
-            "Variables must always be lowercase"
-        ],
-        "answer": "MyVar and myvar are different variables"
-    },
-    {
-        "question": "What is the output of console.log(typeof NaN)?",
-        "options": ["'number'", "'NaN'", "'undefined'", "'object'"],
-        "answer": "'number'"
-    },
-    {
-        "question": "Which of these is NOT a valid way to declare a variable in JavaScript?",
-        "options": ["let x = 5;", "const y = 10;", "var z = 15;", "int w = 20;"],
-        "answer": "int w = 20;"
-    },
-    {
-        "question": "What does the + operator do in JavaScript?",
-        "options": ["Multiplication", "Addition", "Subtraction", "Division"],
-        "answer": "Addition"
-    },
-    {
-        "question": "What is the result of let sum = 5 + 3;?",
-        "options": ["8", "53", "35", "3"],
-        "answer": "8"
-    },
-    {
-        "question": "What does the - operator do in JavaScript?",
-        "options": ["Addition", "Subtraction", "Multiplication", "Division"],
-        "answer": "Subtraction"
-    },
-    {
-        "question": "What is the result of let result = 10 - 4;?",
-        "options": ["6", "104", "14", "40"],
-        "answer": "6"
-    },
-    {
-        "question": "What does the * operator do in JavaScript?",
-        "options": ["Addition", "Subtraction", "Multiplication", "Division"],
-        "answer": "Multiplication"
-    },
-    {
-        "question": "What is the result of let total = 6 * 2;?",
-        "options": ["12", "62", "26", "16"],
-        "answer": "12"
-    },
-    {
-        "question": "What does the / operator do in JavaScript?",
-        "options": ["Addition", "Subtraction", "Multiplication", "Division"],
-        "answer": "Division"
-    },
-    {
-        "question": "What is the result of let divide = 8 / 2;?",
-        "options": ["4", "8", "2", "16"],
-        "answer": "4"
-    },
-    {
-        "question": "What does the % operator do in JavaScript?",
-        "options": ["Addition", "Subtraction", "Modulus (remainder)", "Division"],
-        "answer": "Modulus (remainder)"
-    },
-    {
-        "question": "What is the result of let mod = 9 % 2;?",
-        "options": ["1", "2", "0", "4"],
-        "answer": "1"
-    },
-    {
-        "question": "What does the ** operator do in JavaScript?",
-        "options": ["Exponentiation (Power)", "Division", "Multiplication", "Modulus"],
-        "answer": "Exponentiation (Power)"
-    },
-    {
-        "question": "What is the result of let power = 2 ** 3;?",
-        "options": ["8", "6", "2", "3"],
-        "answer": "8"
-    },
-    {
-        "question": "What does the = operator do in JavaScript?",
-        "options": [
-            "Assigns a value",
-            "Checks for equality",
-            "Compares values",
-            "Adds two values"
-        ],
-        "answer": "Assigns a value"
-    },
-    {
-        "question": "What does the += operator do in JavaScript?",
-        "options": [
-            "Subtract and assign",
-            "Multiply and assign",
-            "Divide and assign",
-            "Add and assign"
-        ],
-        "answer": "Add and assign"
-    },
-    {
-        "question": "What is the return value of prompt('Enter your name:')?",
-        "options": [
-            "The user's input",
-            "A boolean value",
-            "A string with the message",
-            "null"
-        ],
-        "answer": "The user's input"
-    },
-    {
-        "question": "What does prompt('Enter your name:') do?",
-        "options": [
-            "Displays a prompt asking the user to enter their name",
-            "Displays a message on the page",
-            "Displays a confirmation box",
-            "Displays an alert"
-        ],
-        "answer": "Displays a prompt asking the user to enter their name"
-    },
-    {
-        "question": "Which of the following is used to ask a question with a prompt box in JavaScript?",
-        "options": [
-            "prompt()",
-            "confirm()",
+            "alertBox()",
+            "message()",
             "alert()",
-            "alertBox()"
+            "showDialog()"
         ],
-        "answer": "prompt()"
+        "answer": "alert()"
     },
     {
-        "question": "Can an alert box contain HTML content?",
+        "question": "What happens when you call alert('Hello')?",
         "options": [
-            "Yes",
-            "No",
-            "Only plain text",
-            "Only images"
+            "Prints 'Hello' to console",
+            "Displays 'Hello' in a popup with OK button",
+            "Creates a variable named Hello",
+            "Nothing happens"
         ],
-        "answer": "No"
+        "answer": "Displays 'Hello' in a popup with OK button"
     },
+
+    # Variables for Strings
     {
-        "question": "What does alert('Hello World'); display?",
+        "question": "How do you declare a string variable?",
         "options": [
-            "A pop-up box with 'Hello World'",
-            "A console message with 'Hello World'",
-            "A new webpage with 'Hello World'",
-            "Nothing"
+            "let str = 'text';",
+            "let str = text;",
+            "string str = 'text';",
+            "var str = text;"
         ],
-        "answer": "A pop-up box with 'Hello World'"
+        "answer": "let str = 'text';"
     },
     {
-        "question": "Which of the following will trigger an alert box in JavaScript?",
-        "options": [
-            "alert('Hello World');",
-            "console.log('Hello World');",
-            "document.write('Hello World');",
-            "window.location.href = 'url';"
-        ],
-        "answer": "alert('Hello World');"
-    },
-    {
-        "question": "What is the purpose of the alert() method in JavaScript?",
-        "options": [
-            "Displays an alert box with a specified message",
-            "Logs a message to the console",
-            "Changes the content of an HTML element",
-            "Creates a new webpage"
-        ],
-        "answer": "Displays an alert box with a specified message"
-    },
-    {
-        "question": "Which of the following will convert a number to a string?",
-        "options": [
-            "String(123)",
-            "123.toString()",
-            "Both A and B",
-            "None of these"
-        ],
-        "answer": "Both A and B"
-    },
-    {
-        "question": "What will let msg = 'Hello'; msg += ' World'; console.log(msg); output?",
-        "options": [
-            "'Hello World'",
-            "'World Hello'",
-            "undefined",
-            "Error"
-        ],
-        "answer": "'Hello World'"
-    },
-    {
-        "question": "What is the output of typeof 'JavaScript'?",
+        "question": "What is the result of typeof 'hello'?",
         "options": [
             "'string'",
             "'text'",
-            "'word'",
+            "'object'",
             "'char'"
         ],
         "answer": "'string'"
     },
+
+    # Variables for Numbers
     {
-        "question": "Which method is used to get the length of a string?",
+        "question": "Which is NOT a valid number declaration?",
         "options": [
-            "length()",
-            "getLength()",
-            "size()",
-            "length"
+            "let num = 10;",
+            "let num = 10.5;",
+            "let num = '10';",
+            "let num = 1_000"
         ],
-        "answer": "length"
+        "answer": "let num = '10';"
     },
     {
-        "question": "What will be the output of this code: let x = '5' + 3;?",
-        "options": [
-            "'53'",
-            "8",
-            "'8'",
-            "Error"
-        ],
-        "answer": "'53'"
-    },
-    {
-        "question": "How do you concatenate two strings in JavaScript?",
-        "options": [
-            "'Hello' + 'World'",
-            "'Hello'.concat('World')",
-            "Both A and B",
-            "Hello.World"
-        ],
-        "answer": "Both A and B"
-    },
-    {
-        "question": "Which of the following is a correct way to declare a string variable in JavaScript?",
-        "options": [
-            "let name = 'John';",
-            "let name = John;",
-            "string name = 'John';",
-            "name = string('John');"
-        ],
-        "answer": "let name = 'John';"
-    },
-    {
-        "question": "What is the output of: let x = 5 + 3 * 2;?",
-        "options": [
-            "16",
-            "11",
-            "13",
-            "10"
-        ],
-        "answer": "11"
-    },
-    {
-        "question": "What will typeof 42 return?",
+        "question": "What is the result of typeof 42?",
         "options": [
             "'number'",
-            "'integer'",
+            "'int'",
             "'float'",
-            "'numeric'"
+            "'integer'"
         ],
         "answer": "'number'"
     },
+
+    # Variable Names Legal and Illegal
     {
-        "question": "Which of the following represents a floating point number?",
+        "question": "Which is a legal variable name?",
         "options": [
-            "10.5",
-            "105",
-            "'10.5'",
-            "'105'"
+            "1stPlace",
+            "first-name",
+            "firstName",
+            "let"
         ],
-        "answer": "10.5"
+        "answer": "firstName"
     },
     {
-        "question": "What will let x = 10 / 2; result in?",
+        "question": "Which character CANNOT start a variable name?",
         "options": [
-            "5",
-            "'5'",
-            "2",
-            "'10 / 2'"
+            "letter",
+            "$",
+            "_",
+            "number"
         ],
-        "answer": "5"
+        "answer": "number"
     },
+
+    # Math Expressions: Familiar Operators
     {
-        "question": "What will be the result of: let a = '5' - 2;?",
+        "question": "What is 10 % 3?",
         "options": [
             "3",
-            "'3'",
-            "Error",
-            "'5 - 2'"
-        ],
-        "answer": "3"
-    },
-    {
-        "question": "Which operator is used for exponentiation in JavaScript?",
-        "options": [
-            "^",
-            "**",
-            "exp()",
-            "^^"
-        ],
-        "answer": "**"
-    },
-    {
-        "question": "What is the output of: let x = 9 % 2;?",
-        "options": [
-            "0",
             "1",
-            "2",
-            "4"
+            "0",
+            "3.333"
         ],
         "answer": "1"
     },
     {
-        "question": "What will parseInt('42px') return?",
+        "question": "What is the result of 2 + 3 * 4?",
         "options": [
-            "42",
-            "'42px'",
-            "NaN",
-            "px"
-        ],
-        "answer": "42"
-    },
-    {
-        "question": "Which of the following is a valid way to declare a number variable in JavaScript?",
-        "options": [
-            "let age = 25;",
-            "let 25 = age;",
-            "int age = 25;",
-            "number age = 25;"
-        ],
-        "answer": "let age = 25;"
-    },
-    {
-        "question": "What is the result of: 10 + 5 * 2?",
-        "options": [
-            "30",
-            "25",
             "20",
-            "40"
+            "14",
+            "24",
+            "10"
         ],
-        "answer": "20"
+        "answer": "14"
+    },
+
+    # Math Expressions: Unfamiliar Operators
+    {
+        "question": "What does the ** operator do?",
+        "options": [
+            "Multiplication",
+            "Exponentiation",
+            "Concatenation",
+            "Division"
+        ],
+        "answer": "Exponentiation"
     },
     {
-        "question": "What is the output of: 7 % 3?",
+        "question": "What is 2 ** 3?",
         "options": [
-            "1",
-            "2",
-            "3",
-            "0"
-        ],
-        "answer": "1"
-    },
-    {
-        "question": "What will 10 / 2 evaluate to?",
-        "options": [
-            "5",
-            "2",
-            "0",
-            "20"
-        ],
-        "answer": "5"
-    },
-    {
-        "question": "What does the ++ operator do?",
-        "options": [
-            "Decreases value by 1",
-            "Increases value by 1",
-            "Multiplies the value",
-            "Divides the value"
-        ],
-        "answer": "Increases value by 1"
-    },
-    {
-        "question": "What is the result of: let x = 5; x++;?",
-        "options": [
-            "4",
-            "5",
             "6",
-            "Error"
+            "8",
+            "23",
+            "5"
         ],
-        "answer": "6"
+        "answer": "8"
     },
+
+    # Math Expressions: Eliminating Ambiguity
     {
-        "question": "Which operator decreases the value by 1?",
+        "question": "How can you make (2 + 3) * 4 clearer?",
         "options": [
-            "--",
-            "++",
-            "-=",
-            "+="
+            "Use more spaces",
+            "Add comments",
+            "Use parentheses",
+            "All of the above"
         ],
-        "answer": "--"
+        "answer": "All of the above"
     },
     {
-        "question": "What does x -= 2 do?",
+        "question": "What does operator precedence determine?",
         "options": [
-            "Adds 2 to x",
-            "Multiplies x by 2",
-            "Divides x by 2",
-            "Subtracts 2 from x"
+            "The order of operations",
+            "Variable names",
+            "Data types",
+            "Function outputs"
         ],
-        "answer": "Subtracts 2 from x"
+        "answer": "The order of operations"
     },
+
+    # Concatenating Text Strings
     {
-        "question": "What is the difference between x++ and ++x?",
-        "options": [
-            "x++ increments after use, ++x increments before use",
-            "They are the same",
-            "x++ causes error",
-            "++x decreases value"
-        ],
-        "answer": "x++ increments after use, ++x increments before use"
-    },
-    {
-        "question": "What does x *= 2 mean in JavaScript?",
-        "options": [
-            "Divides x by 2",
-            "Multiplies x by 2",
-            "Sets x to 2",
-            "Adds 2 to x"
-        ],
-        "answer": "Multiplies x by 2"
-    },
-    {
-        "question": "What will console.log('I am ' + 20 + ' years old.'); print?",
-        "options": [
-            "'I am 20 years old.'",
-            "'I am 20years old.'",
-            "'I am20 years old.'",
-            "'20 I am years old.'"
-        ],
-        "answer": "'I am 20 years old.'"
-    },
-    {
-        "question": "What happens if you concatenate 'abc' + 123 in JavaScript?",
-        "options": [
-            "Throws an error",
-            "'abc123'",
-            "246",
-            "NaN"
-        ],
-        "answer": "'abc123'"
-    },
-    {
-        "question": "What does this expression return: 'Age: ' + (10 + 5)?",
-        "options": [
-            "'Age: 15'",
-            "'Age: 105'",
-            "'10 + 5 = Age'",
-            "Error"
-        ],
-        "answer": "'Age: 15'"
-    },
-    {
-        "question": "What will be the output of: '2' + 2 in JavaScript?",
-        "options": [
-            "4",
-            "22",
-            "'4'",
-            "'2 2'"
-        ],
-        "answer": "22"
-    },
-    {
-        "question": "What is the value of: let name = 'Ali'; let message = 'Hello ' + name;?",
-        "options": [
-            "'Hello Ali'",
-            "'Ali Hello'",
-            "Hello + name",
-            "Error"
-        ],
-        "answer": "'Hello Ali'"
-    },
-    {
-        "question": "What will be the result of: 'Hello' + ' World'?",
+        "question": "What is 'Hello' + ' ' + 'World'?",
         "options": [
             "'HelloWorld'",
             "'Hello World'",
-            "'Hello+World'",
+            "'Hello + World'",
             "Error"
         ],
         "answer": "'Hello World'"
     },
     {
-        "question": "Which operator is used to concatenate strings in JavaScript?",
+        "question": "What is '5' + 2?",
         "options": [
-            "+",
-            "-",
-            "*",
-            "/"
+            "7",
+            "'52'",
+            "Error",
+            "5"
         ],
-        "answer": "+"
+        "answer": "'52'"
+    },
+
+    # Prompts
+    {
+        "question": "What does prompt() return if user clicks Cancel?",
+        "options": [
+            "empty string",
+            "null",
+            "undefined",
+            "false"
+        ],
+        "answer": "null"
     },
     {
-        "question": "What does string concatenation mean?",
+        "question": "How do you add a default value to prompt()?",
         "options": [
-            "Dividing two strings",
-            "Multiplying strings",
-            "Joining two or more strings together",
-            "Converting string to number"
+            "prompt('Message', 'default')",
+            "prompt('Message').default('value')",
+            "prompt().setDefault('value')",
+            "You can't"
         ],
-        "answer": "Joining two or more strings together"
+        "answer": "prompt('Message', 'default')"
+    },
+
+    # if statements
+    {
+        "question": "What is the correct if statement syntax?",
+        "options": [
+            "if x == 5 {}",
+            "if (x = 5) {}",
+            "if (x === 5) {}",
+            "if x = 5 then"
+        ],
+        "answer": "if (x === 5) {}"
     },
     {
-        "question": "What does the -= operator do in JavaScript?",
+        "question": "When does an if statement execute its code block?",
         "options": [
-            "Subtract and assign",
-            "Add and assign",
-            "Multiply and assign",
-            "Divide and assign"
+            "Always",
+            "When condition is truthy",
+            "When condition is false",
+            "Only at runtime"
         ],
-        "answer": "Subtract and assign"
+        "answer": "When condition is truthy"
+    },
+
+    # Comparison Operators
+    {
+        "question": "Which operator checks value AND type?",
+        "options": [
+            "==",
+            "===",
+            "=",
+            "!=="
+        ],
+        "answer": "==="
     },
     {
-        "question": "What does the *= operator do in JavaScript?",
+        "question": "What is 5 == '5'?",
         "options": [
-            "Subtract and assign",
-            "Add and assign",
-            "Multiply and assign",
-            "Divide and assign"
+            "true",
+            "false",
+            "Error",
+            "null"
         ],
-        "answer": "Multiply and assign"
+        "answer": "true"
+    },
+
+    # if...else and else if statements
+    {
+        "question": "What is the purpose of else if?",
+        "options": [
+            "To create multiple conditions",
+            "To handle errors",
+            "To loop through code",
+            "To declare variables"
+        ],
+        "answer": "To create multiple conditions"
     },
     {
-        "question": "What does the /= operator do in JavaScript?",
+        "question": "How many else if blocks can you have?",
         "options": [
-            "Subtract and assign",
-            "Multiply and assign",
-            "Divide and assign",
-            "Modulus and assign"
+            "Only 1",
+            "Up to 3",
+            "As many as needed",
+            "Exactly 2"
         ],
-        "answer": "Divide and assign"
+        "answer": "As many as needed"
+    },
+
+    # Testing Sets of Conditions
+    {
+        "question": "What is (x > 5 && x < 10) testing?",
+        "options": [
+            "If x is between 5 and 10",
+            "If x is less than 5 or greater than 10",
+            "If x equals 5 or 10",
+            "If x is not a number"
+        ],
+        "answer": "If x is between 5 and 10"
     },
     {
-        "question": "What does the %= operator do in JavaScript?",
+        "question": "Which operator would test if x is 5 OR 10?",
         "options": [
-            "Subtract and assign",
-            "Add and assign",
-            "Divide and assign",
-            "Modulus and assign"
+            "x == 5 && x == 10",
+            "x === 5 || x === 10",
+            "x == 5 ! x == 10",
+            "x === 5 & x === 10"
         ],
-        "answer": "Modulus and assign"
+        "answer": "x === 5 || x === 10"
+    },
+
+    # Nested if statements
+    {
+        "question": "What is a nested if statement?",
+        "options": [
+            "An if inside another if",
+            "An if after an else",
+            "Multiple else ifs",
+            "An if with many conditions"
+        ],
+        "answer": "An if inside another if"
     },
     {
-        "question": "What does the **= operator do in JavaScript?",
+        "question": "When would you use nested ifs?",
         "options": [
-            "Exponentiation and assign",
-            "Multiply and assign",
-            "Divide and assign",
-            "Modulus and assign"
+            "To check multiple related conditions",
+            "To make code run faster",
+            "To reduce code length",
+            "To declare variables"
         ],
-        "answer": "Exponentiation and assign"
+        "answer": "To check multiple related conditions"
+    },
+
+    # Arrays
+    {
+        "question": "How do you create an array with 3 elements?",
+        "options": [
+            "let arr = [1, 2, 3];",
+            "let arr = (1, 2, 3);",
+            "let arr = {1, 2, 3};",
+            "let arr = new Array(1 2 3);"
+        ],
+        "answer": "let arr = [1, 2, 3];"
     },
     {
-        "question": "When was JavaScript created and by whom?",
+        "question": "What is arr.length for [10, 20, 30]?",
         "options": [
-            "December 4, 1995 by Brendan Eich",
-            "1995 by Brendan Eich",
-            "December 4, 1995 by Mark Zuckerberg",
-            "2000 by Tim Berners-Lee"
+            "2",
+            "3",
+            "30",
+            "undefined"
         ],
-        "answer": "December 4, 1995 by Brendan Eich"
+        "answer": "3"
+    },
+
+    # Arrays: Adding and Removing Elements
+    {
+        "question": "Which method adds to the end of an array?",
+        "options": [
+            "push()",
+            "pop()",
+            "shift()",
+            "unshift()"
+        ],
+        "answer": "push()"
     },
     {
-        "question": "What was JavaScript's original name and what happened to it?",
+        "question": "What does pop() return?",
         "options": [
-            "LiveScript, later renamed to JavaScript",
-            "JScript, later renamed to JavaScript",
-            "Java, later renamed to JavaScript",
-            "LiveScript, later renamed to JScript"
+            "The removed element",
+            "The new array length",
+            "The array without last element",
+            "undefined"
         ],
-        "answer": "LiveScript, later renamed to JavaScript"
+        "answer": "The removed element"
+    },
+
+    # Arrays: Removing, Inserting, Extracting
+    {
+        "question": "What does splice(1, 2) do?",
+        "options": [
+            "Removes 2 elements starting at index 1",
+            "Adds 2 elements at index 1",
+            "Extracts elements without modifying array",
+            "Reverses the array"
+        ],
+        "answer": "Removes 2 elements starting at index 1"
     },
     {
-        "question": "Which of the following will work for block-scoping in JavaScript?",
-        "options": ["let", "var", "const", "Both let and const"],
-        "answer": "Both let and const"
-    },
-      {
-        'question': 'What is the output of `console.log(typeof null)`?',
-        'options': ['null', 'object', 'undefined', 'string'],
-        'answer': 'object'
-    },
+        "question": "How do you extract a portion of an array without modifying it?",
+        "options": [
+            "slice()",
+            "splice()",
+            "cut()",
+            "extract()"
+        ],
+        "answer": "slice()"
+    }
 ]
-
-
-
 
 
 
