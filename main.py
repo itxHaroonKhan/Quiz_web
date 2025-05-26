@@ -5,162 +5,140 @@ import streamlit.components.v1 as components
 
 # Corrected Quiz Data (fixed the block-scoping question)
 quiz = [
-
     {
-        "question": "Which function displays a message in a popup?",
+        "question": "Which function shows a message popup?",
         "options": ["alert()", "prompt()", "confirm()", "message()"],
         "answer": "alert()"
     },
     {
-        "question": "What does alert('Error!') do?",
-        "options": ["Logs to console", "Shows a popup", "Creates a variable", "Nothing"],
-        "answer": "Shows a popup"
+        "question": "What does alert('Hello') display?",
+        "options": ["'Hello'", "undefined", "null", "Error"],
+        "answer": "'Hello'"
     },
     {
-        "question": "What is the return value of alert()?",
+        "question": "What is alert()'s return value?",
         "options": ["string", "undefined", "null", "boolean"],
         "answer": "undefined"
     },
     {
-        "question": "What happens if alert() is called with no argument?",
-        "options": ["Empty popup", "Throws error", "Shows 'undefined'", "Does nothing"],
-        "answer": "Shows 'undefined'"
+        "question": "What does alert(5 + 3) show?",
+        "options": ["'5 + 3'", "8", "'8'", "Error"],
+        "answer": "'8'"
     },
     {
-        "question": "How do you add a line break in an alert message?",
+        "question": "How do you add a line break in alert?",
         "options": ["<br>", "\\n", "/n", ";"],
         "answer": "\\n"
     },
     {
-        "question": "What does alert('Hello\\nWorld') show?",
-        "options": ["HelloWorld", "Hello World", "Hello\\nWorld", "Error"],
-        "answer": "Hello World"
+        "question": "What does alert('Hi\\nThere') show?",
+        "options": ["HiThere", "Hi There", "Hi\\nThere", "Error"],
+        "answer": "Hi There"
     },
     {
-        "question": "Can alert() accept multiple arguments?",
+        "question": "Can alert() take multiple arguments?",
         "options": ["Yes", "No", "Only strings", "Only numbers"],
         "answer": "No"
     },
     {
-        "question": "What does alert(5 + 5) display?",
-        "options": ["'5 + 5'", "10", "'10'", "Error"],
-        "answer": "'10'"
+        "question": "What happens if alert() has no argument?",
+        "options": ["Empty popup", "Throws error", "Shows 'undefined'", "Does nothing"],
+        "answer": "Shows 'undefined'"
     },
-
-    // Variables for Strings (8 questions)
     {
         "question": "How do you declare a string variable?",
         "options": ["let str = 'text';", "let str = text;", "string str = 'text';", "var str = (text);"],
         "answer": "let str = 'text';"
     },
     {
-        "question": "What is typeof 'hello'?",
+        "question": "What is typeof 'code'?",
         "options": ["'string'", "'text'", "'object'", "'char'"],
         "answer": "'string'"
     },
     {
-        "question": "What does 'test'.length return?",
-        "options": ["3", "4", "5", "undefined"],
-        "answer": "4"
+        "question": "What is 'hello'.length?",
+        "options": ["4", "5", "6", "undefined"],
+        "answer": "5"
     },
     {
-        "question": "How do you declare a string with double quotes?",
-        "options": ["let str = 'text';", "let str = \"text\";", "let str = (text);", "let str = text;"],
-        "answer": "let str = \"text\";"
+        "question": "What does 'test'.toUpperCase() return?",
+        "options": ["'TEST'", "'test'", "'Test'", "undefined"],
+        "answer": "'TEST'"
     },
     {
-        "question": "What is 'hello'[0]?",
-        "options": ["'h'", "'e'", "0", "undefined"],
+        "question": "What is 'code'[1]?",
+        "options": ["'c'", "'o'", "'d'", "undefined"],
+        "answer": "'o'"
+    },
+    {
+        "question": "What does 'hi'.charAt(0) return?",
+        "options": ["'h'", "'i'", "0", "undefined"],
         "answer": "'h'"
     },
     {
-        "question": "What does 'abc'.toUpperCase() return?",
-        "options": ["'ABC'", "'abc'", "'Abc'", "undefined"],
-        "answer": "'ABC'"
+        "question": "What is let str = 'abc'; str = 'def';?",
+        "options": ["'abc'", "'def'", "undefined", "Error"],
+        "answer": "'def'"
     },
     {
-        "question": "What is the value of let str = 'code'; str = 'test';?",
-        "options": ["'code'", "'test'", "undefined", "Error"],
-        "answer": "'test'"
+        "question": "What does 'javascript'.toLowerCase() return?",
+        "options": ["'JAVASCRIPT'", "'javascript'", "'Javascript'", "undefined"],
+        "answer": "'javascript'"
     },
-    {
-        "question": "What does 'hi'.charAt(1) return?",
-        "options": ["'h'", "'i'", "undefined", "Error"],
-        "answer": "'i'"
-    },
-
-    // Variables for Numbers (8 questions)
     {
         "question": "Which is a valid number declaration?",
         "options": ["let num = '10';", "let num = 10;", "let num = ten;", "let num = [10];"],
         "answer": "let num = 10;"
     },
     {
-        "question": "What is typeof 42?",
+        "question": "What is typeof 100?",
         "options": ["'number'", "'int'", "'float'", "'integer'"],
         "answer": "'number'"
     },
     {
-        "question": "What does let num = 5; num = 10; return?",
-        "options": ["5", "10", "undefined", "Error"],
-        "answer": "10"
+        "question": "What does parseInt('25') return?",
+        "options": ["25", "'25'", "NaN", "undefined"],
+        "answer": "25"
     },
     {
-        "question": "What is parseInt('15')?",
-        "options": ["15", "'15'", "NaN", "undefined"],
-        "answer": "15"
+        "question": "What is parseFloat('4.5')?",
+        "options": ["4", "4.5", "'4.5'", "NaN"],
+        "answer": "4.5"
     },
     {
-        "question": "What is parseFloat('3.14')?",
-        "options": ["3", "3.14", "'3.14'", "NaN"],
-        "answer": "3.14"
+        "question": "What does Number('50') return?",
+        "options": ["50", "'50'", "NaN", "undefined"],
+        "answer": "50"
     },
     {
-        "question": "What does Number('123') return?",
-        "options": ["123", "'123'", "NaN", "undefined"],
-        "answer": "123"
+        "question": "What is let num = 3; num = 7;?",
+        "options": ["3", "7", "undefined", "Error"],
+        "answer": "7"
     },
     {
-        "question": "What is typeof 10.5?",
+        "question": "What does isNaN('abc') return?",
+        "options": ["true", "false", "NaN", "undefined"],
+        "answer": "true"
+    },
+    {
+        "question": "What is typeof 7.5?",
         "options": ["'number'", "'float'", "'double'", "'decimal'"],
         "answer": "'number'"
     },
-    {
-        "question": "What does isNaN(5) return?",
-        "options": ["true", "false", "NaN", "undefined"],
-        "answer": "false"
-    },
-
-    // Variable Names (Legal and Illegal) (8 questions)
     {
         "question": "Which is a legal variable name?",
         "options": ["myVar", "1var", "my-var", "let"],
         "answer": "myVar"
     },
     {
-        "question": "Which character can start a variable name?",
-        "options": ["number", "letter", "$", "Both B and C"],
+        "question": "Which can start a variable name?",
+        "options": ["number", "letter", "_", "Both B and C"],
         "answer": "Both B and C"
     },
     {
         "question": "Which is NOT a reserved keyword?",
-        "options": ["if", "else", "data", "for"],
-        "answer": "data"
-    },
-    {
-        "question": "Is '2name' a legal variable name?",
-        "options": ["Yes", "No", "Only in strict mode", "Only with var"],
-        "answer": "No"
-    },
-    {
-        "question": "Which is a valid variable name?",
-        "options": ["_count", "count!", "count#", "count space"],
-        "answer": "_count"
-    },
-    {
-        "question": "What happens if you use 'function' as a variable name?",
-        "options": ["Works fine", "SyntaxError", "ReferenceError", "undefined"],
-        "answer": "SyntaxError"
+        "options": ["if", "else", "value", "while"],
+        "answer": "value"
     },
     {
         "question": "Is 'my_name' a legal variable name?",
@@ -168,164 +146,170 @@ quiz = [
         "answer": "Yes"
     },
     {
-        "question": "Which naming convention is used for constants?",
+        "question": "What happens if you use 'return' as a variable name?",
+        "options": ["Works fine", "SyntaxError", "ReferenceError", "undefined"],
+        "answer": "SyntaxError"
+    },
+    {
+        "question": "Which is a valid variable name?",
+        "options": ["$count", "count!", "count#", "count space"],
+        "answer": "$count"
+    },
+    {
+        "question": "Is '2start' a legal variable name?",
+        "options": ["Yes", "No", "Only in strict mode", "Only with var"],
+        "answer": "No"
+    },
+    {
+        "question": "What is the convention for constants?",
         "options": ["camelCase", "UPPER_CASE", "PascalCase", "kebab-case"],
         "answer": "UPPER_CASE"
     },
-
-    // Math Expressions: Familiar Operators (6 questions)
     {
-        "question": "What is 5 + 3 * 2?",
-        "options": ["16", "11", "8", "10"],
-        "answer": "11"
+        "question": "What is 4 + 2 * 3?",
+        "options": ["18", "10", "12", "9"],
+        "answer": "10"
     },
     {
-        "question": "What is 10 - 4 / 2?",
-        "options": ["3", "8", "6", "2"],
-        "answer": "8"
+        "question": "What is 15 / 3 - 1?",
+        "options": ["4", "5", "6", "2"],
+        "answer": "4"
     },
     {
-        "question": "What is 15 % 4?",
-        "options": ["3", "4", "2", "0"],
-        "answer": "3"
+        "question": "What is 10 % 3?",
+        "options": ["1", "3", "0", "2"],
+        "answer": "1"
     },
     {
-        "question": "What is 6 * 2 + 3?",
-        "options": ["15", "18", "9", "12"],
+        "question": "What is 7 * 2 + 1?",
+        "options": ["14", "15", "13", "16"],
         "answer": "15"
     },
     {
-        "question": "What is 20 / 5 - 1?",
-        "options": ["3", "4", "5", "2"],
-        "answer": "3"
+        "question": "What is 20 - 8 / 4?",
+        "options": ["18", "12", "10", "6"],
+        "answer": "18"
     },
     {
-        "question": "What is 2 + 3 - 1?",
-        "options": ["4", "5", "6", "3"],
-        "answer": "4"
-    },
-
-    // Math Expressions: Unfamiliar Operators (6 questions)
-    {
-        "question": "What does 2 ** 3 return?",
-        "options": ["6", "8", "9", "Error"],
-        "answer": "8"
-    },
-    {
-        "question": "What is the ++ operator in x++?",
-        "options": ["Adds 1", "Subtracts 1", "Multiplies by 1", "Divides by 1"],
-        "answer": "Adds 1"
-    },
-    {
-        "question": "What does x-- do if x is 5?",
-        "options": ["4", "5", "6", "Error"],
-        "answer": "4"
-    },
-    {
-        "question": "What is 10 ** 2?",
-        "options": ["20", "100", "12", "Error"],
-        "answer": "100"
-    },
-    {
-        "question": "What does += do in x += 5?",
-        "options": ["Assigns 5", "Adds 5 to x", "Subtracts 5", "Multiplies by 5"],
-        "answer": "Adds 5 to x"
-    },
-    {
-        "question": "What is x *= 2 if x is 3?",
-        "options": ["6", "5", "9", "Error"],
+        "question": "What is 3 + 5 - 2?",
+        "options": ["6", "8", "10", "4"],
         "answer": "6"
     },
-
-    // Math Expressions: Eliminating Ambiguity (6 questions)
     {
-        "question": "What is (2 + 3) * 4?",
-        "options": ["20", "14", "24", "10"],
-        "answer": "20"
-    },
-    {
-        "question": "How do parentheses affect 2 + 3 * 4?",
-        "options": ["No effect", "Changes result to 20", "Causes error", "Changes result to 14"],
-        "answer": "Changes result to 20"
-    },
-    {
-        "question": "What is 10 / (2 + 3)?",
-        "options": ["2", "5", "1", "Error"],
-        "answer": "2"
-    },
-    {
-        "question": "What is 4 * (2 + 1)?",
-        "options": ["12", "9", "10", "8"],
-        "answer": "12"
-    },
-    {
-        "question": "What does (5 - 2) * 3 return?",
-        "options": ["9", "6", "15", "3"],
+        "question": "What does 3 ** 2 return?",
+        "options": ["6", "9", "8", "Error"],
         "answer": "9"
     },
     {
-        "question": "How do you ensure 2 + 3 * 4 evaluates to 20?",
+        "question": "What does x++ do if x is 4?",
+        "options": ["3", "4", "5", "Error"],
+        "answer": "5"
+    },
+    {
+        "question": "What is x -= 2 if x is 7?",
+        "options": ["5", "9", "7", "Error"],
+        "answer": "5"
+    },
+    {
+        "question": "What does ++x do if x is 3?",
+        "options": ["2", "3", "4", "Error"],
+        "answer": "4"
+    },
+    {
+        "question": "What is 2 ** 4?",
+        "options": ["8", "16", "6", "Error"],
+        "answer": "16"
+    },
+    {
+        "question": "What does x += 3 do if x is 5?",
+        "options": ["8", "5", "3", "Error"],
+        "answer": "8"
+    },
+    {
+        "question": "What is (3 + 2) * 4?",
+        "options": ["20", "14", "12", "10"],
+        "answer": "20"
+    },
+    {
+        "question": "What does (10 / 2) + 3 return?",
+        "options": ["8", "15", "6", "Error"],
+        "answer": "8"
+    },
+    {
+        "question": "What is 6 * (2 + 1)?",
+        "options": ["18", "12", "9", "15"],
+        "answer": "18"
+    },
+    {
+        "question": "How do you make 2 + 3 * 4 equal 20?",
         "options": ["Use spaces", "Use parentheses", "Use comments", "Use variables"],
         "answer": "Use parentheses"
     },
-
-    // Concatenating Text Strings (8 questions)
     {
-        "question": "What is 'Hello' + ' ' + 'World'?",
-        "options": ["'HelloWorld'", "'Hello World'", "'Hello + World'", "Error"],
+        "question": "What is 8 / (2 + 2)?",
+        "options": ["2", "4", "1", "Error"],
+        "answer": "2"
+    },
+    {
+        "question": "What does (5 - 1) * 2 return?",
+        "options": ["8", "6", "10", "4"],
+        "answer": "8"
+    },
+    {
+        "question": "What is 'Hi' + ' ' + 'There'?",
+        "options": ["'HiThere'", "'Hi There'", "'Hi + There'", "Error"],
+        "answer": "'Hi There'"
+    },
+    {
+        "question": "What is '10' + 5?",
+        "options": ["15", "'15'", "'105'", "Error"],
+        "answer": "'105'"
+    },
+    {
+        "question": "What is `Hello ${'World'}`?",
+        "options": ["'HelloWorld'", "'Hello World'", "'Hello ${World}'", "Error"],
         "answer": "'Hello World'"
     },
     {
-        "question": "What is '5' + 2?",
-        "options": ["7", "'7'", "'52'", "Error"],
-        "answer": "'52'"
-    },
-    {
-        "question": "What is `Hi ${'there'}`?",
-        "options": ["'Hi there'", "'Hi ${there}'", "'there'", "Error"],
-        "answer": "'Hi there'"
-    },
-    {
-        "question": "What is 3 + '3'?",
-        "options": ["6", "'6'", "'33'", "Error"],
-        "answer": "'33'"
+        "question": "What is 2 + '3'?",
+        "options": ["5", "'5'", "'23'", "Error"],
+        "answer": "'23'"
     },
     {
         "question": "How do you convert a number to string for concatenation?",
         "options": ["num.toString()", "String(num)", "num + ''", "All of the above"],
         "answer": "All of the above"
+   _weapon
     },
     {
-        "question": "What is 'test' + null?",
-        "options": ["'testnull'", "'test'", "null", "Error"],
-        "answer": "'testnull'"
+        "question": "What is 'abc' + null?",
+        "options": ["'abcnull'", "'abc'", "null", "Error"],
+        "answer": "'abcnull'"
     },
     {
-        "question": "What is `Sum: ${4 + 2}`?",
-        "options": ["'Sum: 6'", "'Sum: 4+2'", "'Sum: 42'", "Error"],
-        "answer": "'Sum: 6'"
+        "question": "What is `Sum: ${3 + 2}`?",
+        "options": ["'Sum: 5'", "'Sum: 3+2'", "'Sum: 32'", "Error"],
+        "answer": "'Sum: 5'"
     },
     {
-        "question": "What is 'a' + 'b' + 'c'?",
-        "options": ["'abc'", "'a b c'", "'a+b+c'", "Error"],
-        "answer": "'abc'"
+        "question": "What is 'x' + 'y' + 'z'?",
+        "options": ["'xyz'", "'x y z'", "'x+y+z'", "Error"],
+        "answer": "'xyz'"
     },
-
-    // Prompts (8 questions)
     {
-        "question": "What does prompt('Enter name') return if the user clicks Cancel?",
+        "question": "What does prompt('Name') return on Cancel?",
         "options": ["null", "empty string", "undefined", "Error"],
         "answer": "null"
     },
     {
-        "question": "What does prompt('Age', '18') return if the user enters '20'?",
-        "options": ["18", "20", "'20'", "null"],
-        "answer": "'20'"
-    },
-    {
-        "question": "What does confirm('Save?') return on OK?",
+        "question": "What does confirm('OK?') return on OK?",
         "options": ["true", "false", "'OK'", "null"],
         "answer": "true"
+    },
+    {
+        "question": "What does prompt('Age', '20') return if user enters '25'?",
+        "options": ["20", "25", "'25'", "null"],
+        "answer": "'25'"
     },
     {
         "question": "How do you convert prompt input to a number?",
@@ -333,7 +317,7 @@ quiz = [
         "answer": "parseInt(prompt())"
     },
     {
-        "question": "What does prompt('Enter') return if the user clicks OK with no input?",
+        "question": "What does prompt('Enter') return if user clicks OK with no input?",
         "options": ["null", "empty string", "undefined", "Error"],
         "answer": "empty string"
     },
@@ -343,26 +327,24 @@ quiz = [
         "answer": "false"
     },
     {
-        "question": "What is Number(prompt('Enter number', '10')) if the user enters '5'?",
+        "question": "What is Number(prompt('Num', '10')) if user enters '5'?",
         "options": ["5", "'5'", "10", "null"],
         "answer": "5"
     },
     {
-        "question": "Can prompt() accept multiple default values?",
+        "question": "Can prompt() have multiple default values?",
         "options": ["Yes", "No", "Only strings", "Only numbers"],
         "answer": "No"
     },
-
-    // If Statements (6 questions)
     {
         "question": "What is the correct if statement syntax?",
         "options": ["if (x == 5) {}", "if x = 5 {}", "if (x = 5) {}", "if x == 5 then"],
         "answer": "if (x == 5) {}"
     },
     {
-        "question": "When does an if statement execute its block?",
-        "options": ["Always", "When condition is true", "When condition is false", "At runtime"],
-        "answer": "When condition is true"
+        "question": "When does an if statement run its block?",
+        "options": ["Always", "When true", "When false", "At runtime"],
+        "answer": "When true"
     },
     {
         "question": "What does if (x) {} evaluate?",
@@ -370,22 +352,10 @@ quiz = [
         "answer": "Any value"
     },
     {
-        "question": "What happens if the condition in if (x == 5) {} is false?",
-        "options": ["Executes block", "Skips block", "Throws error", "Returns null"],
+        "question": "What happens if if (x == 5) {} is false?",
+        "options": ["Runs block", "Skips block", "Throws error", "Returns null"],
         "answer": "Skips block"
     },
-    {
-        "question": "What is the output of if (5 > 3) { console.log('Yes'); }?",
-        "options": ["'Yes'", "undefined", "true", "Error"],
-        "answer": "'Yes'"
-    },
-    {
-        "question": "Can an if statement have no curly braces for a single statement?",
-        "options": ["Yes", "No", "Only in strict mode", "Only with var"],
-        "answer": "Yes"
-    },
-
-    // Comparison Operators (6 questions)
     {
         "question": "What does x === 5 check?",
         "options": ["Value only", "Type only", "Value and type", "Reference"],
@@ -397,12 +367,12 @@ quiz = [
         "answer": "true"
     },
     {
-        "question": "What does x !== 5 check?",
-        "options": ["Value not equal", "Type not equal", "Value and type not equal", "Value or type not equal"],
-        "answer": "Value and type not equal"
+        "question": "What does 10 !== '10' return?",
+        "options": ["true", "false", "undefined", "Error"],
+        "answer": "true"
     },
     {
-        "question": "What is 10 > 5?",
+        "question": "What is 7 > 4?",
         "options": ["true", "false", "undefined", "Error"],
         "answer": "true"
     },
@@ -412,26 +382,29 @@ quiz = [
         "answer": "true"
     },
     {
-        "question": "What is '10' != 10?",
+        "question": "What is '5' != 5?",
         "options": ["true", "false", "undefined", "Error"],
         "answer": "false"
     },
-
-    // If...Else and Else If Statements (6 questions)
     {
-        "question": "What does the else statement do?",
+        "question": "What does else do in an if...else statement?",
         "options": ["Runs if true", "Runs if false", "Always runs", "Skips condition"],
         "answer": "Runs if false"
     },
     {
-        "question": "What is the purpose of else if?",
+        "question": "What is the output of: let x = 3; if (x > 5) { console.log('big'); } else { console.log('small'); }?",
+        "options": ["'big'", "'small'", "undefined", "Error"],
+        "answer": "'small'"
+    },
+    {
+        "question": "What does else if do?",
         "options": ["Multiple conditions", "Error handling", "Looping", "Variable declaration"],
         "answer": "Multiple conditions"
     },
     {
-        "question": "What is the output of: let x = 5; if (x > 10) { console.log('big'); } else { console.log('small'); }?",
-        "options": ["'big'", "'small'", "undefined", "Error"],
-        "answer": "'small'"
+        "question": "What is the output of: let x = 0; if (x > 0) { console.log('positive'); } else if (x < 0) { console.log('negative'); } else { console.log('zero'); }?",
+        "options": ["'positive'", "'negative'", "'zero'", "Error"],
+        "answer": "'zero'"
     },
     {
         "question": "How many else if statements can you have?",
@@ -439,113 +412,85 @@ quiz = [
         "answer": "As many as needed"
     },
     {
-        "question": "What does else require?",
-        "options": ["An if statement", "A loop", "A function", "A variable"],
-        "answer": "An if statement"
+        "question": "What does x > 3 && x < 7 test?",
+        "options": ["x is between 3 and 7", "x is less than 3 or greater than 7", "x equals 3 or 7", "x is not a number"],
+        "answer": "x is between 3 and 7"
     },
     {
-        "question": "What is the output of: let x = 0; if (x > 0) { console.log('positive'); } else if (x < 0) { console.log('negative'); } else { console.log('zero'); }?",
-        "options": ["'positive'", "'negative'", "'zero'", "Error"],
-        "answer": "'zero'"
-    },
-
-    // Testing Sets of Conditions (6 questions)
-    {
-        "question": "What does x > 5 && x < 10 test?",
-        "options": ["x is between 5 and 10", "x is less than 5 or greater than 10", "x equals 5 or 10", "x is not a number"],
-        "answer": "x is between 5 and 10"
+        "question": "What is true || false?",
+        "options": ["true", "false", "undefined", "Error"],
+        "answer": "true"
     },
     {
-        "question": "What is true && false?",
+        "question": "What does x === 4 || x === 8 return if x is 8?",
+        "options": ["true", "false", "undefined", "Error"],
+        "answer": "true"
+    },
+    {
+        "question": "What is !true?",
         "options": ["true", "false", "undefined", "Error"],
         "answer": "false"
     },
     {
-        "question": "What does x === 5 || x === 10 return if x is 5?",
+        "question": "What does 3 > 5 || 5 < 10 return?",
         "options": ["true", "false", "undefined", "Error"],
         "answer": "true"
     },
-    {
-        "question": "What is !false?",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "true"
-    },
-    {
-        "question": "What does 5 < 3 || 3 < 5 return?",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "true"
-    },
-    {
-        "question": "What is the result of x >= 10 && x <= 20 if x is 15?",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "true"
-    },
-
-    // If Statements Nested (6 questions)
     {
         "question": "What is a nested if statement?",
         "options": ["An if inside another if", "An if after else", "Multiple else ifs", "An if with many conditions"],
         "answer": "An if inside another if"
     },
     {
-        "question": "What is the output of: let x = 5; if (x > 0) { if (x < 10) { console.log('valid'); } }?",
+        "question": "What is the output of: let x = 7; if (x > 5) { if (x < 10) { console.log('valid'); } }?",
         "options": ["'valid'", "undefined", "Error", "Nothing"],
         "answer": "'valid'"
     },
     {
-        "question": "When are nested if statements used?",
-        "options": ["For multiple related conditions", "To loop code", "To declare variables", "To reduce code"],
-        "answer": "For multiple related conditions"
-    },
-    {
-        "question": "What is the output of: let x = 15; if (x > 10) { if (x < 20) { console.log('range'); } } else { console.log('out'); }?",
-        "options": ["'range'", "'out'", "undefined", "Error"],
+        "question": "What does: let x = 12; if (x > 10) { if (x < 15) { console.log('range'); } } output?",
+        "options": ["'range'", "undefined", "Error", "Nothing"],
         "answer": "'range'"
     },
     {
-        "question": "Can a nested if have its own else?",
-        "options": ["Yes", "No", "Only in strict mode", "Only with let"],
-        "answer": "Yes"
-    },
-    {
-        "question": "What is the output of: let x = 5; if (x > 0) { if (x > 10) { console.log('big'); } else { console.log('small'); } }?",
+        "question": "What is the output of: let x = 3; if (x > 0) { if (x > 5) { console.log('big'); } else { console.log('small'); } }?",
         "options": ["'big'", "'small'", "undefined", "Error"],
         "answer": "'small'"
     },
-
-    // Arrays (6 questions)
+    {
+        "question": "Can a nested if have an else?",
+        "options": ["Yes", "No", "Only in strict mode", "Only with let"],
+        "answer": "Yes"
+    },
     {
         "question": "How do you create an array?",
         "options": ["let arr = [1, 2, 3];", "let arr = (1, 2, 3);", "let arr = {1, 2, 3};", "let arr = 1, 2, 3;"],
         "answer": "let arr = [1, 2, 3];"
     },
     {
-        "question": "What is [1, 2, 3].length?",
+        "question": "What is [4, 5, 6].length?",
         "options": ["2", "3", "4", "undefined"],
         "answer": "3"
     },
     {
-        "question": "What is [1, 2, 3][1]?",
+        "question": "What does [1, 2, 3][2] return?",
         "options": ["1", "2", "3", "undefined"],
-        "answer": "2"
+        "answer": "3"
     },
     {
-        "question": "What does [1, 2, 3].includes(2) return?",
+        "question": "What does [1, 2, 3].includes(1) return?",
         "options": ["true", "false", "undefined", "Error"],
         "answer": "true"
+    },
+    {
+        "question": "What does [1, 2, 3].join(',') return?",
+        "options": ["'1,2,3'", "'123'", "'1, 2, 3'", "Error"],
+        "answer": "'1,2,3'"
     },
     {
         "question": "What is typeof [1, 2, 3]?",
         "options": ["'array'", "'object'", "'list'", "'collection'"],
         "answer": "'object'"
     },
-    {
-        "question": "What does [1, 2, 3].join('-') return?",
-        "options": ["'1-2-3'", "'123'", "'1,2,3'", "Error"],
-        "answer": "'1-2-3'"
-    },
-
-    // Arrays: Adding/Removing and Removing/Inserting/Extracting Elements (8 questions)
     {
         "question": "What does [1, 2, 3].push(4) do?",
         "options": ["Adds 4 to start", "Adds 4 to end", "Removes 4", "Replaces 3"],
@@ -567,9 +512,9 @@ quiz = [
         "answer": "Adds 0 to start"
     },
     {
-        "question": "What does [1, 2, 3].slice(1, 2) return?",
-        "options": ["[1]", "[2]", "[1, 2]", "[2, 3]"],
-        "answer": "[2]"
+        "question": "What does [1, 2, 3].slice(0, 2) return?",
+        "options": ["[1, 2]", "[2, 3]", "[1]", "Error"],
+        "answer": "[1, 2]"
     },
     {
         "question": "What does [1, 2, 3].splice(1, 1) return?",
@@ -582,12 +527,10 @@ quiz = [
         "answer": "Inserts 4 at index 1"
     },
     {
-        "question": "What is [1, 2, 3].concat([4])?",
-        "options": ["[1, 2, 3, 4]", "[1, 2, 3, [4]]", "[4, 1, 2, 3]", "Error"],
-        "answer": "[1, 2, 3, 4]"
+        "question": "What does [1, 2].concat([3]) return?",
+        "options": ["[1, 2, 3]", "[1, 2, [3]]", "[3, 1, 2]", "Error"],
+        "answer": "[1, 2, 3]"
     },
-
-    // For Loops (6 questions)
     {
         "question": "What is the syntax of a for loop?",
         "options": ["for (i = 0; i < 5; i++) {}", "for (i = 0, i < 5, i++) {}", "for i = 0 to 5 {}", "for (i < 5) {}"],
@@ -599,18 +542,18 @@ quiz = [
         "answer": "0, 1, 2"
     },
     {
-        "question": "What is the purpose of i++ in a for loop?",
+        "question": "What does i++ do in a for loop?",
         "options": ["Initializes i", "Checks condition", "Increments i", "Logs i"],
         "answer": "Increments i"
     },
     {
-        "question": "What does for (let i = 1; i <= 3; i++) { console.log(i); } output?",
-        "options": ["1, 2, 3", "0, 1, 2", "1, 2", "Error"],
-        "answer": "1, 2, 3"
+        "question": "What does for (let i = 1; i <= 2; i++) { console.log(i); } output?",
+        "options": ["1, 2", "0, 1", "1, 2, 3", "Error"],
+        "answer": "1, 2"
     },
     {
         "question": "How do you loop through [1, 2, 3]?",
-        "options": ["for (let i = 0; i < arr.length; i++) {}", "for (let i = 1; i <= arr.length; i++) {}", "for (let i = 0; i <= arr.length; i++) {}", "for i in arr {}"],
+        "options": ["for (let i = 0; i < arr.length; i++) {}", "for (let i = 1; i <= arr.length; i++) {}", "for i in arr {}", "for (let i = 0; i <= arr.length; i++) {}"],
         "answer": "for (let i = 0; i < arr.length; i++) {}"
     },
     {
@@ -619,8 +562,6 @@ quiz = [
         "answer": "6"
     }
 ]
-
-
 
 # Set page configuration
 st.set_page_config(page_title="JS Quiz Pro", page_icon="🚀", layout="wide")
