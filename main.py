@@ -74,6 +74,7 @@ quiz = [
     {"question": "When does an if statement run its block?", "options": ["Always", "When true", "When false", "At runtime"], "answer": "When true"},
     {"question": "What does if (x) {} evaluate?", "options": ["A number", "A boolean", "A string", "Any value"], "answer": "Any value"},
     {"question": "What happens if if (x == 5) {} is false?", "options": ["Runs block", "Skips block", "Throws error", "Returns null"], "answer": "Skips block"},
+    {"question": "What is the output of: if (5 < 10) { console.log('yes'); }?", "options": ["'yes'", "undefined", "true", "Error"], "answer": "'yes'"},
     {"question": "What does x === 5 check?", "options": ["Value only", "Type only", "Value and type", "Reference"], "answer": "Value and type"},
     {"question": "What is 5 == '5'?", "options": ["true", "false", "undefined", "Error"], "answer": "true"},
     {"question": "What does 10 !== '10' return?", "options": ["true", "false", "undefined", "Error"], "answer": "true"},
@@ -90,6 +91,7 @@ quiz = [
     {"question": "What does x === 4 || x === 8 return if x is 8?", "options": ["true", "false", "undefined", "Error"], "answer": "true"},
     {"question": "What is !true?", "options": ["true", "false", "undefined", "Error"], "answer": "false"},
     {"question": "What does 3 > 5 || 5 < 10 return?", "options": ["true", "false", "undefined", "Error"], "answer": "true"},
+    {"question": "What does true && false return?", "options": ["true", "false", "undefined", "Error"], "answer": "false"},
     {"question": "What is a nested if statement?", "options": ["An if inside another if", "An if after else", "Multiple else ifs", "An if with many conditions"], "answer": "An if inside another if"},
     {"question": "What is the output of: let x = 7; if (x > 5) { if (x < 10) { console.log('valid'); } }?", "options": ["'valid'", "undefined", "Error", "Nothing"], "answer": "'valid'"},
     {"question": "What does: let x = 12; if (x > 10) { if (x < 15) { console.log('range'); } } output?", "options": ["'range'", "undefined", "Error", "Nothing"], "answer": "'range'"},
@@ -102,9 +104,7 @@ quiz = [
     {"question": "What does [1, 2, 3].join(',') return?", "options": ["'1,2,3'", "'123'", "'1, 2, 3'", "Error"], "answer": "'1,2,3'"},
     {"question": "What does [1, 2, 3].push(4) do?", "options": ["Adds 4 to start", "Adds 4 to end", "Removes 4", "Replaces 3"], "answer": "Adds 4 to end"},
     {"question": "What does [1, 2, 3].pop() return?", "options": ["1", "2", "3", "undefined"], "answer": "3"},
-    {"question": "What does [1, 2, 3].slice(0, 2) return?", "options": ["[1, 2]", "[2, 3]", "[1]", "Error"], "answer": "[1, 2]"},
-    {"question": "What is the output of: if (5 < 10) { console.log('yes'); }?", "options": ["'yes'", "undefined", "true", "Error"], "answer": "'yes'"},
-    {"question": "What does true && false return?", "options": ["true", "false", "undefined", "Error"], "answer": "false"}
+    {"question": "What does [1, 2, 3].slice(0, 2) return?", "options": ["[1, 2]", "[2, 3]", "[1]", "Error"], "answer": "[1, 2]"}
 ]
 
 st.set_page_config(page_title="JS Quiz Pro", page_icon="🚀", layout="wide")
@@ -195,7 +195,7 @@ st.markdown("""
     }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-""", unsafe html=True)
+""", unsafe_allow_html=True)
 
 if 'quiz_data' not in st.session_state:
     st.session_state.update({
@@ -261,7 +261,7 @@ else:
 
     if not st.session_state.show_results:
         with st.container():
-            st.markdown('<div class="question-container">', unsafe_html=True)
+            st.markdown('<div class="question-container">', unsafe_allow_html=True)
             q = st.session_state.quiz_data[st.session_state.current_q]
             st.markdown(f"### Question {st.session_state.current_q + 1}")
             st.markdown(f"**{q['question']}")
@@ -288,7 +288,7 @@ else:
             col_prev, col_next = st.columns([1, 1])
             with col_prev:
                 if st.button("⬅ Previous", disabled=st.session_state.current_q == 0):
-                    if st.session_state.answers[st.session_state.current_q]['is_correct']:
+                    if st.session_state.answers[st.session_state.current_q] and st.session_state.answers[st.session_state.current_q]['is_correct']:
                         st.session_state.score -= 1
                     st.session_state.current_q -= 1
                     st.session_state.selected_option = None
