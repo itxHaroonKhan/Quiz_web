@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 
 # Corrected Quiz Data (fixed the block-scoping question)
 quiz = [
-    // Alerts (8 questions)
+
     {
         "question": "Which function displays a message in a popup?",
         "options": ["alert()", "prompt()", "confirm()", "message()"],
