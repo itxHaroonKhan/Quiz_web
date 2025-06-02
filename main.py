@@ -4,7 +4,7 @@ from datetime import datetime
 import streamlit.components.v1 as components
 
 quiz = [
-    // For Loops (30 questions: Flags, Booleans, Array Length, Loop Interruption, Nested Loops)
+    
     {"question": "What does this code output: let flag = false; for (let i = 0; i < 5; i++) { if (i > 3) flag = true; } console.log(flag);?", "options": ["true", "false", "undefined", "Error"], "answer": "true"},
     {"question": "What is the output of: for (let i = 0; i < 4; i++) { if (i === 2) break; console.log(i); }?", "options": ["0 1", "0 1 2", "0 1 2 3", "Error"], "answer": "0 1"},
     {"question": "What does this nested loop output: let str = ''; for (let i = 1; i <= 2; i++) { for (let j = 1; j <= 2; j++) { str += i + j + ' '; } } console.log(str);?", "options": ["'2 3 3 4 '", "'1 2 3 4 '", "'2 4 '", "Error"], "answer": "'2 3 3 4 '"},
@@ -36,7 +36,7 @@ quiz = [
     {"question": "What is the output of: let flag = true; for (let i = 0; i < 3; i++) { if (i === 1) { flag = false; break; } } console.log(flag);?", "options": ["true", "false", "undefined", "Error"], "answer": "false"},
     {"question": "What does this loop output: let str = ''; for (let i = 1; i <= 3; i++) { str += i + ' '; } console.log(str);?", "options": ["'1 2 3 '", "'1 2 '", "'2 3 4 '", "Error"], "answer": "'1 2 3 '"},
 
-    // Strings (30 questions: Changing Case, Measuring Length, Extracting Parts, Finding Segments, Finding Character, Replacing Characters)
+
     {"question": "What does 'JavaScript'.toUpperCase() return?", "options": ["'JAVASCRIPT'", "'javascript'", "'JavaScript'", "Error"], "answer": "'JAVASCRIPT'"},
     {"question": "What is 'Hello World'.length?", "options": ["10", "11", "12", "Error"], "answer": "11"},
     {"question": "What does 'Programming'.slice(0, 4) return?", "options": ["'Prog'", "'gram'", "'Progr'", "Error"], "answer": "'Prog'"},
@@ -68,7 +68,7 @@ quiz = [
     {"question": "What does 'Hello'.slice(1, 4) return?", "options": ["'ell'", "'Hel'", "'llo'", "Error"], "answer": "'ell'"},
     {"question": "What is 'Programming'.indexOf('m')?", "options": ["3", "4", "5", "Error"], "answer": "3"},
 
-    // Numbers (30 questions: Rounding, Random Numbers, Converting Strings to Numbers, Controlling Decimal Length)
+ 
     {"question": "What does Math.round(4.7) return?", "options": ["4", "5", "4.7", "Error"], "answer": "5"},
     {"question": "What is the range of Math.random()?", "options": ["0 to 1 (inclusive)", "0 to 1 (exclusive)", "0 to 100", "1 to 100"], "answer": "0 to 1 (exclusive)"},
     {"question": "What does parseInt('15.9') return?", "options": ["15", "16", "15.9", "Error"], "answer": "15"},
@@ -100,7 +100,6 @@ quiz = [
     {"question": "What is parseInt('-5.7')?", "options": ["-5", "-6", "NaN", "Error"], "answer": "-5"},
     {"question": "What does Math.random() * 2 + 1 return?", "options": ["0 to 2", "1 to 2.999...", "1 to 3", "Error"], "answer": "1 to 2.999..."},
 
-    // Array Methods (15 questions: Map, Filter, Reduce)
     {"question": "What does [1, 2, 3].map(x => x + 1) return?", "options": ["[2, 3, 4]", "[1, 2, 3]", "[1, 2, 4]", "Error"], "answer": "[2, 3, 4]"},
     {"question": "What does [2, 4, 6].filter(x => x > 3) return?", "options": ["[2, 4]", "[4, 6]", "[6]", "Error"], "answer": "[4, 6]"},
     {"question": "What does [1, 2, 3].reduce((a, b) => a * b, 1) return?", "options": ["6", "12", "1", "Error"], "answer": "6"},
@@ -117,7 +116,6 @@ quiz = [
     {"question": "What does [0, 1, 2, 3].filter(x => x % 2 === 1) return?", "options": ["[0, 2]", "[1, 3]", "[0, 1, 2, 3]", "Error"], "answer": "[1, 3]"},
     {"question": "What does [1, 2].reduce((a, b) => a * b) return?", "options": ["2", "3", "1", "Error"], "answer": "2"},
 
-    // Basic Error Handling (15 questions)
     {"question": "What does this code output: try { let x = y; } catch (e) { console.log(e.name); }?", "options": ["'ReferenceError'", "'TypeError'", "'SyntaxError'", "Error"], "answer": "'ReferenceError'"},
     {"question": "What does try { throw new Error('Test'); } catch (e) { console.log(e.message); } output?", "options": ["'Test'", "'Error'", "undefined", "Error"], "answer": "'Test'"},
     {"question": "What happens in: try { console.log(undefinedVar); } catch (e) { console.log('Caught'); }?", "options": ["'Caught'", "undefined", "Error", "Nothing"], "answer": "'Caught'"},
