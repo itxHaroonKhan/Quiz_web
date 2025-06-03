@@ -31,5 +31,5 @@ Before running the app, ensure you have:
 ### 1. Clone or Download
 
 ```bash
-git clone https://github.com/itxHaroonKhan/Quiz_web?tab=readme-ov-file
+git clone https://github.com/itxHaroonKhan/Quiz_web
 cd /Quiz_web
