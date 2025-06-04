@@ -1,36 +1,15 @@
 import streamlit as st
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Sample quiz with one coding question
 quiz = [
     {
         "question": "What does this JavaScript code output?\n```javascript\nlet x = 0;\nfor (let i = 1; i <= 3; i++) {\n    x += i;\n}\nconsole.log(x);\n```",
         "options": ["3", "6", "9", "Error"],
-        "answer": "6"
-    },
-    {
-        "question": "What is the output of the following code?\n```javascript\nconsole.log(typeof null);\n```",
-        "options": ["object", "null", "undefined", "boolean"],
-        "answer": "object"
-    },
-    {
-        "question": "Which of the following is NOT a primitive data type in JavaScript?",
-        "options": ["String", "Number", "Object", "Boolean"],
-        "answer": "Object"
-    },
-    {
-        "question": "What will this code output?\n```javascript\nlet a;\nconsole.log(a);\n```",
-        "options": ["null", "0", "undefined", "Error"],
-        "answer": "undefined"
-    },
-    {
-        "question": "Which method is used to parse a JSON string into a JavaScript object?",
-        "options": ["JSON.parse()", "JSON.stringify()", "JSON.object()", "JSON.toObject()"],
-        "answer": "JSON.parse()"
+        "answer": "3"
     }
-];
-
+]
 
 # Shuffle quiz and label options
 def shuffle_quiz():
@@ -149,29 +128,51 @@ if 'quiz_data' not in st.session_state:
         'show_results': False,
         'selected_option': None,
         'feedback': None,
-        'time_left': 1800,  # 30 minutes in seconds
-        'last_update': datetime.now()
+        'time_left': 1800  # 30 minutes in seconds
     })
 
-# Update timer
-current_time = datetime.now()
-elapsed_time = (current_time - st.session_state.start_time).total_seconds()
-st.session_state.time_left = max(0, 1800 - int(elapsed_time))
+# Live timer using JavaScript in st.markdown
+timer_html = f"""
+<div id="timer" class="timer">⏰ Time Left: 30:00</div>
+<script>
+    let timeLeft = {st.session_state.time_left};
+    const timerElement = document.getElementById('timer');
+    function updateTimer() {{
+        if (timeLeft <= 0) {{
+            timerElement.innerHTML = '⏰ Time Up!';
+            // Signal time-up to Python via form submission
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '';
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'time_up';
+            input.value = 'true';
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+            return;
+        }}
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerElement.innerHTML = `⏰ Time Left: ${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
+        timeLeft--;
+        setTimeout(updateTimer, 1000);
+    }}
+    updateTimer();
+</script>
+"""
+st.markdown(timer_html, unsafe_allow_html=True)
 
-# Periodic rerun to update timer (every 1 second)
-if (current_time - st.session_state.last_update).total_seconds() >= 1 and not st.session_state.show_results:
-    st.session_state.last_update = current_time
-    st.rerun()
-
-# Check for time-up condition
-if st.session_state.time_left <= 0:
+# Check for time-up via form data
+if st.experimental_get_query_params().get('time_up', [False])[0] == 'true':
     st.session_state.show_results = True
+    st.experimental_set_query_params()
 
-# Display timer
-minutes = st.session_state.time_left // 60
-seconds = st.session_state.time_left % 60
-timer_display = f"⏰ Time Left: {minutes:02d}:{seconds:02d}" if st.session_state.time_left > 0 else "⏰ Time Up!"
-st.markdown(f'<div class="timer">{timer_display}</div>', unsafe_allow_html=True)
+# Fallback: Check elapsed time since start
+elapsed_time = (datetime.now() - st.session_state.start_time).total_seconds()
+if elapsed_time >= 1800:
+    st.session_state.show_results = True
 
 # Main UI
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
@@ -316,7 +317,7 @@ else:
 
 # Sidebar
 with st.sidebar:
-    st.markdown('<div style="color: #ffffff; font-size: 22px;">📚 Quiz Info</div>', unsafe_allow_html=True)
+    st.markdown('<div class="color: #ffffff; font-size: 22px;">📚 Quiz Info</div>', unsafe_allow_html=True)
     st.markdown(f'<div style="color: #b0b0d0;">Questions: {len(quiz)}</div>', unsafe_allow_html=True)
     st.markdown(f'<div style="color: #b0b0d0;">Score: {st.session_state.score}/{len(quiz)}</div>', unsafe_allow_html=True)
     if not st.session_state.show_results:
