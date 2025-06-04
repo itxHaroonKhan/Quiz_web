@@ -1,7 +1,6 @@
 import streamlit as st
 import random
-from datetime import datetime
-import streamlit.components.v1 as components
+from datetime import datetime, timedelta
 
 # Sample quiz with one coding question
 quiz = [
@@ -130,46 +129,28 @@ if 'quiz_data' not in st.session_state:
         'selected_option': None,
         'feedback': None,
         'time_left': 1800,  # 30 minutes in seconds
-        'timer_value': {'time_up': False}
+        'last_update': datetime.now()
     })
 
-# Timer component
-timer_html = f"""
-<div id="timer" class="timer">⏰ Time Left: {st.session_state.time_left//60:02d}:{st.session_state.time_left%60:02d}</div>
-<script>
-    let timeLeft = {st.session_state.time_left};
-    const timerElement = document.getElementById('timer');
-    function updateTimer() {{
-        if (timeLeft <= 0) {{
-            timerElement.innerHTML = '⏰ Time Up!';
-            window.Streamlit.setComponentValue({{time_up: true}});
-            return;
-        }}
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        timerElement.innerHTML = `⏰ Time Left: ${{'${{minutes}}'.padStart(2, '0')}}:${{'${{seconds}}'.padStart(2, '0')}}`;
-        timeLeft--;
-        setTimeout(updateTimer, 1000);
-    }}
-    updateTimer();
-</script>
-"""
-timer_key = f"timer_{st.session_state.current_q}_{st.session_state.show_results}"
-timer_value = components.html(timer_html, height=40, key=timer_key)
+# Update timer
+current_time = datetime.now()
+elapsed_time = (current_time - st.session_state.start_time).total_seconds()
+st.session_state.time_left = max(0, 1800 - int(elapsed_time))
+
+# Periodic rerun to update timer (every 1 second)
+if (current_time - st.session_state.last_update).total_seconds() >= 1 and not st.session_state.show_results:
+    st.session_state.last_update = current_time
+    st.rerun()
 
 # Check for time-up condition
-if timer_value and timer_value.get('time_up', False):
+if st.session_state.time_left <= 0:
     st.session_state.show_results = True
-    st.session_state.timer_value['time_up'] = True
 
-# Fallback: Check elapsed time since start
-elapsed_time = (datetime.now() - st.session_state.start_time).total_seconds()
-if elapsed_time >= 1800:
-    st.session_state.show_results = True
-    st.session_state.timer_value['time_up'] = True
-
-# Debug timer state (uncomment for debugging)
-# st.write(f"Debug: time_left={st.session_state.time_left}, timer_value={st.session_state.timer_value}, elapsed_time={elapsed_time:.0f}s")
+# Display timer
+minutes = st.session_state.time_left // 60
+seconds = st.session_state.time_left % 60
+timer_display = f"⏰ Time Left: {minutes:02d}:{seconds:02d}" if st.session_state.time_left > 0 else "⏰ Time Up!"
+st.markdown(f'<div class="timer">{timer_display}</div>', unsafe_allow_html=True)
 
 # Main UI
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
@@ -220,7 +201,7 @@ else:
                     st.session_state.selected_option = option
                     st.session_state.feedback = {'is_correct': is_correct, 'correct_answer': q['labeled_answer']}
                     st.session_state.answers[st.session_state.current_q] = {
-                        'question': q['question'], 'user_answer': option, 'current_answer': q['labeled_answer'], 'is_correct': is_correct
+                        'question': q['question'], 'user_answer': option, 'correct_answer': q['labeled_answer'], 'is_correct': is_correct
                     }
                     if is_correct:
                         st.session_state.score += 1
@@ -256,14 +237,14 @@ else:
             st.markdown('</div>', unsafe_allow_html=True)
 
     else:
-        time_taken = datetime.now() - st.session_state.start_time
+        time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
         accuracy = (st.session_state.score / len(quiz)) * 100 if quiz else 0
         st.markdown('<div class="question-container">', unsafe_allow_html=True)
         st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{len(quiz)}</h2>', unsafe_allow_html=True)
         st.markdown(f"""
         <h3>📊 Results</h3>
         <div style="color: #b0b0d0; font-size: 15px;">
-            - ⏱️ Time: {min(time_taken.seconds, 1800) // 60}m {min(time_taken.seconds, 1800) % 60}s<br>
+            - ⏱️ Time: {int(time_taken) // 60}m {int(time_taken) % 60}s<br>
             - 🎯 Accuracy: {accuracy:.1f}%<br>
             - ✅ Correct: {st.session_state.score}<br>
             - ❌ Wrong: {len(quiz) - st.session_state.score}
@@ -273,7 +254,7 @@ else:
         leaderboard = [
             {"name": "Alex", "score": 8, "time": 180},
             {"name": "Sam", "score": 7, "time": 200},
-            {"name": "You", "score": st.session_state.score, "time": min(time_taken.seconds, 1800)}
+            {"name": "You", "score": st.session_state.score, "time": int(time_taken)}
         ]
         leaderboard.sort(key=lambda x: (-x['score'], x['time']))
         st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
@@ -297,7 +278,7 @@ else:
                         st.markdown(f'<span style="color: #b0b0d0;">{status} Your: {answer["user_answer"]}</span>', unsafe_allow_html=True)
                     with col2:
                         if not answer['is_correct']:
-                            st.markdown(f'<span style="color: #b0b0d0;">Correct: {answer["current_answer"]}</span>', unsafe_allow_html=True)
+                            st.markdown(f'<span style="color: #b0b0d0;">Correct: {answer["correct_answer"]}</span>', unsafe_allow_html=True)
                     st.markdown('<hr style="border-color: #4b4b6b;">', unsafe_allow_html=True)
 
         col_restart, col_share = st.columns(2)
@@ -320,8 +301,8 @@ with st.sidebar:
     if not st.session_state.show_results:
         st.markdown(f'<div style="color: #b0b0d0;">Timer above ⬆️</div>', unsafe_allow_html=True)
     else:
-        time_taken = datetime.now() - st.session_state.start_time
-        st.markdown(f'<div style="color: #b0b0d0;">Time: {min(time_taken.seconds, 1800) // 60}m {min(time_taken.seconds, 1800) % 60}s</div>', unsafe_allow_html=True)
+        time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
+        st.markdown(f'<div style="color: #b0b0d0;">Time: {int(time_taken) // 60}m {int(time_taken) % 60}s</div>', unsafe_allow_html=True)
     st.markdown('<hr style="border-color: #4b4b6b;">', unsafe_allow_html=True)
     st.markdown('<div style="color: #ffffff; font-size: 16px;">ℹ️ About</div>', unsafe_allow_html=True)
     st.markdown('<div style="color: #b0b0d0; font-size: 13px;">JS Quiz Pro tests JavaScript skills with code-based questions.</div>', unsafe_allow_html=True)
