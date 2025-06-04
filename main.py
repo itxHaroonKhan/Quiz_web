@@ -1,8 +1,9 @@
 import streamlit as st
 import random
 from datetime import datetime
+import uuid
 
-# Updated quiz with 50 questions, including difficulty and hints
+# Quiz data (50 questions, same as provided)
 quiz = [
     {
         "question": "What happens when this alert is executed?\n```javascript\nalert('Hello\\nWorld');\n```",
@@ -369,163 +370,137 @@ def shuffle_quiz():
                 break
     return shuffled
 
-# CSS for enhanced UI
+# Simplified CSS for reliability
 st.markdown("""
     <style>
-    body {
-        background: linear-gradient(180deg, #1a1a3b, #2c2c54);
-        color: #ffffff;
-        font-family: 'Inter', sans-serif;
-    }
     .main-container {
         background: #2c2c54;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        max-width: 900px;
-        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 10px auto;
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
     }
     .stButton>button {
-        background: linear-gradient(45deg, #6b21a8, #a855f7);
+        background: #6b21a8;
         color: #ffffff;
         border: none;
-        border-radius: 10px;
-        padding: 12px;
+        border-radius: 8px;
+        padding: 10px;
         width: 100%;
-        font-size: 15px;
-        font-weight: 600;
-        margin: 6px 0;
+        font-size: 14px;
+        margin: 5px 0;
         cursor: pointer;
-        transition: all 0.2s ease;
     }
     .stButton>button:hover {
-        background: linear-gradient(45deg, #8b5cf6, #c084fc);
-        transform: translateY(-2px);
+        background: #a855f7;
     }
     .question-container {
         background: #373760;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
     }
     .feedback-correct {
         color: #34c759;
-        font-weight: 600;
-        font-size: 18px;
-        margin: 15px 0;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 10px 0;
     }
     .feedback-wrong {
         color: #ff3b30;
-        font-weight: 600;
-        font-size: 18px;
-        margin: 15px 0;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 10px 0;
     }
     .progress-bar {
         background: #4b4b6b;
-        border-radius: 10px;
-        height: 10px;
+        border-radius: 5px;
+        height: 8px;
         margin: 10px 0;
     }
     .progress-fill {
-        background: linear-gradient(45deg, #6b21a8, #a855f7);
+        background: #6b21a8;
         height: 100%;
-        border-radius: 10px;
-        transition: width 0.3s ease;
+        border-radius: 5px;
     }
     .title {
-        font-size: 36px;
+        font-size: 32px;
         text-align: center;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
     .caption {
         text-align: center;
         color: #b0b0d0;
-        font-size: 16px;
-        margin-bottom: 20px;
+        font-size: 14px;
+        margin-bottom: 15px;
     }
     .timer {
-        font-size: 16px;
+        font-size: 14px;
         color: #ff6b6b;
-        font-weight: 600;
+        font-weight: bold;
         text-align: center;
         margin-top: 10px;
     }
     .difficulty {
-        font-size: 14px;
+        font-size: 12px;
         color: #b0b0d0;
         margin-bottom: 10px;
     }
     .hint {
-        font-size: 13px;
+        font-size: 12px;
         color: #b0b0d0;
         background: #2c2c54;
-        padding: 10px;
-        border-radius: 8px;
+        padding: 8px;
+        border-radius: 5px;
         margin-top: 10px;
     }
     .stCodeBlock {
-        background-color: #1e1e1e !important;
+        background-color: #1e1e1e;
         border-radius: 8px;
-        padding: 15px;
-        font-family: 'Consolas', 'Monaco', monospace;
-        font-size: 14px;
-        line-height: 1.5;
-        border: 1px solid #4b4b6b;
-    }
-    .stCodeBlock pre, .stCodeBlock code {
-        color: #d4d4d4;
-    }
-    .stCodeBlock .hljs-keyword { color: #569cd6; }
-    .stCodeBlock .hljs-string { color: #ce9178; }
-    .stCodeBlock .hljs-number { color: #b5cea8; }
-    .stCodeBlock .hljs-comment { color: #6a9955; }
-    .stCodeBlock .hljs-operator, .stCodeBlock .hljs-punctuation { color: #d4d4d4; }
-    @media (max-width: 600px) {
-        .main-container {
-            padding: 15px;
-            margin: 10px;
-        }
-        .title {
-            font-size: 28px;
-        }
-        .stButton>button {
-            font-size: 14px;
-            padding: 10px;
-        }
+        padding: 10px;
+        font-family: 'Consolas', monospace;
+        font-size: 13px;
     }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Initialize session state
-if 'quiz_data' not in st.session_state:
+# Initialize session state with safeguard
+if 'quiz_data' not in st.session_state or not st.session_state.quiz_data:
     st.session_state.update({
-        'quiz_data': shuffle_quiz() if quiz else [],
+        'quiz_data': shuffle_quiz(),
         'score': 0,
         'current_q': 0,
         'start_time': datetime.now(),
-        'answers': [None] * len(quiz) if quiz else [],
+        'answers': [None] * len(quiz),
         'show_results': False,
         'selected_option': None,
         'feedback': None,
-        'time_left': 1800  # 30 minutes in seconds
+        'time_left': 1800
     })
 
-# Timer logic in Python
+# Timer logic
 def update_timer():
     elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
     st.session_state.time_left = max(1800 - elapsed, 0)
-    if st.session_state.time_left <= 0:
+    if st.session_state.time_left <= 0 and not st.session_state.show_results:
         st.session_state.show_results = True
         st.rerun()
 
-# Update timer
-if not st.session_state.show_results:
-    update_timer()
-    minutes = int(st.session_state.time_left // 60)
-    seconds = int(st.session_state.time_left % 60)
-    st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+# Debug reset button
+if st.button("Reset Quiz (Debug)", key="reset_quiz"):
+    st.session_state.clear()
+    st.session_state.quiz_data = shuffle_quiz()
+    st.session_state.score = 0
+    st.session_state.current_q = 0
+    st.session_state.start_time = datetime.now()
+    st.session_state.answers = [None] * len(quiz)
+    st.session_state.show_results = False
+    st.session_state.selected_option = None
+    st.session_state.feedback = None
+    st.session_state.time_left = 1800
+    st.rerun()
 
 # Main UI
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
@@ -533,15 +508,20 @@ st.markdown('<h1 class="title">🚀 JavaScript Quiz Pro</h1>', unsafe_allow_html
 st.markdown('<p class="caption">Challenge Your JavaScript Skills</p>', unsafe_allow_html=True)
 
 if not st.session_state.quiz_data:
-    st.error("No quiz questions available. Please add questions to start the quiz.")
+    st.error("No quiz questions available. Please reset the quiz.")
 else:
+    update_timer()
+    minutes = int(st.session_state.time_left // 60)
+    seconds = int(st.session_state.time_left % 60)
+    st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+
     progress = st.session_state.current_q / len(st.session_state.quiz_data)
     progress_percentage = int(progress * 100)
     st.markdown(f"""
     <div class="progress-bar">
         <div class="progress-fill" style="width: {progress_percentage}%"></div>
     </div>
-    <div style="color: #b0b0d0; font-size: 13px; text-align: center;">
+    <div style="color: #b0b0d0; font-size: 12px; text-align: center;">
         Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
     </div>
     """, unsafe_allow_html=True)
@@ -551,10 +531,8 @@ else:
             st.markdown('<div class="question-container">', unsafe_allow_html=True)
             q = st.session_state.quiz_data[st.session_state.current_q]
             
-            # Display difficulty
             st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]}</div>', unsafe_allow_html=True)
 
-            # Split question into text and code
             if "```javascript" in q['question']:
                 question_parts = q['question'].split("```javascript\n")
                 question_text = question_parts[0].strip()
@@ -566,9 +544,8 @@ else:
                 st.markdown(f"### Question {st.session_state.current_q + 1}")
                 st.markdown(f"**{q['question']}**")
 
-            # Option buttons
             for i, option in enumerate(q['display_options']):
-                if st.button(option, key=f"q{i}", disabled=st.session_state.selected_option is not None):
+                if st.button(option, key=f"q{i}_{uuid.uuid4()}", disabled=st.session_state.selected_option is not None):
                     original_option = option[3:]
                     is_correct = option == q['labeled_answer']
                     st.session_state.selected_option = option
@@ -582,37 +559,34 @@ else:
                         st.session_state.score += points
                     st.rerun()
 
-            # Feedback
             if st.session_state.feedback:
                 if st.session_state.feedback['is_correct']:
                     st.markdown('<div class="feedback-correct">✅ Correct!</div>', unsafe_allow_html=True)
                 else:
                     st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
 
-            # Hint
             with st.expander("💡 Show Hint"):
                 st.markdown(f'<div class="hint">{q["hint"]}</div>', unsafe_allow_html=True)
 
-            # Navigation
             col_prev, col_next = st.columns(2)
             with col_prev:
-                if st.button("⬅ Previous", disabled=st.session_state.current_q == 0):
+                if st.button("⬅ Previous", key="prev", disabled=st.session_state.current_q == 0):
                     if st.session_state.answers[st.session_state.current_q] and st.session_state.answers[st.session_state.current_q]['is_correct']:
                         points = {'Easy': 1, 'Medium': 2, 'Hard': 3}[st.session_state.answers[st.session_state.current_q]['difficulty']]
                         st.session_state.score -= points
-                    st.session_state.current_q -= 1
+                    st.session_state.current_q = max(0, st.session_state.current_q - 1)
                     st.session_state.selected_option = None
                     st.session_state.feedback = None
                     st.rerun()
             with col_next:
-                if st.session_state.current_q < len(quiz) - 1:
-                    if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
-                        st.session_state.current_q += 1
+                if st.session_state.current_q < len(st.session_state.quiz_data) - 1:
+                    if st.button("➡️ Next", key="next", disabled=st.session_state.selected_option is None):
+                        st.session_state.current_q = min(len(st.session_state.quiz_data) - 1, st.session_state.current_q + 1)
                         st.session_state.selected_option = None
                         st.session_state.feedback = None
                         st.rerun()
                 else:
-                    if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
+                    if st.button("🏁 Finish", key="finish", disabled=st.session_state.selected_option is None):
                         st.session_state.show_results = True
                         st.rerun()
 
@@ -626,7 +600,7 @@ else:
         st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
         st.markdown(f"""
         <h3>📊 Results</h3>
-        <div style="color: #b0b0d0; font-size: 15px;">
+        <div style="color: #b0b0d0; font-size: 14px;">
             - ⏱️ Time: {int(time_taken) // 60}m {int(time_taken) % 60}s<br>
             - 🎯 Accuracy: {accuracy:.1f}%<br>
             - ✅ Correct: {sum(1 for a in st.session_state.answers if a and a['is_correct'])}<br>
@@ -634,7 +608,6 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # Leaderboard
         leaderboard = [
             {"name": "Alex", "score": 45, "time": 600},
             {"name": "Sam", "score": 40, "time": 700},
@@ -644,3 +617,6 @@ else:
         st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
         for i, entry in enumerate(leaderboard[:5], 1):
             st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
