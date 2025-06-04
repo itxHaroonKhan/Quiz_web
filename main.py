@@ -164,10 +164,10 @@ timer_html = f"""
 """
 st.markdown(timer_html, unsafe_allow_html=True)
 
-# Check for time-up via form data
-if st.experimental_get_query_params().get('time_up', [False])[0] == 'true':
+# Check for time-up via query params
+if st.query_params.get('time_up', 'false') == 'true':
     st.session_state.show_results = True
-    st.experimental_set_query_params()
+    st.query_params.clear()
 
 # Fallback: Check elapsed time since start
 elapsed_time = (datetime.now() - st.session_state.start_time).total_seconds()
@@ -317,7 +317,7 @@ else:
 
 # Sidebar
 with st.sidebar:
-    st.markdown('<div class="color: #ffffff; font-size: 22px;">📚 Quiz Info</div>', unsafe_allow_html=True)
+    st.markdown('<div style="color: #ffffff; font-size: 22px;">📚 Quiz Info</div>', unsafe_allow_html=True)
     st.markdown(f'<div style="color: #b0b0d0;">Questions: {len(quiz)}</div>', unsafe_allow_html=True)
     st.markdown(f'<div style="color: #b0b0d0;">Score: {st.session_state.score}/{len(quiz)}</div>', unsafe_allow_html=True)
     if not st.session_state.show_results:
@@ -325,6 +325,3 @@ with st.sidebar:
     else:
         time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
         st.markdown(f'<div style="color: #b0b0d0;">Time: {int(time_taken) // 60}m {int(time_taken) % 60}s</div>', unsafe_allow_html=True)
-    st.markdown('<hr style="border-color: #4b4b6b;">', unsafe_allow_html=True)
-    st.markdown('<div style="color: #ffffff; font-size: 16px;">ℹ️ About</div>', unsafe_allow_html=True)
-    st.markdown('<div style="color: #b0b0d0; font-size: 13px;">JS Quiz Pro tests JavaScript skills with code-based questions.</div>', unsafe_allow_html=True)
