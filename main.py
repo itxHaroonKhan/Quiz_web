@@ -168,7 +168,7 @@ if elapsed_time >= 1800:
     st.session_state.show_results = True
     st.session_state.timer_value['time_up'] = True
 
-# Debug timer state
+# Debug timer state (uncomment for debugging)
 # st.write(f"Debug: time_left={st.session_state.time_left}, timer_value={st.session_state.timer_value}, elapsed_time={elapsed_time:.0f}s")
 
 # Main UI
@@ -220,7 +220,7 @@ else:
                     st.session_state.selected_option = option
                     st.session_state.feedback = {'is_correct': is_correct, 'correct_answer': q['labeled_answer']}
                     st.session_state.answers[st.session_state.current_q] = {
-                        'question': q['question'], 'user_answer': option, 'correct_answer': q['labeled_answer'], 'is_correct': is_correct
+                        'question': q['question'], 'user_answer': option, 'current_answer': q['labeled_answer'], 'is_correct': is_correct
                     }
                     if is_correct:
                         st.session_state.score += 1
@@ -263,7 +263,7 @@ else:
         st.markdown(f"""
         <h3>📊 Results</h3>
         <div style="color: #b0b0d0; font-size: 15px;">
-            - ⏱️ Time: {time_taken.seconds // 60}m {time_taken.seconds % 60}s<br>
+            - ⏱️ Time: {min(time_taken.seconds, 1800) // 60}m {min(time_taken.seconds, 1800) % 60}s<br>
             - 🎯 Accuracy: {accuracy:.1f}%<br>
             - ✅ Correct: {st.session_state.score}<br>
             - ❌ Wrong: {len(quiz) - st.session_state.score}
@@ -273,7 +273,7 @@ else:
         leaderboard = [
             {"name": "Alex", "score": 8, "time": 180},
             {"name": "Sam", "score": 7, "time": 200},
-            {"name": "You", "score": st.session_state.score, "time": time_taken.seconds}
+            {"name": "You", "score": st.session_state.score, "time": min(time_taken.seconds, 1800)}
         ]
         leaderboard.sort(key=lambda x: (-x['score'], x['time']))
         st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
@@ -297,7 +297,7 @@ else:
                         st.markdown(f'<span style="color: #b0b0d0;">{status} Your: {answer["user_answer"]}</span>', unsafe_allow_html=True)
                     with col2:
                         if not answer['is_correct']:
-                            st.markdown(f'<span style="color: #b0b0d0;">Correct: {answer["correct_answer"]}</span>', unsafe_allow_html=True)
+                            st.markdown(f'<span style="color: #b0b0d0;">Correct: {answer["current_answer"]}</span>', unsafe_allow_html=True)
                     st.markdown('<hr style="border-color: #4b4b6b;">', unsafe_allow_html=True)
 
         col_restart, col_share = st.columns(2)
@@ -321,7 +321,7 @@ with st.sidebar:
         st.markdown(f'<div style="color: #b0b0d0;">Timer above ⬆️</div>', unsafe_allow_html=True)
     else:
         time_taken = datetime.now() - st.session_state.start_time
-        st.markdown(f'<div style="color: #b0b0d0;">Time: {time_taken.seconds // 60}m {time_taken.seconds % 60}s</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="color: #b0b0d0;">Time: {min(time_taken.seconds, 1800) // 60}m {min(time_taken.seconds, 1800) % 60}s</div>', unsafe_allow_html=True)
     st.markdown('<hr style="border-color: #4b4b6b;">', unsafe_allow_html=True)
     st.markdown('<div style="color: #ffffff; font-size: 16px;">ℹ️ About</div>', unsafe_allow_html=True)
     st.markdown('<div style="color: #b0b0d0; font-size: 13px;">JS Quiz Pro tests JavaScript skills with code-based questions.</div>', unsafe_allow_html=True)
