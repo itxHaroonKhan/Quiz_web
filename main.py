@@ -106,18 +106,14 @@ st.markdown("""
         font-size: 14px;
         line-height: 1.5;
     }
-    .stCodeBlock pre {
-        color: #d4d4d4;
-    }
-    .stCodeBlock code {
+    .stCodeBlock pre, .stCodeBlock code {
         color: #d4d4d4;
     }
     .stCodeBlock .hljs-keyword { color: #569cd6; }
     .stCodeBlock .hljs-string { color: #ce9178; }
     .stCodeBlock .hljs-number { color: #b5cea8; }
     .stCodeBlock .hljs-comment { color: #6a9955; }
-    .stCodeBlock .hljs-operator { color: #d4d4d4; }
-    .stCodeBlock .hljs-punctuation { color: #d4d4d4; }
+    .stCodeBlock .hljs-operator, .stCodeBlock .hljs-punctuation { color: #d4d4d4; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
@@ -133,7 +129,8 @@ if 'quiz_data' not in st.session_state:
         'show_results': False,
         'selected_option': None,
         'feedback': None,
-        'time_left': 1800  # 30 minutes in seconds
+        'time_left': 1800,  # 30 minutes in seconds
+        'timer_value': {'time_up': False}
     })
 
 # Timer component
@@ -157,11 +154,22 @@ timer_html = f"""
     updateTimer();
 </script>
 """
-components.html(timer_html, height=40)
+timer_key = f"timer_{st.session_state.current_q}_{st.session_state.show_results}"
+timer_value = components.html(timer_html, height=40, key=timer_key)
 
 # Check for time-up condition
-if st.session_state.get('timer_value', {}).get('time_up', False):
+if timer_value and timer_value.get('time_up', False):
     st.session_state.show_results = True
+    st.session_state.timer_value['time_up'] = True
+
+# Fallback: Check elapsed time since start
+elapsed_time = (datetime.now() - st.session_state.start_time).total_seconds()
+if elapsed_time >= 1800:
+    st.session_state.show_results = True
+    st.session_state.timer_value['time_up'] = True
+
+# Debug timer state
+# st.write(f"Debug: time_left={st.session_state.time_left}, timer_value={st.session_state.timer_value}, elapsed_time={elapsed_time:.0f}s")
 
 # Main UI
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
