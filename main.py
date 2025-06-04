@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 import streamlit.components.v1 as components
 
-# Sample quiz with one coding question for demonstration
+# Sample quiz with one coding question
 quiz = [
     {
         "question": "What does this JavaScript code output?\n```javascript\nlet x = 0;\nfor (let i = 1; i <= 3; i++) {\n    x += i;\n}\nconsole.log(x);\n```",
@@ -133,7 +133,7 @@ if 'quiz_data' not in st.session_state:
         'show_results': False,
         'selected_option': None,
         'feedback': None,
-        'time_left': 300
+        'time_left': 1800  # 30 minutes in seconds
     })
 
 # Timer component
@@ -159,6 +159,7 @@ timer_html = f"""
 """
 components.html(timer_html, height=40)
 
+# Check for time-up condition
 if st.session_state.get('timer_value', {}).get('time_up', False):
     st.session_state.show_results = True
 
@@ -274,7 +275,6 @@ else:
         with st.expander("📝 Review", expanded=True):
             for i, answer in enumerate(st.session_state.answers):
                 if answer:
-                    # Handle code in review section
                     if "```javascript" in answer["question"]:
                         question_parts = answer["question"].split("```javascript\n")
                         question_text = question_parts[0].strip()
