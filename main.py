@@ -4,33 +4,257 @@ from datetime import datetime
 
 # Sample quiz with one coding question
 quiz = [
-    {
-        "question": "What does this JavaScript code output?\n```javascript\nlet x = 0;\nfor (let i = 1; i <= 3; i++) {\n    x += i;\n}\nconsole.log(x);\n```",
-        "options": ["3", "6", "9", "Error"],
-        "answer": "6"
-    },
-    {
-        "question": "What is the output of the following code?\n```javascript\nconsole.log(typeof null);\n```",
-        "options": ["object", "null", "undefined", "boolean"],
-        "answer": "object"
-    },
-    {
-        "question": "Which of the following is NOT a primitive data type in JavaScript?",
-        "options": ["String", "Number", "Object", "Boolean"],
-        "answer": "Object"
-    },
-    {
-        "question": "What will this code output?\n```javascript\nlet a;\nconsole.log(a);\n```",
-        "options": ["null", "0", "undefined", "Error"],
-        "answer": "undefined"
-    },
-    {
-        "question": "Which method is used to parse a JSON string into a JavaScript object?",
-        "options": ["JSON.parse()", "JSON.stringify()", "JSON.object()", "JSON.toObject()"],
-        "answer": "JSON.parse()"
-    }
+  {
+    "question": "What happens when this alert is executed?\n```javascript\nalert('Hello\\nWorld');\n```",
+    "options": ["Displays 'Hello World'", "Displays 'Hello' and 'World' on two lines", "Throws an error", "Displays 'Hello\\nWorld'"],
+    "answer": "Displays 'Hello' and 'World' on two lines"
+  },
+  {
+    "question": "What is the output of this code?\n```javascript\nlet name = 'Ali';\nalert(name + 42);\n```",
+    "options": ["Ali42", "NaN", "Error", "42Ali"],
+    "answer": "Ali42"
+  },
+  {
+    "question": "What will this code output?\n```javascript\nlet num = 10.5;\nconsole.log(num * 2);\n```",
+    "options": ["21", "20", "10.5", "NaN"],
+    "answer": "21"
+  },
+  {
+    "question": "Which variable name is illegal?\n```javascript\nlet my-variable = 10;\n```",
+    "options": ["my_variable", "myVariable", "my-variable", "_variable"],
+    "answer": "my-variable"
+  },
+  {
+    "question": "What is the result of this expression?\n```javascript\nconsole.log(10 - 3 * 2 + 4);\n```",
+    "options": ["8", "16", "20", "5"],
+    "answer": "8"
+  },
+  {
+    "question": "What does the ** operator do in this code?\n```javascript\nconsole.log(2 ** 3);\n```",
+    "options": ["6", "8", "9", "Error"],
+    "answer": "8"
+  },
+  {
+    "question": "What is the output of this code?\n```javascript\nconsole.log(2 * (3 + 4) / 2);\n```",
+    "options": ["7", "14", "5", "10"],
+    "answer": "7"
+  },
+  {
+    "question": "What does this concatenation produce?\n```javascript\nlet str = 'Code' + 2 + 'Run';\nconsole.log(str);\n```",
+    "options": ["Code2Run", "CodeRun", "Error", "NaN"],
+    "answer": "Code2Run"
+  },
+  {
+    "question": "What does this prompt return if the user enters nothing and clicks OK?\n```javascript\nlet input = prompt('Enter something:');\nconsole.log(input);\n```",
+    "options": ["null", "undefined", "'' (empty string)", "Error"],
+    "answer": "'' (empty string)"
+  },
+  {
+    "question": "What will this code output?\n```javascript\nlet x = 0;\nif (x || x === 0) {\n  console.log('Zero');\n}\n```",
+    "options": ["Zero", "Nothing", "undefined", "Error"],
+    "answer": "Zero"
+  },
+  {
+    "question": "What does this comparison return?\n```javascript\nconsole.log('10' === 10);\n```",
+    "options": ["true", "false", "undefined", "Error"],
+    "answer": "false"
+  },
+  {
+    "question": "What is the output of this code?\n```javascript\nlet score = 75;\nif (score >= 90) {\n  console.log('A');\n} else if (score >= 70) {\n  console.log('B');\n} else {\n  console.log('C');\n}\n```",
+    "options": ["A", "B", "C", "Nothing"],
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of this condition?\n```javascript\nlet a = 5, b = 10;\nif (a > 3 && b < 15) {\n  console.log('Both true');\n}\n```",
+    "options": ["Both true", "Nothing", "Error", "undefined"],
+    "answer": "Both true"
+  },
+  {
+    "question": "What does this nested if output?\n```javascript\nlet num = 12;\nif (num > 10) {\n  if (num % 2 === 0) {\n    console.log('Even and greater than 10');\n  }\n}\n```",
+    "options": ["Even and greater than 10", "Nothing", "Error", "undefined"],
+    "answer": "Even and greater than 10"
+  },
+  {
+    "question": "What is the output of this array code?\n```javascript\nlet arr = [1, 2, 3];\nconsole.log(arr[2]);\n```",
+    "options": ["1", "2", "3", "undefined"],
+    "answer": "3"
+  },
+  {
+    "question": "What does this array operation produce?\n```javascript\nlet nums = [1, 2];\nnums.push(3, 4);\nconsole.log(nums);\n```",
+    "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "[3, 4]", "Error"],
+    "answer": "[1, 2, 3, 4]"
+  },
+  {
+    "question": "What is the result of this splice operation?\n```javascript\nlet arr = ['a', 'b', 'c', 'd'];\narr.splice(1, 2, 'x');\nconsole.log(arr);\n```",
+    "options": ["['a', 'x', 'd']", "['a', 'b', 'c']", "['x', 'd']", "Error"],
+    "answer": "['a', 'x', 'd']"
+  },
+  {
+    "question": "What does this loop output?\n```javascript\nfor (let i = 1; i <= 3; i++) {\n  console.log(i * i);\n}\n```",
+    "options": ["1 4 9", "1 2 3", "3 6 9", "Error"],
+    "answer": "1 4 9"
+  },
+  {
+    "question": "What does this loop with break output?\n```javascript\nlet sum = 0;\nfor (let i = 1; i <= 5; i++) {\n  if (i === 4) break;\n  sum += i;\n}\nconsole.log(sum);\n```",
+    "options": ["6", "10", "15", "3"],
+    "answer": "6"
+  },
+  {
+    "question": "What does this nested loop output?\n```javascript\nlet str = '';\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    str += i * j + ' ';\n  }\n}\nconsole.log(str);\n```",
+    "options": ["1 2 2 4", "1 2 3 4", "2 4 6 8", "Error"],
+    "answer": "1 2 2 4"
+  },
+  {
+    "question": "What does this code output?\n```javascript\nlet text = 'javascript';\nconsole.log(text.toUpperCase().slice(0, 4));\n```",
+    "options": ["JAVA", "java", "JAVAS", "Error"],
+    "answer": "JAVA"
+  },
+  {
+    "question": "What is the result of this string operation?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.length);\n```",
+    "options": ["10", "11", "12", "9"],
+    "answer": "11"
+  },
+  {
+    "question": "What does this string method return?\n```javascript\nlet str = 'Find the needle';\nconsole.log(str.indexOf('needle'));\n```",
+    "options": ["9", "10", "11", "-1"],
+    "answer": "10"
+  },
+  {
+    "question": "What character is returned?\n```javascript\nlet str = 'Programming';\nconsole.log(str.charAt(3));\n```",
+    "options": ["g", "r", "o", "p"],
+    "answer": "g"
+  },
+  {
+    "question": "What does this string replacement do?\n```javascript\nlet str = 'I like to code';\nconsole.log(str.replace('code', 'program'));\n```",
+    "options": ["I like to program", "I like to code", "Error", "undefined"],
+    "answer": "I like to program"
+  },
+  {
+    "question": "What is the result of this rounding?\n```javascript\nconsole.log(Math.round(7.49));\n```",
+    "options": ["7", "8", "7.5", "Error"],
+    "answer": "7"
+  },
+  {
+    "question": "What does this random number code return?\n```javascript\nconsole.log(Math.floor(Math.random() * 5));\n```",
+    "options": ["0 to 4", "1 to 5", "0 to 5", "1 to 4"],
+    "answer": "0 to 4"
+  },
+  {
+    "question": "What does this parsing return?\n```javascript\nconsole.log(parseInt('42px'));\n```",
+    "options": ["42", "NaN", "Error", "42px"],
+    "answer": "42"
+  },
+  {
+    "question": "What is the output of this conversion?\n```javascript\nconsole.log(Number('123.45'));\n```",
+    "options": ["123", "123.45", "NaN", "Error"],
+    "answer": "123.45"
+  },
+  {
+    "question": "What does this decimal control return?\n```javascript\nlet num = 9.87654;\nconsole.log(num.toFixed(3));\n```",
+    "options": ["9.876", "9.877", "9.88", "9.87"],
+    "answer": "9.877"
+  },
+  {
+    "question": "What does this strict comparison return?\n```javascript\nconsole.log(0 === false);\n```",
+    "options": ["true", "false", "undefined", "Error"],
+    "answer": "false"
+  },
+  {
+    "question": "What is the output of this code?\n```javascript\nlet x = '10';\nlet y = 10;\nconsole.log(x !== y);\n```",
+    "options": ["true", "false", "undefined", "Error"],
+    "answer": "true"
+  },
+  {
+    "question": "What does this array operation do?\n```javascript\nlet arr = [1, 2, 3];\narr.unshift(0);\nconsole.log(arr);\n```",
+    "options": ["[0, 1, 2, 3]", "[1, 2, 3, 0]", "[0, 2, 3]", "Error"],
+    "answer": "[0, 1, 2, 3]"
+  },
+  {
+    "question": "What does this array method return?\n```javascript\nlet arr = ['a', 'b', 'c'];\nconsole.log(arr.shift());\n```",
+    "options": ["a", "b", "c", "undefined"],
+    "answer": "a"
+  },
+  {
+    "question": "What is the array length after this operation?\n```javascript\nlet arr = [1, 2, 3, 4];\narr.pop();\nconsole.log(arr.length);\n```",
+    "options": ["3", "4", "2", "1"],
+    "answer": "3"
+  },
+  {
+    "question": "What does this boolean flag code output?\n```javascript\nlet flag = true;\nfor (let i = 0; i < 3; i++) {\n  if (!flag) break;\n  console.log(i);\n  flag = false;\n}\n```",
+    "options": ["0", "0 1 2", "0 1", "Error"],
+    "answer": "0"
+  },
+  {
+    "question": "What does this string extraction return?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.slice(4, 7));\n```",
+    "options": ["Scr", "Scri", "ipt", "Java"],
+    "answer": "Scr"
+  },
+  {
+    "question": "What does this case conversion output?\n```javascript\nlet str = 'HELLO';\nconsole.log(str[0].toLowerCase() + str.slice(1));\n```",
+    "options": ["hELLO", "HELLO", "hello", "error"],
+    "answer": "hELLO"
+  },
+  {
+    "question": "What does this parse return?\n```javascript\nconsole.log(parseFloat('12.34.56'));\n```",
+    "options": ["12.34", "12.3456", "NaN", "Error"],
+    "answer": "12.34"
+  },
+  {
+    "question "question": "What does this number-to-string conversion output?\n```javascript\nlet num = 100;\nconsole.log(num.toString(2));\n```",
+    "options": ["'100'", "'64'", "'1100100'", "Error"],
+    "answer": "'1100100'"
+  },
+  {
+    "question": "What does this floor operation return?\n```javascript\nconsole.log(Math.floor(-3.7));\n```",
+    "options": ["-3", "-4", "-3.7", "Error"],
+    "answer": "-4"
+  },
+  {
+    "question": "What does this string method return?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.substring(6));\n```",
+    "options": ["World", "Hello", "rld", "Error"],
+    "answer": "World"
+  },
+  {
+    "question": "What does this loop output?\n```javascript\ndo {\n  console.log('Run');\n} while (false);\n```",
+    "options": ["Run", "Nothing", "Error", "undefined"],
+    "answer": "Run"
+  },
+  {
+    "question": "What does this type check return?\n```javascript\nconsole.log(typeof (10 + '5'));\n```",
+    "options": ["number", "string", "object", "undefined"],
+    "answer": "string"
+  },
+  {
+    "question": "What does this loose comparison return?\n```javascript\nconsole.log(null == undefined);\n```",
+    "options": ["true", "false", "undefined", "Error"],
+    "answer": "true"
+  },
+  {
+    "question": "What does this string method return?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.includes('lo W'));\n```",
+    "options": ["true", "false", "undefined", "Error"],
+    "answer": "true"
+  },
+  {
+    "question": "What does this array slice return?\n```javascript\nlet arr = [1, 2, 3, 4];\nconsole.log(arr.slice(1, 3));\n```",
+    "options": ["[1, 2]", "[2, 3]", "[1, 2, 3]", "[2, 3, 4]"],
+    "answer": "[2, 3]"
+  },
+  {
+    "question": "What does this code output?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.replace('a', '4').replace('S', '5'));\n```",
+    "options": ["J4v4Script", "J4va5cript", "JavaScript", "Error"],
+    "answer": "J4va5cript"
+  },
+  {
+    "question": "What does this random number code return?\n```javascript\nconsole.log(Math.floor(Math.random() * 10) + 1);\n```",
+    "options": ["0 to 10", "1 to 10", "0 to 9", "1 to 9"],
+    "answer": "1 to 10"
+  },
+  {
+    "question": "What is the output of this nested condition?\n```javascript\nlet x = 5;\nif (x > 0) {\n  if (x < 10) {\n    if (x % 2 === 1) {\n      console.log('Odd and small');\n    }\n  }\n}\n```",
+    "options": ["Odd and small", "Nothing", "Error", "undefined"],
+    "answer": "Odd and small"
+  }
 ];
-
 
 # Shuffle quiz and label options
 def shuffle_quiz():
