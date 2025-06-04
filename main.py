@@ -7,9 +7,30 @@ quiz = [
     {
         "question": "What does this JavaScript code output?\n```javascript\nlet x = 0;\nfor (let i = 1; i <= 3; i++) {\n    x += i;\n}\nconsole.log(x);\n```",
         "options": ["3", "6", "9", "Error"],
-        "answer": "3"
+        "answer": "6"
+    },
+    {
+        "question": "What is the output of the following code?\n```javascript\nconsole.log(typeof null);\n```",
+        "options": ["object", "null", "undefined", "boolean"],
+        "answer": "object"
+    },
+    {
+        "question": "Which of the following is NOT a primitive data type in JavaScript?",
+        "options": ["String", "Number", "Object", "Boolean"],
+        "answer": "Object"
+    },
+    {
+        "question": "What will this code output?\n```javascript\nlet a;\nconsole.log(a);\n```",
+        "options": ["null", "0", "undefined", "Error"],
+        "answer": "undefined"
+    },
+    {
+        "question": "Which method is used to parse a JSON string into a JavaScript object?",
+        "options": ["JSON.parse()", "JSON.stringify()", "JSON.object()", "JSON.toObject()"],
+        "answer": "JSON.parse()"
     }
-]
+];
+
 
 # Shuffle quiz and label options
 def shuffle_quiz():
