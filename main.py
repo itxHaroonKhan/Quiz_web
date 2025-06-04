@@ -643,4 +643,4 @@ else:
         leaderboard.sort(key=lambda x: (-x['score'], x['time']))
         st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
         for i, entry in enumerate(leaderboard[:5], 1):
-            st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True) ye qiuz work nhi kar raha 
+            st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True) 
