@@ -2,7 +2,8 @@ import streamlit as st
 import random
 from datetime import datetime
 
-[
+# Quiz data with hints removed
+quiz = [
     {
         "question": "What is the output of this code?\n```javascript\nlet name = 'Sara';\nconsole.log(name + 'h');\n```",
         "options": ["Sarah", "Sara h", "Sarh", "Error"],
@@ -184,6 +185,7 @@ from datetime import datetime
         "difficulty": "Medium"
     }
 ]
+
 # Shuffle quiz and label options
 def shuffle_quiz():
     shuffled = random.sample(quiz, len(quiz))
@@ -284,14 +286,6 @@ st.markdown("""
         color: #b0b0d0;
         margin-bottom: 10px;
     }
-    .hint {
-        font-size: 13px;
-        color: #b0b0d0;
-        background: #2c2c54;
-        padding: 10px;
-        border-radius: 8px;
-        margin-top: 10px;
-    }
     .stCodeBlock {
         background-color: #1e1e1e !important;
         border-radius: 8px;
@@ -340,7 +334,7 @@ if 'quiz_data' not in st.session_state:
         'time_left': 1800  # 30 minutes in seconds
     })
 
-# Timer logic in Python
+# Timer logic
 def update_timer():
     elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
     st.session_state.time_left = max(1800 - elapsed, 0)
@@ -417,10 +411,6 @@ else:
                 else:
                     st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
 
-            # Hint
-            with st.expander("💡 Show Hint"):
-                st.markdown(f'<div class="hint">{q["hint"]}</div>', unsafe_allow_html=True)
-
             # Navigation
             col_prev, col_next = st.columns(2)
             with col_prev:
@@ -471,4 +461,4 @@ else:
         leaderboard.sort(key=lambda x: (-x['score'], x['time']))
         st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
         for i, entry in enumerate(leaderboard[:5], 1):
-            st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True) 
+            st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True)
