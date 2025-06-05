@@ -2,360 +2,188 @@ import streamlit as st
 import random
 from datetime import datetime
 
-# Updated quiz with 50 questions, including difficulty and hints
-quiz = [
+[
     {
-        "question": "What happens when this alert is executed?\n```javascript\nalert('Hello\\nWorld');\n```",
-        "options": ["Displays 'Hello World'", "Displays 'Hello' and 'World' on two lines", "Throws an error", "Displays 'Hello\\nWorld'"],
-        "answer": "Displays 'Hello' and 'World' on two lines",
-        "difficulty": "Easy",
-        "hint": "The \\n character creates a new line in strings."
+        "question": "What is the output of this code?\n```javascript\nlet name = 'Sara';\nconsole.log(name + 'h');\n```",
+        "options": ["Sarah", "Sara h", "Sarh", "Error"],
+        "answer": "Sarah",
+        "difficulty": "Easy"
     },
     {
-        "question": "What is the output of this code?\n```javascript\nlet name = 'Ali';\nconsole.log(name + undefined);\n```",
-        "options": ["Aliundefined", "NaN", "Error", "undefined"],
-        "answer": "Aliundefined",
-        "difficulty": "Medium",
-        "hint": "String concatenation with undefined results in a string."
+        "question": "What is the result of this operation?\n```javascript\nlet num = 8;\nconsole.log(num * 3);\n```",
+        "options": ["24", "11", "NaN", "Error"],
+        "answer": "24",
+        "difficulty": "Easy"
     },
     {
-        "question": "What will this code output?\n```javascript\nlet num = 10.5;\nconsole.log(num * '2');\n```",
-        "options": ["21", "NaN", "1052", "Error"],
-        "answer": "21",
-        "difficulty": "Medium",
-        "hint": "JavaScript converts the string '2' to a number during multiplication."
+        "question": "Which variable name is illegal?\n```javascript\nlet 1stPlace = 'Gold';\n```",
+        "options": ["firstPlace", "_1stPlace", "1stPlace", "$place"],
+        "answer": "1stPlace",
+        "difficulty": "Easy"
     },
     {
-        "question": "Which variable name is illegal?\n```javascript\nlet 2ndVar = 10;\n```",
-        "options": ["my_variable", "_2ndVar", "2ndVar", "$var"],
-        "answer": "2ndVar",
-        "difficulty": "Easy",
-        "hint": "Variable names cannot start with a number."
+        "question": "What is the output of this expression?\n```javascript\nconsole.log(5 + 4 * 2);\n```",
+        "options": ["18", "13", "9", "10"],
+        "answer": "13",
+        "difficulty": "Medium"
     },
     {
-        "question": "What is the result of this expression?\n```javascript\nconsole.log(10 / 2 + 3 * 2 - 1);\n```",
-        "options": ["10", "8", "11", "12"],
-        "answer": "10",
-        "difficulty": "Medium",
-        "hint": "Follow the order of operations (PEMDAS)."
-    },
-    {
-        "question": "What does the ** operator do in this code?\n```javascript\nconsole.log(3 ** 2);\n```",
-        "options": ["6", "9", "8", "Error"],
-        "answer": "9",
-        "difficulty": "Easy",
-        "hint": "** is the exponentiation operator."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nconsole.log((5 + 3) * (2 + 2) / 4);\n```",
-        "options": ["8", "16", "4", "10"],
+        "question": "What does the ** operator do?\n```javascript\nconsole.log(2 ** 3);\n```",
+        "options": ["6", "8", "9", "Error"],
         "answer": "8",
-        "difficulty": "Medium",
-        "hint": "Parentheses ensure addition is performed first."
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this concatenation produce?\n```javascript\nlet str = 'Code' + 2 * 3 + 'Run';\nconsole.log(str);\n```",
-        "options": ["Code6Run", "Code23Run", "Error", "NaN"],
-        "answer": "Code6Run",
-        "difficulty": "Medium",
-        "hint": "Multiplication has higher precedence than concatenation."
+        "question": "What is the output of this expression?\n```javascript\nconsole.log((3 + 2) * (4 - 1));\n```",
+        "options": ["15", "10", "12", "9"],
+        "answer": "15",
+        "difficulty": "Medium"
     },
     {
-        "question": "What does this prompt return if the user cancels it?\n```javascript\nlet input = prompt('Enter something:');\nconsole.log(input);\n```",
-        "options": ["null", "undefined", "'' (empty string)", "Error"],
-        "answer": "null",
-        "difficulty": "Easy",
-        "hint": "Canceling a prompt returns null."
+        "question": "What does this concatenation produce?\n```javascript\nlet str = 'Test' + 2 * 2 + 'Case';\nconsole.log(str);\n```",
+        "options": ["Test4Case", "Test22Case", "Test2Case", "Error"],
+        "answer": "Test4Case",
+        "difficulty": "Medium"
     },
     {
-        "question": "What will this code output?\n```javascript\nlet x = null;\nif (x || x === null) {\n  console.log('Nullish');\n}\n```",
-        "options": ["Nullish", "Nothing", "undefined", "Error"],
-        "answer": "Nullish",
-        "difficulty": "Medium",
-        "hint": "Check how null behaves in logical OR operations."
-    },
-    {
-        "question": "What does this comparison return?\n```javascript\nconsole.log('10' !== 10);\n```",
+        "question": "What does this comparison return?\n```javascript\nconsole.log(5 === '5');\n```",
         "options": ["true", "false", "undefined", "Error"],
-        "answer": "true",
-        "difficulty": "Easy",
-        "hint": "Strict inequality checks both value and type."
+        "answer": "false",
+        "difficulty": "Easy"
     },
     {
-        "question": "What is the output of this code?\n```javascript\nlet score = 65;\nif (score >= 90) {\n  console.log('A');\n} else if (score >= 80) {\n  console.log('B');\n} else if (score >= 60) {\n  console.log('C');\n} else {\n  console.log('D');\n}\n```",
-        "options": ["A", "B", "C", "D"],
-        "answer": "C",
-        "difficulty": "Easy",
-        "hint": "Check the conditions in order."
+        "question": "What is the output of this code?\n```javascript\nlet marks = 75;\nif (marks >= 80) {\n  console.log('A');\n} else if (marks >= 70) {\n  console.log('B');\n} else {\n  console.log('C');\n}\n```",
+        "options": ["A", "B", "C", "Error"],
+        "answer": "B",
+        "difficulty": "Easy"
     },
     {
-        "question": "What is the result of this condition?\n```javascript\nlet x = 7, y = '7';\nif (x == y && x !== y) {\n  console.log('Tricky');\n}\n```",
-        "options": ["Tricky", "Nothing", "Error", "undefined"],
-        "answer": "Tricky",
-        "difficulty": "Hard",
-        "hint": "Loose equality (==) ignores type, but strict inequality (!==) checks it."
+        "question": "What does this condition return?\n```javascript\nlet a = 10, b = '10';\nif (a == b && a !== b) {\n  console.log('Equal');\n}\n```",
+        "options": ["Equal", "Nothing", "Error", "undefined"],
+        "answer": "Equal",
+        "difficulty": "Hard"
     },
     {
-        "question": "What does this nested if output?\n```javascript\nlet num = 15;\nif (num > 10) {\n  if (num % 3 === 0) {\n    console.log('Divisible by 3');\n  }\n}\n```",
-        "options": ["Divisible by 3", "Nothing", "Error", "undefined"],
-        "answer": "Divisible by 3",
-        "difficulty": "Medium",
-        "hint": "Check if 15 satisfies both conditions."
+        "question": "What does this nested if output?\n```javascript\nlet num = 12;\nif (num > 10) {\n  if (num % 2 === 0) {\n    console.log('Even');\n  }\n}\n```",
+        "options": ["Even", "Nothing", "Error", "undefined"],
+        "answer": "Even",
+        "difficulty": "Medium"
     },
     {
-        "question": "What is the output of this array code?\n```javascript\nlet arr = [0, 1, 2, 3];\nconsole.log(arr[arr.length - 1]);\n```",
-        "options": ["0", "1", "2", "3"],
+        "question": "What is the output of this array code?\n```javascript\nlet arr = [1, 2, 3];\nconsole.log(arr[2]);\n```",
+        "options": ["1", "2", "3", "undefined"],
         "answer": "3",
-        "difficulty": "Easy",
-        "hint": "arr.length - 1 gives the last index."
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this array operation produce?\n```javascript\nlet nums = [1, 2];\nnums.push(...[3, 4]);\nconsole.log(nums);\n```",
-        "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "[1, 2, [3, 4]]", "Error"],
-        "answer": "[1, 2, 3, 4]",
-        "difficulty": "Medium",
-        "hint": "The spread operator (...) unpacks the array."
+        "question": "What does this array operation produce?\n```javascript\nlet nums = [4, 5];\nnums.push(6, 7);\nconsole.log(nums);\n```",
+        "options": ["[4, 5, 6]", "[4, 5, 6, 7]", "[6, 7, 4, 5]", "Error"],
+        "answer": "[4, 5, 6, 7]",
+        "difficulty": "Medium"
     },
     {
-        "question": "What is the result of this splice operation?\n```javascript\nlet arr = ['a', 'b', 'c', 'd'];\narr.splice(1, 2, 'x', 'y');\nconsole.log(arr);\n```",
-        "options": ["['a', 'x', 'y', 'd']", "['a', 'b', 'c']", "['x', 'y', 'd']", "Error"],
-        "answer": "['a', 'x', 'y', 'd']",
-        "difficulty": "Medium",
-        "hint": "Splice removes and inserts elements at the specified index."
+        "question": "What is the result of this splice operation?\n```javascript\nlet arr = ['p', 'q', 'r', 's'];\narr.splice(1, 1, 'x');\nconsole.log(arr);\n```",
+        "options": ["['p', 'x', 'r', 's']", "['p', 'q', 'r']", "['x', 'r', 's']", "Error"],
+        "answer": "['p', 'x', 'r', 's']",
+        "difficulty": "Medium"
     },
     {
-        "question": "What does this loop output?\n```javascript\nfor (let i = 1; i <= 4; i++) {\n  if (i % 2 === 0) console.log(i);\n}\n```",
-        "options": ["1 3", "2 4", "1 2 3 4", "Nothing"],
-        "answer": "2 4",
-        "difficulty": "Easy",
-        "hint": "Only even numbers are logged."
+        "question": "What does this loop output?\n```javascript\nfor (let i = 1; i <= 5; i++) {\n  if (i % 2 !== 0) console.log(i);\n}\n```",
+        "options": ["1 3 5", "2 4", "1 2 3 4 5", "Nothing"],
+        "answer": "1 3 5",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this loop with break output?\n```javascript\nlet product = 1;\nfor (let i = 1; i <= 5; i++) {\n  if (i === 3) break;\n  product *= i;\n}\nconsole.log(product);\n```",
-        "options": ["2", "6", "15", "120"],
-        "answer": "2",
-        "difficulty": "Medium",
-        "hint": "The loop stops before i reaches 3."
+        "question": "What does this loop with break output?\n```javascript\nlet sum = 0;\nfor (let i = 1; i <= 4; i++) {\n  if (i === 3) break;\n  sum += i;\n}\nconsole.log(sum);\n```",
+        "options": ["3", "6", "10", "1"],
+        "answer": "3",
+        "difficulty": "Medium"
     },
     {
-        "question": "What does this nested loop output?\n```javascript\nlet result = '';\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    result += (i + j) + ' ';\n  }\n}\nconsole.log(result);\n```",
-        "options": ["2 3 3 4", "1 2 3 4", "2 4 4 6", "Error"],
-        "answer": "2 3 3 4",
-        "difficulty": "Hard",
-        "hint": "Calculate the sum of i and j for each iteration."
+        "question": "What does this nested loop output?\n```javascript\nlet output = '';\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    output += (i * j) + ' ';\n  }\n}\nconsole.log(output);\n```",
+        "options": ["1 2 2 4", "1 2 3 4", "2 4 4 8", "Error"],
+        "answer": "1 2 2 4",
+        "difficulty": "Hard"
     },
     {
-        "question": "What does this code output?\n```javascript\nlet text = 'javascript';\nconsole.log(text.toUpperCase().slice(-3));\n```",
-        "options": ["IPT", "ipt", "JAV", "Error"],
-        "answer": "IPT",
-        "difficulty": "Medium",
-        "hint": "Negative slice index counts from the end."
+        "question": "What does this case conversion output?\n```javascript\nlet str = 'hello';\nconsole.log(str.toUpperCase());\n```",
+        "options": ["HELLO", "hello", "Hello", "Error"],
+        "answer": "HELLO",
+        "difficulty": "Easy"
     },
     {
-        "question": "What is the result of this string operation?\n```javascript\nlet str = 'Hello World!';\nconsole.log(str.length);\n```",
-        "options": ["10", "11", "12", "13"],
-        "answer": "12",
-        "difficulty": "Easy",
-        "hint": "Count all characters, including spaces and punctuation."
+        "question": "What is the length of this string?\n```javascript\nlet str = 'Coding!';\nconsole.log(str.length);\n```",
+        "options": ["6", "7", "8", "Error"],
+        "answer": "7",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this string method return?\n```javascript\nlet str = 'Find the needle';\nconsole.log(str.indexOf('not'));\n```",
-        "options": ["-1", "0", "5", "8"],
-        "answer": "-1",
-        "difficulty": "Medium",
-        "hint": "indexOf returns -1 if the substring is not found."
+        "question": "What does this string method return?\n```javascript\nlet str = 'Find the key';\nconsole.log(str.indexOf('key'));\n```",
+        "options": ["-1", "9", "0", "5"],
+        "answer": "9",
+        "difficulty": "Medium"
     },
     {
-        "question": "What character is returned?\n```javascript\nlet str = 'Programming';\nconsole.log(str.charAt(str.length - 1));\n```",
-        "options": ["g", "n", "i", "m"],
-        "answer": "g",
-        "difficulty": "Easy",
-        "hint": "charAt with length - 1 gets the last character."
+        "question": "What character is returned?\n```javascript\nlet str = 'Script';\nconsole.log(str.charAt(2));\n```",
+        "options": ["S", "r", "i", "p"],
+        "answer": "r",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this string replacement do?\n```javascript\nlet str = 'I code, you code';\nconsole.log(str.replace(/code/g, 'program'));\n```",
-        "options": ["I program, you program", "I program, you code", "I code, you program", "Error"],
-        "answer": "I program, you program",
-        "difficulty": "Hard",
-        "hint": "The /g flag replaces all occurrences."
+        "question": "What does this string replacement do?\n```javascript\nlet str = 'cat and dog';\nconsole.log(str.replace('cat', 'rat'));\n```",
+        "options": ["rat and dog", "cat and rat", "rat and rat", "Error"],
+        "answer": "rat and dog",
+        "difficulty": "Medium"
     },
     {
-        "question": "What is the result of this rounding?\n```javascript\nconsole.log(Math.round(-7.6));\n```",
-        "options": ["-7", "-8", "-7.6", "Error"],
-        "answer": "-8",
-        "difficulty": "Medium",
-        "hint": "Math.round rounds to the nearest integer."
-    },
-    {
-        "question": "What does this random number code return?\n```javascript\nconsole.log(Math.floor(Math.random() * 6) + 1);\n```",
-        "options": ["0 to 6", "1 to 6", "0 to 5", "1 to 5"],
-        "answer": "1 to 6",
-        "difficulty": "Easy",
-        "hint": "Math.random() generates a number from 0 to <1."
-    },
-    {
-        "question": "What does this parsing return?\n```javascript\nconsole.log(parseInt('-42.7'));\n```",
-        "options": ["-42", "42", "NaN", "Error"],
-        "answer": "-42",
-        "difficulty": "Medium",
-        "hint": "parseInt handles negative numbers."
-    },
-    {
-        "question": "What is the output of this conversion?\n```javascript\nconsole.log(Number('12.34.56'));\n```",
-        "options": ["12.34", "12.3456", "NaN", "Error"],
-        "answer": "NaN",
-        "difficulty": "Medium",
-        "hint": "Number() expects a valid number string."
-    },
-    {
-        "question": "What does this decimal control return?\n```javascript\nlet num = 9.87654;\nconsole.log(num.toFixed(2));\n```",
-        "options": ["9.88", "9.87", "9.876", "9.9"],
-        "answer": "9.88",
-        "difficulty": "Easy",
-        "hint": "toFixed rounds to the specified decimals."
-    },
-    {
-        "question": "What does this strict comparison return?\n```javascript\nconsole.log(undefined === null);\n```",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "false",
-        "difficulty": "Medium",
-        "hint": "Strict comparison checks both value and type."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nlet x = '5';\nlet y = 5;\nconsole.log(x != y);\n```",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "false",
-        "difficulty": "Easy",
-        "hint": "Loose inequality ignores type."
-    },
-    {
-        "question": "What does this array operation do?\n```javascript\nlet arr = [1, 2, 3];\narr.unshift(...[0, -1]);\nconsole.log(arr);\n```",
-        "options": ["[0, -1, 1, 2, 3]", "[1, 2, 3, 0, -1]", "[0, -1]", "Error"],
-        "answer": "[0, -1, 1, 2, 3]",
-        "difficulty": "Medium",
-        "hint": "unshift with spread adds elements to the start."
-    },
-    {
-        "question": "What does this array method return?\n```javascript\nlet arr = ['x', 'y', 'z'];\nconsole.log(arr.pop());\n```",
-        "options": ["x", "y", "z", "undefined"],
-        "answer": "z",
-        "difficulty": "Easy",
-        "hint": "pop() removes and returns the last element."
-    },
-    {
-        "question": "What is the array length after this operation?\n```javascript\nlet arr = [1, 2, 3, 4, 5];\narr.splice(1, 3);\nconsole.log(arr.length);\n```",
-        "options": ["2", "3", "4", "5"],
-        "answer": "2",
-        "difficulty": "Medium",
-        "hint": "splice removes elements and changes length."
-    },
-    {
-        "question": "What does this boolean flag code output?\n```javascript\nlet found = false;\nlet arr = [1, 2, 3, 4];\nfor (let i = 0; i < arr.length; i++) {\n  if (arr[i] === 3) {\n    found = true;\n    break;\n  }\n}\nconsole.log(found);\n```",
-        "options": ["true", "false", "3", "Error"],
-        "answer": "true",
-        "difficulty": "Medium",
-        "hint": "The loop breaks when 3 is found."
-    },
-    {
-        "question": "What does this string extraction return?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.slice(-4, -1));\n```",
-        "options": ["rip", "ript", "Scri", "Java"],
-        "answer": "rip",
-        "difficulty": "Hard",
-        "hint": "Negative indices count from the end."
-    },
-    {
-        "question": "What does this case conversion output?\n```javascript\nlet str = 'javascript';\nconsole.log(str[0].toUpperCase() + str.slice(1, -1) + str.slice(-1).toUpperCase());\n```",
-        "options": ["JavascriptT", "JAVASCRIPt", "JavascripT", "Error"],
-        "answer": "JavascripT",
-        "difficulty": "Hard",
-        "hint": "Manipulate the first and last characters."
-    },
-    {
-        "question": "What does this parse return?\n```javascript\nconsole.log(parseFloat('12.34abc45'));\n```",
-        "options": ["12.34", "12.3445", "NaN", "Error"],
-        "answer": "12.34",
-        "difficulty": "Medium",
-        "hint": "parseFloat stops at the first invalid character."
-    },
-    {
-        "question": "What does this number-to-string conversion output?\n```javascript\nlet num = 255;\nconsole.log(num.toString(16));\n```",
-        "options": ["'255'", "'ff'", "'100'", "Error"],
-        "answer": "'ff'",
-        "difficulty": "Hard",
-        "hint": "toString(16) converts to hexadecimal."
-    },
-    {
-        "question": "What does this floor operation return?\n```javascript\nconsole.log(Math.floor(5.999));\n```",
-        "options": ["5", "6", "5.999", "Error"],
+        "question": "What is the result of this rounding?\n```javascript\nconsole.log(Math.round(4.6));\n```",
+        "options": ["4", "5", "4.6", "Error"],
         "answer": "5",
-        "difficulty": "Easy",
-        "hint": "Math.floor rounds down to the nearest integer."
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this string method return?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.substring(2, 5));\n```",
-        "options": ["llo", "ll", "lo ", "Error"],
-        "answer": "llo",
-        "difficulty": "Easy",
-        "hint": "substring extracts from start to end-1 index."
+        "question": "What does this random number code return?\n```javascript\nconsole.log(Math.floor(Math.random() * 5) + 1);\n```",
+        "options": ["0 to 5", "1 to 5", "0 to 4", "1 to 4"],
+        "answer": "1 to 5",
+        "difficulty": "Medium"
     },
     {
-        "question": "What does this loop output?\n```javascript\nlet i = 0;\nwhile (i < 3) {\n  console.log(i++);\n}\n```",
-        "options": ["0 1 2", "1 2 3", "0 1", "Error"],
-        "answer": "0 1 2",
-        "difficulty": "Easy",
-        "hint": "i++ logs first, then increments."
+        "question": "What does this parsing return?\n```javascript\nconsole.log(parseInt('123.45'));\n```",
+        "options": ["123", "123.45", "NaN", "Error"],
+        "answer": "123",
+        "difficulty": "Medium"
     },
     {
-        "question": "What does this type check return?\n```javascript\nconsole.log(typeof ('5' + 5));\n```",
-        "options": ["number", "string", "object", "undefined"],
-        "answer": "string",
-        "difficulty": "Easy",
-        "hint": "String + number results in a string."
+        "question": "What does this conversion output?\n```javascript\nlet num = 42;\nconsole.log(num.toString());\n```",
+        "options": ["'42'", "42", "NaN", "Error"],
+        "answer": "'42'",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this loose comparison return?\n```javascript\nconsole.log(0 == '0');\n```",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "true",
-        "difficulty": "Medium",
-        "hint": "Loose equality converts types."
+        "question": "What does this decimal control return?\n```javascript\nlet num = 7.12345;\nconsole.log(num.toFixed(3));\n```",
+        "options": ["7.123", "7.12", "7.1234", "7.1"],
+        "answer": "7.123",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this string method return?\n```javascript\nlet str = 'JavaScript is fun';\nconsole.log(str.includes('Script'));\n```",
-        "options": ["true", "false", "undefined", "Error"],
-        "answer": "true",
-        "difficulty": "Easy",
-        "hint": "includes checks for a substring."
+        "question": "What does this function return?\n```javascript\nfunction add(a, b) {\n  return a + b;\n}\nconsole.log(add(3, 4));\n```",
+        "options": ["7", "34", "Error", "undefined"],
+        "answer": "7",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this array slice return?\n```javascript\nlet arr = [1, 2, 3, 4, 5];\nconsole.log(arr.slice(-3));\n```",
-        "options": ["[1, 2, 3]", "[3, 4, 5]", "[2, 3, 4]", "[4, 5]"],
-        "answer": "[3, 4, 5]",
-        "difficulty": "Medium",
-        "hint": "Negative slice index starts from the end."
+        "question": "What does this function with parameters output?\n```javascript\nfunction greet(name) {\n  return 'Hello ' + name;\n}\nconsole.log(greet('Ali'));\n```",
+        "options": ["Hello Ali", "Hello", "Ali", "Error"],
+        "answer": "Hello Ali",
+        "difficulty": "Easy"
     },
     {
-        "question": "What does this code output?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.replace(/a/g, '4').toUpperCase());\n```",
-        "options": ["J4V4SCRIPT", "JAVA4SCRIPT", "J4VASCRIPT", "Error"],
-        "answer": "J4V4SCRIPT",
-        "difficulty": "Hard",
-        "hint": "/g replaces all occurrences of 'a'."
-    },
-    {
-        "question": "What does this random number code return?\n```javascript\nconsole.log(Math.ceil(Math.random() * 10));\n```",
-        "options": ["0 to 10", "1 to 10", "0 to 9", "1 to 9"],
-        "answer": "1 to 10",
-        "difficulty": "Medium",
-        "hint": "Math.ceil rounds up the random number."
-    },
-    {
-        "question": "What is the output of this nested condition?\n```javascript\nlet x = 8;\nif (x > 5) {\n  if (x < 10) {\n    if (x % 2 === 0) {\n      console.log('Even and in range');\n    }\n  }\n}\n```",
-        "options": ["Even and in range", "Nothing", "Error", "undefined"],
-        "answer": "Even and in range",
-        "difficulty": "Hard",
-        "hint": "Check all nested conditions for x = 8."
+        "question": "What does this date operation return?\n```javascript\nlet date = new Date('2023-06-05');\nconsole.log(date.getFullYear());\n```",
+        "options": ["2023", "6", "5", "Error"],
+        "answer": "2023",
+        "difficulty": "Medium"
     }
 ]
-
 # Shuffle quiz and label options
 def shuffle_quiz():
     shuffled = random.sample(quiz, len(quiz))
