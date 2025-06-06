@@ -273,8 +273,9 @@ quiz = [
         "explanation": "substring(1, 4) extracts characters from index 1 to 3, returning 'ell'."
     },
     {
-        "question": "What does this code output?\n```javascript\nlet num = 3.14159;\nconsole.log(Math.floor(num));\n}\n```",
-        "options": ["3", "answer": "3",
+        "question": "What does this code output?\n```javascript\nlet num = 3.14159;\nconsole.log(Math.floor(num));\n```",
+        "options": ["3", "4", "3.14", "Error"],
+        "answer": "3",
         "difficulty": "Medium",
         "explanation": "Math.floor(3.14159) rounds down to the nearest integer, returning 3."
     },
@@ -288,7 +289,7 @@ quiz = [
     {
         "question": "What does this code output?\n```javascript\nlet arr = ['a', 'b'];\narr.unshift('c');\nconsole.log(arr);\n```",
         "options": ["['c', 'a', 'b']", "['a', 'b', 'c']", "['c', 'b']", "Error"],
-        "answer": "['c', 'b', 'c']",
+        "answer": "['c', 'a', 'b']",
         "difficulty": "Medium",
         "explanation": "unshift('c') adds 'c' to the start of the array, resulting in ['c', 'a', 'b']."
     },
@@ -297,7 +298,7 @@ quiz = [
         "options": ["true", "false", "2", "Error"],
         "answer": "true",
         "difficulty": "Medium",
-        "explanation": "includes('cd') checks if 'c' is a substring, returning true since 'cd' exists in 'abcde'."
+        "explanation": "includes('cd') checks if 'cd' is a substring, returning true since 'cd' exists in 'abcde'."
     },
     {
         "question": "What does this code output?\n```javascript\nlet num = 0.1 + 0.2;\nconsole.log(num.toFixed(1));\n```",
@@ -307,14 +308,14 @@ quiz = [
         "explanation": "Due to floating-point precision, 0.3 is approximated, and toFixed(1) rounds it to 0.3."
     },
     {
-        "question": "What does this code return?\n```javascript\nlet date = new Date('2025-06-06T10:29:00:00');\nconsole.log(date.getHours());\n```",
+        "question": "What does this code return?\n```javascript\nlet date = new Date('2025-06-06T10:29:00');\nconsole.log(date.getHours());\n```",
         "options": ["10", "11", "0", "Error"],
         "answer": "10",
         "difficulty": "Medium",
         "explanation": "getHours() returns the hour (10) from the time 10:29:00."
     },
     {
-        "question": "What does this function output?\n```javascript\nfunction isEven(num) {\n    return num % 2 === 0;\n}\nconsole.log(isEven(10));\n```",
+        "question": "What does this function output?\n```javascript\nfunction isEven(num) {\n  return num % 2 === 0;\n}\nconsole.log(isEven(10));\n```",
         "options": ["true", "false", "10", "Error"],
         "answer": "true",
         "difficulty": "Medium",
@@ -328,14 +329,14 @@ quiz = [
         "explanation": "slice(1, 3) extracts elements from index 1 to 2, returning [2, 3]."
     },
     {
-        "question": "What does this code return?\n```javascript\nconsole.log(str.split(' ')[0]);\n```javascript\nlet str = 'Hello World';\n```",
-        "options": ["Hello", "World"", "Hello World", "Error"],
+        "question": "What does this code return?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.split(' ')[0]);\n```",
+        "options": ["Hello", "World", "Hello World", "Error"],
         "answer": "Hello",
         "difficulty": "Medium",
-        "explanation": "split(' ') splits the string into ['Hello', 'World'], producingand ['Hello'] accesses 'World']."
+        "explanation": "split(' ') splits the string into ['Hello', 'World'], and [0] accesses 'Hello'."
     },
     {
-        "question": "What does this code output?\n```javascript\nconsole.log(Math.ceil(4.2));\n```",
+        "question": "What does this code output?\n```javascript\nlet num = Math.ceil(4.2);\nconsole.log(num);\n```",
         "options": ["4", "5", "4.2", "Error"],
         "answer": "5",
         "difficulty": "Medium",
@@ -349,34 +350,35 @@ quiz = [
         "explanation": "parseInt('100px') parses the string to an integer, stopping at 'px', returning 100."
     },
     {
-        "question": "What does this code output?\n```javascript\n```javascript\nlet arr = [10, 20];\narr.splice(1, 0, 15);\nconsole.log(arr);\n```",
+        "question": "What does this code output?\n```javascript\nlet arr = [10, 20];\narr.splice(1, 0, 15);\nconsole.log(arr);\n```",
         "options": ["[10, 15, 20]", "[10, 20, 15]", "[15, 20]", "Error"],
         "answer": "[10, 15, 20]",
         "difficulty": "Medium",
         "explanation": "splice(1, 0, 15) inserts 15 at index 1 without removing elements, resulting in [10, 15, 20]."
     },
     {
-        "question": "What does this code return?\n```javascript\nconsole.log(str.charAt(10));\n```javascript\nlet str = 'Test';\n```",
-        "options": ["'s'", "''", "undefined", "Error"],
+        "question": "What does this code return?\n```javascript\nlet str = 'Test';\nconsole.log(str.charAt(10));\n```",
+        "options": ["'T'", "''", "undefined", "Error"],
         "answer": "''",
         "difficulty": "Medium",
-        "explanation": "charAt(10) returns an empty string for an invalid index."
+        "explanation": "charAt(10) returns an empty string for an index beyond the string's length."
     },
     {
-        "question": "What does this code output?\n```javascript\nconsole.log(date.getDate());\n```javascript\n\nlet date = new Date('2025-06-06');\ndate.setDate(10);\n```",
+        "question": "What does this code output?\n```javascript\nlet date = new Date('2025-06-06');\ndate.setDate(10);\nconsole.log(date.getDate());\n```",
         "options": ["6", "10", "0", "Error"],
         "answer": "10",
         "difficulty": "Medium",
         "explanation": "setDate(10) sets the day to 10, and getDate() returns 10."
     },
     {
-        "question": "What does this function output?\n```javascript\nconsolefunction sumArray(arr) {\n    let sum = 0;\n    return sum;\nfor (let num of arr) sum += num;\n}\nconsole.log(sumArray([1, 2, 3]));\n```",
-        "options": ["6", "123"", "",3"", ""Error"],
+        "question": "What does this function output?\n```javascript\nfunction sumArray(arr) {\n  let sum = 0;\n  for (let num of arr) sum += num;\n  return sum;\n}\nconsole.log(sumArray([1, 2, 3]));\n```",
+        "options": ["6", "123", "3", "Error"],
         "answer": "6",
         "difficulty": "Medium",
         "explanation": "The function sums the array elements (1 + 2 + 3 = 6)."
     }
 ]
+
 
 # Cache shuffled quiz
 @st.cache_data
