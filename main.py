@@ -2,7 +2,7 @@ import streamlit as st
 import random
 from datetime import datetime
 
-# Quiz data with corrected question 14 and proper syntax
+# Quiz data with fixed syntax error in question 43 and corrected question 14
 quiz = [
     {
         "question": "What happens if the user clicks 'Cancel' in this alert code?\n```javascript\nlet result = alert('Confirm action');\nconsole.log(result);\n```",
@@ -307,7 +307,7 @@ quiz = [
     },
     {
         "question": "What does this code return?\n```javascript\nlet date = new Date('2025-06-06T10:29:00');\nconsole.log(date.getHours());\n```",
-        "options": ["10", "11",0", "Error"],
+        "options": ["10", "11", "0", "Error"],
         "answer": "10",
         "difficulty": "Medium",
         "explanation": "getHours() returns the hour (10) from the time 10:29:00."
@@ -588,7 +588,8 @@ else:
                     st.session_state.feedback = {'is_correct': is_correct, 'correct_answer': q['labeled_answer'], 'explanation': q['explanation']}
                     st.session_state.answers[st.session_state.current_q] = {
                         'question': q['question'], 'user_answer': option, 'correct_answer': q['labeled_answer'], 
-                        'is_correct': is_correct, 'difficulty': q['difficulty']
+                        'is_correct': is_correct,
+                        'difficulty': q['difficulty']
                     }
                     if is_correct:
                         points = {'Easy': 1, 'Medium': 2, 'Hard': 3}[q['difficulty']]
@@ -602,62 +603,3 @@ else:
                 else:
                     st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
                     st.markdown(f'<div style="color: #b0b0d0; font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
-
-            # Navigation
-            col_prev, col_next = st.columns(2)
-            with col_prev:
-                if st.button("⬅ Previous", disabled=st.session_state.current_q == 0):
-                    if st.session_state.answers[st.session_state.current_q] and st.session_state.answers[st.session_state.current_q]['is_correct']:
-                        points = {'Easy': 1, 'Medium': 2, 'Hard': 3}[st.session_state.answers[st.session_state.current_q]['difficulty']]
-                        st.session_state.score -= points
-                    st.session_state.current_q -= 1
-                    st.session_state.selected_option = None
-                    st.session_state.feedback = None
-                    st.rerun()
-            with col_next:
-                if st.session_state.current_q < len(quiz) - 1:
-                    if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
-                        st.session_state.current_q += 1
-                        st.session_state.selected_option = None
-                        st.session_state.feedback = None
-                        st.rerun()
-                else:
-                    if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
-                        st.session_state.show_results = True
-                        st.rerun()
-
-            st.markdown('</div>', unsafe_allow_html=True)
-
-    else:
-        time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
-        total_possible_score = sum({'Easy': 1, 'Medium': 2, 'Hard': 3}[q['difficulty']] for q in quiz)
-        accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
-        st.markdown('<div class="question-container">', unsafe_allow_html=True)
-        st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
-        st.markdown(f"""
-        <h3>📊 Results</h3>
-        <div style="color: #b0b0d0; font-size: 15px;">
-            - ⏱️ Time: {int(time_taken) // 60}m {int(time_taken) % 60}s<br>
-            - 🎯 Accuracy: {accuracy:.1f}%<br>
-            - ✅ Correct: {sum(1 for a in st.session_state.answers if a and a['is_correct'])}<br>
-            - ❌ Wrong: {sum(1 for a in st.session_state.answers if a and not a['is_correct'])}
-        </div>
-        """, unsafe_allow_html=True)
-
-        # Leaderboard
-        leaderboard = [
-            {"name": "Alex", "score": 45, "time": 600},
-            {"name": "Sam", "score": 40, "time": 700},
-            {"name": "You", "score": st.session_state.score, "time": int(time_taken)}
-        ]
-        leaderboard.sort(key=lambda x: (-x['score'], x['time']))
-        st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
-        for i, entry in enumerate(leaderboard[:5], 1):
-            st.markdown(f'<div style="color: #b0b0d0;">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True)
-
-        # Review Answers
-        st.markdown('<h3>📝 Review Your Answers</h3>', unsafe_allow_html=True)
-        for i, ans in enumerate(st.session_state.answers):
-            if ans:
-                status = "✅ Correct" if ans['is_correct'] else f"❌ Wrong (Correct: {ans['correct_answer']})"
-                st.markdown(f'<div style="color: #b0b0d0;">Question {i+1}: {ans["question"]}<br>Your Answer: {ans["user_answer"]}<br>{status}<br>Explanation: {quiz[i]["explanation"]}</div>', unsafe_allow_html=True)
