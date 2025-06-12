@@ -4,297 +4,206 @@ from datetime import datetime
 import uuid
 
 quiz = [
-    # 13. Testing sets of conditions (if...else and else if)
     {
-        "question": "What is logged?\n```javascript\nlet temp = 25;\nif (temp > 30) {\n  console.log('Hot');\n} else if (temp > 20) {\n  console.log('Warm');\n} else {\n  console.log('Cool');\n}\n```",
-        "options": ["Hot", "Warm", "Cool", "Nothing"],
-        "answer": "Warm",
-        "difficulty": "Medium",
-        "explanation": "Since `temp = 25` satisfies `temp > 20` but not `temp > 30`, 'Warm' is logged.",
-        "hint": "Check which condition is evaluated first in an if...else if chain."
-    },
-    {
-        "question": "What is logged?\n```javascript\nlet score = 85;\nif (score >= 90) {\n  console.log('A');\n} else if (score >= 80) {\n  console.log('B');\n} else {\n  console.log('C');\n}\n```",
-        "options": ["A", "B", "C", "Nothing"],
-        "answer": "B",
-        "difficulty": "Medium",
-        "explanation": "Since `score = 85` satisfies `score >= 80` but not `score >= 90`, 'B' is logged.",
-        "hint": "Evaluate the conditions in order."
-    },
-
-    # 14. if statements nested
-    {
-        "question": "What is logged?\n```javascript\nlet num = 6;\nif (num > 5) {\n  if (num % 2 === 0) {\n    console.log('Even and large');\n  }\n}\n```",
-        "options": ["Even and large", "Nothing", "Error", "6"],
-        "answer": "Even and large",
-        "difficulty": "Medium",
-        "explanation": "Since `num > 5` and `num % 2 === 0` are true for `num = 6`, 'Even and large' is logged.",
-        "hint": "Check both conditions in the nested if structure."
-    },
-    {
-        "question": "What is logged?\n```javascript\nlet x = 10;\nif (x > 5) {\n  if (x < 15) {\n    console.log('In range');\n  }\n}\n```",
-        "options": ["In range", "Nothing", "Error", "10"],
-        "answer": "In range",
-        "difficulty": "Medium",
-        "explanation": "Since `x > 5` and `x < 15` are true for `x = 10`, 'In range' is logged.",
-        "hint": "Both nested conditions must be true."
-    },
-
-    # 15. Arrays
-    {
-        "question": "What is logged?\n```javascript\nlet arr = [10, 20, 30];\nconsole.log(arr[2]);\n```",
-        "options": ["30", "20", "10", "undefined"],
-        "answer": "30",
+        "question": "What is the purpose of an alert in JavaScript?",
+        "options": ["To display a message in the console", "To show a pop-up message to the user", "To redirect to a new page", "To log errors"],
+        "answer": "To show a pop-up message to the user",
         "difficulty": "Easy",
-        "explanation": "Arrays are zero-indexed, so `arr[2]` accesses the third element, 30.",
-        "hint": "Array indices start at 0."
+        "explanation": "The `alert()` function displays a simple pop-up message to the user in the browser.",
+        "hint": "Think about what happens when you see a pop-up message in a browser."
     },
     {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3];\nconsole.log(arr[0]);\n```",
-        "options": ["1", "2", "3", "undefined"],
+        "question": "Which of the following is a valid string variable declaration?",
+        "options": ["let name = 'John';", "string name = 'John';", "var name = John;", "let name = John;"],
+        "answer": "let name = 'John';",
+        "difficulty": "Easy",
+        "explanation": "String variables in JavaScript must have their values enclosed in quotes. `let name = 'John';` is the correct syntax.",
+        "hint": "Strings need quotes around their values."
+    },
+    {
+        "question": "What is the correct way to declare a number variable?",
+        "options": ["let num = '123';", "let num = 123;", "var num = '123';", "number num = 123;"],
+        "answer": "let num = 123;",
+        "difficulty": "Easy",
+        "explanation": "Number variables in JavaScript are declared without quotes, e.g., `let num = 123;`.",
+        "hint": "Numbers don’t use quotes."
+    },
+    {
+        "question": "Which variable name is illegal in JavaScript?",
+        "options": ["myVar", "2ndVar", "_count", "$price"],
+        "answer": "2ndVar",
+        "difficulty": "Medium",
+        "explanation": "Variable names in JavaScript cannot start with a number, making `2ndVar` illegal.",
+        "hint": "Check the rules for valid variable names."
+    },
+    {
+        "question": "What does the `+` operator do in a math expression?",
+        "options": ["Multiplies two numbers", "Adds two numbers", "Divides two numbers", "Subtracts two numbers"],
+        "answer": "Adds two numbers",
+        "difficulty": "Easy",
+        "explanation": "The `+` operator is used for addition in mathematical expressions.",
+        "hint": "Think of basic arithmetic operations."
+    },
+    {
+        "question": "What is the result of the expression `5 % 2`?",
+        "options": ["2", "1", "3", "0"],
         "answer": "1",
+        "difficulty": "Medium",
+        "explanation": "The `%` operator returns the remainder of division, so `5 % 2` equals `1`.",
+        "hint": "What does the modulus operator do?"
+    },
+    {
+        "question": "How do you eliminate ambiguity in the expression `5 + 3 * 2`?",
+        "options": ["Use parentheses", "Use a comma", "Use a semicolon", "Use curly braces"],
+        "answer": "Use parentheses",
+        "difficulty": "Medium",
+        "explanation": "Parentheses `()` ensure the order of operations, e.g., `(5 + 3) * 2`.",
+        "hint": "How can you control the order of operations?"
+    },
+    {
+        "question": "How do you concatenate two strings in JavaScript?",
+        "options": ["Using `&&`", "Using `+`", "Using `*`", "Using `/`"],
+        "answer": "Using `+`",
         "difficulty": "Easy",
-        "explanation": "The first element of the array is at index 0, so `arr[0]` is 1.",
-        "hint": "Check the first index of an array."
-    },
-
-    # 16. Arrays: adding and removing elements
-    {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2];\narr.push(3);\nconsole.log(arr.length);\n```",
-        "options": ["3", "2", "1", "4"],
-        "answer": "3",
-        "difficulty": "Medium",
-        "explanation": "The `push(3)` method adds 3 to the array, making it `[1, 2, 3]`, so `arr.length` is 3.",
-        "hint": "What does `push()` do to an array’s length?"
+        "explanation": "The `+` operator concatenates strings, e.g., `'Hello' + 'World'` results in `'HelloWorld'`.",
+        "hint": "Which operator joins text?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3];\narr.pop();\nconsole.log(arr.length);\n```",
-        "options": ["2", "3", "1", "0"],
-        "answer": "2",
-        "difficulty": "Medium",
-        "explanation": "The `pop()` method removes the last element, leaving `[1, 2]`, so `arr.length` is 2.",
-        "hint": "What happens when you remove the last element?"
-    },
-
-    # 17. Arrays: removing, inserting, and extracting elements
-    {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3, 4];\nlet removed = arr.splice(1, 2);\nconsole.log(arr);\n```",
-        "options": ["[1, 4]", "[1, 2, 3, 4]", "[2, 3]", "[1]"],
-        "answer": "[1, 4]",
-        "difficulty": "Hard",
-        "explanation": "`splice(1, 2)` removes 2 elements starting at index 1, leaving `arr` as `[1, 4]`.",
-        "hint": "Check how `splice()` modifies the array."
-    },
-    {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3];\narr.splice(1, 0, 4);\nconsole.log(arr);\n```",
-        "options": ["[1, 4, 2, 3]", "[1, 2, 3, 4]", "[1, 2, 4]", "[4, 1, 2, 3]"],
-        "answer": "[1, 4, 2, 3]",
-        "difficulty": "Hard",
-        "explanation": "`splice(1, 0, 4)` inserts 4 at index 1 without removing elements, resulting in `[1, 4, 2, 3]`.",
-        "hint": "What does `splice()` do when the second argument is 0?"
-    },
-
-    # 18. for loops
-    {
-        "question": "What is logged?\n```javascript\nfor (let i = 0; i < 3; i++) {\n  console.log(i * 2);\n}\n```",
-        "options": ["0, 2, 4", "0, 1, 2", "2, 4, 6", "Nothing"],
-        "answer": "0, 2, 4",
-        "difficulty": "Medium",
-        "explanation": "The loop runs for `i = 0, 1, 2`, logging `i * 2` each time: `0, 2, 4`.",
-        "hint": "Trace the loop iterations and multiply by 2."
-    },
-    {
-        "question": "What is logged?\n```javascript\nfor (let i = 1; i <= 3; i++) {\n  console.log(i);\n}\n```",
-        "options": ["1, 2, 3", "0, 1, 2", "1, 2", "Nothing"],
-        "answer": "1, 2, 3",
+        "question": "What does the `prompt()` function do?",
+        "options": ["Displays a message", "Asks for user input", "Logs to the console", "Redirects the page"],
+        "answer": "Asks for user input",
         "difficulty": "Easy",
-        "explanation": "The loop runs for `i = 1, 2, 3`, logging each value.",
-        "hint": "Check the loop’s start and end conditions."
-    },
-
-    # 19. for loops: flags, Booleans, array length, and breaks
-    {
-        "question": "What is logged?\n```javascript\nlet arr = [5, 10, 15];\nlet found = false;\nfor (let i = 0; i < arr.length; i++) {\n  if (arr[i] > 12) {\n    found = true;\n    break;\n  }\n}\nconsole.log(found);\n```",
-        "options": ["true", "false", "15", "Nothing"],
-        "answer": "true",
-        "difficulty": "Hard",
-        "explanation": "The loop breaks when `arr[i] = 15` (`> 12`), setting `found = true`, which is logged.",
-        "hint": "When does the loop stop, and what does `break` do?"
+        "explanation": "The `prompt()` function displays a dialog box that asks the user for input.",
+        "hint": "What function asks the user to type something?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3];\nlet found = false;\nfor (let i = 0; i < arr.length; i++) {\n  if (arr[i] > 5) {\n    found = true;\n    break;\n  }\n}\nconsole.log(found);\n```",
-        "options": ["true", "false", "3", "Nothing"],
-        "answer": "false",
-        "difficulty": "Medium",
-        "explanation": "No element in `[1, 2, 3]` is `> 5`, so `found` remains `false`.",
-        "hint": "Check if any array element meets the condition."
-    },
-
-    # 20. for loops nested
-    {
-        "question": "What is logged?\n```javascript\nlet sum = 0;\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    sum += i + j;\n  }\n}\nconsole.log(sum);\n```",
-        "options": ["10", "6", "8", "12"],
-        "answer": "10",
-        "difficulty": "Hard",
-        "explanation": "The nested loops compute `sum += i + j` for `(i,j) = (1,1), (1,2), (2,1), (2,2)`, giving `2 + 3 + 3 + 4 = 10`.",
-        "hint": "Calculate the sum for each pair of `i` and `j`."
-    },
-    {
-        "question": "What is logged?\n```javascript\nlet count = 0;\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    count++;\n  }\n}\nconsole.log(count);\n```",
-        "options": ["4", "2", "6", "0"],
-        "answer": "4",
-        "difficulty": "Medium",
-        "explanation": "The nested loops run for `(i,j) = (1,1), (1,2), (2,1), (2,2)`, incrementing `count` 4 times.",
-        "hint": "Count how many times the inner loop runs."
-    },
-
-    # 21. Changing case
-    {
-        "question": "What is logged?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.toLowerCase());\n```",
-        "options": ["javascript", "JavaScript", "JAVASCRIPT", "js"],
-        "answer": "javascript",
+        "question": "What is the purpose of an `if` statement?",
+        "options": ["To loop through an array", "To execute code conditionally", "To define a function", "To declare a variable"],
+        "answer": "To execute code conditionally",
         "difficulty": "Easy",
-        "explanation": "The `toLowerCase()` method converts all characters to lowercase, resulting in 'javascript'.",
-        "hint": "What does `toLowerCase()` do to a string?"
+        "explanation": "`if` statements execute code only if a condition is true.",
+        "hint": "Think about decision-making in code."
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.toUpperCase());\n```",
-        "options": ["JAVASCRIPT", "javascript", "JavaScript", "JS"],
-        "answer": "JAVASCRIPT",
+        "question": "Which operator checks for equality without type coercion?",
+        "options": ["==", "===", "!=", "!=="],
+        "answer": "===",
+        "difficulty": "Medium",
+        "explanation": "The `===` operator checks for both value and type equality.",
+        "hint": "Which operator is strict about types?"
+    },
+    {
+        "question": "What does an `else if` statement do?",
+        "options": ["Repeats a block of code", "Checks another condition if the first is false", "Defines a function", "Ends a loop"],
+        "answer": "Checks another condition if the first is false",
+        "difficulty": "Medium",
+        "explanation": "`else if` allows testing additional conditions if the previous `if` or `else if` is false.",
+        "hint": "What happens after an `if` condition fails?"
+    },
+    {
+        "question": "How do you test multiple conditions in a single `if` statement?",
+        "options": ["Use `&&` or `||`", "Use `+`", "Use `;`", "Use `,`"],
+        "answer": "Use `&&` or `||`",
+        "difficulty": "Medium",
+        "explanation": "`&&` (and) and `||` (or) operators combine multiple conditions in an `if` statement.",
+        "hint": "Think about logical operators."
+    },
+    {
+        "question": "What is a nested `if` statement?",
+        "options": ["An `if` statement inside another `if` statement", "An `if` statement with multiple conditions", "An `if` statement in a loop", "An `if` statement with no condition"],
+        "answer": "An `if` statement inside another `if` statement",
+        "difficulty": "Medium",
+        "explanation": "A nested `if` statement is an `if` statement placed inside another `if` block.",
+        "hint": "Think about `if` statements within `if` statements."
+    },
+    {
+        "question": "What is an array in JavaScript?",
+        "options": ["A single value", "A collection of values", "A function", "A loop"],
+        "answer": "A collection of values",
         "difficulty": "Easy",
-        "explanation": "The `toUpperCase()` method converts all characters to uppercase, resulting in 'JAVASCRIPT'.",
-        "hint": "What does `toUpperCase()` do to a string?"
+        "explanation": "An array is a data structure that holds a collection of values, e.g., `[1, 2, 3]`.",
+        "hint": "What stores multiple values in one variable?"
     },
-
-    # 22. Strings: measuring length and extracting parts
     {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.slice(6, 11));\n```",
-        "options": ["World", "Hello", "Worl", "ld"],
-        "answer": "World",
+        "question": "How do you add an element to the end of an array?",
+        "options": ["array.add()", "array.push()", "array.append()", "array.insert()"],
+        "answer": "array.push()",
         "difficulty": "Medium",
-        "explanation": "The `slice(6, 11)` method extracts characters from index 6 to 10, giving 'World'.",
-        "hint": "Check the start and end indices for `slice()`."
+        "explanation": "The `push()` method adds an element to the end of an array.",
+        "hint": "Which method adds to the end?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.length);\n```",
-        "options": ["10", "9", "11", "8"],
-        "answer": "10",
+        "question": "How do you remove the first element from an array?",
+        "options": ["array.pop()", "array.shift()", "array.splice()", "array.delete()"],
+        "answer": "array.shift()",
+        "difficulty": "Medium",
+        "explanation": "The `shift()` method removes the first element from an array.",
+        "hint": "Which method removes from the start?"
+    },
+    {
+        "question": "What is the purpose of a `for` loop?",
+        "options": ["To execute code once", "To repeat code a specific number of times", "To define a function", "To check a condition"],
+        "answer": "To repeat code a specific number of times",
         "difficulty": "Easy",
-        "explanation": "The `length` property returns the number of characters in 'JavaScript', which is 10.",
-        "hint": "Count the characters in the string."
-    },
-
-    # 23. Strings: finding segments
-    {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.includes('World'));\n```",
-        "options": ["true", "false", "World", "5"],
-        "answer": "true",
-        "difficulty": "Medium",
-        "explanation": "The `includes()` method checks if 'World' is a substring, returning `true`.",
-        "hint": "Does the string contain the substring 'World'?"
+        "explanation": "A `for` loop repeats a block of code for a specified number of iterations.",
+        "hint": "What loop is used for a known number of iterations?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.indexOf('World'));\n```",
-        "options": ["6", "-1", "0", "5"],
-        "answer": "6",
+        "question": "What does the `break` statement do in a `for` loop?",
+        "options": ["Pauses the loop", "Exits the loop", "Skips one iteration", "Restarts the loop"],
+        "answer": "Exits the loop",
         "difficulty": "Medium",
-        "explanation": "`indexOf('World')` returns the starting index of 'World', which is 6.",
-        "hint": "Where does the substring 'World' start?"
-    },
-
-    # 24. Strings: finding a character at a location
-    {
-        "question": "What is logged?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str[4]);\n```",
-        "options": ["S", "a", "J", "c"],
-        "answer": "S",
-        "difficulty": "Medium",
-        "explanation": "Bracket notation `str[4]` accesses the character at index 4, which is 'S'.",
-        "hint": "Strings can be indexed like arrays."
+        "explanation": "The `break` statement terminates the loop immediately.",
+        "hint": "What stops a loop completely?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello';\nconsole.log(str.charAt(1));\n```",
-        "options": ["e", "H", "l", "o"],
-        "answer": "e",
+        "question": "What is a nested `for` loop?",
+        "options": ["A loop inside another loop", "A loop with multiple conditions", "A loop with no condition", "A loop that runs once"],
+        "answer": "A loop inside another loop",
         "difficulty": "Medium",
-        "explanation": "`charAt(1)` returns the character at index 1, which is 'e'.",
-        "hint": "What character is at the second position?"
-    },
-
-    # 25. Strings: replacing characters
-    {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.replace('World', 'Universe'));\n```",
-        "options": ["Hello Universe", "Hello World", "Universe", "Nothing"],
-        "answer": "Hello Universe",
-        "difficulty": "Medium",
-        "explanation": "The `replace()` method replaces the first occurrence of 'World' with 'Universe'.",
-        "hint": "What does `replace()` do with the first match?"
+        "explanation": "A nested `for` loop is a `for` loop inside another `for` loop, often used for multi-dimensional arrays.",
+        "hint": "Think about loops within loops."
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = 'Hello Hello';\nconsole.log(str.replace('Hello', 'Hi'));\n```",
-        "options": ["Hi Hello", "Hi Hi", "Hello Hi", "Nothing"],
-        "answer": "Hi Hello",
-        "difficulty": "Medium",
-        "explanation": "`replace()` replaces only the first occurrence of 'Hello' with 'Hi'.",
-        "hint": "Does `replace()` affect all occurrences?"
-    },
-
-    # 26. Rounding numbers
-    {
-        "question": "What is logged?\n```javascript\nlet num = 3.14159;\nconsole.log(Math.floor(num));\n```",
-        "options": ["3", "4", "3.14", "3.1"],
-        "answer": "3",
-        "difficulty": "Medium",
-        "explanation": "`Math.floor()` rounds down to the nearest integer, so 3.14159 becomes 3.",
-        "hint": "What does `Math.floor()` do to decimals?"
+        "question": "How do you convert a string to uppercase?",
+        "options": ["string.toLowerCase()", "string.toUpperCase()", "string.upper()", "string.capitalize()"],
+        "answer": "string.toUpperCase()",
+        "difficulty": "Easy",
+        "explanation": "The `toUpperCase()` method converts a string to uppercase letters.",
+        "hint": "Which method changes text to all caps?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet num = 3.14159;\nconsole.log(Math.ceil(num));\n```",
-        "options": ["4", "3", "3.14", "3.1"],
-        "answer": "4",
-        "difficulty": "Medium",
-        "explanation": "`Math.ceil()` rounds up to the nearest integer, so 3.14159 becomes 4.",
-        "hint": "What does `Math.ceil()` do to decimals?"
-    },
-
-    # 27. Generating random numbers
-    {
-        "question": "What is a possible value of `num`?\n```javascript\nlet num = Math.floor(Math.random() * 10) + 1;\n```",
-        "options": ["5", "10", "0", "11"],
-        "answer": "5",
-        "difficulty": "Medium",
-        "explanation": "`Math.random() * 10` gives 0 to <10, `Math.floor()` rounds down, and `+ 1` shifts the range to 1–10, so 5 is possible.",
-        "hint": "What range does this expression produce?"
-    },
-
-    # 28. Converting strings to integers and decimals
-    {
-        "question": "What is logged?\n```javascript\nlet str = '123.45';\nconsole.log(parseFloat(str));\n```",
-        "options": ["123.45", "123", "NaN", "123.5"],
-        "answer": "123.45",
-        "difficulty": "Medium",
-        "explanation": "`parseFloat()` converts the string '123.45' to the number 123.45.",
-        "hint": "Does `parseFloat()` keep decimals?"
+        "question": "How do you find the length of a string?",
+        "options": ["string.size", "string.length", "string.count", "string.len"],
+        "answer": "string.length",
+        "difficulty": "Easy",
+        "explanation": "The `length` property returns the number of characters in a string.",
+        "hint": "What property counts characters?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet str = '123';\nconsole.log(parseInt(str));\n```",
-        "options": ["123", "123.0", "NaN", "12"],
-        "answer": "123",
+        "question": "How do you find a substring in a string?",
+        "options": ["string.includes()", "string.indexOf()", "string.search()", "All of the above"],
+        "answer": "All of the above",
         "difficulty": "Medium",
-        "explanation": "`parseInt()` converts the string '123' to the integer 123.",
-        "hint": "Does `parseInt()` include decimals?"
+        "explanation": "`includes()`, `indexOf()`, and `search()` can all be used to find substrings, with slight differences in their behavior.",
+        "hint": "Which methods check for parts of a string?"
     },
-
-    # 29. Converting strings to numbers, numbers to strings
     {
-        "question": "What is logged?\n```javascript\nlet num = 100;\nconsole.log(typeof num.toString());\n```",
-        "options": ["string", "number", "object", "undefined"],
-        "answer": "string",
+        "question": "How do you find a character at a specific index in a string?",
+        "options": ["string.charAt()", "string.at()", "string.getChar()", "Both a and b"],
+        "answer": "Both a and b",
         "difficulty": "Medium",
-        "explanation": "The `toString()` method converts the number 100 to a string, so `typeof` returns 'string'.",
-        "hint": "What does `toString()` do to a number?"
+        "explanation": "Both `charAt()` and `at()` return the character at a specified index in a string.",
+        "hint": "Which methods get a single character?"
     },
-
-    # 30. Controlling the length of decimals
+    {
+        "question": "How do you replace all occurrences of a substring in a string?",
+        "options": ["string.replace()", "string.replaceAll()", "string.substitute()", "string.change()"],
+        "answer": "string.replaceAll()",
+        "difficulty": "Medium",
+        "explanation": "`replaceAll()` replaces all occurrences of a substring, while `replace()` only replaces the first.",
+        "hint": "Which method replaces all matches?"
+    },
     {
         "question": "What is logged?\n```javascript\nlet num = 9.8765;\nconsole.log(num.toFixed(3));\n```",
         "options": ["9.877", "9.876", "9.88", "9.8765"],
@@ -303,83 +212,149 @@ quiz = [
         "explanation": "`toFixed(3)` rounds to 3 decimal places, so 9.8765 becomes '9.877' (as a string).",
         "hint": "How many decimal places does `toFixed(3)` keep?"
     },
-
-    # 31. Getting the current date and time
     {
-        "question": "What is logged?\n```javascript\nlet date = new Date();\nconsole.log(typeof date);\n```",
-        "options": ["object", "string", "number", "undefined"],
-        "answer": "object",
+        "question": "What is logged?\n```javascript\nconsole.log(Math.floor(Math.random() * 10));\n```",
+        "options": ["A random integer from 0 to 10", "A random integer from 0 to 9", "A random float from 0 to 10", "A random float from 0 to 9"],
+        "answer": "A random integer from 0 to 9",
         "difficulty": "Medium",
-        "explanation": "The `Date` constructor creates a Date object, so `typeof` returns 'object'.",
-        "hint": "What type is a `Date` instance?"
-    },
-
-    # 32. Extracting parts of the date and time
-    {
-        "question": "What does `date.getHours()` return for 09:39 AM?\n```javascript\nlet date = new Date('2025-06-09T09:39:00');\n```",
-        "options": ["9", "21", "39", "12"],
-        "answer": "9",
-        "difficulty": "Medium",
-        "explanation": "`getHours()` returns the hour in 24-hour format, so 09:39 AM is 9.",
-        "hint": "Is the time in 24-hour format?"
+        "explanation": "`Math.random() * 10` generates a float from 0 to 9.999..., and `Math.floor()` rounds it down to an integer from 0 to 9.",
+        "hint": "What range does `Math.random() * 10` produce?"
     },
     {
-        "question": "What is logged?\n```javascript\nlet date = new Date('2025-06-09');\nconsole.log(date.getDay());\n```",
-        "options": ["1", "0", "6", "9"],
-        "answer": "1",
+        "question": "What is logged?\n```javascript\nlet str = '123';\nconsole.log(parseInt(str));\n```",
+        "options": ["'123'", "123", "12.3", "NaN"],
+        "answer": "123",
         "difficulty": "Medium",
-        "explanation": "`getDay()` returns the day of the week (0=Sunday, 6=Saturday). June 9, 2025, is a Monday, so it returns 1.",
-        "hint": "What day of the week is June 9, 2025?"
+        "explanation": "`parseInt(str)` converts the string '123' to the integer 123.",
+        "hint": "What does `parseInt()` do to a string?"
     },
-
-    # 33. Specifying a date and time
     {
-        "question": "What is logged?\n```javascript\nlet date = new Date('2025-12-25T14:30:00');\nconsole.log(date.getHours());\n```",
-        "options": ["14", "2", "12", "30"],
-        "answer": "14",
+        "question": "What is logged?\n```javascript\nlet num = 123;\nconsole.log(String(num));\n```",
+        "options": ["123", "'123'", "NaN", "undefined"],
+        "answer": "'123'",
         "difficulty": "Medium",
-        "explanation": "`getHours()` returns the hour in 24-hour format, so 14:30 (2:30 PM) returns 14.",
-        "hint": "Check the hour in 24-hour format."
+        "explanation": "`String(num)` converts the number 123 to the string '123'.",
+        "hint": "What does `String()` do to a number?"
     },
-
-    # 34. Changing elements of a date and time
     {
-        "question": "What is logged?\n```javascript\nlet date = new Date('2025-06-09');\ndate.setFullYear(2026);\nconsole.log(date.getFullYear());\n```",
-        "options": ["2026", "2025", "2027", "6"],
-        "answer": "2026",
+        "question": "What is logged?\n```javascript\nlet num = 5.56789;\nconsole.log(num.toFixed(2));\n```",
+        "options": ["5.57", "5.56", "5.6", "5.567"],
+        "answer": "5.57",
         "difficulty": "Medium",
-        "explanation": "`setFullYear(2026)` changes the year to 2026, so `getFullYear()` returns 2026.",
-        "hint": "What does `setFullYear()` modify?"
+        "explanation": "`toFixed(2)` rounds to 2 decimal places, so 5.56789 becomes '5.57' (as a string).",
+        "hint": "How does `toFixed(2)` round numbers?"
     },
-
-    # 35. Functions
     {
-        "question": "What is logged?\n```javascript\nfunction multiply(x, y) {\n  return x * y;\n}\nconsole.log(multiply(4, 5));\n```",
-        "options": ["20", "9", "45", "undefined"],
-        "answer": "20",
+        "question": "What is logged?\n```javascript\nlet date = new Date();\nconsole.log(date.getFullYear());\n```",
+        "options": ["The current month", "The current year", "The current day", "The current time"],
+        "answer": "The current year",
+        "difficulty": "Medium",
+        "explanation": "`getFullYear()` returns the current year from a Date object.",
+        "hint": "What does `getFullYear()` extract?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet date = new Date('2023-01-01');\nconsole.log(date.getMonth());\n```",
+        "options": ["0", "1", "12", "2023"],
+        "answer": "0",
+        "difficulty": "Medium",
+        "explanation": "`getMonth()` returns the month (0-based), so January is 0.",
+        "hint": "Is January represented as 0 or 1?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet date = new Date();\ndate.setFullYear(2025);\nconsole.log(date.getFullYear());\n```",
+        "options": ["2024", "2025", "2023", "undefined"],
+        "answer": "2025",
+        "difficulty": "Medium",
+        "explanation": "`setFullYear(2025)` sets the year to 2025, and `getFullYear()` returns it.",
+        "hint": "What does `setFullYear()` change?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nfunction greet() {\n  return 'Hello';\n}\nconsole.log(greet());\n```",
+        "options": ["undefined", "Hello", "greet", "null"],
+        "answer": "Hello",
         "difficulty": "Easy",
-        "explanation": "The `multiply` function returns `x * y`, so `4 * 5 = 20`.",
+        "explanation": "The `greet()` function returns the string 'Hello', which is logged.",
         "hint": "What does the function return?"
     },
-
-    # 36. Functions: passing them data
     {
-        "question": "What is logged?\n```javascript\nfunction formatName(first, last) {\n  return `${first} ${last}`;\n}\nconsole.log(formatName('John', 'Doe'));\n```",
-        "options": ["John Doe", "John", "Doe", "undefined"],
-        "answer": "John Doe",
-        "difficulty": "Medium",
-        "explanation": "The function uses a template literal to combine `first` and `last`, returning 'John Doe'.",
-        "hint": "How are the arguments combined?"
+        "question": "What is logged?\n```javascript\nfunction add(a, b) {\n  return a + b;\n}\nconsole.log(add(2, 3));\n```",
+        "options": ["5", "23", "undefined", "NaN"],
+        "answer": "5",
+        "difficulty": "Easy",
+        "explanation": "The `add` function takes two parameters and returns their sum, so `add(2, 3)` returns 5.",
+        "hint": "What do the parameters `a` and `b` do?"
     },
-
-    # 37. Functions: passing data back from them
     {
-        "question": "What is logged?\n```javascript\nfunction isEven(num) {\n  return num % 2 === 0;\n}\nconsole.log(isEven(10));\n```",
-        "options": ["true", "false", "10", "0"],
-        "answer": "true",
+        "question": "What is logged?\n```javascript\nlet x = 10;\nfunction test() {\n  let x = 20;\n  return x;\n}\nconsole.log(test());\n```",
+        "options": ["10", "20", "undefined", "null"],
+        "answer": "20",
         "difficulty": "Medium",
-        "explanation": "The `isEven` function returns `true` if `num` is divisible by 2, which 10 is.",
-        "hint": "What does the function check?"
+        "explanation": "The local variable `x` inside the function shadows the global `x`, so `test()` returns 20.",
+        "hint": "Which variable `x` is used inside the function?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet day = 3;\nswitch (day) {\n  case 1:\n    console.log('Monday');\n    break;\n  case 2:\n    console.log('Tuesday');\n    break;\n  default:\n    console.log('Other');\n}\n```",
+        "options": ["Monday", "Tuesday", "Other", "undefined"],
+        "answer": "Other",
+        "difficulty": "Medium",
+        "explanation": "Since `day` is 3 and no case matches, the `default` block executes, logging 'Other'.",
+        "hint": "What happens when no case matches?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet i = 0;\nwhile (i < 2) {\n  console.log(i);\n  i++;\n}\n```",
+        "options": ["0, 1", "1, 2", "0, 1, 2", "undefined"],
+        "answer": "0, 1",
+        "difficulty": "Medium",
+        "explanation": "The `while` loop runs as long as `i < 2`, logging 0 and 1.",
+        "hint": "How many times does the loop run?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet i = 0;\ndo {\n  console.log(i);\n  i++;\n} while (i < 2);\n```",
+        "options": ["0, 1", "1, 2", "0, 1, 2", "undefined"],
+        "answer": "0, 1",
+        "difficulty": "Medium",
+        "explanation": "The `do...while` loop runs at least once, logging 0 and 1 since the condition is `i < 2`.",
+        "hint": "Does the loop run at least once?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet arr = [1, 2, 3];\narr.splice(1, 1);\nconsole.log(arr);\n```",
+        "options": ["[1, 3]", "[1, 2]", "[2, 3]", "[1, 2, 3]"],
+        "answer": "[1, 3]",
+        "difficulty": "Medium",
+        "explanation": "`splice(1, 1)` removes 1 element at index 1, so `[1, 2, 3]` becomes `[1, 3]`.",
+        "hint": "What does `splice(1, 1)` remove?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet str = 'hello';\nconsole.log(str.slice(1, 3));\n```",
+        "options": ["he", "el", "ll", "lo"],
+        "answer": "el",
+        "difficulty": "Medium",
+        "explanation": "`slice(1, 3)` extracts characters from index 1 to 2, resulting in 'el'.",
+        "hint": "What does `slice(1, 3)` include?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.indexOf('Script'));\n```",
+        "options": ["4", "5", "6", "-1"],
+        "answer": "4",
+        "difficulty": "Medium",
+        "explanation": "`indexOf('Script')` returns the starting index of 'Script', which is 4.",
+        "hint": "Where does 'Script' start in 'JavaScript'?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet num = 3.14159;\nconsole.log(Math.round(num));\n```",
+        "options": ["3", "4", "3.14", "3.142"],
+        "answer": "3",
+        "difficulty": "Medium",
+        "explanation": "`Math.round()` rounds to the nearest integer, so 3.14159 becomes 3.",
+        "hint": "Does `Math.round()` round up or down?"
+    },
+    {
+        "question": "What is logged?\n```javascript\nlet x = 5;\nif (x > 3 && x < 7) {\n  console.log('In range');\n} else {\n  console.log('Out of range');\n}\n```",
+        "options": ["In range", "Out of range", "undefined", "null"],
+        "answer": "In range",
+        "difficulty": "Medium",
+        "explanation": "The condition `x > 3 && x < 7` is true for `x = 5`, so 'In range' is logged.",
+        "hint": "Evaluate the condition for `x = 5`."
     }
 ]
 
