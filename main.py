@@ -4,408 +4,406 @@ from datetime import datetime
 import uuid
 
 quiz = [
-    
     {
-        "question": "What is the output of `alert('Welcome!');` in JavaScript?",
-        "options": ["Logs 'Welcome!' to console", "Shows a pop-up with 'Welcome!'", "Returns 'Welcome!'", "Nothing happens"],
-        "answer": "Shows a pop-up with 'Welcome!'",
-        "difficulty": "Easy",
-        "explanation": "The `alert()` function displays a pop-up with the message 'Welcome!' in the browser.",
-        "hint": "Think about browser pop-ups."
-    },
-    {
-        "question": "What is the correct way to declare a string variable?",
-        "options": ["let str = 'Hello';", "string str = 'Hello';", "let str = Hello;", "var str = Hello;"],
-        "answer": "let str = 'Hello';",
-        "difficulty": "Easy",
-        "explanation": "Strings must be enclosed in quotes, and `let` is a valid variable declaration.",
-        "hint": "Strings need quotes."
-    },
-    {
-        "question": "What is the value of `let num = 3.14;` after execution?",
-        "options": ["'3.14'", "3.14", "undefined", "null"],
-        "answer": "3.14",
-        "difficulty": "Easy",
-        "explanation": "The variable `num` is assigned the numeric value `3.14`.",
-        "hint": "Think about number assignment."
-    },
-    {
-        "question": "Which variable name is illegal?",
-        "options": ["let userName;", "let $price;", "let 1stPlace;", "let _score;"],
-        "answer": "let 1stPlace;",
+        "question": "What does the `alert()` function do in a browser environment?",
+        "options": ["Logs a message to the console", "Displays a pop-up dialog", "Redirects to a new page", "Throws an error"],
+        "answer": "Displays a pop-up dialog",
         "difficulty": "Medium",
-        "explanation": "Variable names cannot start with a number, making `1stPlace` illegal.",
-        "hint": "Check naming rules."
+        "explanation": "The `alert()` function creates a pop-up dialog box in the browser to display a message and waits for the user to click 'OK'.",
+        "hint": "Think about user-facing notifications in browsers."
     },
     {
-        "question": "What is the output of `console.log(4 + 2 * 3);`?",
-        "options": ["18", "10", "12", "9"],
+        "question": "What is the result of `let str = 'Hello'; str = str + ' World'; console.log(str);`?",
+        "options": ["Hello", "World", "Hello World", "Error"],
+        "answer": "Hello World",
+        "difficulty": "Medium",
+        "explanation": "The `+` operator concatenates 'Hello' and ' World' to form 'Hello World'.",
+        "hint": "Consider how strings are combined."
+    },
+    {
+        "question": "What is the value of `x` after `let x = 8; x += 2;`?",
+        "options": ["6", "8", "10", "12"],
         "answer": "10",
         "difficulty": "Medium",
-        "explanation": "Multiplication has higher precedence, so `2 * 3 = 6`, then `4 + 6 = 10`.",
-        "hint": "Consider operator precedence."
+        "explanation": "The `+=` operator adds 2 to `x`, so `8 + 2 = 10`.",
+        "hint": "Recall compound assignment operators."
     },
     {
-        "question": "What is the output of `console.log(8 ** 2);`?",
-        "options": ["16", "64", "10", "4"],
-        "answer": "64",
+        "question": "Which variable name is illegal in JavaScript?",
+        "options": ["myVar", "_count", "user_name", "1stVar"],
+        "answer": "1stVar",
         "difficulty": "Medium",
-        "explanation": "The `**` operator raises 8 to the power of 2, resulting in `64`.",
-        "hint": "Think about exponentiation."
+        "explanation": "Variable names cannot start with a digit; they must begin with a letter, underscore, or dollar sign.",
+        "hint": "Check JavaScript naming conventions."
     },
     {
-        "question": "What is the output of `console.log((5 + 3) * 2);`?",
-        "options": ["16", "10", "13", "20"],
-        "answer": "16",
+        "question": "What is the result of `6 + 4 * 2` in JavaScript?",
+        "options": ["20", "14", "10", "12"],
+        "answer": "14",
         "difficulty": "Medium",
-        "explanation": "Parentheses ensure `5 + 3 = 8` is evaluated first, then `8 * 2 = 16`.",
-        "hint": "Parentheses control order."
+        "explanation": "Following PEMDAS, multiplication is done first: `4 * 2 = 8`, then addition: `6 + 8 = 14`.",
+        "hint": "Remember the order of operations."
     },
     {
-        "question": "What is the output of `console.log('Hi' + ' ' + 'there');`?",
-        "options": ["Hi there", "Hithere", "Hi + there", "Hi, there"],
-        "answer": "Hi there",
-        "difficulty": "Easy",
-        "explanation": "The `+` operator concatenates strings, including the space, resulting in `'Hi there'`.",
-        "hint": "Think about joining strings."
-    },
-    {
-        "question": "What does `let input = prompt('Enter a number');` do?",
-        "options": ["Logs a message", "Asks for user input and stores it", "Shows an alert", "Declares a number"],
-        "answer": "Asks for user input and stores it",
-        "difficulty": "Easy",
-        "explanation": "`prompt()` displays a dialog for user input, storing the result in `input`.",
-        "hint": "Think about user input dialogs."
-    },
-    {
-        "question": "What is the output of `if (10 > 5) { console.log('Yes'); }`?",
-        "options": ["Yes", "No", "undefined", "Nothing"],
-        "answer": "Yes",
-        "difficulty": "Easy",
-        "explanation": "Since `10 > 5` is true, the `if` block logs `'Yes'`.",
-        "hint": "Evaluate the condition."
-    },
-    {
-        "question": "What is the output of `console.log(3 === '3');`?",
-        "options": ["true", "false", "3", "undefined"],
-        "answer": "false",
-        "difficulty": "Medium",
-        "explanation": "The `===` operator checks value and type, so `3` (number) is not equal to `'3'` (string).",
-        "hint": "Consider type comparison."
-    },
-    {
-        "question": "What is the output of `let x = 8; if (x > 10) { console.log('High'); } else if (x > 5) { console.log('Medium'); }`?",
-        "options": ["High", "Medium", "Nothing", "Low"],
-        "answer": "Medium",
-        "difficulty": "Medium",
-        "explanation": "Since `x > 10` is false but `x > 5` is true, the `else if` block logs `'Medium'`.",
-        "hint": "Check conditions in order."
-    },
-    {
-        "question": "What is the output of `if (x > 5 && x < 10) { console.log('Valid'); }` when `x = 7`?",
-        "options": ["Valid", "Invalid", "Nothing", "undefined"],
-        "answer": "Valid",
-        "difficulty": "Medium",
-        "explanation": "Both conditions (`x > 5` and `x < 10`) are true for `x = 7`, so `'Valid'` is logged.",
-        "hint": "Evaluate logical AND."
-    },
-    {
-        "question": "What is the output of `if (x > 5) { if (x < 10) { console.log('Range'); } }` when `x = 8`?",
-        "options": ["Range", "Nothing", "Out of range", "undefined"],
-        "answer": "Range",
-        "difficulty": "Medium",
-        "explanation": "Both outer (`x > 5`) and inner (`x < 10`) conditions are true, so `'Range'` is logged.",
-        "hint": "Check nested conditions."
-    },
-    {
-        "question": "What is the output of `let arr = [1, 2, 3]; console.log(arr[0]);`?",
-        "options": ["1", "2", "3", "undefined"],
-        "answer": "1",
-        "difficulty": "Easy",
-        "explanation": "Square brackets access array elements by index, so `arr[0]` returns the first element, `1`.",
-        "hint": "Remember array indices start at 0."
-    },
-    {
-        "question": "What is the output of `let arr = [1, 2]; arr.push(3); console.log(arr);`?",
-        "options": ["[1, 2]", "[1, 2, 3]", "[3, 2, 1]", "[3]"],
-        "answer": "[1, 2, 3]",
-        "difficulty": "Medium",
-        "explanation": "`push()` adds `3` to the end of the array, resulting in `[1, 2, 3]`.",
-        "hint": "Think about adding to an array."
-    },
-    {
-        "question": "What is the output of `let arr = [1, 2, 3]; arr.splice(1, 1); console.log(arr);`?",
-        "options": ["[1, 2, 3]", "[1, 3]", "[2, 3]", "[1, 2]"],
-        "answer": "[1, 3]",
-        "difficulty": "Medium",
-        "explanation": "`splice(1, 1)` removes 1 element at index 1, resulting in `[1, 3]`.",
-        "hint": "Think about removing from an array."
-    },
-    {
-        "question": "What is the output of `for (let i = 0; i < 2; i++) { console.log(i); }`?",
-        "options": ["0, 1", "1, 2", "0, 1, 2", "Nothing"],
-        "answer": "0, 1",
-        "difficulty": "Easy",
-        "explanation": "The loop runs from `i = 0` to `i < 2`, logging `0` and `1`.",
-        "hint": "Count the loop iterations."
-    },
-    {
-        "question": "What is the output of `let found = false; for (let i = 0; i < 3; i++) { if (i === 2) { found = true; break; } } console.log(found);`?",
-        "options": ["true", "false", "2", "undefined"],
-        "answer": "true",
-        "difficulty": "Medium",
-        "explanation": "When `i === 2`, `found` is set to `true`, and `break` exits the loop, so `'true'` is logged.",
-        "hint": "Think about flags and breaking loops."
-    },
-    {
-        "question": "What is the output of `for (let i = 1; i <= 2; i++) { for (let j = 1; j <= 2; j++) { console.log(i * j); } }`?",
-        "options": ["1, 2, 2, 4", "1, 2, 3, 4", "1, 2", "1, 4"],
-        "answer": "1, 2, 2, 4",
-        "difficulty": "Medium",
-        "explanation": "The outer loop runs for `i = 1, 2`, and the inner loop for `j = 1, 2`, logging `1*1=1`, `1*2=2`, `2*1=2`, `2*2=4`.",
-        "hint": "Trace nested loop multiplication."
-    },
-    {
-        "question": "What is the output of `console.log('hello'.toUpperCase());`?",
-        "options": ["HELLO", "hello", "Hello", "undefined"],
-        "answer": "HELLO",
-        "difficulty": "Easy",
-        "explanation": "`toUpperCase()` converts `'hello'` to `'HELLO'`.",
-        "hint": "Think about case conversion."
-    },
-    {
-        "question": "What is the output of `let str = 'hello'; console.log(str.length);`?",
-        "options": ["4", "5", "6", "undefined"],
-        "answer": "5",
-        "difficulty": "Easy",
-        "explanation": "The `length` property returns the number of characters in `'hello'`, which is `5`.",
-        "hint": "Count the letters in 'hello'."
-    },
-    {
-        "question": "What is the output of `console.log('hello'.indexOf('lo'));`?",
-        "options": ["0", "3", "4", "-1"],
-        "answer": "3",
-        "difficulty": "Medium",
-        "explanation": "`indexOf('lo')` returns the starting index of `'lo'` in `'hello'`, which is `3`.",
-        "hint": "Find where 'lo' starts in 'hello'."
-    },
-    {
-        "question": "What is the output of `let str = 'hello'; console.log(str.replace('l', 'p'));`?",
-        "options": ["heppo", "hello", "peppo", "helpo"],
-        "answer": "heppo",
-        "difficulty": "Medium",
-        "explanation": "`replace('l', 'p')` replaces the first `'l'` with `'p'`, resulting in `'heppo'`.",
-        "hint": "Think about replacing one character."
-    },
-    {
-        "question": "What is the output of `let i = 0; do { console.log(i); i++; } while (i < 2);`?",
-        "options": ["0, 1", "1, 2", "0", "Nothing"],
-        "answer": "0, 1",
-        "difficulty": "Medium",
-        "explanation": "The `do...while` loop runs at least once, logging `0` and `1` as `i` increments until `i < 2` is false.",
-        "hint": "Consider the guaranteed first iteration."
-    },
-    {
-        "question": "What is the purpose of an alert in JavaScript?",
-        "options": ["To display a message in the console", "To show a pop-up message to the user", "To redirect to a new page", "To log errors"],
-        "answer": "To show a pop-up message to the user",
-        "difficulty": "Easy",
-        "explanation": "The `alert()` function displays a simple pop-up message to the user in the browser.",
-        "hint": "Think about what happens when you see a pop-up message in a browser."
-    },
-    {
-        "question": "What is a string variable in JavaScript?",
-        "options": ["A variable storing numbers", "A variable storing text", "A variable storing objects", "A variable storing functions"],
-        "answer": "A variable storing text",
-        "difficulty": "Easy",
-        "explanation": "A string variable stores text data, enclosed in single or double quotes, e.g., `let name = 'Alice';`.",
-        "hint": "Consider what type of data is stored in quotes."
-    },
-    {
-        "question": "What type of data is stored in a number variable in JavaScript?",
-        "options": ["Text", "Numeric values", "Boolean values", "Arrays"],
-        "answer": "Numeric values",
-        "difficulty": "Easy",
-        "explanation": "Number variables store integers or decimals, e.g., `let num = 42;`.",
-        "hint": "Think about numbers like 42 or 3.14."
-    },
-    {
-        "question": "Which of the following is an illegal variable name in JavaScript?",
-        "options": ["myVar", "2ndVar", "_var", "varName"],
-        "answer": "2ndVar",
-        "difficulty": "Medium",
-        "explanation": "Variable names cannot start with a number, making `2ndVar` illegal.",
-        "hint": "Check JavaScript’s variable naming rules."
-    },
-    {
-        "question": "Which operator performs multiplication in JavaScript?",
-        "options": ["+", "-", "*", "/"],
-        "answer": "*",
-        "difficulty": "Easy",
-        "explanation": "The `*` operator is used for multiplication, e.g., `5 * 2 = 10`.",
-        "hint": "Think about basic math operators."
-    },
-    {
-        "question": "What does the exponentiation operator (**) do in JavaScript?",
-        "options": ["Divides numbers", "Raises a number to a power", "Returns the remainder", "Adds numbers"],
+        "question": "What does the `**` operator do in JavaScript?",
+        "options": ["Multiplies two numbers", "Raises a number to a power", "Performs division", "Increments a number"],
         "answer": "Raises a number to a power",
         "difficulty": "Medium",
-        "explanation": "The `**` operator raises the first number to the power of the second, e.g., `2 ** 3 = 8`.",
-        "hint": "Consider an operator for powers."
+        "explanation": "The `**` operator performs exponentiation, e.g., `2 ** 3 = 8`.",
+        "hint": "Think about mathematical powers."
     },
     {
-        "question": "How do you eliminate ambiguity in math expressions in JavaScript?",
-        "options": ["Using variables", "Using parentheses", "Using comments", "Using strings"],
-        "answer": "Using parentheses",
+        "question": "How do you ensure `5 + 3 * 4` evaluates to `32` instead of `17`?",
+        "options": ["(5 + 3) * 4", "5 + (3 * 4)", "5 * (3 + 4)", "No change needed"],
+        "answer": "(5 + 3) * 4",
         "difficulty": "Medium",
-        "explanation": "Parentheses `()` control the order of operations, ensuring expressions are evaluated as intended.",
-        "hint": "Think about grouping in math."
+        "explanation": "Parentheses ensure `5 + 3 = 8` is calculated first, then `8 * 4 = 32`.",
+        "hint": "Use parentheses to control precedence."
     },
     {
-        "question": "What is string concatenation in JavaScript?",
-        "options": ["Splitting strings", "Joining strings", "Reversing strings", "Comparing strings"],
-        "answer": "Joining strings",
-        "difficulty": "Easy",
-        "explanation": "String concatenation combines strings using the `+` operator, e.g., `'Hello' + 'World'` yields `'HelloWorld'`.",
-        "hint": "Think about combining text."
-    },
-    {
-        "question": "What is the purpose of the `prompt()` function in JavaScript?",
-        "options": ["Logs to the console", "Asks for user input", "Displays an alert", "Redirects to a URL"],
-        "answer": "Asks for user input",
-        "difficulty": "Easy",
-        "explanation": "The `prompt()` function displays a dialog box for user input, returning the entered value.",
-        "hint": "Consider user interaction dialogs."
-    },
-    {
-        "question": "What does an `if` statement do in JavaScript?",
-        "options": ["Loops through code", "Executes code conditionally", "Declares variables", "Defines functions"],
-        "answer": "Executes code conditionally",
-        "difficulty": "Easy",
-        "explanation": "An `if` statement runs code only if its condition is true, e.g., `if (x > 5)`.",
-        "hint": "Think about decision-making."
-    },
-    {
-        "question": "Which operator checks for strict equality in JavaScript?",
-        "options": ["==", "===", "!=", "!=="],
-        "answer": "===",
+        "question": "What is the result of `'Good' + ' ' + 'Day'`?",
+        "options": ["GoodDay", "Good Day", "Good+Day", "Error"],
+        "answer": "Good Day",
         "difficulty": "Medium",
-        "explanation": "The `===` operator checks for both value and type equality, e.g., `5 === '5'` is false.",
-        "hint": "Consider strict comparison."
+        "explanation": "The `+` operator concatenates the strings, including the space, to form 'Good Day'.",
+        "hint": "Spaces are important in concatenation."
     },
     {
-        "question": "What is the role of an `else if` statement in JavaScript?",
-        "options": ["Runs if the first condition is true", "Checks another condition if prior ones are false", "Always runs", "Declares variables"],
-        "answer": "Checks another condition if prior ones are false",
+        "question": "What does `prompt('Enter age')` return if the user enters '25'?",
+        "options": ["25", "'25'", "null", "undefined"],
+        "answer": "'25'",
         "difficulty": "Medium",
-        "explanation": "`else if` tests additional conditions if previous `if` or `else if` conditions fail.",
-        "hint": "Think about multiple conditions."
+        "explanation": "`prompt()` returns user input as a string, so '25' is returned as `'25'`.",
+        "hint": "Consider the data type of user input."
     },
     {
-        "question": "How can multiple conditions be combined in an `if` statement?",
-        "options": ["Using commas", "Using && or || operators", "Using switch", "Using loops"],
-        "answer": "Using && or || operators",
+        "question": "What will `if (7 > 4) { console.log('True'); }` output?",
+        "options": ["True", "False", "Nothing", "Error"],
+        "answer": "True",
         "difficulty": "Medium",
-        "explanation": "Logical operators `&&` (AND) and `||` (OR) combine conditions in an `if` statement.",
-        "hint": "Consider logical operators."
+        "explanation": "The condition `7 > 4` is true, so 'True' is logged.",
+        "hint": "Evaluate the `if` condition."
     },
     {
-        "question": "What is a nested `if` statement in JavaScript?",
-        "options": ["An if statement inside another if statement", "Multiple if statements in a row", "An if statement with no condition", "An if statement in a loop"],
-        "answer": "An if statement inside another if statement",
+        "question": "What is the result of `'10' == 10` in JavaScript?",
+        "options": ["true", "false", "undefined", "Error"],
+        "answer": "true",
         "difficulty": "Medium",
-        "explanation": "A nested `if` statement is an `if` block inside another `if` block for layered conditions.",
-        "hint": "Think about conditions within conditions."
+        "explanation": "The `==` operator performs type coercion, so `'10'` is converted to the number 10, making the comparison true.",
+        "hint": "Compare loose equality behavior."
     },
     {
-        "question": "What is an array in JavaScript?",
-        "options": ["A single value", "A collection of values", "A function", "A string"],
-        "answer": "A collection of values",
-        "difficulty": "Easy",
-        "explanation": "An array is a data structure that stores multiple values in a single variable, e.g., `[1, 2, 3]`.",
-        "hint": "Think about lists of items."
-    },
-    {
-        "question": "Which method adds an element to the end of an array?",
-        "options": ["pop()", "push()", "shift()", "unshift()"],
-        "answer": "push()",
+        "question": "What will be output: `let x = 15; if (x < 10) { console.log('Small'); } else if (x < 20) { console.log('Medium'); } else { console.log('Large'); }`?",
+        "options": ["Small", "Medium", "Large", "Nothing"],
+        "answer": "Medium",
         "difficulty": "Medium",
-        "explanation": "The `push()` method adds elements to the end of an array, e.g., `arr.push(4)`.",
-        "hint": "Consider adding to the end of a list."
+        "explanation": "Since `x = 15` is less than 20 but not less than 10, 'Medium' is logged.",
+        "hint": "Check which condition matches."
     },
     {
-        "question": "What does the `splice()` method do in JavaScript arrays?",
-        "options": ["Copies elements", "Removes or replaces elements", "Sorts elements", "Joins arrays"],
-        "answer": "Removes or replaces elements",
+        "question": "What is the result of `if (4 > 2 && 3 < 5) { console.log('Yes'); }`?",
+        "options": ["Yes", "No", "Nothing", "Error"],
+        "answer": "Yes",
         "difficulty": "Medium",
-        "explanation": "`splice()` removes or replaces elements at a specific index, e.g., `arr.splice(1, 1)` removes one element at index 1.",
-        "hint": "Think about modifying arrays."
+        "explanation": "Both `4 > 2` and `3 < 5` are true, so the `&&` operator evaluates to true, logging 'Yes'.",
+        "hint": "Evaluate the logical operator."
     },
     {
-        "question": "What is the purpose of a `for` loop in JavaScript?",
-        "options": ["To execute code once", "To repeat code a specific number of times", "To declare variables", "To define functions"],
-        "answer": "To repeat code a specific number of times",
-        "difficulty": "Easy",
-        "explanation": "A `for` loop repeats code based on a counter, e.g., `for (let i = 0; i < 5; i++)`.",
-        "hint": "Think about repeating tasks."
-    },
-    {
-        "question": "What is a flag in a `for` loop?",
-        "options": ["A counter variable", "A Boolean to control the loop", "An array index", "A loop condition"],
-        "answer": "A Boolean to control the loop",
+        "question": "What will be output: `let x = 7; if (x > 5) { if (x < 10) { console.log('In Range'); } }`?",
+        "options": ["In Range", "Out of Range", "Nothing", "Error"],
+        "answer": "In Range",
         "difficulty": "Medium",
-        "explanation": "A flag is a Boolean variable used to signal when a condition is met in a loop.",
-        "hint": "Think about signaling in loops."
+        "explanation": "Both conditions (`x > 5` and `x < 10`) are true for `x = 7`, so 'In Range' is logged.",
+        "hint": "Trace nested conditions."
     },
     {
-        "question": "What is a nested `for` loop?",
-        "options": ["A loop inside another loop", "Multiple loops in sequence", "A loop with no condition", "A loop in a function"],
-        "answer": "A loop inside another loop",
+        "question": "Which creates an array in JavaScript?",
+        "options": ["let arr = {};", "let arr = [];", "let arr = '';", "let arr = null;"],
+        "answer": "let arr = [];",
         "difficulty": "Medium",
-        "explanation": "A nested `for` loop is a `for` loop inside another, often used for multi-dimensional data.",
-        "hint": "Think about loops within loops."
+        "explanation": "Arrays are created with square brackets `[]`. Curly braces `{}` create objects.",
+        "hint": "Recall array syntax."
     },
     {
-        "question": "What are `()` called in JavaScript?",
-        "options": ["Curly braces", "Square brackets", "Parentheses", "Angle brackets"],
-        "answer": "Parentheses",
-        "difficulty": "Easy",
-        "explanation": "`()` are called parentheses and are used for function calls, grouping expressions, and conditions.",
-        "hint": "Think about round symbols in functions."
-    },
-    {
-        "question": "What are `{}` used for in JavaScript?",
-        "options": ["Defining arrays", "Defining code blocks or objects", "Calling functions", "Accessing elements"],
-        "answer": "Defining code blocks or objects",
+        "question": "What does `arr.push(4)` do to `arr = [1, 2, 3]`?",
+        "options": ["[1, 2, 3, 4]", "[4, 1, 2, 3]", "[1, 2, 4]", "[4]"],
+        "answer": "[1, 2, 3, 4]",
         "difficulty": "Medium",
-        "explanation": "Curly braces `{}` define code blocks (e.g., in loops) or object literals (e.g., `{ key: value }`).",
-        "hint": "Consider objects or loop bodies."
+        "explanation": "`push(4)` adds 4 to the end of the array, resulting in `[1, 2, 3, 4]`.",
+        "hint": "Think about adding to the end of an array."
     },
     {
-        "question": "What are `[]` used for in JavaScript?",
-        "options": ["Defining functions", "Defining arrays or accessing elements", "Creating objects", "Setting conditions"],
-        "answer": "Defining arrays or accessing elements",
+        "question": "What does `arr.splice(1, 1)` do to `arr = [1, 2, 3]`?",
+        "options": ["Removes 1", "Removes 2", "Removes 3", "Clears the array"],
+        "answer": "Removes 2",
         "difficulty": "Medium",
-        "explanation": "Square brackets `[]` are used to define arrays (e.g., `[1, 2]`) or access elements (e.g., `arr[0]`).",
-        "hint": "Think about lists or indexing."
+        "explanation": "`splice(1, 1)` removes 1 element at index 1, so `2` is removed, leaving `[1, 3]`.",
+        "hint": "Check `splice()` parameters."
     },
     {
-        "question": "When was JavaScript first created?",
-        "options": ["1990", "1995", "2000", "2005"],
-        "answer": "1995",
-        "difficulty": "Easy",
-        "explanation": "JavaScript was created in 1995 by Brendan Eich at Netscape.",
-        "hint": "Think about the mid-90s internet era."
-    },
-    {
-        "question": "Which is a popular alternative to JavaScript for web development?",
-        "options": ["Python", "TypeScript", "C++", "Java"],
-        "answer": "TypeScript",
+        "question": "What will `for (let i = 0; i < 3; i++) { console.log(i); }` output?",
+        "options": ["0, 1, 2", "1, 2, 3", "0, 1", "Nothing"],
+        "answer": "0, 1, 2",
         "difficulty": "Medium",
-        "explanation": "TypeScript is a superset of JavaScript with static typing, often used for web development.",
-        "hint": "Consider a language that compiles to JavaScript."
+        "explanation": "The loop runs from `i = 0` to `i < 3`, logging `0`, `1`, and `2`.",
+        "hint": "Trace the loop counter."
+    },
+    {
+        "question": "What will be output: `let arr = [1, 2, 3]; for (let i = 0; i < arr.length; i++) { if (arr[i] === 2) break; console.log(arr[i]); }`?",
+        "options": ["1", "1, 2", "1, 2, 3", "Nothing"],
+        "answer": "1",
+        "difficulty": "Medium",
+        "explanation": "The loop stops at `arr[i] === 2` due to `break`, so only `1` is logged.",
+        "hint": "Consider the `break` statement."
+    },
+    {
+        "question": "What will be output: `for (let i = 1; i <= 2; i++) { for (let j = 1; j <= 2; j++) { console.log(i * j); } }`?",
+        "options": ["1, 2, 2, 4", "1, 2, 3, 4", "1, 1, 2, 2", "Nothing"],
+        "answer": "1, 2, 2, 4",
+        "difficulty": "Medium",
+        "explanation": "The loop outputs products: `1*1=1`, `1*2=2`, `2*1=2`, `2*2=4`.",
+        "hint": "Trace nested loop iterations."
+    },
+    {
+        "question": "What is the result of `'hello'.toUpperCase()`?",
+        "options": ["HELLO", "hello", "Hello", "hELLO"],
+        "answer": "HELLO",
+        "difficulty": "Medium",
+        "explanation": "`toUpperCase()` converts all characters to uppercase, resulting in 'HELLO'.",
+        "hint": "Think about case transformation."
+    },
+    {
+        "question": "What is the result of `'JavaScript'.substring(0, 4)`?",
+        "options": ["Java", "Scri", "JavaS", "Script"],
+        "answer": "Java",
+        "difficulty": "Medium",
+        "explanation": "`substring(0, 4)` extracts characters from index 0 to 3, resulting in 'Java'.",
+        "hint": "Check `substring()` indices."
+    },
+    {
+        "question": "What does `'Hello World'.indexOf('World')` return?",
+        "options": ["0", "5", "6", "-1"],
+        "answer": "6",
+        "difficulty": "Medium",
+        "explanation": "`indexOf('World')` returns the starting index of 'World', which is 6 (after 'Hello ').",
+        "hint": "Locate 'World' in the string."
+    },
+    {
+        "question": "What does `'Test'.charAt(1)` return?",
+        "options": ["T", "e", "s", "t"],
+        "answer": "e",
+        "difficulty": "Medium",
+        "explanation": "`charAt(1)` returns the character at index 1, which is 'e' in 'Test'.",
+        "hint": "Count characters from index 0."
+    },
+    {
+        "question": "What is the result of `'Hello All'.replace('All', 'Everyone')`?",
+        "options": ["Hello Everyone", "Hello All", "Everyone All", "Hello"],
+        "answer": "Hello Everyone",
+        "difficulty": "Medium",
+        "explanation": "`replace()` substitutes 'All' with 'Everyone', resulting in 'Hello Everyone'.",
+        "hint": "Think about string replacement."
+    },
+    {
+        "question": "What is the result of `Math.round(5.8)`?",
+        "options": ["5", "6", "5.5", "7"],
+        "answer": "6",
+        "difficulty": "Medium",
+        "explanation": "`Math.round()` rounds to the nearest integer. Since 5.8 is closer to 6, it returns 6.",
+        "hint": "Consider rounding rules."
+    },
+    {
+        "question": "How do you generate a random integer from 1 to 10?",
+        "options": ["Math.random() * 10", "Math.floor(Math.random() * 10) + 1", "Math.round(Math.random() * 10)", "Math.random(1, 10)"],
+        "answer": "Math.floor(Math.random() * 10) + 1",
+        "difficulty": "Medium",
+        "explanation": "`Math.random() * 10` gives 0 to 9.999..., `Math.floor()` rounds down to 0–9, and `+1` shifts to 1–10.",
+        "hint": "Scale and shift a random number."
+    },
+    {
+        "question": "What does `parseInt('123.45')` return?",
+        "options": ["123.45", "123", "124", "NaN"],
+        "answer": "123",
+        "difficulty": "Medium",
+        "explanation": "`parseInt()` converts a string to an integer, stopping at the decimal, so '123.45' becomes 123.",
+        "hint": "Think about integer conversion."
+    },
+    {
+        "question": "How do you convert the number 42 to a string?",
+        "options": ["42.toString()", "String(42)", "parseInt(42)", "Both 42.toString() and String(42)"],
+        "answer": "Both 42.toString() and String(42)",
+        "difficulty": "Medium",
+        "explanation": "Both `42.toString()` and `String(42)` convert 42 to the string '42'.",
+        "hint": "Consider number-to-string methods."
+    },
+    {
+        "question": "What does `3.14159.toFixed(2)` return?",
+        "options": ["3.14", "3.141", "3.15", "3.14159"],
+        "answer": "3.14",
+        "difficulty": "Medium",
+        "explanation": "`toFixed(2)` rounds to 2 decimal places, returning '3.14' as a string.",
+        "hint": "Check decimal formatting."
+    },
+    {
+        "question": "What does `new Date()` return?",
+        "options": ["A string", "A Date object", "A timestamp", "A formatted date"],
+        "answer": "A Date object",
+        "difficulty": "Medium",
+        "explanation": "`new Date()` creates a Date object for the current date and time.",
+        "hint": "Think about the Date constructor."
+    },
+    {
+        "question": "What does `new Date().getFullYear()` return in 2025?",
+        "options": ["2024", "2025", "25", "2026"],
+        "answer": "2025",
+        "difficulty": "Medium",
+        "explanation": "`getFullYear()` returns the four-digit year, e.g., 2025.",
+        "hint": "Consider Date object methods."
+    },
+    {
+        "question": "Which creates a Date object for April 1, 2025?",
+        "options": ["new Date(2025, 4, 1)", "new Date(2025, 3, 1)", "new Date('2025-04-01')", "Both new Date(2025, 3, 1) and new Date('2025-04-01')"],
+        "answer": "Both new Date(2025, 3, 1) and new Date('2025-04-01')",
+        "difficulty": "Medium",
+        "explanation": "April is month 3 (0-based), and '2025-04-01' is a valid string format.",
+        "hint": "Check month indexing."
+    },
+    {
+        "question": "What does `date.setFullYear(2026)` do to a Date object?",
+        "options": ["Sets the month to 2026", "Sets the year to 2026", "Sets the day to 2026", "Sets the timestamp"],
+        "answer": "Sets the year to 2026",
+        "difficulty": "Medium",
+        "explanation": "`setFullYear(2026)` updates the year of the Date object to 2026.",
+        "hint": "Think about Date modification."
+    },
+    {
+        "question": "What is the correct function declaration syntax?",
+        "options": ["function myFunc() {}", "myFunc() {}", "func myFunc() {}", "function = myFunc() {}"],
+        "answer": "function myFunc() {}",
+        "difficulty": "Medium",
+        "explanation": "Functions are declared with the `function` keyword, a name, and a body.",
+        "hint": "Recall function syntax."
+    },
+    {
+        "question": "What will `function add(a, b) { console.log(a + b); } add(2, 3);` output?",
+        "options": ["5", "23", "Nothing", "Error"],
+        "answer": "5",
+        "difficulty": "Medium",
+        "explanation": "The function adds `2 + 3` and logs 5.",
+        "hint": "Trace the function parameters."
+    },
+    {
+        "question": "What does `function square(n) { return n * n; } square(3);` return?",
+        "options": ["6", "9", "3", "Nothing"],
+        "answer": "9",
+        "difficulty": "Medium",
+        "explanation": "The function returns `3 * 3 = 9`.",
+        "hint": "Focus on the `return` statement."
+    },
+    {
+        "question": "What is the scope of `let x` inside a function?",
+        "options": ["Global", "Local to the function", "Browser scope", "Global and local"],
+        "answer": "Local to the function",
+        "difficulty": "Medium",
+        "explanation": "`let` variables inside a function are local and not accessible outside.",
+        "hint": "Think about variable scope."
+    },
+    {
+        "question": "What is the correct `switch` statement syntax?",
+        "options": ["switch (x) {}", "switch x {}", "case (x) {}", "switch { x }"],
+        "answer": "switch (x) {}",
+        "difficulty": "Medium",
+        "explanation": "A `switch` statement starts with `switch (expression) {}`.",
+        "hint": "Recall `switch` structure."
+    },
+    {
+        "question": "What happens if `break` is omitted in a `switch` case?",
+        "options": ["Skips the case", "Executes the next case", "Throws an error", "Exits the switch"],
+        "answer": "Executes the next case",
+        "difficulty": "Medium",
+        "explanation": "Without `break`, execution falls through to the next case.",
+        "hint": "Think about fall-through behavior."
+    },
+    {
+        "question": "What will `let i = 0; while (i < 2) { console.log(i); i++; }` output?",
+        "options": ["0, 1", "1, 2", "0, 1, 2", "Nothing"],
+        "answer": "0, 1",
+        "difficulty": "Medium",
+        "explanation": "The loop runs while `i < 2`, logging `0` and `1`.",
+        "hint": "Trace the loop condition."
+    },
+    {
+        "question": "What will `let i = 3; do { console.log(i); i++; } while (i < 3);` output?",
+        "options": ["Nothing", "3", "3, 4", "2, 3"],
+        "answer": "3",
+        "difficulty": "Medium",
+        "explanation": "The `do...while` loop runs once, logging `3`, then stops since `i < 3` is false.",
+        "hint": "Recall `do...while` behavior."
+    },
+    {
+        "question": "What happens if `alert('Test')` is called in Node.js?",
+        "options": ["Shows a pop-up", "Logs to console", "Throws an error", "Nothing"],
+        "answer": "Throws an error",
+        "difficulty": "Medium",
+        "explanation": "`alert()` is browser-specific and undefined in Node.js, causing an error.",
+        "hint": "Consider environment differences."
+    },
+    {
+        "question": "What is the result of `let str = 'Hi'; str += '!'; console.log(str);`?",
+        "options": ["Hi", "Hi!", "!Hi", "Error"],
+        "answer": "Hi!",
+        "difficulty": "Medium",
+        "explanation": "The `+=` operator concatenates '!' to 'Hi', resulting in 'Hi!'.",
+        "hint": "Think about string modification."
+    },
+    {
+        "question": "What is the value of `x` after `let x = 12; x -= 5;`?",
+        "options": ["7", "17", "5", "12"],
+        "answer": "7",
+        "difficulty": "Medium",
+        "explanation": "The `-=` operator subtracts 5 from `x`, so `12 - 5 = 7`.",
+        "hint": "Check compound operators."
+    },
+    {
+        "question": "What is the result of `15 % 4` in JavaScript?",
+        "options": ["3", "4", "2", "0"],
+        "answer": "3",
+        "difficulty": "Medium",
+        "explanation": "The `%` operator returns the remainder, so `15 % 4 = 3`.",
+        "hint": "Think about division remainders."
+    },
+    {
+        "question": "What is the result of `let x = '3'; let y = 4; console.log(x + y);`?",
+        "options": ["7", "34", "12", "Error"],
+        "answer": "34",
+        "difficulty": "Medium",
+        "explanation": "The `+` operator concatenates the string '3' with the number 4 (converted to '4'), resulting in '34'.",
+        "hint": "Consider type coercion."
+    },
+    {
+        "question": "What does `arr.pop()` do to `arr = [1, 2, 3]`?",
+        "options": ["Removes 1", "Removes 3", "Removes 2", "Clears the array"],
+        "answer": "Removes 3",
+        "difficulty": "Medium",
+        "explanation": "`pop()` removes and returns the last element, so `3` is removed, leaving `[1, 2]`.",
+        "hint": "Think about the end of an array."
+    },
+    {
+        "question": "What will `for (let i = 0; i < 4; i += 2) { console.log(i); }` output?",
+        "options": ["0, 1, 2, 3", "0, 2", "1, 3", "0, 1, 2"],
+        "answer": "0, 2",
+        "difficulty": "Medium",
+        "explanation": "The loop increments `i` by 2, logging `0` and `2`.",
+        "hint": "Check the increment step."
+    },
+    {
+        "question": "What does `function divide(a, b) { return a / b; } divide(10, 2);` return?",
+        "options": ["5", "20", "2", "Nothing"],
+        "answer": "5",
+        "difficulty": "Medium",
+        "explanation": "The function returns `10 / 2 = 5`.",
+        "hint": "Focus on the `return` value."
     }
-
 ]
 
 
