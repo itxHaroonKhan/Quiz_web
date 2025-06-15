@@ -1,10 +1,9 @@
-
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
 
-# Quiz data (50 JavaScript MCQs)
+# Quiz data: 50 JavaScript MCQs
 quiz = [
     {
         "question": "What does the `alert()` function do in a browser environment?",
@@ -408,26 +407,77 @@ quiz = [
     }
 ]
 
-# Cache shuffled quiz
+# Helper Functions
 @st.cache_data
 def shuffle_quiz(_quiz):
+    """Shuffle quiz questions and options, ensuring varied difficulty sequence."""
     shuffled = random.sample(_quiz, len(_quiz))
+    # Avoid same difficulty consecutively
     for i in range(len(shuffled) - 1):
-        if i < len(shuffled) - 1 and shuffled[i]["difficulty"] == shuffled[i + 1]["difficulty"]:
+        if shuffled[i]["difficulty"] == shuffled[i + 1]["difficulty"]:
             for j in range(i + 2, len(shuffled)):
                 if shuffled[j]["difficulty"] != shuffled[i]["difficulty"]:
                     shuffled[i + 1], shuffled[j] = shuffled[j], shuffled[i + 1]
                     break
+    # Assign UUIDs and shuffle options with labels
     for q in shuffled:
         q["id"] = str(uuid.uuid4())
         labeled_options = list(zip(q["options"], ["A", "B", "C", "D"]))
         random.shuffle(labeled_options)
         q["display_options"] = [f"{label}: {option}" for option, label in labeled_options]
-        for option, label in labeled_options:
-            if option == q["answer"]:
-                q["labeled_answer"] = f"{label}: {option}"
-                break
+        q["labeled_answer"] = next(f"{label}: {option}" for option, label in labeled_options if option == q["answer"])
     return shuffled
+
+def toggle_theme():
+    """Toggle between dark and light themes."""
+    st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
+    st.rerun()
+
+def update_timer():
+    """Update quiz timer and check for timeout."""
+    elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
+    st.session_state.time_left = max(1800 - elapsed, 0)
+    if st.session_state.time_left <= 0:
+        st.session_state.show_results = True
+        st.rerun()
+
+def reset_quiz():
+    """Reset quiz state to start a new session."""
+    st.session_state.update({
+        "quiz_data": shuffle_quiz(quiz) if quiz else [],
+        "score": 0,
+        "current_q": 0,
+        "start_time": datetime.now(),
+        "answers": [None] * len(quiz),
+        "show_results": False,
+        "selected_option": None,
+        "feedback": None,
+        "time_left": 1800,
+        "theme": "dark",
+        "streak": 0,
+        "show_hint": False,
+        "started": False
+    })
+    st.rerun()
+
+def show_progress_snapshot():
+    """Display current quiz progress."""
+    answered = sum(1 for ans in st.session_state.answers if ans is not None)
+    st.markdown("""
+        <div style='background: var(--bg-container); padding: 15px; border-radius: 10px; box-shadow: 0 4px 12px var(--shadow); margin: 10px 0;'>
+            <h4 style='color: var(--text-color);'>📊 Progress Snapshot</h4>
+            <div style='color: var(--text-color); font-size: 14px;'>
+                - 🏆 Current Score: {score}<br>
+                - 🔥 Streak: {streak}<br>
+                - ✅ Questions Answered: {answered}/{total}
+            </div>
+        </div>
+    """.format(
+        score=st.session_state.score,
+        streak=st.session_state.streak,
+        answered=answered,
+        total=len(st.session_state.quiz_data)
+    ), unsafe_allow_html=True)
 
 # Initialize session state
 if "quiz_data" not in st.session_state:
@@ -447,56 +497,7 @@ if "quiz_data" not in st.session_state:
         "started": False
     })
 
-# Theme toggle
-def toggle_theme():
-    st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
-
-# Timer logic
-def update_timer():
-    elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-    st.session_state.time_left = max(1800 - elapsed, 0)
-    if st.session_state.time_left <= 0:
-        st.session_state.show_results = True
-        st.rerun()
-
-# Reset quiz
-def reset_quiz():
-    st.session_state.update({
-        "quiz_data": shuffle_quiz(quiz),
-        "score": 0,
-        "current_q": 0,
-        "start_time": datetime.now(),
-        "answers": [None] * len(quiz),
-        "show_results": False,
-        "selected_option": None,
-        "feedback": None,
-        "time_left": 1800,
-        "streak": 0,
-        "show_hint": False,
-        "started": False
-    })
-    st.rerun()
-
-# Progress snapshot function
-def show_progress_snapshot():
-    answered = sum(1 for ans in st.session_state.answers if ans is not None)
-    st.markdown("""
-        <div style='background: var(--bg-container); padding: 15px; border-radius: 10px; box-shadow: 0 4px 12px var(--shadow); margin: 10px 0;'>
-            <h4 style='color: var(--text-color);'>📊 Progress Snapshot</h4>
-            <div style='color: var(--text-color); font-size: 14px;'>
-                - 🏆 Current Score: {score}<br>
-                - 🔥 Streak: {streak}<br>
-                - ✅ Questions Answered: {answered}/{total}
-            </div>
-        </div>
-    """.format(
-        score=st.session_state.score,
-        streak=st.session_state.streak,
-        answered=answered,
-        total=len(st.session_state.quiz_data)
-    ), unsafe_allow_html=True)
-
-# CSS for VS Code-like styling
+# VS Code-like CSS Styling
 st.markdown("""
     <style>
     body {
@@ -674,38 +675,37 @@ st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">
 st.markdown('<h1 class="title">🚀 JavaScript Quiz Pro</h1>', unsafe_allow_html=True)
 st.markdown('<p class="caption">Test Your JavaScript Mastery!</p>', unsafe_allow_html=True)
 
-# Theme toggle button
+# Theme toggle
 if st.button("🌙 Toggle Theme", key="theme_toggle"):
     toggle_theme()
-    st.rerun()
 
 # Welcome screen
 if not st.session_state.started:
     st.markdown("""
-    <div style="text-align: center;">
-        <p style="color: var(--text-color); font-size: 16px;">Challenge yourself with 50 JavaScript questions!</p>
-        <p style="color: #8b8b8b;">30 minutes, 2 points per correct answer. Ready to code?</p>
-    </div>
+        <div style="text-align: center;">
+            <p style="color: var(--text-color); font-size: 16px;">Challenge yourself with 50 JavaScript questions!</p>
+            <p style="color: #8b8b8b;">30 minutes, 2 points per correct answer. Ready to code?</p>
+        </div>
     """, unsafe_allow_html=True)
     if st.button("Start Quiz", key="start_quiz"):
         st.session_state.started = True
         st.session_state.start_time = datetime.now()
         st.rerun()
+
+# Quiz logic
+elif not st.session_state.quiz_data:
+    st.error("No quiz questions available.")
 else:
     # Timer
     if not st.session_state.show_results:
         update_timer()
-        minutes = int(st.session_state.time_left // 60)
-        seconds = int(st.session_state.time_left % 60)
+        minutes, seconds = divmod(int(st.session_state.time_left), 60)
         st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
 
-    if not st.session_state.quiz_data:
-        st.error("No quiz questions available.")
-    else:
-        # Progress bar
-        progress = st.session_state.current_q / len(st.session_state.quiz_data)
-        progress_percentage = int(progress * 100)
-        st.markdown(f"""
+    # Progress bar
+    progress = st.session_state.current_q / len(st.session_state.quiz_data)
+    progress_percentage = int(progress * 100)
+    st.markdown(f"""
         <div class="progress-bar">
             <div class="progress-fill" style="width: {progress_percentage}%"></div>
             <div class="progress-text">{progress_percentage}%</div>
@@ -713,123 +713,117 @@ else:
         <div style="color: var(--text-color); font-size: 12px; text-align: center;">
             Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
         </div>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-        if not st.session_state.show_results:
-            with st.container():
-                st.markdown('<div class="question-container">', unsafe_allow_html=True)
-                q = st.session_state.quiz_data[st.session_state.current_q]
+    # Question display
+    if not st.session_state.show_results:
+        with st.container():
+            st.markdown('<div class="question-container">', unsafe_allow_html=True)
+            q = st.session_state.quiz_data[st.session_state.current_q]
 
-                # Display difficulty and streak
-                st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
+            # Difficulty and streak
+            st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
-                # Split question into text and code
-                if "```javascript" in q["question"]:
-                    question_parts = q["question"].split("```javascript\n")
-                    question_text = question_parts[0].strip()
-                    code_snippet = question_parts[1].split("```")[0].strip()
-                    st.markdown(f"### Question {st.session_state.current_q + 1}")
-                    st.markdown(f"**{question_text}**")
-                    st.code(code_snippet, language="javascript")
+            # Display question and code snippet if present
+            if "```javascript" in q["question"]:
+                parts = q["question"].split("```javascript\n")
+                question_text = parts[0].strip()
+                code_snippet = parts[1].split("```")[0].strip()
+                st.markdown(f"### Question {st.session_state.current_q + 1}")
+                st.markdown(f"**{question_text}**")
+                st.code(code_snippet, language="javascript")
+            else:
+                st.markdown(f"### Question {st.session_state.current_q + 1}")
+                st.markdown(f"**{q['question']}**")
+
+            # Option buttons
+            for i, option in enumerate(q["display_options"]):
+                button_class = "selected-correct" if st.session_state.selected_option == option and option == q["labeled_answer"] else \
+                               "selected-wrong" if st.session_state.selected_option == option else ""
+                if st.button(option, key=f"q{i}", disabled=st.session_state.selected_option is not None, help="Select this option"):
+                    is_correct = option == q["labeled_answer"]
+                    st.session_state.selected_option = option
+                    st.session_state.feedback = {
+                        "is_correct": is_correct,
+                        "correct_answer": q["labeled_answer"],
+                        "explanation": q["explanation"]
+                    }
+                    st.session_state.answers[st.session_state.current_q] = {
+                        "question": q["question"],
+                        "user_answer": option,
+                        "correct_answer": q["labeled_answer"],
+                        "is_correct": is_correct,
+                        "difficulty": q["difficulty"]
+                    }
+                    if is_correct:
+                        points = {"Easy": 1, "Medium": 2, "Hard": 3}.get(q["difficulty"], 2)
+                        st.session_state.score += points
+                        st.session_state.streak += 1
+                        if st.session_state.streak >= 3:
+                            st.session_state.score += 1
+                    else:
+                        st.session_state.streak = 0
+                    st.rerun()
+
+            # Feedback
+            if st.session_state.feedback:
+                if st.session_state.feedback["is_correct"]:
+                    st.markdown('<div class="feedback-correct">✅ Correct!</div>', unsafe_allow_html=True)
                 else:
-                    st.markdown(f"### Question {st.session_state.current_q + 1}")
-                    st.markdown(f"**{q['question']}**")
+                    st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div style="color: var(--text-color); font-size: 13px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
 
-                # Option buttons
-                for i, option in enumerate(q["display_options"]):
-                    button_class = ""
-                    if st.session_state.selected_option == option:
-                        button_class = "selected-correct" if option == q["labeled_answer"] else "selected-wrong"
-                    if st.button(
-                        option,
-                        key=f"q{i}",
-                        disabled=st.session_state.selected_option is not None,
-                        help="Select this option"
-                    ):
-                        original_option = option[3:]
-                        is_correct = option == q["labeled_answer"]
-                        st.session_state.selected_option = option
-                        st.session_state.feedback = {
-                            "is_correct": is_correct,
-                            "correct_answer": q["labeled_answer"],
-                            "explanation": q["explanation"]
-                        }
-                        st.session_state.answers[st.session_state.current_q] = {
-                            "question": q["question"],
-                            "user_answer": option,
-                            "correct_answer": q["labeled_answer"],
-                            "is_correct": is_correct,
-                            "difficulty": q["difficulty"]
-                        }
-                        if is_correct:
-                            points = {"Easy": 1, "Medium": 2, "Hard": 3}[q["difficulty"]]
-                            st.session_state.score += points
-                            st.session_state.streak += 1
-                            if st.session_state.streak >= 3:
-                                st.session_state.score += 1
-                        else:
-                            st.session_state.streak = 0
+            # Hint
+            if st.button("💡 Show Hint", key="hint", disabled=st.session_state.show_hint or st.session_state.selected_option is not None):
+                st.session_state.show_hint = True
+                st.session_state.score = max(0, st.session_state.score - 0.5)
+                st.rerun()
+            if st.session_state.show_hint:
+                st.markdown(f'<div style="color: #facc15; font-size: 13px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
+
+            # Navigation
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("📊 Progress Snapshot", key="progress"):
+                    show_progress_snapshot()
+            with col2:
+                if st.session_state.current_q < len(quiz) - 1:
+                    if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
+                        st.session_state.current_q += 1
+                        st.session_state.selected_option = None
+                        st.session_state.feedback = None
+                        st.session_state.show_hint = False
+                        st.rerun()
+                else:
+                    if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
+                        st.session_state.show_results = True
                         st.rerun()
 
-                # Feedback
-                if st.session_state.feedback:
-                    if st.session_state.feedback["is_correct"]:
-                        st.markdown('<div class="feedback-correct">✅ Correct!</div>', unsafe_allow_html=True)
-                    else:
-                        st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
-                        st.markdown(f'<div style="color: var(--text-color); font-size: 13px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
+            # Reset quiz
+            if st.button("🔄 Reset Quiz", key="reset"):
+                reset_quiz()
 
-                # Hint button
-                if st.button("💡 Show Hint", key="hint", disabled=st.session_state.show_hint or st.session_state.selected_option is not None):
-                    st.session_state.show_hint = True
-                    st.session_state.score = max(0, st.session_state.score - 0.5)
-                    st.rerun()
-                if st.session_state.show_hint:
-                    st.markdown(f'<div style="color: #facc15; font-size: 13px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
 
-                # Navigation and progress snapshot
-                col1, col2 = st.columns(2)
-                with col1:
-                    if st.button("📊 Progress Snapshot", key="progress"):
-                        show_progress_snapshot()
-                with col2:
-                    if st.session_state.current_q < len(quiz) - 1:
-                        if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
-                            st.session_state.current_q += 1
-                            st.session_state.selected_option = None
-                            st.session_state.feedback = None
-                            st.session_state.show_hint = False
-                            st.rerun()
-                    else:
-                        if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
-                            st.session_state.show_results = True
-                            st.rerun()
-
-                # Reset quiz button
-                if st.button("🔄 Reset Quiz", key="reset"):
-                    reset_quiz()
-
-                st.markdown("</div>", unsafe_allow_html=True)
-
-        # Results screen
-        else:
-            st.markdown('<h2 style="color: var(--accent); text-align: center;">🎉 Quiz Completed!</h2>', unsafe_allow_html=True)
-            answered = sum(1 for ans in st.session_state.answers if ans is not None)
-            correct = sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])
-            st.markdown(f"""
+    # Results screen
+    else:
+        st.markdown('<h2 style="color: var(--accent); text-align: center;">🎉 Quiz Completed!</h2>', unsafe_allow_html=True)
+        answered = sum(1 for ans in st.session_state.answers if ans is not None)
+        correct = sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])
+        st.markdown(f"""
             <div style="text-align: center; color: var(--text-color);">
                 <p><strong>Final Score:</strong> {st.session_state.score} points</p>
                 <p><strong>Correct Answers:</strong> {correct}/{answered}</p>
                 <p><strong>Accuracy:</strong> {int((correct / answered) * 100) if answered > 0 else 0}%</p>
             </div>
-            """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-            st.markdown("### Review Your Answers")
-            for i, ans in enumerate(st.session_state.answers):
-                if ans:
-                    status = "✅ Correct" if ans["is_correct"] else "❌ Incorrect"
-                    color = "var(--correct)" if ans["is_correct"] else "var(--wrong)"
-                    st.markdown(f"""
+        st.markdown("### Review Your Answers")
+        for i, ans in enumerate(st.session_state.answers):
+            if ans:
+                status = "✅ Correct" if ans["is_correct"] else "❌ Incorrect"
+                color = "var(--correct)" if ans["is_correct"] else "var(--wrong)"
+                st.markdown(f"""
                     <div style="background: var(--code-bg); padding: 10px; border-radius: 6px; margin: 5px 0; border: 1px solid #3c3c3c;">
                         <strong>Question {i + 1}:</strong> {ans['question']}<br>
                         <strong>Your Answer:</strong> {ans['user_answer']}<br>
@@ -837,9 +831,9 @@ else:
                         <strong>Status:</strong> <span style="color: {color};">{status}</span><br>
                         <strong>Difficulty:</strong> {ans['difficulty']}
                     </div>
-                    """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
-            if st.button("🔄 Try Again", key="try_again"):
-                reset_quiz()
+        if st.button("🔄 Try Again", key="try_again"):
+            reset_quiz()
 
 st.markdown("</div>", unsafe_allow_html=True)
