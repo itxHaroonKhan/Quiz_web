@@ -1,9 +1,10 @@
+```python
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
 
-# Quiz data: 50 JavaScript MCQs
+# Quiz Data: 50 JavaScript MCQs with Topic Tags
 quiz = [
     {
         "question": "What does the `alert()` function do in a browser environment?",
@@ -11,7 +12,8 @@ quiz = [
         "answer": "Displays a pop-up dialog",
         "difficulty": "Medium",
         "explanation": "The `alert()` function creates a pop-up dialog box in the browser to display a message and waits for the user to click 'OK'.",
-        "hint": "Think about user-facing notifications in browsers."
+        "hint": "Think about user-facing notifications in browsers.",
+        "topic": "Alerts"
     },
     {
         "question": "What is the result of `let str = 'Hello'; str = str + ' World'; console.log(str);`?",
@@ -19,7 +21,8 @@ quiz = [
         "answer": "Hello World",
         "difficulty": "Medium",
         "explanation": "The `+` operator concatenates 'Hello' and ' World' to form 'Hello World'.",
-        "hint": "Consider how strings are combined."
+        "hint": "Consider how strings are combined.",
+        "topic": "Concatenating text strings"
     },
     {
         "question": "What is the value of `x` after `let x = 8; x += 2;`?",
@@ -27,7 +30,8 @@ quiz = [
         "answer": "10",
         "difficulty": "Medium",
         "explanation": "The `+=` operator adds 2 to `x`, so `8 + 2 = 10`.",
-        "hint": "Recall compound assignment operators."
+        "hint": "Recall compound assignment operators.",
+        "topic": "Variables for Numbers"
     },
     {
         "question": "Which variable name is illegal in JavaScript?",
@@ -35,7 +39,8 @@ quiz = [
         "answer": "1stVar",
         "difficulty": "Medium",
         "explanation": "Variable names cannot start with a digit; they must begin with a letter, underscore, or dollar sign.",
-        "hint": "Check JavaScript naming conventions."
+        "hint": "Check JavaScript naming conventions.",
+        "topic": "Variable Names Legal and Illegal"
     },
     {
         "question": "What is the result of `6 + 4 * 2` in JavaScript?",
@@ -43,7 +48,8 @@ quiz = [
         "answer": "14",
         "difficulty": "Medium",
         "explanation": "Following PEMDAS, multiplication is done first: `4 * 2 = 8`, then addition: `6 + 8 = 14`.",
-        "hint": "Remember the order of operations."
+        "hint": "Remember the order of operations.",
+        "topic": "Math Expressions: familiar operators"
     },
     {
         "question": "What does the `**` operator do in JavaScript?",
@@ -51,7 +57,8 @@ quiz = [
         "answer": "Raises a number to a power",
         "difficulty": "Medium",
         "explanation": "The `**` operator performs exponentiation, e.g., `2 ** 3 = 8`.",
-        "hint": "Think about mathematical powers."
+        "hint": "Think about mathematical powers.",
+        "topic": "Math Expressions: unfamiliar operators"
     },
     {
         "question": "How do you ensure `5 + 3 * 4` evaluates to `32` instead of `17`?",
@@ -59,7 +66,8 @@ quiz = [
         "answer": "(5 + 3) * 4",
         "difficulty": "Medium",
         "explanation": "Parentheses ensure `5 + 3 = 8` is calculated first, then `8 * 4 = 32`.",
-        "hint": "Use parentheses to control precedence."
+        "hint": "Use parentheses to control precedence.",
+        "topic": "Math Expressions: eliminating ambiguity"
     },
     {
         "question": "What is the result of `'Good' + ' ' + 'Day'`?",
@@ -67,7 +75,8 @@ quiz = [
         "answer": "Good Day",
         "difficulty": "Medium",
         "explanation": "The `+` operator concatenates the strings, including the space, to form 'Good Day'.",
-        "hint": "Spaces are important in concatenation."
+        "hint": "Spaces are important in concatenation.",
+        "topic": "Concatenating text strings"
     },
     {
         "question": "What does `prompt('Enter age')` return if the user enters '25'?",
@@ -75,7 +84,8 @@ quiz = [
         "answer": "'25'",
         "difficulty": "Medium",
         "explanation": "`prompt()` returns user input as a string, so '25' is returned as `'25'`.",
-        "hint": "Consider the data type of user input."
+        "hint": "Consider the data type of user input.",
+        "topic": "Prompts"
     },
     {
         "question": "What will `if (7 > 4) { console.log('True'); }` output?",
@@ -83,7 +93,8 @@ quiz = [
         "answer": "True",
         "difficulty": "Medium",
         "explanation": "The condition `7 > 4` is true, so 'True' is logged.",
-        "hint": "Evaluate the `if` condition."
+        "hint": "Evaluate the `if` condition.",
+        "topic": "if statements"
     },
     {
         "question": "What is the result of `'10' == 10` in JavaScript?",
@@ -91,7 +102,8 @@ quiz = [
         "answer": "true",
         "difficulty": "Medium",
         "explanation": "The `==` operator performs type coercion, so `'10'` is converted to the number 10, making the comparison true.",
-        "hint": "Compare loose equality behavior."
+        "hint": "Compare loose equality behavior.",
+        "topic": "Comparison operators"
     },
     {
         "question": "What will be output: `let x = 15; if (x < 10) { console.log('Small'); } else if (x < 20) { console.log('Medium'); } else { console.log('Large'); }`?",
@@ -99,7 +111,8 @@ quiz = [
         "answer": "Medium",
         "difficulty": "Medium",
         "explanation": "Since `x = 15` is less than 20 but not less than 10, 'Medium' is logged.",
-        "hint": "Check which condition matches."
+        "hint": "Check which condition matches.",
+        "topic": "if...else and else if statements"
     },
     {
         "question": "What is the result of `if (4 > 2 && 3 < 5) { console.log('Yes'); }`?",
@@ -107,7 +120,8 @@ quiz = [
         "answer": "Yes",
         "difficulty": "Medium",
         "explanation": "Both `4 > 2` and `3 < 5` are true, so the `&&` operator evaluates to true, logging 'Yes'.",
-        "hint": "Evaluate the logical operator."
+        "hint": "Evaluate the logical operator.",
+        "topic": "Testing sets of conditions"
     },
     {
         "question": "What will be output: `let x = 7; if (x > 5) { if (x < 10) { console.log('In Range'); } }`?",
@@ -115,7 +129,8 @@ quiz = [
         "answer": "In Range",
         "difficulty": "Medium",
         "explanation": "Both conditions (`x > 5` and `x < 10`) are true for `x = 7`, so 'In Range' is logged.",
-        "hint": "Trace nested conditions."
+        "hint": "Trace nested conditions.",
+        "topic": "if statements nested"
     },
     {
         "question": "Which creates an array in JavaScript?",
@@ -123,7 +138,8 @@ quiz = [
         "answer": "let arr = [];",
         "difficulty": "Medium",
         "explanation": "Arrays are created with square brackets `[]`. Curly braces `{}` create objects.",
-        "hint": "Recall array syntax."
+        "hint": "Recall array syntax.",
+        "topic": "Arrays"
     },
     {
         "question": "What does `arr.push(4)` do to `arr = [1, 2, 3]`?",
@@ -131,7 +147,8 @@ quiz = [
         "answer": "[1, 2, 3, 4]",
         "difficulty": "Medium",
         "explanation": "`push(4)` adds 4 to the end of the array, resulting in `[1, 2, 3, 4]`.",
-        "hint": "Think about adding to the end of an array."
+        "hint": "Think about adding to the end of an array.",
+        "topic": "Arrays: adding and removing elements"
     },
     {
         "question": "What does `arr.splice(1, 1)` do to `arr = [1, 2, 3]`?",
@@ -139,7 +156,8 @@ quiz = [
         "answer": "Removes 2",
         "difficulty": "Medium",
         "explanation": "`splice(1, 1)` removes 1 element at index 1, so `2` is removed, leaving `[1, 3]`.",
-        "hint": "Check `splice()` parameters."
+        "hint": "Check `splice()` parameters.",
+        "topic": "Arrays: removing, inserting, and extracting elements"
     },
     {
         "question": "What will `for (let i = 0; i < 3; i++) { console.log(i); }` output?",
@@ -147,7 +165,8 @@ quiz = [
         "answer": "0, 1, 2",
         "difficulty": "Medium",
         "explanation": "The loop runs from `i = 0` to `i < 3`, logging `0`, `1`, and `2`.",
-        "hint": "Trace the loop counter."
+        "hint": "Trace the loop counter.",
+        "topic": "for loops"
     },
     {
         "question": "What will be output: `let arr = [1, 2, 3]; for (let i = 0; i < arr.length; i++) { if (arr[i] === 2) break; console.log(arr[i]); }`?",
@@ -155,7 +174,8 @@ quiz = [
         "answer": "1",
         "difficulty": "Medium",
         "explanation": "The loop stops at `arr[i] === 2` due to `break`, so only `1` is logged.",
-        "hint": "Consider the `break` statement."
+        "hint": "Consider the `break` statement.",
+        "topic": "for loops: flags, Booleans, array length, and breaks"
     },
     {
         "question": "What will be output: `for (let i = 1; i <= 2; i++) { for (let j = 1; j <= 2; j++) { console.log(i * j); } }`?",
@@ -163,7 +183,8 @@ quiz = [
         "answer": "1, 2, 2, 4",
         "difficulty": "Medium",
         "explanation": "The loop outputs products: `1*1=1`, `1*2=2`, `2*1=2`, `2*2=4`.",
-        "hint": "Trace nested loop iterations."
+        "hint": "Trace nested loop iterations.",
+        "topic": "for loops nested"
     },
     {
         "question": "What is the result of `'hello'.toUpperCase()`?",
@@ -171,7 +192,8 @@ quiz = [
         "answer": "HELLO",
         "difficulty": "Medium",
         "explanation": "`toUpperCase()` converts all characters to uppercase, resulting in 'HELLO'.",
-        "hint": "Think about case transformation."
+        "hint": "Think about case transformation.",
+        "topic": "Changing case"
     },
     {
         "question": "What is the result of `'JavaScript'.substring(0, 4)`?",
@@ -179,7 +201,8 @@ quiz = [
         "answer": "Java",
         "difficulty": "Medium",
         "explanation": "`substring(0, 4)` extracts characters from index 0 to 3, resulting in 'Java'.",
-        "hint": "Check `substring()` indices."
+        "hint": "Check `substring()` indices.",
+        "topic": "Strings: measuring length and extracting parts"
     },
     {
         "question": "What does `'Hello World'.indexOf('World')` return?",
@@ -187,7 +210,8 @@ quiz = [
         "answer": "6",
         "difficulty": "Medium",
         "explanation": "`indexOf('World')` returns the starting index of 'World', which is 6 (after 'Hello ').",
-        "hint": "Locate 'World' in the string."
+        "hint": "Locate 'World' in the string.",
+        "topic": "Strings: finding segments"
     },
     {
         "question": "What does `'Test'.charAt(1)` return?",
@@ -195,7 +219,8 @@ quiz = [
         "answer": "e",
         "difficulty": "Medium",
         "explanation": "`charAt(1)` returns the character at index 1, which is 'e' in 'Test'.",
-        "hint": "Count characters from index 0."
+        "hint": "Count characters from index 0.",
+        "topic": "Strings: finding a character at a location"
     },
     {
         "question": "What is the result of `'Hello All'.replace('All', 'Everyone')`?",
@@ -203,7 +228,8 @@ quiz = [
         "answer": "Hello Everyone",
         "difficulty": "Medium",
         "explanation": "`replace()` substitutes 'All' with 'Everyone', resulting in 'Hello Everyone'.",
-        "hint": "Think about string replacement."
+        "hint": "Think about string replacement.",
+        "topic": "Strings: replacing characters"
     },
     {
         "question": "What is the result of `Math.round(5.8)`?",
@@ -211,7 +237,8 @@ quiz = [
         "answer": "6",
         "difficulty": "Medium",
         "explanation": "`Math.round()` rounds to the nearest integer. Since 5.8 is closer to 6, it returns 6.",
-        "hint": "Consider rounding rules."
+        "hint": "Consider rounding rules.",
+        "topic": "Rounding numbers"
     },
     {
         "question": "How do you generate a random integer from 1 to 10?",
@@ -219,7 +246,8 @@ quiz = [
         "answer": "Math.floor(Math.random() * 10) + 1",
         "difficulty": "Medium",
         "explanation": "`Math.random() * 10` gives 0 to 9.999..., `Math.floor()` rounds down to 0–9, and `+1` shifts to 1–10.",
-        "hint": "Scale and shift a random number."
+        "hint": "Scale and shift a random number.",
+        "topic": "Generating random numbers"
     },
     {
         "question": "What does `parseInt('123.45')` return?",
@@ -227,7 +255,8 @@ quiz = [
         "answer": "123",
         "difficulty": "Medium",
         "explanation": "`parseInt()` converts a string to an integer, stopping at the decimal, so '123.45' becomes 123.",
-        "hint": "Think about integer conversion."
+        "hint": "Think about integer conversion.",
+        "topic": "Converting strings to integers and decimals"
     },
     {
         "question": "How do you convert the number 42 to a string?",
@@ -235,7 +264,8 @@ quiz = [
         "answer": "Both 42.toString() and String(42)",
         "difficulty": "Medium",
         "explanation": "Both `42.toString()` and `String(42)` convert 42 to the string '42'.",
-        "hint": "Consider number-to-string methods."
+        "hint": "Consider number-to-string methods.",
+        "topic": "Converting strings to numbers, numbers to strings"
     },
     {
         "question": "What does `3.14159.toFixed(2)` return?",
@@ -243,7 +273,8 @@ quiz = [
         "answer": "3.14",
         "difficulty": "Medium",
         "explanation": "`toFixed(2)` rounds to 2 decimal places, returning '3.14' as a string.",
-        "hint": "Check decimal formatting."
+        "hint": "Check decimal formatting.",
+        "topic": "Controlling the length of decimals"
     },
     {
         "question": "What does `new Date()` return?",
@@ -251,7 +282,8 @@ quiz = [
         "answer": "A Date object",
         "difficulty": "Medium",
         "explanation": "`new Date()` creates a Date object for the current date and time.",
-        "hint": "Think about the Date constructor."
+        "hint": "Think about the Date constructor.",
+        "topic": "Getting the current date and time"
     },
     {
         "question": "What does `new Date().getFullYear()` return in 2025?",
@@ -259,7 +291,8 @@ quiz = [
         "answer": "2025",
         "difficulty": "Medium",
         "explanation": "`getFullYear()` returns the four-digit year, e.g., 2025.",
-        "hint": "Consider Date object methods."
+        "hint": "Consider Date object methods.",
+        "topic": "Extracting parts of the date and time"
     },
     {
         "question": "Which creates a Date object for April 1, 2025?",
@@ -267,7 +300,8 @@ quiz = [
         "answer": "Both new Date(2025, 3, 1) and new Date('2025-04-01')",
         "difficulty": "Medium",
         "explanation": "April is month 3 (0-based), and '2025-04-01' is a valid string format.",
-        "hint": "Check month indexing."
+        "hint": "Check month indexing.",
+        "topic": "Specifying a date and time"
     },
     {
         "question": "What does `date.setFullYear(2026)` do to a Date object?",
@@ -275,7 +309,8 @@ quiz = [
         "answer": "Sets the year to 2026",
         "difficulty": "Medium",
         "explanation": "`setFullYear(2026)` updates the year of the Date object to 2026.",
-        "hint": "Think about Date modification."
+        "hint": "Think about Date modification.",
+        "topic": "Changing elements of a date and time"
     },
     {
         "question": "What is the correct function declaration syntax?",
@@ -283,7 +318,8 @@ quiz = [
         "answer": "function myFunc() {}",
         "difficulty": "Medium",
         "explanation": "Functions are declared with the `function` keyword, a name, and a body.",
-        "hint": "Recall function syntax."
+        "hint": "Recall function syntax.",
+        "topic": "Functions"
     },
     {
         "question": "What will `function add(a, b) { console.log(a + b); } add(2, 3);` output?",
@@ -291,7 +327,8 @@ quiz = [
         "answer": "5",
         "difficulty": "Medium",
         "explanation": "The function adds `2 + 3` and logs 5.",
-        "hint": "Trace the function parameters."
+        "hint": "Trace the function parameters.",
+        "topic": "Functions: passing them data"
     },
     {
         "question": "What does `function square(n) { return n * n; } square(3);` return?",
@@ -299,7 +336,8 @@ quiz = [
         "answer": "9",
         "difficulty": "Medium",
         "explanation": "The function returns `3 * 3 = 9`.",
-        "hint": "Focus on the `return` statement."
+        "hint": "Focus on the `return` statement.",
+        "topic": "Functions: passing data back from them"
     },
     {
         "question": "What is the scope of `let x` inside a function?",
@@ -307,7 +345,8 @@ quiz = [
         "answer": "Local to the function",
         "difficulty": "Medium",
         "explanation": "`let` variables inside a function are local and not accessible outside.",
-        "hint": "Think about variable scope."
+        "hint": "Think about variable scope.",
+        "topic": "Functions: local vs. global variables"
     },
     {
         "question": "What is the correct `switch` statement syntax?",
@@ -315,7 +354,8 @@ quiz = [
         "answer": "switch (x) {}",
         "difficulty": "Medium",
         "explanation": "A `switch` statement starts with `switch (expression) {}`.",
-        "hint": "Recall `switch` structure."
+        "hint": "Recall `switch` structure.",
+        "topic": "switch statements: how to start them"
     },
     {
         "question": "What happens if `break` is omitted in a `switch` case?",
@@ -323,7 +363,8 @@ quiz = [
         "answer": "Executes the next case",
         "difficulty": "Medium",
         "explanation": "Without `break`, execution falls through to the next case.",
-        "hint": "Think about fall-through behavior."
+        "hint": "Think about fall-through behavior.",
+        "topic": "switch statements: how to complete them"
     },
     {
         "question": "What will `let i = 0; while (i < 2) { console.log(i); i++; }` output?",
@@ -331,7 +372,8 @@ quiz = [
         "answer": "0, 1",
         "difficulty": "Medium",
         "explanation": "The loop runs while `i < 2`, logging `0` and `1`.",
-        "hint": "Trace the loop condition."
+        "hint": "Trace the loop condition.",
+        "topic": "while loops"
     },
     {
         "question": "What will `let i = 3; do { console.log(i); i++; } while (i < 3);` output?",
@@ -339,7 +381,8 @@ quiz = [
         "answer": "3",
         "difficulty": "Medium",
         "explanation": "The `do...while` loop runs once, logging `3`, then stops since `i < 3` is false.",
-        "hint": "Recall `do...while` behavior."
+        "hint": "Recall `do...while` behavior.",
+        "topic": "do...while loops"
     },
     {
         "question": "What happens if `alert('Test')` is called in Node.js?",
@@ -347,7 +390,8 @@ quiz = [
         "answer": "Throws an error",
         "difficulty": "Medium",
         "explanation": "`alert()` is browser-specific and undefined in Node.js, causing an error.",
-        "hint": "Consider environment differences."
+        "hint": "Consider environment differences.",
+        "topic": "Alerts"
     },
     {
         "question": "What is the result of `let str = 'Hi'; str += '!'; console.log(str);`?",
@@ -355,7 +399,8 @@ quiz = [
         "answer": "Hi!",
         "difficulty": "Medium",
         "explanation": "The `+=` operator concatenates '!' to 'Hi', resulting in 'Hi!'.",
-        "hint": "Think about string modification."
+        "hint": "Think about string modification.",
+        "topic": "Concatenating text strings"
     },
     {
         "question": "What is the value of `x` after `let x = 12; x -= 5;`?",
@@ -363,7 +408,8 @@ quiz = [
         "answer": "7",
         "difficulty": "Medium",
         "explanation": "The `-=` operator subtracts 5 from `x`, so `12 - 5 = 7`.",
-        "hint": "Check compound operators."
+        "hint": "Check compound operators.",
+        "topic": "Variables for Numbers"
     },
     {
         "question": "What is the result of `15 % 4` in JavaScript?",
@@ -371,7 +417,8 @@ quiz = [
         "answer": "3",
         "difficulty": "Medium",
         "explanation": "The `%` operator returns the remainder, so `15 % 4 = 3`.",
-        "hint": "Think about division remainders."
+        "hint": "Think about division remainders.",
+        "topic": "Math Expressions: familiar operators"
     },
     {
         "question": "What is the result of `let x = '3'; let y = 4; console.log(x + y);`?",
@@ -379,7 +426,8 @@ quiz = [
         "answer": "34",
         "difficulty": "Medium",
         "explanation": "The `+` operator concatenates the string '3' with the number 4 (converted to '4'), resulting in '34'.",
-        "hint": "Consider type coercion."
+        "hint": "Consider type coercion.",
+        "topic": "Concatenating text strings"
     },
     {
         "question": "What does `arr.pop()` do to `arr = [1, 2, 3]`?",
@@ -387,7 +435,8 @@ quiz = [
         "answer": "Removes 3",
         "difficulty": "Medium",
         "explanation": "`pop()` removes and returns the last element, so `3` is removed, leaving `[1, 2]`.",
-        "hint": "Think about the end of an array."
+        "hint": "Think about the end of an array.",
+        "topic": "Arrays: adding and removing elements"
     },
     {
         "question": "What will `for (let i = 0; i < 4; i += 2) { console.log(i); }` output?",
@@ -395,7 +444,8 @@ quiz = [
         "answer": "0, 2",
         "difficulty": "Medium",
         "explanation": "The loop increments `i` by 2, logging `0` and `2`.",
-        "hint": "Check the increment step."
+        "hint": "Check the increment step.",
+        "topic": "for loops"
     },
     {
         "question": "What does `function divide(a, b) { return a / b; } divide(10, 2);` return?",
@@ -403,7 +453,8 @@ quiz = [
         "answer": "5",
         "difficulty": "Medium",
         "explanation": "The function returns `10 / 2 = 5`.",
-        "hint": "Focus on the `return` value."
+        "hint": "Focus on the `return` value.",
+        "topic": "Functions: passing data back from them"
     }
 ]
 
@@ -412,14 +463,12 @@ quiz = [
 def shuffle_quiz(_quiz):
     """Shuffle quiz questions and options, ensuring varied difficulty sequence."""
     shuffled = random.sample(_quiz, len(_quiz))
-    # Avoid same difficulty consecutively
     for i in range(len(shuffled) - 1):
         if shuffled[i]["difficulty"] == shuffled[i + 1]["difficulty"]:
             for j in range(i + 2, len(shuffled)):
                 if shuffled[j]["difficulty"] != shuffled[i]["difficulty"]:
                     shuffled[i + 1], shuffled[j] = shuffled[j], shuffled[i + 1]
                     break
-    # Assign UUIDs and shuffle options with labels
     for q in shuffled:
         q["id"] = str(uuid.uuid4())
         labeled_options = list(zip(q["options"], ["A", "B", "C", "D"]))
@@ -479,14 +528,14 @@ def show_progress_snapshot():
         total=len(st.session_state.quiz_data)
     ), unsafe_allow_html=True)
 
-# Initialize session state
+# Initialize Session State
 if "quiz_data" not in st.session_state:
     st.session_state.update({
         "quiz_data": shuffle_quiz(quiz) if quiz else [],
         "score": 0,
         "current_q": 0,
         "start_time": datetime.now(),
-        "answers": [None] * len(quiz) if quiz else [],
+        "answers": [None] * len(quiz),
         "show_results": False,
         "selected_option": None,
         "feedback": None,
@@ -675,11 +724,11 @@ st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">
 st.markdown('<h1 class="title">🚀 JavaScript Quiz Pro</h1>', unsafe_allow_html=True)
 st.markdown('<p class="caption">Test Your JavaScript Mastery!</p>', unsafe_allow_html=True)
 
-# Theme toggle
+# Theme Toggle
 if st.button("🌙 Toggle Theme", key="theme_toggle"):
     toggle_theme()
 
-# Welcome screen
+# Welcome Screen
 if not st.session_state.started:
     st.markdown("""
         <div style="text-align: center;">
@@ -692,7 +741,7 @@ if not st.session_state.started:
         st.session_state.start_time = datetime.now()
         st.rerun()
 
-# Quiz logic
+# Quiz Logic
 elif not st.session_state.quiz_data:
     st.error("No quiz questions available.")
 else:
@@ -702,7 +751,7 @@ else:
         minutes, seconds = divmod(int(st.session_state.time_left), 60)
         st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
 
-    # Progress bar
+    # Progress Bar
     progress = st.session_state.current_q / len(st.session_state.quiz_data)
     progress_percentage = int(progress * 100)
     st.markdown(f"""
@@ -715,16 +764,16 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    # Question display
+    # Question Display
     if not st.session_state.show_results:
         with st.container():
             st.markdown('<div class="question-container">', unsafe_allow_html=True)
             q = st.session_state.quiz_data[st.session_state.current_q]
 
-            # Difficulty and streak
-            st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
+            # Difficulty, Topic, and Streak
+            st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Topic: {q["topic"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
-            # Display question and code snippet if present
+            # Display Question and Code Snippet
             if "```javascript" in q["question"]:
                 parts = q["question"].split("```javascript\n")
                 question_text = parts[0].strip()
@@ -736,7 +785,7 @@ else:
                 st.markdown(f"### Question {st.session_state.current_q + 1}")
                 st.markdown(f"**{q['question']}**")
 
-            # Option buttons
+            # Option Buttons
             for i, option in enumerate(q["display_options"]):
                 button_class = "selected-correct" if st.session_state.selected_option == option and option == q["labeled_answer"] else \
                                "selected-wrong" if st.session_state.selected_option == option else ""
@@ -753,7 +802,8 @@ else:
                         "user_answer": option,
                         "correct_answer": q["labeled_answer"],
                         "is_correct": is_correct,
-                        "difficulty": q["difficulty"]
+                        "difficulty": q["difficulty"],
+                        "topic": q["topic"]
                     }
                     if is_correct:
                         points = {"Easy": 1, "Medium": 2, "Hard": 3}.get(q["difficulty"], 2)
@@ -799,13 +849,13 @@ else:
                         st.session_state.show_results = True
                         st.rerun()
 
-            # Reset quiz
+            # Reset Quiz
             if st.button("🔄 Reset Quiz", key="reset"):
                 reset_quiz()
 
             st.markdown("</div>", unsafe_allow_html=True)
 
-    # Results screen
+    # Results Screen
     else:
         st.markdown('<h2 style="color: var(--accent); text-align: center;">🎉 Quiz Completed!</h2>', unsafe_allow_html=True)
         answered = sum(1 for ans in st.session_state.answers if ans is not None)
@@ -829,7 +879,8 @@ else:
                         <strong>Your Answer:</strong> {ans['user_answer']}<br>
                         <strong>Correct Answer:</strong> {ans['correct_answer']}<br>
                         <strong>Status:</strong> <span style="color: {color};">{status}</span><br>
-                        <strong>Difficulty:</strong> {ans['difficulty']}
+                        <strong>Difficulty:</strong> {ans['difficulty']}<br>
+                        <strong>Topic:</strong> {ans['topic']}
                     </div>
                 """, unsafe_allow_html=True)
 
@@ -837,3 +888,4 @@ else:
             reset_quiz()
 
 st.markdown("</div>", unsafe_allow_html=True)
+```
