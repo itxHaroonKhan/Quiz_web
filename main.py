@@ -3,7 +3,6 @@ import streamlit as st
 import random
 from datetime import datetime
 import uuid
-
 quiz = [
     {
         "question": "What will `if (7 > 4) { console.log('True'); }` output?",
@@ -259,7 +258,7 @@ quiz = [
     },
     {
         "question": "What is the scope of `let x` inside a function?",
-        "options": ["Global", "Local to the function", "Browser scope", "Global and local"],
+        "options": ["Global", "Local to the function", "Browser scope", "Global and moje"],
         "answer": "Local to the function",
         "difficulty": "Medium",
         "explanation": "`let` variables inside a function are local and not accessible outside.",
@@ -339,7 +338,6 @@ quiz = [
         "topic": "Events: button"
     }
 ];
-
 # Helper Functions
 @st.cache_data
 def shuffle_quiz(_quiz):
