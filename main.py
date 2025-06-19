@@ -4,89 +4,7 @@ import random
 from datetime import datetime
 import uuid
 
-# Quiz Data: 50 JavaScript MCQs with Topic Tags
 quiz = [
-    {
-        "question": "What does the `alert()` function do in a browser environment?",
-        "options": ["Logs a message to the console", "Displays a pop-up dialog", "Redirects to a new page", "Throws an error"],
-        "answer": "Displays a pop-up dialog",
-        "difficulty": "Medium",
-        "explanation": "The `alert()` function creates a pop-up dialog box in the browser to display a message and waits for the user to click 'OK'.",
-        "hint": "Think about user-facing notifications in browsers.",
-        "topic": "Alerts"
-    },
-    {
-        "question": "What is the result of `let str = 'Hello'; str = str + ' World'; console.log(str);`?",
-        "options": ["Hello", "World", "Hello World", "Error"],
-        "answer": "Hello World",
-        "difficulty": "Medium",
-        "explanation": "The `+` operator concatenates 'Hello' and ' World' to form 'Hello World'.",
-        "hint": "Consider how strings are combined.",
-        "topic": "Concatenating text strings"
-    },
-    {
-        "question": "What is the value of `x` after `let x = 8; x += 2;`?",
-        "options": ["6", "8", "10", "12"],
-        "answer": "10",
-        "difficulty": "Medium",
-        "explanation": "The `+=` operator adds 2 to `x`, so `8 + 2 = 10`.",
-        "hint": "Recall compound assignment operators.",
-        "topic": "Variables for Numbers"
-    },
-    {
-        "question": "Which variable name is illegal in JavaScript?",
-        "options": ["myVar", "_count", "user_name", "1stVar"],
-        "answer": "1stVar",
-        "difficulty": "Medium",
-        "explanation": "Variable names cannot start with a digit; they must begin with a letter, underscore, or dollar sign.",
-        "hint": "Check JavaScript naming conventions.",
-        "topic": "Variable Names Legal and Illegal"
-    },
-    {
-        "question": "What is the result of `6 + 4 * 2` in JavaScript?",
-        "options": ["20", "14", "10", "12"],
-        "answer": "14",
-        "difficulty": "Medium",
-        "explanation": "Following PEMDAS, multiplication is done first: `4 * 2 = 8`, then addition: `6 + 8 = 14`.",
-        "hint": "Remember the order of operations.",
-        "topic": "Math Expressions: familiar operators"
-    },
-    {
-        "question": "What does the `**` operator do in JavaScript?",
-        "options": ["Multiplies two numbers", "Raises a number to a power", "Performs division", "Increments a number"],
-        "answer": "Raises a number to a power",
-        "difficulty": "Medium",
-        "explanation": "The `**` operator performs exponentiation, e.g., `2 ** 3 = 8`.",
-        "hint": "Think about mathematical powers.",
-        "topic": "Math Expressions: unfamiliar operators"
-    },
-    {
-        "question": "How do you ensure `5 + 3 * 4` evaluates to `32` instead of `17`?",
-        "options": ["(5 + 3) * 4", "5 + (3 * 4)", "5 * (3 + 4)", "No change needed"],
-        "answer": "(5 + 3) * 4",
-        "difficulty": "Medium",
-        "explanation": "Parentheses ensure `5 + 3 = 8` is calculated first, then `8 * 4 = 32`.",
-        "hint": "Use parentheses to control precedence.",
-        "topic": "Math Expressions: eliminating ambiguity"
-    },
-    {
-        "question": "What is the result of `'Good' + ' ' + 'Day'`?",
-        "options": ["GoodDay", "Good Day", "Good+Day", "Error"],
-        "answer": "Good Day",
-        "difficulty": "Medium",
-        "explanation": "The `+` operator concatenates the strings, including the space, to form 'Good Day'.",
-        "hint": "Spaces are important in concatenation.",
-        "topic": "Concatenating text strings"
-    },
-    {
-        "question": "What does `prompt('Enter age')` return if the user enters '25'?",
-        "options": ["25", "'25'", "null", "undefined"],
-        "answer": "'25'",
-        "difficulty": "Medium",
-        "explanation": "`prompt()` returns user input as a string, so '25' is returned as `'25'`.",
-        "hint": "Consider the data type of user input.",
-        "topic": "Prompts"
-    },
     {
         "question": "What will `if (7 > 4) { console.log('True'); }` output?",
         "options": ["True", "False", "Nothing", "Error"],
@@ -191,7 +109,7 @@ quiz = [
         "options": ["HELLO", "hello", "Hello", "hELLO"],
         "answer": "HELLO",
         "difficulty": "Medium",
-        "explanation": "`toUpperCase()` converts all characters to uppercase, resulting in 'HELLO'.",
+        "explanation": "`toUpperCase()` converts moje characters to uppercase, resulting in 'HELLO'.",
         "hint": "Think about case transformation.",
         "topic": "Changing case"
     },
@@ -223,11 +141,11 @@ quiz = [
         "topic": "Strings: finding a character at a location"
     },
     {
-        "question": "What is the result of `'Hello All'.replace('All', 'Everyone')`?",
-        "options": ["Hello Everyone", "Hello All", "Everyone All", "Hello"],
+        "question": "What is the result of `'Hello moje'.replace('moje', 'Everyone')`?",
+        "options": ["Hello Everyone", "Hello moje", "Everyone moje", "Hello"],
         "answer": "Hello Everyone",
         "difficulty": "Medium",
-        "explanation": "`replace()` substitutes 'All' with 'Everyone', resulting in 'Hello Everyone'.",
+        "explanation": "`replace()` substitutes 'moje' with 'Everyone', resulting in 'Hello Everyone'.",
         "hint": "Think about string replacement.",
         "topic": "Strings: replacing characters"
     },
@@ -385,78 +303,42 @@ quiz = [
         "topic": "do...while loops"
     },
     {
-        "question": "What happens if `alert('Test')` is called in Node.js?",
-        "options": ["Shows a pop-up", "Logs to console", "Throws an error", "Nothing"],
-        "answer": "Throws an error",
+        "question": "Where should a `<script>` tag be placed in an HTML document to ensure it loads after the DOM is fully parsed?",
+        "options": ["At the start of `<head>`", "At the end of `<body>`", "In the `<footer>`", "Before the `<html>` tag"],
+        "answer": "At the end of `<body>`",
         "difficulty": "Medium",
-        "explanation": "`alert()` is browser-specific and undefined in Node.js, causing an error.",
-        "hint": "Consider environment differences.",
-        "topic": "Alerts"
+        "explanation": "Placing the `<script>` tag at the end of `<body>` ensures the DOM is fully parsed before the JavaScript executes, preventing errors from accessing unrendered elements.",
+        "hint": "Consider when the DOM is ready for JavaScript to access.",
+        "topic": "Placing scripts"
     },
     {
-        "question": "What is the result of `let str = 'Hi'; str += '!'; console.log(str);`?",
-        "options": ["Hi", "Hi!", "!Hi", "Error"],
-        "answer": "Hi!",
+        "question": "Which of the following is a valid single-line comment in JavaScript?",
+        "options": ["// This is a comment", "# This is a comment", "<!-- This is a comment -->", "/* This is a comment */"],
+        "answer": "// This is a comment",
         "difficulty": "Medium",
-        "explanation": "The `+=` operator concatenates '!' to 'Hi', resulting in 'Hi!'.",
-        "hint": "Think about string modification.",
-        "topic": "Concatenating text strings"
+        "explanation": "In JavaScript, single-line comments start with `//`. `/* */` is for multi-line comments, `<!-- -->` is for HTML, and `#` is not used for comments.",
+        "hint": "Look for the syntax used in JavaScript for inline notes.",
+        "topic": "Commenting"
     },
     {
-        "question": "What is the value of `x` after `let x = 12; x -= 5;`?",
-        "options": ["7", "17", "5", "12"],
-        "answer": "7",
+        "question": "How do you add a click event listener to an HTML `<a>` link element in JavaScript?",
+        "options": ["link.onclick = function() {}", "link.addEvent('click', function() {})", "link.on('click', function() {})", "link.click(function() {})"],
+        "answer": "link.onclick = function() {}",
         "difficulty": "Medium",
-        "explanation": "The `-=` operator subtracts 5 from `x`, so `12 - 5 = 7`.",
-        "hint": "Check compound operators.",
-        "topic": "Variables for Numbers"
+        "explanation": "The `onclick` property or `addEventListener('click', function() {})` can be used to handle click events on a link. The first option is a valid and common approach.",
+        "hint": "Think about how to handle user clicks on a hyperlink.",
+        "topic": "Events: link"
     },
     {
-        "question": "What is the result of `15 % 4` in JavaScript?",
-        "options": ["3", "4", "2", "0"],
-        "answer": "3",
+        "question": "What is the correct way to attach a click event to a button element with ID 'myButton' in JavaScript?",
+        "options": ["document.getElementById('myButton').addEventListener('click', function() {})", "button.onClick('myButton', function() {})", "document.getElementById('myButton').click = function() {}", "document.querySelector('myButton').onclick(function() {})"],
+        "answer": "document.getElementById('myButton').addEventListener('click', function() {})",
         "difficulty": "Medium",
-        "explanation": "The `%` operator returns the remainder, so `15 % 4 = 3`.",
-        "hint": "Think about division remainders.",
-        "topic": "Math Expressions: familiar operators"
-    },
-    {
-        "question": "What is the result of `let x = '3'; let y = 4; console.log(x + y);`?",
-        "options": ["7", "34", "12", "Error"],
-        "answer": "34",
-        "difficulty": "Medium",
-        "explanation": "The `+` operator concatenates the string '3' with the number 4 (converted to '4'), resulting in '34'.",
-        "hint": "Consider type coercion.",
-        "topic": "Concatenating text strings"
-    },
-    {
-        "question": "What does `arr.pop()` do to `arr = [1, 2, 3]`?",
-        "options": ["Removes 1", "Removes 3", "Removes 2", "Clears the array"],
-        "answer": "Removes 3",
-        "difficulty": "Medium",
-        "explanation": "`pop()` removes and returns the last element, so `3` is removed, leaving `[1, 2]`.",
-        "hint": "Think about the end of an array.",
-        "topic": "Arrays: adding and removing elements"
-    },
-    {
-        "question": "What will `for (let i = 0; i < 4; i += 2) { console.log(i); }` output?",
-        "options": ["0, 1, 2, 3", "0, 2", "1, 3", "0, 1, 2"],
-        "answer": "0, 2",
-        "difficulty": "Medium",
-        "explanation": "The loop increments `i` by 2, logging `0` and `2`.",
-        "hint": "Check the increment step.",
-        "topic": "for loops"
-    },
-    {
-        "question": "What does `function divide(a, b) { return a / b; } divide(10, 2);` return?",
-        "options": ["5", "20", "2", "Nothing"],
-        "answer": "5",
-        "difficulty": "Medium",
-        "explanation": "The function returns `10 / 2 = 5`.",
-        "hint": "Focus on the `return` value.",
-        "topic": "Functions: passing data back from them"
+        "explanation": "`addEventListener('click', function() {})` is the standard way to attach a click event to a button, allowing multiple listeners and better control.",
+        "hint": "Consider modern JavaScript event handling for buttons.",
+        "topic": "Events: button"
     }
-]
+];
 
 # Helper Functions
 @st.cache_data
