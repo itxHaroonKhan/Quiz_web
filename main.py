@@ -421,7 +421,7 @@ quiz = [
         "hint": "Check button event syntax.",
         "topic": "Events: button"
     },
-    // Additional questions for topics with high relevance
+    
     {
         "question": "What does `'5' + 5` produce?",
         "options": ["10", "55", "5", "Error"],
