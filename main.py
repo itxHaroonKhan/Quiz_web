@@ -3,6 +3,57 @@ import random
 from datetime import datetime
 import uuid
 
+# Custom CSS for improved UI
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f0f2f6;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .stRadio > label {
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px 0;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+    .stRadio > label:hover {
+        background-color: #e6f3ff;
+        border-color: #007bff;
+    }
+    .stButton > button {
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    .stButton > button:hover {
+        background-color: #0056b3;
+    }
+    .question-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+    .sidebar .sidebar-content {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .score-history {
+        font-size: 14px;
+        color: #333;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Quiz data with explanations
 quiz_data = [
     {
@@ -92,39 +143,45 @@ if 'score_history' not in st.session_state:
 
 # Sidebar for session info and score history
 st.sidebar.header("Quiz Info")
-st.sidebar.write(f"Session ID: {st.session_state.session_id}")
+st.sidebar.markdown(f"**Session ID**: {st.session_state.session_id}")
 st.sidebar.markdown("### Score History")
 for i, score in enumerate(st.session_state.score_history, 1):
-    st.sidebar.write(f"Attempt {i}: {score}/{len(quiz_data)}")
+    st.sidebar.markdown(f"<div class='score-history'>Attempt {i}: {score}/{len(quiz_data)}</div>", unsafe_allow_html=True)
+
+# Progress bar
+progress = (st.session_state.question_index / len(quiz_data)) * 100
+st.progress(progress)
 
 # Function to display the current question
 def display_question():
     question = st.session_state.shuffled_questions[st.session_state.question_index]
-    st.subheader(f"Question {st.session_state.question_index + 1} of {len(quiz_data)}")
-    st.markdown(f"**{question['question']}**")
-    
-    # Display radio buttons for options with styling
-    selected_option = st.radio("Choose an option:", question["options"], key=f"q{st.session_state.question_index}")
-    
-    if st.button("Submit Answer", key="submit"):
-        st.session_state.answered = True
-        st.session_state.selected_option = selected_option
+    with st.container():
+        st.markdown(f"<div class='question-card'><h3>Question {st.session_state.question_index + 1} of {len(quiz_data)}</h3><p>{question['question']}</p></div>", unsafe_allow_html=True)
+        
+        # Display radio buttons for options
+        selected_option = st.radio("Choose an option:", question["options"], key=f"q{st.session_state.question_index}")
+        
+        if st.button("Submit Answer", key="submit"):
+            st.session_state.answered = True
+            st.session_state.selected_option = selected_option
 
 # Function to check answer and show explanation
 def check_answer():
     question = st.session_state.shuffled_questions[st.session_state.question_index]
-    if st.session_state.selected_option == question["correct_answer"]:
-        st.session_state.score += 1
-        st.success("Correct Answer! 🎉")
-    else:
-        st.error(f"Wrong Answer! Correct answer is: **{question['correct_answer']}**")
-    
-    st.markdown(f"**Explanation**: {question['explanation']}")
-    
-    if st.button("Next Question", key="next"):
-        st.session_state.question_index += 1
-        st.session_state.answered = False
-        st.session_state.selected_option = None
+    with st.container():
+        st.markdown(f"<div class='question-card'><h3>Question {st.session_state.question_index + 1} of {len(quiz_data)}</h3><p>{question['question']}</p></div>", unsafe_allow_html=True)
+        if st.session_state.selected_option == question["correct_answer"]:
+            st.session_state.score += 1
+            st.success("Correct Answer! 🎉")
+        else:
+            st.error(f"Wrong Answer! Correct answer is: **{question['correct_answer']}**")
+        
+        st.markdown(f"**Explanation**: {question['explanation']}")
+        
+        if st.button("Next Question", key="next"):
+            st.session_state.question_index += 1
+            st.session_state.answered = False
+            st.session_state.selected_option = None
 
 # Main logic
 if st.session_state.question_index < len(quiz_data):
@@ -134,7 +191,7 @@ if st.session_state.question_index < len(quiz_data):
         check_answer()
 else:
     st.balloons()
-    st.subheader("Quiz Completed! 🏆")
+    st.markdown("<div class='question-card'><h2>Quiz Completed! 🏆</h2>", unsafe_allow_html=True)
     st.markdown(f"**Your Score**: {st.session_state.score}/{len(quiz_data)}")
     percentage = (st.session_state.score / len(quiz_data)) * 100
     st.markdown(f"**Percentage**: {percentage:.2f}%")
