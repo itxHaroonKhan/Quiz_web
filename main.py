@@ -564,7 +564,7 @@ def show_progress_snapshot():
     ), unsafe_allow_html=True)
 
 # Initialize Session State
-if "quiz_data" not in st.session_state:
+if "quiz_data" not in st.session_state or not st.session_state.quiz_data:
     st.session_state.update({
         "quiz_data": shuffle_quiz(quiz) if quiz else [],
         "score": 0,
@@ -778,7 +778,7 @@ if not st.session_state.started:
 
 # Quiz Logic
 elif not st.session_state.quiz_data:
-    st.error("No quiz questions available.")
+    st.error("No quiz questions available. Please check the quiz data for errors or clear the cache.")
 else:
     # Timer
     if not st.session_state.show_results:
@@ -909,7 +909,7 @@ else:
                         <strong>Question {i + 1}:</strong> {ans['question']}<br>
                         <strong>Your Answer:</strong> {ans['user_answer']}<br>
                         <strong>Correct Answer:</strong> {ans['correct_answer']}<br>
-                        <strong>Status:</strong> <span style="color: {color};">{status}</span><br>
+                        <strong>Status:</strong>U+0020<span style="color: {color};">{status}</span><br>
                         <strong>Difficulty:</strong> {ans['difficulty']}<br>
                         <strong>Topic:</strong> {ans['topic']}
                     </div>
