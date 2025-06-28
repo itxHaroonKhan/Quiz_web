@@ -5,515 +5,487 @@ from datetime import datetime
 import uuid
 
 
-quiz = [
+ quiz = [
     {
-        question: "What is the output of `typeof null` in JavaScript?",
-        options: ["null", "object", "undefined", "string"],
-        answer: "object",
-        difficulty: "Medium",
-        explanation: "`typeof null` returns 'object' due to a historical bug in JavaScript.",
-        hint: "Think about JavaScript's quirks with null.",
+        question: "What does `typeof undefined` return in JavaScript?",
+        options: ["undefined", "null", "string", "object"],
+        answer: "undefined",
+        difficulty: "Easy",
+        explanation: "`typeof undefined` returns 'undefined' as it checks the type of an uninitialized variable.",
+        hint: "Think about JavaScript's type system.",
         topic: "Data Types"
     },
     {
-        question: "How do you declare a constant variable in JavaScript?",
-        options: ["let x = 10;", "var x = 10;", "const x = 10;", "constant x = 10;"],
-        answer: "const x = 10;",
+        question: "How do you declare a variable with block scope?",
+        options: ["var x = 5;", "let x = 5;", "const x = 5;", "x = 5;"],
+        answer: "let x = 5;",
         difficulty: "Easy",
-        explanation: "`const` declares a variable that cannot be reassigned after initialization.",
-        hint: "Check variable declaration keywords.",
+        explanation: "`let` declares a variable with block scope, unlike `var` which is function-scoped.",
+        hint: "Consider scope rules in ES6.",
         topic: "Variables"
     },
     {
-        question: "What does `alert('Hello')` do in JavaScript?",
-        options: ["Logs to console", "Shows a pop-up", "Changes text", "Nothing"],
-        answer: "Shows a pop-up",
-        difficulty: "Easy",
-        explanation: "`alert()` displays a dialog box with a message and an OK button.",
-        hint: "Think about browser interactions.",
-        topic: "Alerts"
-    },
-    {
-        question: "What is the result of `5 + '5'` in JavaScript?",
-        options: ["10", "55", "5", "Error"],
-        answer: "55",
+        question: "What does `console.log(3 + '3')` output?",
+        options: ["6", "33", "9", "Error"],
+        answer: "33",
         difficulty: "Medium",
-        explanation: "The `+` operator concatenates when one operand is a string, resulting in '55'.",
-        hint: "Consider type coercion.",
+        explanation: "The `+` operator concatenates when one operand is a string, resulting in '33'.",
+        hint: "Think about type coercion.",
         topic: "Type Coercion"
     },
     {
-        question: "Which is a valid way to create an array?",
-        options: ["let arr = [];", "let arr = {};", "let arr = '';", "arr = ();"],
-        answer: "let arr = [];",
+        question: "What does `arr.push(4)` do to `arr = [1, 2, 3]`?",
+        options: ["[1, 2, 3, 4]", "[4, 1, 2, 3]", "[1, 2, 4]", "[1, 4, 3]"],
+        answer: "[1, 2, 3, 4]",
         difficulty: "Easy",
-        explanation: "Arrays are created using square brackets `[]`.",
-        hint: "Check array syntax.",
-        topic: "Arrays"
+        explanation: "`push()` adds an element to the end of an array.",
+        hint: "Check array methods for adding elements.",
+        topic: "Arrays: Push"
     },
     {
-        question: "What does `arr.pop()` do to an array `arr`?",
-        options: ["Adds an element", "Removes the last element", "Removes the first element", "Clears the array"],
-        answer: "Removes the last element",
-        difficulty: "Easy",
-        explanation: "`pop()` removes and returns the last element of an array.",
-        hint: "Think about array modification.",
-        topic: "Arrays: Methods"
-    },
-    {
-        question: "What is the output of `3 * 2 ** 2`?",
-        options: ["12", "36", "18", "9"],
-        answer: "12",
+        question: "What is the output of `2 ** 3 * 2`?",
+        options: ["12", "16", "8", "10"],
+        answer: "16",
         difficulty: "Medium",
-        explanation: "Exponentiation (`**`) has higher precedence, so `2 ** 2 = 4`, then `3 * 4 = 12`.",
+        explanation: "Exponentiation (`**`) has higher precedence, so `2 ** 3 = 8`, then `8 * 2 = 16`.",
         hint: "Check operator precedence.",
         topic: "Math Expressions"
     },
     {
-        question: "What does `prompt('Enter name')` do?",
-        options: ["Logs to console", "Shows an input dialog", "Changes text", "Nothing"],
-        answer: "Shows an input dialog",
-        difficulty: "Easy",
-        explanation: "`prompt()` displays a dialog box for user input with a text field.",
-        hint: "Think about user interaction.",
+        question: "What does `prompt('Enter age')` return if the user cancels?",
+        options: ["null", "undefined", "''", "0"],
+        answer: "null",
+        difficulty: "Medium",
+        explanation: "`prompt()` returns `null` if the user cancels the dialog.",
+        hint: "Think about user interaction outcomes.",
         topic: "Prompts"
     },
     {
-        question: "What is the output of `'Hello'.length`?",
-        options: ["4", "5", "6", "7"],
-        answer: "5",
+        question: "What is the output of `'Code'.length`?",
+        options: ["3", "4", "5", "6"],
+        answer: "4",
         difficulty: "Easy",
-        explanation: "The `length` property returns the number of characters in a string.",
-        hint: "Count the characters.",
+        explanation: "The `length` property counts the characters in a string.",
+        hint: "Count the characters in 'Code'.",
         topic: "Strings: Length"
     },
     {
-        question: "What does `'JavaScript'.toUpperCase()` return?",
-        options: ["javascript", "JAVASCRIPT", "JavaScript", "Error"],
-        answer: "JAVASCRIPT",
+        question: "What does `'hello'.toLowerCase()` return?",
+        options: ["HELLO", "hello", "Hello", "Error"],
+        answer: "hello",
         difficulty: "Easy",
-        explanation: "`toUpperCase()` converts a string to uppercase.",
-        hint: "Think about string case conversion.",
+        explanation: "`toLowerCase()` converts a string to lowercase.",
+        hint: "Think about string case methods.",
         topic: "Strings: Case"
     },
     {
-        question: "What does `if (5 > 3) { console.log('True'); }` output?",
-        options: ["True", "False", "Nothing", "Error"],
+        question: "What does `if (10 < Grownk 3 built by xAI
+<= 100 words >=
         answer: "True",
         difficulty: "Easy",
-        explanation: "The condition `5 > 3` is true, so 'True' is logged.",
-        hint: "Evaluate the condition.",
+        explanation: "The condition `10 >= 5` is true, so 'True' is logged.",
+        hint: "Evaluate the comparison.",
         topic: "if Statements"
     },
     {
-        question: "What is the result of `'10' == 10`?",
+        question: "What is the result of `'5' === 5`?",
         options: ["true", "false", "undefined", "Error"],
-        answer: "true",
+        answer: "false",
         difficulty: "Medium",
-        explanation: "The `==` operator performs type coercion, so string '10' equals number 10.",
-        hint: "Think about loose equality.",
+        explanation: "`===` checks both value and type, so string '5' is not equal to number 5.",
+        hint: "Consider strict equality.",
         topic: "Comparison Operators"
     },
     {
-        question: "What does `Math.floor(7.9)` return?",
-        options: ["7", "8", "7.9", "9"],
-        answer: "7",
+        question: "What does `Math.ceil(4.2)` return?",
+        options: ["4", "5", "4.2", "5.2"],
+        answer: "5",
         difficulty: "Easy",
-        explanation: "`Math.floor()` rounds down to the nearest integer.",
-        hint: "Think about rounding down.",
+        explanation: "`Math.ceil()` rounds up to the nearest integer.",
+        hint: "Think about rounding up.",
         topic: "Math Methods"
     },
     {
-        question: "What does `Math.random()` generate?",
-        options: ["0 to 100", "0 to 1", "1 to 10", "1 to 100"],
-        answer: "0 to 1",
+        question: "What does `Math.round(4.5)` return?",
+        options: ["4", "5", "4.5", "5.5"],
+        answer: "5",
         difficulty: "Easy",
-        explanation: "`Math.random()` generates a float between 0 (inclusive) and 1 (exclusive).",
-        hint: "Check random number range.",
-        topic: "Random Numbers"
+        explanation: "`Math.round()` rounds to the nearest integer, with .5 rounding up.",
+        hint: "Check rounding rules.",
+        topic: "Math Methods"
     },
     {
-        question: "How do you define a function named `add`?",
-        options: ["function add() {}", "add = function {}", "def add() {}", "function = add()"],
-        answer: "function add() {}",
+        question: "How do you define an anonymous function in JavaScript?",
+        options: ["function() {}", "let function = {}", "const func = () => {}", "def func() {}"],
+        answer: "function() {}",
         difficulty: "Easy",
-        explanation: "Functions are defined with the `function` keyword, name, and body.",
-        hint: "Check function syntax.",
+        explanation: "An anonymous function is defined without a name, like `function() {}`.",
+        hint: "Think about function syntax without a name.",
         topic: "Functions"
     },
     {
-        question: "What does `function multiply(x, y) { return x * y; }` return for `multiply(2, 3)`?",
-        options: ["5", "6", "8", "Error"],
-        answer: "6",
+        question: "What does `function square(n) { return n * n; }` return for `square(5)`?",
+        options: ["10", "25", "15", "5"],
+        answer: "25",
         difficulty: "Easy",
-        explanation: "The function returns `x * y`, so `2 * 3 = 6`.",
-        hint: "Focus on the return value.",
+        explanation: "The function returns `n * n`, so `5 * 5 = 25`.",
+        hint: "Calculate the function's return value.",
         topic: "Functions: Return"
     },
     {
-        question: "What does `for (let i = 0; i < 3; i++) { console.log(i); }` output?",
-        options: ["0 1 2", "1 2 3", "0 1", "Nothing"],
-        answer: "0 1 2",
+        question: "What does `for (let i = 1; i <= 3; i++) { console.log(i); }` output?",
+        options: ["0 1 2", "1 2 3", "1 2", "Nothing"],
+        answer: "1 2 3",
         difficulty: "Easy",
-        explanation: "The loop runs from `i = 0` to `i = 2`, logging each value.",
-        hint: "Trace loop iterations.",
+        explanation: "The loop runs from `i = 1` to `i <= 3`, logging `1, 2, 3`.",
+        hint: "Trace the loop iterations.",
         topic: "for Loops"
     },
     {
-        question: "What stops a loop in `for (let i = 0; i < 5; i++) { if (i === 3) break; }`?",
-        options: ["stop;", "break;", "exit;", "return;"],
-        answer: "break;",
-        difficulty: "Medium",
-        explanation: "`break` exits the loop when `i === 3`.",
-        hint: "Think about loop termination.",
+        question: "What does `break` do in a loop?",
+        options: ["Continues to the next iteration", "Exits the loop", "Restarts the loop", "Pauses the loop"],
+        answer: "Exits the loop",
+        difficulty: "Easy",
+        explanation: "`break` terminates the loop immediately.",
+        hint: "Think about loop control.",
         topic: "for Loops: Break"
     },
     {
-        question: "What does `'Test'.replace('T', 'B')` return?",
-        options: ["Best", "Test", "BTest", "Error"],
-        answer: "Best",
+        question: "What does `'Java'.replace('J', 'B')` return?",
+        options: ["Bava", "Java", "BJava", "Error"],
+        answer: "Bava",
         difficulty: "Medium",
-        explanation: "`replace()` substitutes the first 'T' with 'B', resulting in 'Best'.",
-        hint: "Think about string replacement.",
+        explanation: "`replace()` substitutes the first occurrence of 'J' with 'B'.",
+        hint: "Check string replacement behavior.",
         topic: "Strings: Replace"
     },
     {
-        question: "What does `new Date().getFullYear()` return on June 28, 2025?",
-        options: ["2024", "2025", "25", "6"],
-        answer: "2025",
+        question: "What does `new Date(2025, 5, 15)` create?",
+        options: ["May 15, 2025", "June 15, 2025", "July 15, 2025", "June 15, 2024"],
+        answer: "June 15, 2025",
         difficulty: "Medium",
-        explanation: "`getFullYear()` returns the current year, which is 2025.",
-        hint: "Check date methods.",
-        topic: "Date Methods"
+        explanation: "Months are 0-based in `Date`, so `5` represents June.",
+        hint: "Check month indexing.",
+        topic: "Date Creation"
     },
     {
-        question: "What is jQuery primarily used for?",
-        options: ["Server-side scripting", "DOM manipulation", "Database queries", "File handling"],
+        question: "What is jQuery used for in web development?",
+        options: ["Server-side processing", "DOM manipulation", "Database queries", "File handling"],
         answer: "DOM manipulation",
         difficulty: "Easy",
-        explanation: "jQuery simplifies DOM manipulation, event handling, and AJAX in JavaScript.",
-        hint: "Think about jQuery’s purpose in web development.",
+        explanation: "jQuery simplifies DOM manipulation, event handling, and AJAX.",
+        hint: "Think about jQuery’s role in JavaScript.",
         topic: "jQuery Basics"
     },
     {
-        question: "How do you include jQuery in an HTML file?",
-        options: [
-            "<script src='jquery.min.js'></script>",
-            "<link href='jquery.min.js'>",
-            "<script include='jquery.js'>",
-            "<jquery src='jquery.js'>"
-        ],
-        answer: "<script src='jquery.min.js'></script>",
+        question: "How do you select an element by ID in jQuery?",
+        options: ["$('#id')", "$('.id')", "$(id)", "$[id]"],
+        answer: "$('#id')",
         difficulty: "Easy",
-        explanation: "jQuery is included using a `<script>` tag with the `src` attribute.",
-        hint: "Check HTML script inclusion.",
-        topic: "jQuery Setup"
-    },
-    {
-        question: "What does `$(document).ready()` do in jQuery?",
-        options: [
-            "Reloads the page",
-            "Executes code when DOM is loaded",
-            "Submits a form",
-            "Hides elements"
-        ],
-        answer: "Executes code when DOM is loaded",
-        difficulty: "Easy",
-        explanation: "`$(document).ready()` runs code after the DOM is fully loaded.",
-        hint: "Think about when jQuery code executes.",
-        topic: "jQuery Document Ready"
-    },
-    {
-        question: "Which jQuery selector targets elements by class?",
-        options: ["#class", ".class", "class()", "[class]"],
-        answer: ".class",
-        difficulty: "Easy",
-        explanation: "The `.class` selector targets elements with the specified class.",
-        hint: "Recall CSS selector syntax in jQuery.",
+        explanation: "`$('#id')` selects an element with a specific ID in jQuery.",
+        hint: "Recall jQuery’s ID selector syntax.",
         topic: "jQuery Selectors"
     },
     {
-        question: "What does `$('p').hide()` do in jQuery?",
-        options: [
-            "Shows p elements",
-            "Hides p elements",
-            "Removes p elements",
-            "Changes p text"
-        ],
-        answer: "Hides p elements",
+        question: "What does `$('div').show()` do in jQuery?",
+        options: ["Hides div elements", "Shows div elements", "Removes div elements", "Changes div text"],
+        answer: "Shows div elements",
         difficulty: "Easy",
-        explanation: "`.hide()` sets `display: none` for selected elements.",
-        hint: "Think about visibility in jQuery.",
+        explanation: "`.show()` makes hidden elements visible by setting `display` to its default value.",
+        hint: "Think about visibility control.",
         topic: "jQuery Effects"
     },
     {
-        question: "What does `$('button').click(function() { alert('Hi'); })` do?",
+        question: "What does `$('button').on('click', function() { alert('Clicked'); })` do?",
         options: [
             "Removes buttons",
-            "Adds a click event to buttons",
+            "Triggers an alert on button click",
             "Changes button text",
             "Hides buttons"
         ],
-        answer: "Adds a click event to buttons",
+        answer: "Triggers an alert on button click",
         difficulty: "Medium",
-        explanation: "`.click()` binds a click event handler to buttons, showing an alert.",
+        explanation: "`.on('click', ...)` binds a click event handler to buttons.",
         hint: "Think about jQuery event handling.",
         topic: "jQuery Events"
     },
     {
-        question: "What is the result of `'20' !== 20` in JavaScript?",
+        question: "What does `'10' != 10` evaluate to?",
         options: ["true", "false", "undefined", "Error"],
         answer: "true",
         difficulty: "Medium",
-        explanation: "`!==` checks value and type, so string '20' is not equal to number 20.",
-        hint: "Consider strict inequality.",
+        explanation: "`!=` checks for inequality after type coercion, so '10' equals 10.",
+        hint: "Consider loose inequality.",
         topic: "Comparison Operators"
     },
     {
-        question: "What does `arr.slice(1, 3)` do for `arr = [1, 2, 3, 4]`?",
-        options: ["Returns [2, 3]", "Returns [1, 2]", "Removes [2, 3]", "Returns [3, 4]"],
-        answer: "Returns [2, 3]",
-        difficulty: "Medium",
-        explanation: "`slice(1, 3)` extracts elements from index 1 to 2 (3 exclusive).",
-        hint: "Check array extraction methods.",
-        topic: "Arrays: Slice"
+        question: "What does `arr.shift()` do to an array?",
+        options: [
+            "Removes the first element",
+            "Removes the last element",
+            "Adds an element to the start",
+            "Clears the array"
+        ],
+        answer: "Removes the first element",
+        difficulty: "Easy",
+        explanation: "`shift()` removes and returns the first element of an array.",
+        hint: "Think about array manipulation.",
+        topic: "Arrays: Shift"
     },
     {
-        question: "What does `while (x < 3) { console.log(x); x++; }` output if `x = 1`?",
-        options: ["1 2", "1 2 3", "0 1 2", "Nothing"],
-        answer: "1 2",
+        question: "What does `while (x < 5) { x++; console.log(x); }` output if `x = 3`?",
+        options: ["3 4 5", "4 5", "3 4", "Nothing"],
+        answer: "4 5",
         difficulty: "Medium",
-        explanation: "The loop runs while `x < 3`, logging `1` and `2`.",
-        hint: "Trace the loop condition.",
+        explanation: "The loop increments and logs `x` while `x < 5`, starting from 3.",
+        hint: "Trace the loop execution.",
         topic: "while Loops"
     },
     {
-        question: "What does `do { console.log(x); x++; } while (x < 2);` do if `x = 1`?",
-        options: ["Logs 1", "Logs 1 2", "Nothing", "Infinite loop"],
-        answer: "Logs 1",
-        difficulty: "Medium",
-        explanation: "The `do...while` loop runs once, logging `1`, then stops as `x < 2` is false.",
-        hint: "Check minimum loop runs.",
-        topic: "do...while Loops"
-    },
-    {
-        question: "What does `$('div').addClass('active')` do in jQuery?",
-        options: [
-            "Removes a class",
-            "Adds the 'active' class to divs",
-            "Toggles a class",
-            "Changes div content"
-        ],
-        answer: "Adds the 'active' class to divs",
+        question: "What does `parseFloat('12.34')` return?",
+        options: ["12", "12.34", "'12.34'", "Error"],
+        answer: "12.34",
         difficulty: "Easy",
-        explanation: "`.addClass()` adds the specified class to selected elements.",
-        hint: "Think about class manipulation in jQuery.",
-        topic: "jQuery Class Manipulation"
-    },
-    {
-        question: "What does `'Hello World'.indexOf('World')` return?",
-        options: ["5", "6", "-1", "7"],
-        answer: "6",
-        difficulty: "Medium",
-        explanation: "`indexOf()` returns the starting index of 'World', which is 6 (after the space).",
-        hint: "Check substring position.",
-        topic: "Strings: IndexOf"
-    },
-    {
-        question: "What does `parseInt('123')` return?",
-        options: ["123", "'123'", "12.3", "Error"],
-        answer: "123",
-        difficulty: "Easy",
-        explanation: "`parseInt()` converts a string to an integer.",
-        hint: "Think about string-to-number conversion.",
+        explanation: "`parseFloat()` converts a string to a floating-point number.",
+        hint: "Check string-to-number conversion.",
         topic: "Type Conversion"
     },
     {
-        question: "What does `(4.567).toFixed(2)` return?",
-        options: ["4.56", "4.57", "4.6", "4.567"],
-        answer: "4.57",
-        difficulty: "Medium",
-        explanation: "`toFixed(2)` rounds to 2 decimal places, returning '4.57' as a string.",
-        hint: "Check decimal precision.",
-        topic: "Number Formatting"
-    },
-    {
-        question: "What does `new Date(2025, 0, 1)` create?",
+        question: "What does `$('p').css('color', 'red')` do in jQuery?",
         options: [
-            "January 1, 2025",
-            "February 1, 2025",
-            "January 1, 2026",
-            "December 1, 2024"
-        ],
-        answer: "January 1, 2025",
-        difficulty: "Medium",
-        explanation: "Months are 0-based, so `0` is January.",
-        hint: "Check month indexing in Date.",
-        topic: "Date Creation"
-    },
-    {
-        question: "What is a closure in JavaScript?",
-        options: [
-            "A loop construct",
-            "A function with access to its outer scope",
-            "A type of variable",
-            "A jQuery method"
-        ],
-        answer: "A function with access to its outer scope",
-        difficulty: "Medium",
-        explanation: "A closure is a function that retains access to its outer scope’s variables even after the outer function has executed.",
-        hint: "Think about scope and functions.",
-        topic: "Closures"
-    },
-    {
-        question: "What does `$('p').text()` do in jQuery?",
-        options: [
-            "Sets text of p elements",
-            "Gets text of the first p element",
-            "Removes p elements",
-            "Hides p elements"
-        ],
-        answer: "Gets text of the first p element",
-        difficulty: "Medium",
-        explanation: "`.text()` without arguments retrieves the text of the first selected element.",
-        hint: "Check jQuery text methods.",
-        topic: "jQuery Text Manipulation"
-    },
-    {
-        question: "What does `let x = 10; x += 5;` result in?",
-        options: ["10", "15", "5", "Error"],
-        answer: "15",
-        difficulty: "Easy",
-        explanation: "`+=` adds 5 to `x`, so `x` becomes 15.",
-        hint: "Think about assignment operators.",
-        topic: "Assignment Operators"
-    },
-    {
-        question: "What does `arr.push(5)` do to `arr = [1, 2, 3]`?",
-        options: ["[1, 2, 3, 5]", "[5, 1, 2, 3]", "[1, 2, 5]", "[1, 5, 3]"],
-        answer: "[1, 2, 3, 5]",
-        difficulty: "Easy",
-        explanation: "`push()` adds an element to the end of the array.",
-        hint: "Check array modification methods.",
-        topic: "Arrays: Push"
-    },
-    {
-        question: "What does `switch(x) { case 1: console.log('One'); break; }` do if `x = 1`?",
-        options: ["Logs 'One'", "Logs nothing", "Logs 'x'", "Error"],
-        answer: "Logs 'One'",
-        difficulty: "Easy",
-        explanation: "The `switch` statement executes the case where `x` matches, logging 'One'.",
-        hint: "Think about switch case execution.",
-        topic: "switch Statements"
-    },
-    {
-        question: "What does `$('div').css('color', 'blue')` do?",
-        options: [
-            "Gets the color",
-            "Sets the color to blue",
-            "Removes the color",
+            "Gets the color of p elements",
+            "Sets the color of p elements to red",
+            "Removes the color property",
             "Toggles the color"
         ],
-        answer: "Sets the color to blue",
+        answer: "Sets the color of p elements to red",
         difficulty: "Easy",
-        explanation: "`.css()` with two arguments sets the CSS property for selected elements.",
+        explanation: "`.css()` with two arguments sets a CSS property for selected elements.",
         hint: "Think about jQuery CSS manipulation.",
         topic: "jQuery CSS"
     },
     {
-        question: "What does `'abc'.charAt(1)` return?",
-        options: ["a", "b", "c", "Error"],
-        answer: "b",
+        question: "What does `'Hello'.substring(1, 3)` return?",
+        options: ["He", "ell", "ll", "lo"],
+        answer: "el",
+        difficulty: "Medium",
+        explanation: "`substring(1, 3)` extracts characters from index 1 to 2 (3 exclusive).",
+        hint: "Check string slicing indices.",
+        topic: "Strings: Substring"
+    },
+    {
+        question: "What is the output of `!!0` in JavaScript?",
+        options: ["true", "false", "0", "undefined"],
+        answer: "false",
+        difficulty: "Medium",
+        explanation: "The double `!!` converts 0 to a boolean, which is `false`.",
+        hint: "Think about falsy values.",
+        topic: "Type Coercion"
+    },
+    {
+        question: "What does `$('div').toggle()` do in jQuery?",
+        options: [
+            "Shows or hides div elements",
+            "Adds or removes a class",
+            "Changes div content",
+            "Reloads the page"
+        ],
+        answer: "Shows or hides div elements",
         difficulty: "Easy",
-        explanation: "`charAt(1)` returns the character at index 1, which is 'b'.",
+        explanation: "`.toggle()` switches the visibility of elements.",
+        hint: "Think about toggling visibility.",
+        topic: "jQuery Effects"
+    },
+    {
+        question: "What does `let x = () => x + 1` define?",
+        options: ["A constant", "An arrow function", "A loop", "A class"],
+        answer: "An arrow function",
+        difficulty: "Easy",
+        explanation: "Arrow functions are concise function expressions introduced in ES6.",
+        hint: "Check ES6 function syntax.",
+        topic: "Arrow Functions"
+    },
+    {
+        question: "What does `arr.join(',')` do for `arr = [1, 2, 3]`?",
+        options: ["1,2,3", "[1,2,3]", "123", "Error"],
+        answer: "1,2,3",
+        difficulty: "Easy",
+        explanation: "`join(',')` combines array elements into a string with commas.",
+        hint: "Think about array-to-string conversion.",
+        topic: "Arrays: Join"
+    },
+    {
+        question: "What does `if (x >= 5 && x <= 10) { console.log('Range'); }` output if `x = 7`?",
+        options: ["Range", "Nothing", "Error", "True"],
+        answer: "Range",
+        difficulty: "Medium",
+        explanation: "Both conditions are true for `x = 7`, so 'Range' is logged.",
+        hint: "Evaluate the logical AND.",
+        topic: "Logical Operators"
+    },
+    {
+        question: "What does `$('p').html('<b>Bold</b>')` do in jQuery?",
+        options: [
+            "Gets HTML content",
+            "Sets HTML content to <b>Bold</b>",
+            "Appends HTML content",
+            "Removes HTML content"
+        ],
+        answer: "Sets HTML content to <b>Bold</b>",
+        difficulty: "Easy",
+        explanation: "`.html()` sets the HTML content of selected elements.",
+        hint: "Think about HTML manipulation.",
+        topic: "jQuery HTML Manipulation"
+    },
+    {
+        question: "What does `typeof function(){}` return?",
+        options: ["object", "function", "undefined", "string"],
+        answer: "function",
+        difficulty: "Easy",
+        explanation: "`typeof` identifies a function expression as 'function'.",
+        hint: "Check JavaScript type checking.",
+        topic: "Data Types"
+    },
+    {
+        question: "What does `'abc'.charAt(0)` return?",
+        options: ["a", "b", "c", "Error"],
+        answer: "a",
+        difficulty: "Easy",
+        explanation: "`charAt(0)` returns the character at index 0, which is 'a'.",
         hint: "Check string indexing.",
         topic: "Strings: charAt"
     },
     {
-        question: "What is the output of `console.log(!!'hello')`?",
-        options: ["true", "false", "'hello'", "undefined"],
-        answer: "true",
+        question: "What does `new Date().getMonth()` return in July 2025?",
+        options: ["6", "7", "8", "5"],
+        answer: "6",
         difficulty: "Medium",
-        explanation: "The double `!!` converts a truthy value ('hello') to `true`.",
-        hint: "Think about boolean conversion.",
-        topic: "Type Coercion"
+        explanation: "Months are 0-based, so July is 6.",
+        hint: "Check month indexing.",
+        topic: "Date Methods"
     },
     {
-        question: "What does `$('p').append('!')` do in jQuery?",
+        question: "What does `$('input').val('test')` do in jQuery?",
         options: [
-            "Removes p elements",
-            "Adds '!' to the end of p content",
-            "Replaces p content with '!'",
-            "Hides p elements"
+            "Gets the input value",
+            "Sets the input value to 'test'",
+            "Clears the input",
+            "Disables the input"
         ],
-        answer: "Adds '!' to the end of p content",
+        answer: "Sets the input value to 'test'",
         difficulty: "Easy",
-        explanation: "`.append()` adds content to the end of selected elements’ content.",
-        hint: "Think about adding content in jQuery.",
+        explanation: "`.val('test')` sets the value of input elements.",
+        hint: "Think about form handling in jQuery.",
+        topic: "jQuery Form Handling"
+    },
+    {
+        question: "What does `let x = 5; x *= 3;` result in?",
+        options: ["15", "8", "5", "Error"],
+        answer: "15",
+        difficulty: "Easy",
+        explanation: "`*=` multiplies `x` by 3, so `5 * 3 = 15`.",
+        hint: "Check assignment operators.",
+        topic: "Assignment Operators"
+    },
+    {
+        question: "What does `arr.concat([4, 5])` do to `arr = [1, 2, 3]`?",
+        options: ["[1, 2, 3, 4, 5]", "[4, 5, 1, 2, 3]", "[1, 2, 3]", "[4, 5]"],
+        answer: "[1, 2, 3, 4, 5]",
+        difficulty: "Easy",
+        explanation: "`concat()` creates a new array by combining `arr` with `[4, 5]`.",
+        hint: "Think about array merging.",
+        topic: "Arrays: Concat"
+    },
+    {
+        question: "What does `$('div').fadeOut()` do in jQuery?",
+        options: [
+            "Fades in div elements",
+            "Hides div elements with a fade effect",
+            "Removes div elements",
+            "Changes div text"
+        ],
+        answer: "Hides div elements with a fade effect",
+        difficulty: "Easy",
+        explanation: "`.fadeOut()` gradually hides elements by reducing opacity.",
+        hint: "Think about jQuery animations.",
+        topic: "jQuery Effects"
+    },
+    {
+        question: "What is the output of `typeof NaN`?",
+        options: ["number", "undefined", "null", "string"],
+        answer: "number",
+        difficulty: "Medium",
+        explanation: "`NaN` is considered a number type in JavaScript.",
+        hint: "Check JavaScript’s type system.",
+        topic: "Data Types"
+    },
+    {
+        question: "What does `for (let i = 0; i < 2; i++) { console.log(i * 2); }` output?",
+        options: ["0 2", "0 1", "2 4", "Nothing"],
+        answer: "0 2",
+        difficulty: "Easy",
+        explanation: "The loop logs `i * 2` for `i = 0` and `1`, resulting in `0, 2`.",
+        hint: "Calculate the loop output.",
+        topic: "for Loops"
+    },
+    {
+        question: "What does `$('p').remove()` do in jQuery?",
+        options: [
+            "Hides p elements",
+            "Removes p elements from the DOM",
+            "Changes p text",
+            "Toggles p visibility"
+        ],
+        answer: "Removes p elements from the DOM",
+        difficulty: "Easy",
+        explanation: "`.remove()` deletes the selected elements from the DOM.",
+        hint: "Think about DOM manipulation.",
         topic: "jQuery DOM Manipulation"
     },
     {
-        question: "What does `let x; console.log(x);` output?",
-        options: ["null", "undefined", "0", "Error"],
-        answer: "undefined",
-        difficulty: "Easy",
-        explanation: "A declared but uninitialized variable is `undefined`.",
-        hint: "Check variable initialization.",
-        topic: "Variables"
-    },
-    {
-        question: "What does `arr.splice(1, 1, 'x')` do to `arr = [1, 2, 3]`?",
-        options: ["[1, 'x', 3]", "[1, 2, 'x']", "['x', 2, 3]", "[1, 2, 3, 'x']"],
-        answer: "[1, 'x', 3]",
+        question: "What does `'123'.slice(0, 2)` return?",
+        options: ["12", "23", "123", "1"],
+        answer: "12",
         difficulty: "Medium",
-        explanation: "`splice(1, 1, 'x')` removes 1 element at index 1 and inserts 'x'.",
-        hint: "Check splice parameters.",
-        topic: "Arrays: Splice"
+        explanation: "`slice(0, 2)` extracts characters from index 0 to 1.",
+        hint: "Check string slicing indices.",
+        topic: "Strings: Slice"
     },
     {
-        question: "What does `$.ajax()` do in jQuery?",
+        question: "What is a JavaScript closure?",
         options: [
-            "Animates elements",
-            "Makes an HTTP request",
-            "Selects elements",
-            "Changes the URL"
+            "A loop construct",
+            "A function with access to outer scope variables",
+            "A variable type",
+            "An event handler"
         ],
-        answer: "Makes an HTTP request",
+        answer: "A function with access to outer scope variables",
         difficulty: "Medium",
-        explanation: "`$.ajax()` performs asynchronous HTTP requests for server communication.",
-        hint: "Think about jQuery’s server interaction.",
-        topic: "jQuery AJAX"
+        explanation: "A closure retains access to its outer function’s variables after execution.",
+        hint: "Think about function scope.",
+        topic: "Closures"
     },
     {
-        question: "What does `for (let i = 0; i < 2; i++) { for (let j = 0; j < 2; j++) { console.log(i + j); } }` output?",
-        options: ["0 1 1 2", "0 1 2 3", "0 0 1 1", "Nothing"],
-        answer: "0 1 1 2",
-        difficulty: "Medium",
-        explanation: "The nested loops log sums: `0+0, 0+1, 1+0, 1+1`.",
-        hint: "Trace nested loop outputs.",
-        topic: "Nested Loops"
-    },
-    {
-        question: "What does `$('p').first().text('Start')` do?",
+        question: "What does `$('p').each(function() { $(this).text('Hi'); })` do?",
         options: [
-            "Sets text of all p elements",
-            "Sets text of the first p element",
-            "Gets text of the first p",
-            "Hides the first p"
+            "Sets text of each p element to 'Hi'",
+            "Gets text of each p element",
+            "Hides each p element",
+            "Removes each p element"
         ],
-        answer: "Sets text of the first p element",
+        answer: "Sets text of each p element to 'Hi'",
         difficulty: "Medium",
-        explanation: "`.first()` selects the first element, and `.text('Start')` sets its text.",
-        hint: "Check jQuery traversal methods.",
-        topic: "jQuery Traversal"
+        explanation: "`.each()` iterates over elements, and `$(this).text('Hi')` sets their text.",
+        hint: "Think about jQuery iteration.",
+        topic: "jQuery Iteration"
     },
     {
-        question: "What is the output of `Number('123')`?",
-        options: ["123", "'123'", "Error", "undefined"],
-        answer: "123",
+        question: "What does `Number('12.34')` return?",
+        options: ["12", "12.34", "'12.34'", "Error"],
+        answer: "12.34",
         difficulty: "Easy",
-        explanation: "`Number()` converts a string to a number.",
-        hint: "Think about type conversion.",
+        explanation: "`Number()` converts a string to a number, including decimals.",
+        hint: "Check type conversion.",
         topic: "Type Conversion"
     }
 ];
