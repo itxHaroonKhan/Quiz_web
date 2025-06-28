@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 import uuid
 
-# Quiz data (unchanged, abbreviated for brevity)
+# Quiz data (unchanged)
 quiz = [
     {
         "question": "What is logged to the console when the user clicks 'Cancel'?\n```javascript\nlet result = prompt('Enter name');\nconsole.log(result);\n```",
@@ -37,7 +37,7 @@ def shuffle_quiz(_quiz):
                 break
     return shuffled
 
-# Initialize session state (CHANGED: Removed show_hint)
+# Initialize session state (unchanged)
 if "quiz_data" not in st.session_state:
     st.session_state.update({
         "quiz_data": shuffle_quiz(quiz) if quiz else [],
@@ -51,6 +51,7 @@ if "quiz_data" not in st.session_state:
         "time_left": 1800,
         "theme": "dark",
         "streak": 0,
+        "show_hint": False,
         "started": False
     })
 
@@ -79,11 +80,12 @@ def reset_quiz():
         "feedback": None,
         "time_left": 1800,
         "streak": 0,
+        "show_hint": False,
         "started": False
     })
     st.rerun()
 
-# Progress snapshot function (unchanged)
+# NEW: Progress snapshot function
 def show_progress_snapshot():
     answered = sum(1 for ans in st.session_state.answers if ans is not None)
     st.markdown("""
@@ -377,10 +379,16 @@ else:
                         st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
                         st.markdown(f'<div style="color: var(--text-color); font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
 
-                # CHANGED: Removed Hint button and logic
+                # Hint button (unchanged)
+                if st.button("💡 Show Hint", key="hint", disabled=st.session_state.show_hint or st.session_state.selected_option is not None):
+                    st.session_state.show_hint = True
+                    st.session_state.score = max(0, st.session_state.score - 0.5)
+                    st.rerun()
+                if st.session_state.show_hint:
+                    st.markdown(f'<div style="color: #facc15; font-size: 14px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
 
-                # Navigation (unchanged from previous modification)
-                col1, col2 = st.columns(2)
+                # CHANGED: Updated navigation (removed Previous and Skip, added Progress Snapshot)
+                col1, col2 = st.columns(2)  # Now only two columns
                 with col1:
                     if st.button("📊 Progress Snapshot", key="progress"):
                         show_progress_snapshot()
@@ -390,6 +398,7 @@ else:
                             st.session_state.current_q += 1
                             st.session_state.selected_option = None
                             st.session_state.feedback = None
+                            st.session_state.show_hint = False
                             st.rerun()
                     else:
                         if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
@@ -403,7 +412,7 @@ else:
                 st.markdown("</div>", unsafe_allow_html=True)
 
         else:
-            # Results (unchanged from previous modification)
+            # Results (unchanged, except for skipped questions in summary)
             time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
             total_possible_score = sum({"Easy": 1, "Medium": 2, "Hard": 3}[q["difficulty"]] for q in quiz)
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
