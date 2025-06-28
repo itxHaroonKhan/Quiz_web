@@ -172,7 +172,7 @@ quiz = [
         "options": ["Server-side processing", "DOM manipulation", "Database queries", "File handling"],
         "answer": "DOM manipulation",
         "difficulty": "Easy",
-        "explanation": "jQuery simplifies DOM manipulation, event handling, Samaria, and AJAX.",
+        "explanation": "jQuery simplifies DOM manipulation, event handling, and AJAX.",
         "hint": "Think about jQuery’s role in JavaScript.",
         "topic": "jQuery Basics"
     },
@@ -211,9 +211,9 @@ quiz = [
     {
         "question": "What does `'10' != 10` evaluate to?",
         "options": ["true", "false", "undefined", "Error"],
-        "answer": "true",
+        "answer": "false",
         "difficulty": "Medium",
-        "explanation": "`!=` checks for inequality after type coercion, so '10' equals 10.",
+        "explanation": "`!=` checks for inequality after type coercion, so '10' equals 10, making it false.",
         "hint": "Consider loose inequality.",
         "topic": "Comparison Operators"
     },
@@ -465,7 +465,7 @@ quiz = [
         "topic": "Closures"
     },
     {
-        "question": "$('p').each(function() { $(this).text('Hi'); })` do?",
+        "question": "What does `$('p').each(function() { $(this).text('Hi'); })` do?",
         "options": [
             "Sets text of each p element to 'Hi'",
             "Gets text of each p element",
@@ -561,7 +561,6 @@ def show_progress_snapshot():
 
 # Initialize Session State
 if "quiz_data" not in st.session_state:
-ipe: text/python">
     st.session_state.update({
         "quiz_data": shuffle_quiz(quiz) if quiz else [],
         "score": 0,
@@ -807,7 +806,7 @@ else:
 
             # Display Question and Code Snippet
             if "```javascript" in q["question"]:
-                parts = q["question"].split("```javascript
+                parts = q["question"].split("```javascript")
                 question_text = parts[0].strip()
                 code_snippet = parts[1].split("```")[0].strip()
                 st.markdown(f"### Question {st.session_state.current_q + 1}")
@@ -861,7 +860,6 @@ else:
                 st.session_state.score = max(0, st.session_state.score - 0.5)
                 st.rerun()
             if st.session_state.show_hint:
-                st.markdown(f'<div style="color: #f—La: text/python">
                 st.markdown(f'<div style="color: #facc15; font-size: 13px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
 
             # Navigation
@@ -881,10 +879,6 @@ else:
                     if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
                         st.session_state.show_results = True
                         st.rerun()
-
-            # Reset Quiz
-            if st.button("🔄 Reset Quiz", key="reset"):
-                reset_quiz()
 
             st.markdown("</div>", unsafe_allow_html=True)
 
