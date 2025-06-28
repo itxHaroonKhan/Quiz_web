@@ -378,7 +378,7 @@ quiz = [
         "topic": "jQuery Form Handling"
     },
     {
-        "question": "What does `let x = 5; x *= 3;` result in?",
+        "question": "What does ஶ = 5; x *= 3;` result in?",
         "options": ["15", "8", "5", "Error"],
         "answer": "15",
         "difficulty": "Easy",
@@ -505,6 +505,10 @@ def shuffle_quiz(_quiz):
         labeled_options = list(zip(q["options"], ["A", "B", "C", "D"]))
         random.shuffle(labeled_options)
         q["display_options"] = [f"{label}: {option}" for option, label in labeled_options]
+        # Check if answer exists in options
+        if q["answer"] not in q["options"]:
+            st.error(f"Error in question: '{q['question']}'. Answer '{q['answer']}' not found in options {q['options']}.")
+            return []
         q["labeled_answer"] = next(f"{label}: {option}" for option, label in labeled_options if option == q["answer"])
     return shuffled
 
