@@ -265,7 +265,7 @@ quiz = [
     },
     {
         "question": "What does `'Hello'.substring(1, 3)` return?",
-        "options": ["He", "ell", "ll", "lo"],
+        "options": ["He", "el", "ll", "lo"],
         "answer": "el",
         "difficulty": "Medium",
         "explanation": "`substring(1, 3)` extracts characters from index 1 to 2 (3 exclusive).",
@@ -378,7 +378,7 @@ quiz = [
         "topic": "jQuery Form Handling"
     },
     {
-        "question": "What does ஶ = 5; x *= 3;` result in?",
+        "question": "What does `let x = 5; x *= 3;` result in?",
         "options": ["15", "8", "5", "Error"],
         "answer": "15",
         "difficulty": "Easy",
