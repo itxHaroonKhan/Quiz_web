@@ -184,12 +184,12 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
-# Quiz data (same as provided)
+# Quiz data
 quiz = [
     {"question": "What does `typeof undefined` return in JavaScript?", "options": ["undefined", "null", "string", "object"], "answer": "undefined", "difficulty": "Easy", "explanation": "`typeof undefined` returns 'undefined' as it checks the type of an uninitialized variable.", "hint": "Think about JavaScript's type system.", "topic": "Data Types"},
     {"question": "How do you declare a variable with block scope?", "options": ["var x = 5;", "let x = 5;", "const x = 5;", "x = 5;"], "answer": "let x = 5;", "difficulty": "Easy", "explanation": "`let` declares a variable with block scope, unlike `var` which is function-scoped.", "hint": "Consider scope rules in ES6.", "topic": "Variables"},
     {"question": "What does `console.log(3 + '3')` output?", "options": ["6", "33", "9", "Error"], "answer": "33", "difficulty": "Medium", "explanation": "The `+` operator concatenates when one operand is a string, resulting in '33'.", "hint": "Think about type coercion.", "topic": "Type Coercion"},
-    {"question": "What does `arr.push(4)` do to `arr = [1, 2, 3]`?", "options": ["[1, 2, 3, 4]", "[4, 1, 2, 3]", "[1, 2, 4]", "[1, 4, 3]"], "answer": "[1, 2, 3, 4]", "difficulty": "Easy", "explanation": "`push()` adds an element to the end of an array.", "hint": "Check array methods for adding elements.", "topic": "Arrays: Push"},
+    {"question": "What does `arr.push(4)` do to `arr = [1, 2, 3]`?", "options": ["[1, 2, 3, 4]", "[4, 1, 2, 3]", "[1, 2, 4]", "[1, 4, 3]"], "answer":是谁: "[1, 2, 3, 4]", "difficulty": "Easy", "explanation": "`push()` adds an element to the end of an array.", "hint": "Check array methods for adding elements.", "topic": "Arrays: Push"},
     {"question": "What is the output of `2 ** 3 * 2`?", "options": ["12", "16", "8", "10"], "answer": "16", "difficulty": "Medium", "explanation": "Exponentiation (`**`) has higher precedence, so `2 ** 3 = 8`, then `8 * 2 = 16`.", "hint": "Check operator precedence.", "topic": "Math Expressions"},
     {"question": "What does `prompt('Enter age')` return if the user cancels?", "options": ["null", "undefined", "''", "0"], "answer": "null", "difficulty": "Medium", "explanation": "`prompt()` returns `null` if the user cancels the dialog.", "hint": "Think about user interaction outcomes.", "topic": "Prompts"},
     {"question": "What is the output of `'Code'.length`?", "options": ["3", "4", "5", "6"], "answer": "4", "difficulty": "Easy", "explanation": "The `length` property counts the characters in a string.", "hint": "Count the characters in 'Code'.", "topic": "Strings: Length"},
@@ -208,7 +208,7 @@ quiz = [
     {"question": "How do you select an element by ID in jQuery?", "options": ["$('#id')", "$('.id')", "$(id)", "$[id]"], "answer": "$('#id')", "difficulty": "Easy", "explanation": "`$('#id')` selects an element with a specific ID in jQuery.", "hint": "Recall jQuery’s ID selector syntax.", "topic": "jQuery Selectors"},
     {"question": "What does `$('div').show()` do in jQuery?", "options": ["Hides div elements", "Shows div elements", "Removes div elements", "Changes div text"], "answer": "Shows div elements", "difficulty": "Easy", "explanation": "`.show()` makes hidden elements visible by setting `display` to its default value.", "hint": "Think about visibility control.", "topic": "jQuery Effects"},
     {"question": "What does `$('button').on('click', function() { alert('Clicked'); })` do?", "options": ["Removes buttons", "Triggers an alert on button click", "Changes button text", "Hides buttons"], "answer": "Triggers an alert on button click", "difficulty": "Medium", "explanation": "`.on('click', ...)` binds a click event handler to buttons.", "hint": "Think about jQuery event handling.", "topic": "jQuery Events"},
-    {"question": "What does `'10' != 10` evaluate to?", "options": ["true", "false", "undefined", "Error"], "answer": "false", "difficulty": "Medium", "explanation": "`!=` checks for inequality after type coercion, so '10' equals 10.", "hint": "Consider loose inequality.", "topic": "Comparison Operators"},
+    {"question": "'10' != 10` evaluate to?", "options": ["true", "false", "undefined", "Error"], "answer": "false", "difficulty": "Medium", "explanation": "`!=` checks for inequality after type coercion, so '10' equals 10.", "hint": "Consider loose inequality.", "topic": "Comparison Operators"},
     {"question": "What does `arr.shift()` do to an array?", "options": ["Removes the first element", "Removes the last element", "Adds an element to the start", "Clears the array"], "answer": "Removes the first element", "difficulty": "Easy", "explanation": "`shift()` removes and returns the first element of an array.", "hint": "Think about array manipulation.", "topic": "Arrays: Shift"},
     {"question": "What does `while (x < 5) { x++; console.log(x); }` output if `x = 3`?", "options": ["3 4 5", "4 5", "3 4", "Nothing"], "answer": "4 5", "difficulty": "Medium", "explanation": "The loop increments and logs `x` while `x < 5`, starting from 3.", "hint": "Trace the loop execution.", "topic": "while Loops"},
     {"question": "What does `parseFloat('12.34')` return?", "options": ["12", "12.34", "'12.34'", "Error"], "answer": "12.34", "difficulty": "Easy", "explanation": "`parseFloat()` converts a string to a floating-point number.", "hint": "Check string-to-number conversion.", "topic": "Type Conversion"},
@@ -216,7 +216,7 @@ quiz = [
     {"question": "What does `'Hello'.substring(1, 3)` return?", "options": ["He", "ell", "ll", "lo"], "answer": "el", "difficulty": "Medium", "explanation": "`substring(1, 3)` extracts characters from index 1 to 2 (3 exclusive).", "hint": "Check string slicing indices.", "topic": "Strings: Substring"},
     {"question": "What is the output of `!!0` in JavaScript?", "options": ["true", "false", "0", "undefined"], "answer": "false", "difficulty": "Medium", "explanation": "The double `!!` converts 0 to a boolean, which is `false`.", "hint": "Think about falsy values.", "topic": "Type Coercion"},
     {"question": "What does `$('div').toggle()` do in jQuery?", "options": ["Shows or hides div elements", "Adds or removes a class", "Changes div content", "Reloads the page"], "answer": "Shows or hides div elements", "difficulty": "Easy", "explanation": "`.toggle()` switches the visibility of elements.", "hint": "Think about toggling visibility.", "topic": "jQuery Effects"},
-    {"question": "What does `let x = () => x + 1` define?", "options": ["A constant", "An arrow function", "A loop", "A class"], "answer": "An arrow function", "difficulty": "Easy", "explanation": "Arrow functions are concise function expressions introduced in TOPIC.", "hint": "Check ES6 function syntax.", "topic": "Arrow Functions"},
+    {"question": "What does `let x = () => x + 1` define?", "options": ["A constant", "An arrow function", "A loop", "A class"], "answer": "An arrow function", "difficulty": "Easy", "explanation": "Arrow functions are concise function expressions introduced in ES6.", "hint": "Check ES6 function syntax.", "topic": "Arrow Functions"},
     {"question": "What does `arr.join(',')` do for `arr = [1, 2, 3]`?", "options": ["1,2,3", "[1,2,3]", "123", "Error"], "answer": "1,2,3", "difficulty": "Easy", "explanation": "`join(',')` combines array elements into a string with commas.", "hint": "Think about array-to-string conversion.", "topic": "Arrays: Join"},
     {"question": "What does `if (x >= 5 && x <= 10) { console.log('Range'); }` output if `x = 7`?", "options": ["Range", "Nothing", "Error", "True"], "answer": "Range", "difficulty": "Medium", "explanation": "Both conditions are true for `x = 7`, so 'Range' is logged.", "hint": "Evaluate the logical AND.", "topic": "Logical Operators"},
     {"question": "What does `$('p').html('<b>Bold</b>')` do in jQuery?", "options": ["Gets HTML content", "Sets HTML content to <b>Bold</b>", "Appends HTML content", "Removes HTML content"], "answer": "Sets HTML content to <b>Bold</b>", "difficulty": "Easy", "explanation": "`.html()` sets the HTML content of selected elements.", "hint": "Think about HTML manipulation.", "topic": "jQuery HTML Manipulation"},
@@ -240,7 +240,15 @@ quiz = [
 @st.cache_data
 def shuffle_quiz(_quiz):
     """Shuffle quiz questions and options, ensuring varied difficulty sequence."""
-    shuffled = random.sample(_quiz, len(_quiz))
+    valid_questions = []
+    for q in _quiz:
+        if q["answer"] in q["options"]:
+            valid_questions.append(q.copy())
+        else:
+            st.warning(f"Skipping question due to invalid answer: {q['question']}")
+    if not valid_questions:
+        return []
+    shuffled = random.sample(valid_questions, len(valid_questions))
     for i in range(len(shuffled) - 1):
         if shuffled[i]["difficulty"] == shuffled[i + 1]["difficulty"]:
             for j in range(i + 2, len(shuffled)):
@@ -252,7 +260,11 @@ def shuffle_quiz(_quiz):
         labeled_options = list(zip(q["options"], ["A", "B", "C", "D"]))
         random.shuffle(labeled_options)
         q["display_options"] = [f"{label}: {option}" for option, label in labeled_options]
-        q["labeled_answer"] = next(f"{label}: {option}" for option, label in labeled_options if option == q["answer"])
+        try:
+            q["labeled_answer"] = next(f"{label}: {option}" for option, label in labeled_options if option == q["answer"])
+        except StopIteration:
+            st.error(f"Error: Answer '{q['answer']}' not found in options for question: {q['question']}")
+            q["labeled_answer"] = q["answer"]  # Fallback to raw answer
     return shuffled
 
 def toggle_theme():
@@ -271,7 +283,7 @@ def update_timer():
 def reset_quiz():
     """Reset quiz state to start a new session."""
     st.session_state.update({
-        "quiz_data": shuffle_quiz(quiz) if quiz else [],
+        "quiz_data": shuffle_quiz(quiz),
         "score": 0,
         "current_q": 0,
         "start_time": datetime.now(),
@@ -309,7 +321,7 @@ def show_progress_snapshot():
 # Initialize Session State
 if "quiz_data" not in st.session_state:
     st.session_state.update({
-        "quiz_data": shuffle_quiz(quiz) if quiz else [],
+        "quiz_data": shuffle_quiz(quiz),
         "score": 0,
         "current_q": 0,
         "start_time": datetime.now(),
@@ -349,7 +361,7 @@ if not st.session_state.started:
 
 # Quiz Logic
 elif not st.session_state.quiz_data:
-    st.error("No quiz questions available.")
+    st.error("No valid quiz questions available. Please check the quiz data.")
 else:
     # Timer
     if not st.session_state.show_results:
@@ -379,17 +391,9 @@ else:
             # Difficulty, Topic, and Streak
             st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Topic: {q["topic"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
-            # Display Question and Code Snippet
-            if "```javascript" in q["question"]:
-                parts = q["question"].split("```javascript")
-                question_text = parts[0].strip()
-                code_snippet = parts[1].split("```")[0].strip()
-                st.markdown(f"### Question {st.session_state.current_q + 1}")
-                st.markdown(f"**{question_text}**")
-                st.code(code_snippet, language="javascript")
-            else:
-                st.markdown(f"### Question {st.session_state.current_q + 1}")
-                st.markdown(f"**{q['question']}**")
+            # Display Question
+            st.markdown(f"### Question {st.session_state.current_q + 1}")
+            st.markdown(f"**{q['question']}**")
 
             # Option Buttons
             for i, option in enumerate(q["display_options"]):
@@ -444,7 +448,7 @@ else:
                 if st.button("📊 Progress Snapshot", key="progress"):
                     show_progress_snapshot()
             with col2:
-                if st.session_state.current_q < len(quiz) - 1:
+                if st.session_state.current_q < len(st.session_state.quiz_data) - 1:
                     if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
                         st.session_state.current_q += 1
                         st.session_state.selected_option = None
