@@ -4,7 +4,7 @@ import random
 from datetime import datetime
 import uuid
 
-# Quiz data with 50 questions (unchanged from previous)
+# Quiz data with 50 questions covering all specified topics
 quiz = [
     {
         "question": "What does `alert('Hello!')` do in JavaScript?\n```javascript\nalert('Hello!');\n```",
@@ -587,6 +587,7 @@ if "quiz_data" not in st.session_state:
         "time_left": 1800,  # 30 minutes
         "theme": "dark",
         "streak": 0,
+        "show_hint": False,
         "started": False
     })
 
@@ -601,6 +602,44 @@ def update_timer():
     if st.session_state.time_left <= 0:
         st.session_state.show_results = True
         st.rerun()
+
+# Reset quiz
+def reset_quiz():
+    st.session_state.update({
+        "quiz_data": shuffle_quiz(quiz),
+        "score": 0,
+        "current_q": 0,
+        "start_time": datetime.now(),
+        "answers": [None] * len(quiz),
+        "show_results": False,
+        "selected_option": None,
+        "feedback": None,
+        "time_left": 1800,
+        "streak": 0,
+        "show_hint": False,
+        "started": False
+    })
+    st.rerun()
+
+# Skip question
+def skip_question():
+    st.session_state.answers[st.session_state.current_q] = {
+        "question": st.session_state.quiz_data[st.session_state.current_q]["question"],
+        "user_answer": "Skipped",
+        "correct_answer": st.session_state.quiz_data[st.session_state.current_q]["labeled_answer"],
+        "is_correct": False,
+        "difficulty": st.session_state.quiz_data[st.session_state.current_q]["difficulty"]
+    }
+    st.session_state.score = max(0, st.session_state.score - 0.5)
+    st.session_state.streak = 0
+    if st.session_state.current_q < len(quiz) - 1:
+        st.session_state.current_q += 1
+    else:
+        st.session_state.show_results = True
+    st.session_state.selected_option = None
+    st.session_state.feedback = None
+    st.session_state.show_hint = False
+    st.rerun()
 
 # CSS for enhanced UI
 st.markdown("""
@@ -867,13 +906,6 @@ else:
                                 st.session_state.score += 0.5
                         else:
                             st.session_state.streak = 0
-                        # Automatically move to next question or show results
-                        if st.session_state.current_q < len(quiz) - 1:
-                            st.session_state.current_q += 1
-                            st.session_state.selected_option = None
-                            st.session_state.feedback = None
-                        else:
-                            st.session_state.show_results = True
                         st.rerun()
 
                 # Feedback
@@ -883,6 +915,48 @@ else:
                     else:
                         st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
                         st.markdown(f'<div style="color: var(--text-color); font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
+
+                # Hint button
+                if st.button("💡 Show Hint", key="hint", disabled=st.session_state.show_hint or st.session_state.selected_option is not None):
+                    st.session_state.show_hint = True
+                    st.session_state.score = max(0, st.session_state.score - 0.25)
+                    st.rerun()
+                if st.session_state.show_hint:
+                    st.markdown(f'<div style="color: #facc15; font-size: 14px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
+
+                # Navigation
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    if st.button("⬅ Previous", disabled=st.session_state.current_q == 0):
+                        if st.session_state.current_q > 0 and st.session_state.answers[st.session_state.current_q] and st.session_state.answers[st.session_state.current_q]["is_correct"]:
+                            points = {"Easy": 1, "Medium": 2, "Hard": 3}[st.session_state.answers[st.session_state.current_q]["difficulty"]]
+                            st.session_state.score -= points
+                            if st.session_state.streak >= 3:
+                                st.session_state.score -= 0.5
+                        st.session_state.current_q -= 1
+                        st.session_state.selected_option = None
+                        st.session_state.feedback = None
+                        st.session_state.show_hint = False
+                        st.rerun()
+                with col2:
+                    if st.button("⏭️ Skip", key="skip"):
+                        skip_question()
+                with col3:
+                    if st.session_state.current_q < len(quiz) - 1:
+                        if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
+                            st.session_state.current_q += 1
+                            st.session_state.selected_option = None
+                            st.session_state.feedback = None
+                            st.session_state.show_hint = False
+                            st.rerun()
+                    else:
+                        if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
+                            st.session_state.show_results = True
+                            st.rerun()
+
+                # Reset quiz button
+                if st.button("🔄 Reset Quiz", key="reset"):
+                    reset_quiz()
 
                 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -900,6 +974,7 @@ else:
                 - 🎯 Accuracy: {accuracy:.1f}%<br>
                 - ✅ Correct: {sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])}<br>
                 - ❌ Incorrect: {sum(1 for ans in st.session_state.answers if ans and not ans["is_correct"])}<br>
+                - ⏭️ Skipped: {sum(1 for ans in st.session_state.answers if ans and ans["user_answer"] == "Skipped")}<br>
                 - 🔥 Max Streak: {st.session_state.streak}
             </div>
             """, unsafe_allow_html=True)
@@ -932,8 +1007,12 @@ else:
             st.markdown('<h3>📝 Review Your Answers</h3>', unsafe_allow_html=True)
             for i, ans in enumerate(st.session_state.answers):
                 if ans:
-                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
+                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})" if ans["user_answer"] != "Skipped" else "⏭️ Skipped"
                     st.markdown(f'<div style="color: var(--text-color);">Question {i+1}: {ans["question"]}<br>Your Answer: {ans["user_answer"]}<br>{status}<br>Explanation: {quiz[i]["explanation"]}</div>', unsafe_allow_html=True)
+
+            # Reset button
+            if st.button("🔄 Play Again", key="play_again"):
+                reset_quiz()
 
             st.markdown("</div>", unsafe_allow_html=True)
 
