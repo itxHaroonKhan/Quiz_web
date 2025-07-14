@@ -1,554 +1,387 @@
-
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
 
-# Quiz data with 50 questions covering all specified topics
+# Quiz data with 50 questions covering all specified topics, options without a, b, c, d labels
 quiz = [
     {
-        "question": "What does `alert('Hello!')` do in JavaScript?\n```javascript\nalert('Hello!');\n```",
-        "options": ["Logs to console", "Displays a popup", "Returns 'Hello!'", "Nothing"],
-        "answer": "Displays a popup",
-        "difficulty": "Easy",
-        "explanation": "The `alert()` function displays a popup dialog with the message 'Hello!' in the browser.",
-        "hint": "Think about user interaction in the browser."
-    },
-    {
-        "question": "What is the value of `str` after this code runs?\n```javascript\nlet str = 'Java';\nstr = str + 'Script';\n```",
-        "options": ["'JavaScript'", "'Java Script'", "'Java'", "'Script'"],
-        "answer": "'JavaScript'",
-        "difficulty": "Easy",
-        "explanation": "The `+` operator concatenates 'Java' with 'Script', resulting in 'JavaScript'.",
-        "hint": "Consider how strings are combined."
-    },
-    {
-        "question": "What is the value of `num` after this code runs?\n```javascript\nlet num = 15;\nnum = num - 5;\n```",
-        "options": ["10", "5", "15", "NaN"],
-        "answer": "10",
-        "difficulty": "Easy",
-        "explanation": "The subtraction operator `-` subtracts 5 from 15, resulting in 10.",
-        "hint": "Evaluate the arithmetic operation."
-    },
-    {
-        "question": "Which variable name is illegal in JavaScript?\n```javascript\nlet 2ndPlace = 'Winner';\nlet place2 = 'Winner';\nlet $place = 'Winner';\nlet _place = 'Winner';\n```",
-        "options": ["2ndPlace", "place2", "$place", "_place"],
-        "answer": "2ndPlace",
-        "difficulty": "Easy",
-        "explanation": "Variable names cannot start with a number, making `2ndPlace` illegal.",
-        "hint": "Recall JavaScript variable naming rules."
-    },
-    {
-        "question": "What is the result of this expression?\n```javascript\n10 % 3\n```",
-        "options": ["3", "1", "0", "10"],
-        "answer": "1",
+        "question": "How do you convert a string to lowercase and then capitalize only its first letter?\n```javascript\nlet str = 'JAVASCRIPT';\n```",
+        "options": ["str.toLowerCase()[0].toUpperCase() + str.slice(1)", "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)", "str[0].toUpperCase() + str.toLowerCase().slice(1)", "str.toLowerCase().replace(str[0], str[0].toUpperCase())"],
+        "answer": "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)",
         "difficulty": "Medium",
-        "explanation": "The modulo operator `%` returns the remainder of 10 divided by 3, which is 1.",
-        "hint": "Perform the division and check the remainder."
+        "explanation": "Convert the string to lowercase with `toLowerCase()`, use `charAt(0)` to get the first character, capitalize it with `toUpperCase()`, and append the rest with `slice(1)`."
     },
     {
-        "question": "What is the value of `x` after this code runs?\n```javascript\nlet x = (2 + 3) * 4;\n```",
-        "options": ["20", "14", "10", "8"],
-        "answer": "20",
-        "difficulty": "Easy",
-        "explanation": "Parentheses ensure `2 + 3` is evaluated first, giving 5, then `5 * 4 = 20`.",
-        "hint": "Check operator precedence with parentheses."
-    },
-    {
-        "question": "What is logged when the user clicks 'Cancel'?\n```javascript\nlet result = prompt('Enter name');\nconsole.log(result);\n```",
-        "options": ["null", "undefined", "''", "'Cancel'"],
-        "answer": "null",
+        "question": "How do you extract the last 3 characters of a string?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str.substring(str.length - 3)", "str.slice(-3)", "str.substr(-3)", "All of the above"],
+        "answer": "All of the above",
         "difficulty": "Medium",
-        "explanation": "The `prompt()` function returns `null` when the user clicks 'Cancel'.",
-        "hint": "Consider what `prompt()` returns on cancellation."
+        "explanation": "`substring(str.length - 3)`, `slice(-3)`, and `substr(-3)` all return the last 3 characters ('ipt') of the string."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 8;\nif (x > 5) {\n  console.log('Greater');\n}\n```",
-        "options": ["'Greater'", "Nothing", "'Less'", "Error"],
-        "answer": "'Greater'",
-        "difficulty": "Easy",
-        "explanation": "The condition `x > 5` is true for `x = 8`, so 'Greater' is logged.",
-        "hint": "Evaluate the condition in the `if` statement."
-    },
-    {
-        "question": "What is the result of this comparison?\n```javascript\n'5' == 5\n```",
-        "options": ["true", "false", "NaN", "Error"],
-        "answer": "true",
+        "question": "How do you find the index of the first occurrence of 'Script' in a string?\n```javascript\nlet str = 'JavaScript is fun';\n```",
+        "options": ["str.find('Script')", "str.indexOf('Script')", "str.search('Script')", "Both str.indexOf('Script') and str.search('Script')"],
+        "answer": "Both str.indexOf('Script') and str.search('Script')",
         "difficulty": "Medium",
-        "explanation": "The `==` operator performs type coercion, so '5' is converted to 5, making the comparison true.",
-        "hint": "Consider loose equality in JavaScript."
+        "explanation": "`indexOf()` and `search()` both return the starting index (4) of 'Script'. `search()` can also use regex."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 10;\nif (x < 5) {\n  console.log('Small');\n} else if (x > 8) {\n  console.log('Large');\n}\n```",
-        "options": ["'Small'", "'Large'", "Nothing", "Error"],
-        "answer": "'Large'",
+        "question": "How do you safely access the character at index 10 of a string that may be shorter?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str[10] || ''", "str.charAt(10)", "str.at(10) || ''", "Both str[10] || '' and str.at(10) || ''"],
+        "answer": "Both str[10] || '' and str.at(10) || ''",
         "difficulty": "Medium",
-        "explanation": "The condition `x > 8` is true for `x = 10`, so 'Large' is logged.",
-        "hint": "Check which `else if` condition is evaluated."
+        "explanation": "`str[10]` returns `undefined` if out of bounds, and `at(10)` returns `undefined`, so both can be safely handled with a fallback like `|| ''`. `charAt(10)` returns an empty string."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 6;\nif (x > 5 && x < 8) {\n  console.log('In range');\n}\n```",
-        "options": ["'In range'", "Nothing", "'Out of range'", "Error"],
-        "answer": "'In range'",
+        "question": "How do you replace only the first 'a' with 'b' in a string case-insensitively?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str.replace('a', 'b')", "str.replace(/a/i, 'b')", "str.replaceAll('a', 'b')", "str.replace(/a/, 'b')"],
+        "answer": "str.replace(/a/i, 'b')",
         "difficulty": "Medium",
-        "explanation": "Both conditions `x > 5` and `x < 8` are true for `x = 6`, so 'In range' is logged.",
-        "hint": "Evaluate the logical AND operator."
+        "explanation": "`replace(/a/i, 'b')` uses a regex with the `i` flag to replace the first 'a' or 'A' with 'b'."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 5;\nif (x > 3) {\n  if (x < 7) {\n    console.log('Nested');\n  }\n}\n```",
-        "options": ["'Nested'", "Nothing", "Error", "5"],
-        "answer": "'Nested'",
+        "question": "How do you round 3.14159 to the nearest tenth?",
+        "options": ["Math.round(3.14159 * 10) / 10", "Math.floor(3.14159 * 10) / 10", "Math.ceil(3.14159 * 10) / 10", "Math.trunc(3.14159 * 10) / 10"],
+        "answer": "Math.round(3.14159 * 10) / 10",
         "difficulty": "Medium",
-        "explanation": "Both conditions `x > 3` and `x < 7` are true for `x = 5`, so 'Nested' is logged.",
-        "hint": "Evaluate nested `if` conditions."
+        "explanation": "Multiply by 10, use `Math.round()` to round to the nearest integer, then divide by 10 to get 3.1."
     },
     {
-        "question": "What is the value of `arr` after this code runs?\n```javascript\nlet arr = [1, 2, 3];\narr.push(4);\n```",
-        "options": ["[1, 2, 3, 4]", "[1, 2, 3]", "[4, 1, 2, 3]", "[1, 2, 4, 3]"],
-        "answer": "[1, 2, 3, 4]",
-        "difficulty": "Easy",
-        "explanation": "The `push()` method adds 4 to the end of the array.",
-        "hint": "Consider what `push()` does to an array."
-    },
-    {
-        "question": "What is the value of `arr` after this code runs?\n```javascript\nlet arr = [1, 2, 3];\narr.pop();\n```",
-        "options": ["[1, 2]", "[1, 3]", "[2, 3]", "[1, 2, 3]"],
-        "answer": "[1, 2]",
-        "difficulty": "Easy",
-        "explanation": "The `pop()` method removes the last element, resulting in `[1, 2]`.",
-        "hint": "Consider what `pop()` does to an array."
-    },
-    {
-        "question": "What is the value of `arr` after this code runs?\n```javascript\nlet arr = [1, 2, 3];\narr.splice(1, 1, 4);\n```",
-        "options": ["[1, 4, 3]", "[1, 2, 4]", "[4, 2, 3]", "[1, 2, 3, 4]"],
-        "answer": "[1, 4, 3]",
+        "question": "How do you generate a random integer between 1 and 10?",
+        "options": ["Math.random() * 10", "Math.floor(Math.random() * 10) + 1", "Math.ceil(Math.random() * 10)", "Math.round(Math.random() * 10)"],
+        "answer": "Math.floor(Math.random() * 10) + 1",
         "difficulty": "Medium",
-        "explanation": "The `splice(1, 1, 4)` method removes 1 element at index 1 and inserts 4.",
-        "hint": "Understand the `splice()` method parameters."
+        "explanation": "`Math.random() * 10` gives a number from 0 to <10, `Math.floor()` makes it an integer (0–9), and `+ 1` shifts it to 1–10."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}\n```",
-        "options": ["0, 1, 2", "1, 2, 3", "0, 1, 2, 3", "Nothing"],
-        "answer": "0, 1, 2",
+        "question": "How do you convert '123.45' to a number with integer and decimal parts?",
+        "options": ["parseInt('123.45')", "parseFloat('123.45')", "Number('123.45')", "Both parseFloat('123.45') and Number('123.45')"],
+        "answer": "Both parseFloat('123.45') and Number('123.45')",
         "difficulty": "Medium",
-        "explanation": "The `for` loop iterates from `i = 0` to `i = 2`, logging each value.",
-        "hint": "Trace the loop iterations."
+        "explanation": "Both `parseFloat('123.45')` and `Number('123.45')` return 123.45, preserving the decimal part."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet arr = [1, 2, 3];\nfor (let i = 0; i < arr.length; i++) {\n  if (arr[i] === 2) {\n    break;\n  }\n  console.log(arr[i]);\n}\n```",
-        "options": ["1", "1, 2", "1, 2, 3", "Nothing"],
-        "answer": "1",
+        "question": "How do you convert a number to a string with a leading zero if less than 10?\n```javascript\nlet num = 5;\n```",
+        "options": ["num.toString().padStart(2, '0')", "num.toString(2)", "String(num).padEnd(2, '0')", "num + '0'"],
+        "answer": "num.toString().padStart(2, '0')",
         "difficulty": "Medium",
-        "explanation": "The loop breaks when `arr[i] === 2`, so only `1` is logged.",
-        "hint": "Consider the effect of `break` in the loop."
+        "explanation": "`padStart(2, '0')` adds a leading zero to make the string '05' if the number is single-digit."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    console.log(i);\n  }\n}\n```",
-        "options": ["1, 1, 2, 2", "1, 2", "1, 2, 1, 2", "Nothing"],
-        "answer": "1, 1, 2, 2",
-        "difficulty": "Hard",
-        "explanation": "The inner loop logs `i` twice for each outer loop iteration, resulting in 1, 1, 2, 2.",
-        "hint": "Trace the nested loop iterations."
-    },
-    {
-        "question": "What is the value of `str` after this code runs?\n```javascript\nlet str = 'hello';\nstr = str.toUpperCase();\n```",
-        "options": ["'HELLO'", "'hello'", "'Hello'", "'hELLO'"],
-        "answer": "'HELLO'",
-        "difficulty": "Easy",
-        "explanation": "The `toUpperCase()` method converts all characters to uppercase.",
-        "hint": "Consider the effect of `toUpperCase()`."
-    },
-    {
-        "question": "What is the value of `str` after this code runs?\n```javascript\nlet str = 'JavaScript';\nstr = str.substring(0, 4);\n```",
-        "options": ["'Java'", "'Script'", "'JavaS'", "'JavaScript'"],
-        "answer": "'Java'",
+        "question": "How do you format a number to exactly 3 decimal places as a number?\n```javascript\nlet num = 3.14159;\n```",
+        "options": ["Number(num.toFixed(3))", "num.toPrecision(3)", "Math.round(num * 1000) / 1000", "Both Number(num.toFixed(3)) and Math.round(num * 1000) / 1000"],
+        "answer": "Both Number(num.toFixed(3)) and Math.round(num * 1000) / 1000",
         "difficulty": "Medium",
-        "explanation": "The `substring(0, 4)` method extracts characters from index 0 to 3, resulting in 'Java'.",
-        "hint": "Check the indices used in `substring()`."
+        "explanation": "`toFixed(3)` returns a string with 3 decimals, converted back with `Number()`. `Math.round(num * 1000) / 1000` achieves the same numerically."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet str = 'Hello World';\nconsole.log(str.includes('World'));\n```",
-        "options": ["true", "false", "'World'", "Error"],
-        "answer": "true",
+        "question": "How do you get the current date in 'YYYY-MM-DD' format?",
+        "options": ["new Date().toISOString().split('T')[0]", "new Date().toDateString()", "new Date().format('YYYY-MM-DD')", "new Date().getDate()"],
+        "answer": "new Date().toISOString().split('T')[0]",
         "difficulty": "Medium",
-        "explanation": "The `includes()` method checks if 'World' is a substring, returning `true`.",
-        "hint": "Consider what `includes()` checks for."
+        "explanation": "`toISOString()` returns a string like '2025-07-14T...', and `split('T')[0]` extracts '2025-07-14'."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet str = 'JavaScript';\nconsole.log(str.charAt(4));\n```",
-        "options": ["'S'", "'s'", "'c'", "''"],
-        "answer": "'S'",
+        "question": "How do you extract the day of the week from a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
+        "options": ["date.getDay()", "date.getDate()", "date.getWeekday()", ",date.day()"],
+        "answer": "date.getDay()",
         "difficulty": "Medium",
-        "explanation": "The `charAt(4)` method returns the character at index 4, which is 'S'.",
-        "hint": "Count the character position in the string."
+        "explanation": "`getDay()` returns the day of the week (0–6, Sunday to Saturday)."
     },
     {
-        "question": "What is the value of `str` after this code runs?\n```javascript\nlet str = 'hello';\nstr = str.replace('h', 'H');\n```",
-        "options": ["'Hello'", "'hello'", "'Hhello'", "'Helloo'"],
-        "answer": "'Hello'",
+        "question": "How do you create a Date object for 2025-12-31 at 23:59:59?",
+        "options": ["new Date('2025-12-31 JUL-14-2025 23:59:59')", "new Date(2025, 11, 31, 23, 59, 59)", "new Date(2025, 12, 31, 23, 59, 59)", "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)"],
+        "answer": "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)",
         "difficulty": "Medium",
-        "explanation": "The `replace()` method replaces the first 'h' with 'H', resulting in 'Hello'.",
-        "hint": "Consider what `replace()` does with the first occurrence."
+        "explanation": "Both the string format and the constructor with 0-based month (11 for December) work."
     },
     {
-        "question": "What is the value of `num` after this code runs?\n```javascript\nlet num = Math.round(7.6);\n```",
-        "options": ["7", "8", "7.6", "8.0"],
-        "answer": "8",
+        "question": "How do you add one month to a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
+        "options": ["date.setMonth(date.getMonth() + 1)", "date.addMonth(1)", "date.setMonth(1)", "date.month += 1"],
+        "answer": "date.setMonth(date.getMonth() + 1)",
+        "難易度": "Medium",
+        "explanation": "`setMonth()` with `getMonth() + 1` increments the month, handling year rollovers."
+    },
+    {
+        "question": "How do you write a function that accepts variable arguments?\n```javascript\nfunction sum(...numbers) {}\n```",
+        "options": ["Use the rest parameter syntax", "Use arguments object", "Both Use the rest parameter syntax and Use arguments object", "Use a fixed parameter list"],
+        "answer": "Both Use the rest parameter syntax and Use arguments object",
         "difficulty": "Medium",
-        "explanation": "The `Math.round()` function rounds 7.6 to the nearest integer, which is 8.",
-        "hint": "Consider how `Math.round()` handles decimals."
+        "explanation": "The rest parameter (`...numbers`) or the `arguments` object can handle variable arguments."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nconsole.log(Math.random());\n```",
-        "options": ["A number between 0 and 1", "A number between 1 and 10", "A whole number", "Nothing"],
-        "answer": "A number between 0 and 1",
-        "difficulty": "Easy",
-        "explanation": "The `Math.random()` function returns a random number between 0 (inclusive) and 1 (exclusive).",
-        "hint": "Consider the range of `Math.random()`."
-    },
-    {
-        "question": "What is the value of `x` after this code runs?\n```javascript\nlet x = parseInt('123');\n```",
-        "options": ["123", "'123'", "NaN", "Error"],
-        "answer": "123",
+        "question": "How do you pass an object as a parameter and access its properties?\n```javascript\nfunction process({name}) {}\n```",
+        "options": ["process({name: 'John'})", "process('John')", "process.name('John')", "process({name: 'John'}.name)"],
+        "answer": "process({name: 'John'})",
         "difficulty": "Medium",
-        "explanation": "The `parseInt()` function converts the string '123' to the number 123.",
-        "hint": "Check how `parseInt()` converts strings."
+        "explanation": "Destructuring in the parameter allows direct access to the `name` property of the passed object."
     },
     {
-        "question": "What is the value of `str` after this code runs?\n```javascript\nlet str = '123';\nstr = Number(str).toString();\n```",
-        "options": ["'123'", "123", "'NaN'", "Error"],
-        "answer": "'123'",
+        "question": "How do you return multiple values from a function?",
+        "options": ["return [val1, val2]", "return {val1, val2}", "return val1, val2", "Both return [val1, val2] and return {val1, val2}"],
+        "answer": "Both return [val1, val2] and return {val1, val2}",
         "difficulty": "Medium",
-        "explanation": "The `Number()` function converts '123' to 123, and `toString()` converts it back to '123'.",
-        "hint": "Trace the conversion process."
+        "explanation": "Returning an array or object allows multiple values to be returned and destructured by the caller."
     },
     {
-        "question": "What is the value of `x` after this code runs?\n```javascript\nlet x = 3.14159;\nx = x.toFixed(2);\n```",
-        "options": ["'3.14'", "3.14", "'3.14159'", "3"],
-        "answer": "'3.14'",
+        "question": "How do you avoid global variable conflicts in a function?\n```javascript\nlet x = 10;\nfunction myFunc() {\n  let x = 20;\n}\n```",
+        "options": ["Use `let` or `const` inside the function", "Use `var` globally", "Avoid naming variables", "Use globalThis.x"],
+        "answer": "Use `let` or `const` inside the function",
         "difficulty": "Medium",
-        "explanation": "The `toFixed(2)` method formats the number to 2 decimal places and returns it as a string, '3.14'.",
-        "hint": "Check the return type of `toFixed()`."
+        "explanation": "Declaring variables with `let` or `const` inside a function creates local scope, avoiding global conflicts."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet date = new Date('2025-06-28');\nconsole.log(date.getFullYear());\n```",
-        "options": ["2025", "6", "28", "Error"],
-        "answer": "2025",
+        "question": "How do you structure a switch statement to handle multiple cases?\n```javascript\nlet value = 2;\nswitch(value) {}\n```",
+        "options": ["switch(value) { case 1: case 2: return 'Low'; }", "switch(value) { case 1, 2: return 'Low'; }", "switch(value) { case 1 || 2: return 'Low'; }", "switch(value) { case [1, 2]: return 'Low'; }"],
+        "answer": "switch(value) { case 1: case 2: return 'Low'; }",
         "difficulty": "Medium",
-        "explanation": "The `getFullYear()` method returns the year of the date, which is 2025.",
-        "hint": "Check what `getFullYear()` extracts."
+        "explanation": "Multiple cases can share the same block by listing them sequentially without breaks."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet date = new Date('2025-06-28');\nconsole.log(date.getMonth());\n```",
-        "options": ["5", "6", "28", "2025"],
-        "answer": "5",
+        "question": "How do you ensure a switch statement handles an unexpected value?\n```javascript\nswitch(value) {}\n```",
+        "options": ["Add a default case", "Add a break statement", "Use a try-catch", "Add an else clause"],
+        "answer": "Add a default case",
         "difficulty": "Medium",
-        "explanation": "The `getMonth()` method returns the month (0-11), so June is 5.",
-        "hint": "Remember months are zero-based in JavaScript."
+        "explanation": "A `default` case handles values not matched by any `case`."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet date = new Date('2025-06-28');\ndate.setFullYear(2026);\nconsole.log(date.getFullYear());\n```",
-        "options": ["2025", "2026", "6", "28"],
-        "answer": "2026",
+        "question": "How do you prevent an infinite while loop?\n```javascript\nlet i = 0;\nwhile (i < 5) {}\n```",
+        "options": ["Increment i inside the loop", "Use break", "Both Increment i inside the loop and Use break", "Set i outside the loop"],
+        "answer": "Both Increment i inside the loop and Use break",
         "difficulty": "Medium",
-        "explanation": "The `setFullYear(2026)` method changes the year to 2026, and `getFullYear()` returns it.",
-        "hint": "Check how `setFullYear()` modifies the date."
+        "explanation": "Incrementing the loop variable (`i++`) or using `break` ensures the condition eventually becomes false."
     },
     {
-        "question": "What does this function return?\n```javascript\nfunction square(num) {\n  return num * num;\n}\nconsole.log(square(4));\n```",
-        "options": ["16", "8", "4", "Error"],
-        "answer": "16",
-        "difficulty": "Easy",
-        "explanation": "The function `square` returns `num * num`, so `square(4)` returns `4 * 4 = 16`.",
-        "hint": "Evaluate the function's return value."
-    },
-    {
-        "question": "What is the value of `x` after this code runs?\n```javascript\nlet x = 0;\nfunction increment(num) {\n  return num + 1;\n}\nx = increment(5);\n```",
-        "options": ["6", "5", "1", "0"],
-        "answer": "6",
+        "question": "How does a do...while loop ensure at least one execution?\n```javascript\nlet i = 0;\ndo {} while (i < 0);\n```",
+        "options": ["Condition is checked after the block", "Condition is checked before", "It uses a counter", "It requires a break"],
+        "answer": "Condition is checked after the block",
         "difficulty": "Medium",
-        "explanation": "The function `increment` returns `num + 1`, so `increment(5)` returns 6, assigned to `x`.",
-        "hint": "Check the function's parameter and return value."
+        "explanation": "A `do...while` loop runs the block first, then checks the condition, ensuring at least one execution."
     },
     {
-        "question": "What is the value of `x` after this code runs?\n```javascript\nlet x = 10;\nfunction setX() {\n  let x = 20;\n}\nsetX();\n```",
-        "options": ["10", "20", "undefined", "Error"],
-        "answer": "10",
+        "question": "Why might you place a `<script>` tag in the `<head>` with a defer attribute?",
+        "options": ["To load the script asynchronously", "To execute after DOM is parsed", "To improve performance", "Both To execute after DOM is parsed and To improve performance"],
+        "answer": "Both To execute after DOM is parsed and To improve performance",
         "difficulty": "Medium",
-        "explanation": "The `x` inside `setX` is a local variable, so the global `x` remains 10.",
-        "hint": "Consider variable scope in functions."
+        "explanation": "The `defer` attribute ensures the script runs after the DOM is fully parsed, improving performance."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 3;\nswitch (x) {\n  case 3:\n    console.log('Three');\n    break;\n  default:\n    console.log('Other');\n}\n```",
-        "options": ["'Three'", "'Other'", "Nothing", "Error"],
-        "answer": "'Three'",
+        "question": "How do you write a multi-line comment that explains a function’s purpose?",
+        "options": ["/* Comment */", "// Comment", "# Comment", "<!-- Comment -->"],
+        "answer": "/* Comment */",
         "difficulty": "Medium",
-        "explanation": "The `switch` statement matches `x = 3` to `case 3`, logging 'Three' and breaking.",
-        "hint": "Trace the `switch` case execution."
+        "explanation": "Multi-line comments use `/* */` to document code, such as a function’s purpose."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet x = 5;\nswitch (x) {\n  case 3:\n    console.log('Three');\n    break;\n  case 5:\n    console.log('Five');\n}\n```",
-        "options": ["'Three'", "'Five'", "Nothing", "'Three', 'Five'"],
-        "answer": "'Five'",
+        "question": "How do you handle a double-click event on a link?\n```javascript\nlet link = document.querySelector('a');\n```",
+        "options": ["link.addEventListener('dblclick', func)", "link.onclick = func", "link.doubleClick = func", "link.on('dblclick', func)"],
+        "answer": "link.addEventListener('dblclick', func)",
         "difficulty": "Medium",
-        "explanation": "The `switch` matches `x = 5` to `case 5`, logging 'Five'. No `break` causes fall-through, but no further cases apply.",
-        "hint": "Check for fall-through behavior in `switch`."
+        "explanation": "The `dblclick` event is handled using `addEventListener` for double-clicks."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet i = 0;\nwhile (i < 2) {\n  console.log(i);\n  i++;\n}\n```",
-        "options": ["0, 1", "0, 1, 2", "1, 2", "Nothing"],
-        "answer": "0, 1",
+        "question": "How do you detect when a button is right-clicked?\n```javascript\nlet button = document.querySelector('button');\n```",
+        "options": ["button.addEventListener('contextmenu', func)", "button.onrightclick = func", "button.onclick = func", "button.addEventListener('rightclick', func)"],
+        "answer": "button.addEventListener('contextmenu', func)",
         "difficulty": "Medium",
-        "explanation": "The `while` loop logs `i` and increments it until `i < 2` is false, logging 0 and 1.",
-        "hint": "Trace the `while` loop iterations."
+        "explanation": "The `contextmenu` event fires on right-clicks, typically used for context menus."
     },
     {
-        "question": "What is logged to the console?\n```javascript\nlet i = 0;\ndo {\n  console.log(i);\n  i++;\n} while (i < 2);\n```",
-        "options": ["0, 1", "0, 1, 2", "1, 2", "Nothing"],
-        "answer": "0, 1",
+        "question": "How do you handle a mouse leaving an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.addEventListener('mouseout', func)", "el.addEventListener('mouseleave', func)", "el.addEventListener('mouseexit', func)", "Both el.addEventListener('mouseout', func) and el.addEventListener('mouseleave', func)"],
+        "answer": "Both el.addEventListener('mouseout', func) and el.addEventListener('mouseleave', func)",
         "difficulty": "Medium",
-        "explanation": "The `do...while` loop logs `i` and increments it, continuing until `i < 2` is false, logging 0 and 1.",
-        "hint": "Consider the guaranteed first iteration of `do...while`."
+        "explanation": "`mouseout` and `mouseleave` both detect when the mouse leaves an element, with `mouseleave` not bubbling."
     },
     {
-        "question": "Where should JavaScript code be placed in an HTML file to ensure it runs after the DOM is loaded?\n```html\n<script>...</script>\n```",
-        "options": ["In the `<head>`", "At the end of `<body>`", "Before `<!DOCTYPE html>`", "Anywhere"],
-        "answer": "At the end of `<body>`",
+        "question": "How do you detect when an input field loses focus?\n```javascript\nlet input = document.querySelector('input');\n```",
+        "options": ["input.addEventListener('blur', func)", "input.addEventListener('focusout', func)", "input.addEventListener('change', func)", "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)"],
+        "answer": "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)",
         "difficulty": "Medium",
-        "explanation": "Placing `<script>` at the end of `<body>` ensures the DOM is fully loaded before execution.",
-        "hint": "Think about DOM loading order."
+        "explanation": "`blur`. and `focusout` both trigger when an input loses focus, with `focusout` bubbling."
     },
     {
-        "question": "What is the purpose of this comment?\n```javascript\n// This is a comment\nlet x = 10;\n```",
-        "options": ["Executes code", "Documents code", "Logs to console", "Defines a variable"],
-        "answer": "Documents code",
-        "difficulty": "Easy",
-        "explanation": "Comments like `//` are used to document or explain code without affecting execution.",
-        "hint": "Consider the role of comments in code."
-    },
-    {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('a').onclick = function() { console.log('Clicked'); };\n```",
-        "options": ["Logs 'Clicked' on page load", "Logs 'Clicked' when a link is clicked", "Changes the link text", "Nothing"],
-        "answer": "Logs 'Clicked' when a link is clicked",
+        "question": "How do you validate an input field’s value before reading it?\n```javascript\nlet input = document.querySelector('input');\n```",
+        "options": ["if (input.value) {}", "if (input.value !== '') {}", "if (input.checkValidity()) {}", "Both if (input.value !== '') {} and if (input.checkValidity()) {}"],
+        "answer": "Both if (input.value !== '') {} and if (input.checkValidity()) {}",
         "difficulty": "Medium",
-        "explanation": "The `onclick` event handler logs 'Clicked' when the link is clicked.",
-        "hint": "Check the event being assigned."
+        "explanation": "Check if `value` is not empty or use `checkValidity()` for HTML5 validation constraints."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('button').addEventListener('click', () => console.log('Button'));\n```",
-        "options": ["Logs 'Button' on page load", "Logs 'Button' when clicked", "Changes button text", "Nothing"],
-        "answer": "Logs 'Button' when clicked",
+        "question": "How do you programmatically set a number input to 42?\n```javascript\nlet input = document.querySelector('input[type=\"number\"]');\n```",
+        "options": ["input.value = 42", "input.value = '42'", "input.setAttribute('value', 42)", "All of the above"],
+        "answer": "All of the above",
         "difficulty": "Medium",
-        "explanation": "The `addEventListener` assigns a click event to the button, logging 'Button' when clicked.",
-        "hint": "Consider how `addEventListener` works."
+        "explanation": "Setting `value` directly or via `setAttribute` updates the input; numbers are coerced to strings."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('div').onmouseover = function() { console.log('Hover'); };\n```",
-        "options": ["Logs 'Hover' on click", "Logs 'Hover' on mouseover", "Changes div text", "Nothing"],
-        "answer": "Logs 'Hover' on mouseover",
+        "question": "How do you update a paragraph’s HTML content safely?\n```javascript\nlet p = document.querySelector('p');\n```",
+        "options": ["p.innerHTML = '<b>Text</b>'", "p.textContent = '<b>Text</b>'", "p.innerText = '<b>Text</b>'", "p.setHTML('<b>Text</b>')"],
+        "answer": "p.innerHTML = '<b>Text</b>'",
         "difficulty": "Medium",
-        "explanation": "The `onmouseover` event triggers when the mouse hovers over the div, logging 'Hover'.",
-        "hint": "Check the mouse event type."
+        "explanation": "`innerHTML` sets HTML content, but use with caution to avoid XSS; `textContent` escapes HTML."
     },
     {
-        "question": "What is the value of `value` after this code runs?\n```javascript\nlet value = document.querySelector('input').value;\n```",
-        "options": ["The input's value", "undefined", "null", "The input element"],
-        "answer": "The input's value",
+        "question": "How do you toggle an image’s visibility using styles?\n```javascript\nlet img = document.querySelector('img');\n```",
+        "options": ["img.style.display = img.style.display === 'none' ? 'block' : 'none'", "img.toggle('visible')", "img.style.visible = 'toggle'", "img.style.opacity = 0"],
+        "answer": "img.style.display = img.style.display === 'none' ? 'block' : 'none'",
         "difficulty": "Medium",
-        "explanation": "The `value` property returns the current value of the input element.",
-        "hint": "Consider what `value` retrieves from an input."
+        "explanation": "Toggling `display` between 'none' and 'block' shows or hides the image."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('input').value = 'Hello';\n```",
-        "options": ["Reads the input value", "Sets the input value to 'Hello'", "Logs 'Hello'", "Nothing"],
-        "answer": "Sets the input value to 'Hello'",
+        "question": "How do you swap an image and add a class on click?\n```javascript\nlet img = document.querySelector('img');\n```",
+        "options": ["img.src = 'new.jpg'; img.classList.add('active')", "img.setAttribute('src', 'new.jpg'); img.className = 'active'", "img.swapImage('new.jpg'); img.classList.add('active')", "Both img.src = 'new.jpg'; img.classList.add('active') and img.setAttribute('src', 'new.jpg'); img.className = 'active'"],
+        "answer": "Both img.src = 'new.jpg'; img.classList.add('active') and img.setAttribute('src', 'new.jpg'); img.className = 'active'",
         "difficulty": "Medium",
-        "explanation": "Assigning to the `value` property sets the input element's value to 'Hello'.",
-        "hint": "Check what assigning to `value` does."
+        "explanation": "Both setting `src` and `classList.add` or `setAttribute` and `className` work to swap the image and add a class."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('p').innerText = 'New Text';\n```",
-        "options": ["Logs 'New Text'", "Sets paragraph text to 'New Text'", "Reads paragraph text", "Nothing"],
-        "answer": "Sets paragraph text to 'New Text'",
+        "question": "How do you set multiple styles on an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.style.cssText = 'color: blue; font-size: 16px'", "el.style = {color: 'blue', fontSize: '16px'}", "el.setStyles({color: 'blue', fontSize: '16px'})", "el.style.set('color: blue; font-size: 16px')"],
+        "answer": "el.style.cssText = 'color: blue; font-size: 16px'",
         "difficulty": "Medium",
-        "explanation": "The `innerText` property sets the text content of the paragraph to 'New Text'.",
-        "hint": "Consider what `innerText` modifies."
+        "explanation": "`cssText` sets multiple inline styles as a single CSS string."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('img').src = 'new.jpg';\n```",
-        "options": ["Changes the image source", "Logs the image source", "Reads the image source", "Nothing"],
-        "answer": "Changes the image source",
+        "question": "How do you select all `<div>` elements and modify the first one?\n```javascript\nlet divs = document.getElementsByTagName('div');\n```",
+        "options": ["divs[0].style.color = 'blue'", "divs.first().style.color = 'blue'", "divs.item(0).style.color = 'blue'", "Both divs[0].style.color = 'blue' and divs.item(0).style.color = 'blue'"],
+        "answer": "Both divs[0].style.color = 'blue' and divs.item(0).style.color = 'blue'",
         "difficulty": "Medium",
-        "explanation": "Assigning to the `src` property changes the image displayed to 'new.jpg'.",
-        "hint": "Check what `src` modifies on an image."
+        "explanation": "`getElementsByTagName` returns an HTMLCollection; access the first element with `[0]` or `item(0)`."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('img').className = 'active';\n```",
-        "options": ["Adds a class to the image", "Removes a class", "Logs the class", "Nothing"],
-        "answer": "Adds a class to the image",
+        "question": "How do you select `<p>` elements with a specific class?\n```javascript\ndocument.querySelectorAll('p.className');\n```",
+        "options": ["document.querySelectorAll('p.className')", "document.getElementsByClassName('className')", "document.querySelectorAll('p[class=\"className\"]')", "Both document.querySelectorAll('p.className') and document.querySelectorAll('p[class=\"className\"]')"],
+        "answer": "Both document.querySelectorAll('p.className') and document.querySelectorAll('p[class=\"className\"]')",
         "difficulty": "Medium",
-        "explanation": "The `className` property sets the class of the image to 'active'.",
-        "hint": "Consider how `className` affects elements."
-    },
-    {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('div').style.backgroundColor = 'blue';\n```",
-        "options": ["Sets the div's background to blue", "Logs the background color", "Removes the background", "Nothing"],
-        "answer": "Sets the div's background to blue",
-        "difficulty": "Medium",
-        "explanation": "The `style.backgroundColor` property sets the div's background color to blue.",
-        "hint": "Check what `style` modifies."
-    },
-    {
-        "question": "What does this code return?\n```javascript\ndocument.getElementsByTagName('p');\n```",
-        "options": ["A single paragraph", "An array-like list of paragraphs", "The first paragraph", "Nothing"],
-        "answer": "An array-like list of paragraphs",
-        "difficulty": "Medium",
-        "explanation": "The `getElementsByTagName()` method returns an HTMLCollection of all `<p>` elements.",
-        "hint": "Consider what `getElementsByTagName` targets."
-    },
-    {
-        "question": "What does this code do?\n```javascript\nlet paras = document.getElementsByTagName('p');\nparas[0].innerText = 'First';\n```",
-        "options": ["Sets first paragraph text to 'First'", "Sets all paragraphs to 'First'", "Logs 'First'", "Nothing"],
-        "answer": "Sets first paragraph text to 'First'",
-        "difficulty": "Medium",
-        "explanation": "The first `<p>` element in the HTMLCollection has its `innerText` set to 'First'.",
-        "hint": "Check how indexing works with HTMLCollection."
+        "explanation": "CSS selectors `p.className` and `p[class=\"className\"]` both select `<p>` elements with the class 'className'."
     },
     {
         "question": "What is the DOM in JavaScript?",
-        "options": ["A database", "A programming interface for HTML", "A JavaScript function", "A styling method"],
-        "answer": "A programming interface for HTML",
-        "difficulty": "Easy",
-        "explanation": "The DOM (Document Object Model) is a programming interface for manipulating HTML and XML documents.",
-        "hint": "Think about how JavaScript interacts with HTML."
-    },
-    {
-        "question": "What is the parent of an element returned by `document.querySelector('p')`?\n```javascript\nlet p = document.querySelector('p');\n```",
-        "options": ["The `<body>` element", "The element containing `<p>`", "The `<html>` element", "Nothing"],
-        "answer": "The element containing `<p>`",
+        "options": ["A programming interface for HTML documents", "A database of elements", "A styling framework", "A JavaScript library"],
+        "answer": "A programming interface for HTML documents",
         "difficulty": "Medium",
-        "explanation": "The parent is the element that directly contains the `<p>` element, accessed via `parentNode`.",
-        "hint": "Consider the DOM tree structure."
+        "explanation": "The DOM (Document Object Model) is a tree-like structure representing HTML, allowing JavaScript to manipulate it."
     },
     {
-        "question": "What does this code return?\n```javascript\ndocument.querySelector('div').children;\n```",
-        "options": ["All child elements", "The first child", "The parent", "Nothing"],
-        "answer": "All child elements",
+        "question": "How do you access the parent of an element?\n```javascript\nlet el = document.querySelector('span');\n```",
+        "options": ["el.parentNode", "el.parentElement", "el.getParent()", "Both el.parentNode and el.parentElement"],
+        "answer": "Both el.parentNode and el.parentElement",
         "difficulty": "Medium",
-        "explanation": "The `children` property returns an HTMLCollection of all child elements of the div.",
-        "hint": "Check what `children` retrieves in the DOM."
+        "explanation": "`parentNode` and `parentElement` both return the parent; `parentElement` returns null for non-element nodes."
     },
     {
-        "question": "What is the value of `node.nodeType` for a text node?\n```javascript\nlet node = document.createTextNode('text');\n```",
-        "options": ["1", "3", "8", "11"],
-        "answer": "3",
-        "difficulty": "Hard",
-        "explanation": "The `nodeType` property returns 3 for text nodes in the DOM.",
-        "hint": "Recall DOM node type values."
-    },
-    {
-        "question": "What does this code return?\n```javascript\ndocument.querySelectorAll('.class');\n```",
-        "options": ["A single element", "A NodeList of elements", "The first element", "Nothing"],
-        "answer": "A NodeList of elements",
+        "question": "How do you get all child elements of a node?\n```javascript\nlet parent = document.querySelector('div');\n```",
+        "options": ["parent.children", "parent.childNodes", "parent.getChildren()", "Both parent.children and parent.childNodes"],
+        "answer": "Both parent.children and parent.childNodes",
         "difficulty": "Medium",
-        "explanation": "The `querySelectorAll()` method returns a NodeList of all elements with the class 'class'.",
-        "hint": "Check how `querySelectorAll` differs from `querySelector`."
+        "explanation": "`children` returns only element children; `childNodes` includes all nodes (e.g., text nodes)."
     },
     {
-        "question": "What does this code return?\n```javascript\ndocument.querySelector('div').tagName;\n```",
-        "options": ["'div'", "'DIV'", "The div's class", "Nothing"],
-        "answer": "'DIV'",
+        "question": "How do you filter out non-element nodes from a node’s children?\n```javascript\nlet parent = document.querySelector('div');\n```",
+        "options": ["[...parent.childNodes].filter(node => node.nodeType === 1)", "[...parent.children].filter(node => node.nodeType === 1)", "parent.childNodes.filter(node => node.nodeType === 3)", "parent.getElements()"],
+        "answer": "[...parent.childNodes].filter(node => node.nodeType === 1)",
         "difficulty": "Medium",
-        "explanation": "The `tagName` property returns the tag name of the element in uppercase, 'DIV'.",
-        "hint": "Check what `tagName` returns."
+        "explanation": "`childNodes` includes all nodes; filter with `nodeType === 1` to get only elements."
     },
     {
-        "question": "What does this code return?\n```javascript\ndocument.getElementsByTagName('p').length;\n```",
-        "options": ["The number of `<p>` elements", "The first `<p>` element", "0", "Nothing"],
-        "answer": "The number of `<p>` elements",
+        "question": "How do you select an element by its ID using the DOM?\n```javascript\ndocument.getElementById('myId');\n```",
+        "options": ["document.getElementById('myId')", "document.querySelector('#myId')", "document.find('#myId')", "Both document.getElementById('myId') and document.querySelector('#myId')"],
+        "answer": "Both document.getElementById('myId') and document.querySelector('#myId')",
         "difficulty": "Medium",
-        "explanation": "The `length` property of the HTMLCollection returns the number of `<p>` elements.",
-        "hint": "Consider what `length` measures."
+        "explanation": "`getElementById` and `querySelector('#myId')` both select an element by its ID."
     },
     {
-        "question": "What does this code do?\n```javascript\ndocument.querySelector('img').setAttribute('alt', 'Image');\n```",
-        "options": ["Sets the image's alt attribute", "Gets the alt attribute", "Removes the alt attribute", "Nothing"],
-        "answer": "Sets the image's alt attribute",
+        "question": "How do you get the tag name of an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.tagName", "el.nodeName", "el.name", "Both el.tagName and el.nodeName"],
+        "answer": "Both el.tagName and el.nodeName",
         "difficulty": "Medium",
-        "explanation": "The `setAttribute()` method sets the 'alt' attribute of the image to 'Image'.",
-        "hint": "Check what `setAttribute()` modifies."
+        "explanation": "`tagName` and `nodeName` both return the tag name (e.g., 'DIV') of an element."
     },
     {
-        "question": "What does this code return?\n```javascript\ndocument.querySelector('img').getAttribute('src');\n```",
-        "options": ["The image's src value", "The image element", "null", "Nothing"],
-        "answer": "The image's src value",
+        "question": "How do you count the number of `<p>` elements in a document?",
+        "options": ["document.querySelectorAll('p').length", "document.getElementsByTagName('p').count", "document.count('p')", "document.querySelector('p').length"],
+        "answer": "document.querySelectorAll('p').length",
         "difficulty": "Medium",
-        "explanation": "The `getAttribute('src')` method returns the value of the image's src attribute.",
-        "hint": "Check what `getAttribute()` retrieves."
+        "explanation": "`querySelectorAll('p')` returns a NodeList, and `length` gives the count of `<p>` elements."
     },
     {
-        "question": "What does this code do?\n```javascript\nlet p = document.createElement('p');\ndocument.body.appendChild(p);\n```",
-        "options": ["Adds a paragraph to `<body>`", "Removes a paragraph", "Logs the paragraph", "Nothing"],
-        "answer": "Adds a paragraph to `<body>`",
+        "question": "How do you check if an element has a specific attribute?\n```javascript\nlet el = document.querySelector('input');\n```",
+        "options": ["el.hasAttribute('type')", "el.getAttribute('type')", "el.attributes['type']", "Both el.hasAttribute('type') and el.attributes['type']"],
+        "answer": "el.hasAttribute('type')",
         "difficulty": "Medium",
-        "explanation": "The `createElement()` and `appendChild()` methods create and add a `<p>` element to `<body>`.",
-        "hint": "Consider how elements are added to the DOM."
+        "explanation": "`hasAttribute()` checks if an attribute exists, returning true or false."
     },
     {
-        "question": "What does this code do?\n```javascript\nlet div = document.querySelector('div');\nlet p = document.createElement('p');\ndiv.insertBefore(p, div.firstChild);\n```",
-        "options": ["Inserts a paragraph as the first child", "Inserts a paragraph as the last child", "Removes the first child", "Nothing"],
-        "answer": "Inserts a paragraph as the first child",
-        "difficulty": "Hard",
-        "explanation": "The `insertBefore()` method inserts the new `<p>` before the first child of the div.",
-        "hint": "Check the parameters of `insertBefore()`."
-    },
-    {
-        "question": "What is the value of `obj.name` after this code runs?\n```javascript\nlet obj = { name: 'John' };\n```",
-        "options": ["'John'", "undefined", "null", "Error"],
-        "answer": "'John'",
-        "difficulty": "Easy",
-        "explanation": "The `name` property of the object `obj` is set to 'John'.",
-        "hint": "Check how object properties are accessed."
-    },
-    {
-        "question": "What does this code return?\n```javascript\nlet obj = { greet: function() { return 'Hello'; } };\nconsole.log(obj.greet());\n```",
-        "options": ["'Hello'", "undefined", "null", "Error"],
-        "answer": "'Hello'",
+        "question": "How do you get the value of an element’s attribute?\n```javascript\nlet el = document.querySelector('input');\n```",
+        "options": ["el.getAttribute('value')", "el.attributes.value", "el.value", "Both el.getAttribute('value') and el.value"],
+        "answer": "Both el.getAttribute('value') and el.value",
         "difficulty": "Medium",
-        "explanation": "The `greet` method of the object returns 'Hello' when called.",
-        "hint": "Consider how object methods are invoked."
+        "explanation": "`getAttribute('value')` gets the attribute value; `value` directly accesses the input’s current value."
     },
     {
-        "question": "What does this code do?\n```javascript\nfunction Person(name) {\n  this.name = name;\n}\nlet person = new Person('Alice');\n```",
-        "options": ["Creates an object with a name property", "Logs 'Alice'", "Defines a function", "Nothing"],
-        "answer": "Creates an object with a name property",
+        "question": "How do you create and append a new `<div>` to the DOM?\n```javascript\nlet parent = document.querySelector('body');\n```",
+        "options": ["let div = document.createElement('div'); parent.appendChild(div)", "let div = new Element('div'); parent.append(div)", "parent.addElement('div')", "parent.createChild('div')"],
+        "answer": "let div = document.createElement('div'); parent.appendChild(div)",
         "difficulty": "Medium",
-        "explanation": "The `Person` constructor creates an object with a `name` property set to 'Alice'.",
-        "hint": "Check how constructors work with `new`."
+        "explanation": "`createElement` creates a new element, and `appendChild` adds it to the parent."
     },
     {
-        "question": "What does this code do?\n```javascript\nfunction Person() {\n  this.greet = function() { return 'Hi'; };\n}\nlet p = new Person();\nconsole.log(p.greet());\n```",
-        "options": ["Logs 'Hi'", "Logs 'Person'", "Creates a function", "Error"],
-        "answer": "Logs 'Hi'",
+        "question": "How do you insert a new element before an existing one?\n```javascript\nlet parent = document.querySelector('div');\nlet child = parent.firstChild;\n```",
+        "options": ["parent.insertBefore(newEl, child)", "parent.prepend(newEl)", "parent.insert(newEl, child)", "parent.addBefore(child, newEl)"],
+        "answer": "parent.insertBefore(newEl, child)",
         "difficulty": "Medium",
-        "explanation": "The constructor assigns a `greet` method to the object, which returns 'Hi' when called.",
-        "hint": "Consider how methods are defined in constructors."
+        "explanation": "`insertBefore(newEl, child)` inserts `newEl` before the specified `child` in the parent."
     },
     {
-        "question": "What does this code do?\n```javascript\nfunction Person() {}\nPerson.prototype.sayHello = function() { return 'Hello'; };\nlet p = new Person();\nconsole.log(p.sayHello());\n```",
-        "options": ["Logs 'Hello'", "Logs 'Person'", "Error", "Nothing"],
-        "answer": "Logs 'Hello'",
-        "difficulty": "Hard",
-        "explanation": "The `sayHello` method is added to the `Person` prototype, so `p.sayHello()` logs 'Hello'.",
-        "hint": "Check how prototype methods are inherited."
-    },
-    {
-        "question": "What does this code return?\n```javascript\nlet obj = { name: 'John' };\nconsole.log('name' in obj);\n```",
-        "options": ["true", "false", "'John'", "Error"],
-        "answer": "true",
+        "question": "How do you create an object with a property in JavaScript?\n```javascript\nlet obj = {};\n```",
+        "options": ["obj.name = 'John'", "obj['name'] = 'John'", "obj.set('name', 'John')", "Both obj.name = 'John' and obj['name'] = 'John'"],
+        "answer": "Both obj.name = 'John' and obj['name'] = 'John'",
         "difficulty": "Medium",
-        "explanation": "The `in` operator checks if the 'name' property exists in `obj`, returning `true`.",
-        "hint": "Consider how `in` checks for properties."
+        "explanation": "Properties can be set using dot notation (`obj.name`) or bracket notation (`obj['name']`)."
+    },
+    {
+        "question": "How do you define a method in an object literal?\n```javascript\nlet obj = {};\n```",
+        "options Crops = ['obj.method = function() {}', 'obj: method() {}', 'obj.method() {}', 'Both obj.method = function() {} and obj.method() {}'],
+        "answer": "obj.method = function() {}",
+        "difficulty": "Medium",
+        "explanation": "Methods are defined by assigning a function to a property, e.g., `obj.method = function() {}`."
+    },
+    {
+        "question": "How do you create an object method using concise syntax?\n```javascript\nlet obj = {\n  method() {}\n};\n```",
+        "options": ["method() {}", "function method() {}", "method: function() {}", "method = function() {}"],
+        "answer": "method() {}",
+        "difficulty": "Medium",
+        "explanation": "ES6 allows concise method syntax in object literals: `method() {}`."
+    },
+    {
+        "question": "How do you define a constructor function for objects?\n```javascript\nfunction Person(name) {}\n```",
+        "options": ["function Person(name) { this.name = name; }", "Person(name) { this.name = name; }", "class Person { name = name; }", "function Person(name) { name: name; }"],
+        "answer": "function Person(name) { this.name = name; }",
+        "difficulty": "Medium",
+        "explanation": "A constructor uses `function` and sets properties on `this`."
+    },
+    {
+        "question": "How do you add a method to a constructor’s prototype?\n```javascript\nfunction Person() {}\n```",
+        "options": ["Person.prototype.greet = function() {}", "Person.greet = function() {}", "Person.addMethod('greet', function() {})", "Person.method.greet = function() {}"],
+        "answer": "Person.prototype.greet = function() {}",
+        "difficulty": "Medium",
+        "explanation": "Methods added to `prototype` are shared by all instances of the constructor."
+    },
+    {
+        "question": "How do you add a property to all instances of a constructor?\n```javascript\nfunction Person() {}\n```",
+        "options": ["Person.prototype.prop = 'value'", "Person.prop = 'value'", "Person.setProp('value')", "Person.add('prop', 'value')"],
+        "answer": "Person.prototype.prop = 'value'",
+        "difficulty": "Medium",
+        "explanation": "Properties on `prototype` are inherited by all instances of the constructor."
+    },
+    {
+        "question": "How do you check if an object has a specific property?\n```javascript\nlet obj = {name: 'John'};\n```",
+        "options": ["'name' in obj", "obj.hasOwnProperty('name')", "obj.isProperty('name')", "Both 'name' in obj and obj.hasOwnProperty('name')"],
+        "answer": "Both 'name' in obj and obj.hasOwnProperty('name')",
+        "difficulty": "Medium",
+        "explanation": "`in` checks for properties in the object and its prototype chain; `hasOwnProperty` checks only the object itself."
     }
 ]
 
@@ -556,21 +389,11 @@ quiz = [
 @st.cache_data
 def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
-    for i in range(len(shuffled) - 1):
-        if i < len(shuffled) - 1 and shuffled[i]["difficulty"] == shuffled[i + 1]["difficulty"]:
-            for j in range(i + 2, len(shuffled)):
-                if shuffled[j]["difficulty"] != shuffled[i]["difficulty"]:
-                    shuffled[i + 1], shuffled[j] = shuffled[j], shuffled[i + 1]
-                    break
     for q in shuffled:
         q["id"] = str(uuid.uuid4())
-        labeled_options = list(zip(q["options"], ["A", "B", "C", "D"]))
-        random.shuffle(labeled_options)
-        q["display_options"] = [f"{label}: {option}" for option, label in labeled_options]
-        for option, label in labeled_options:
-            if option == q["answer"]:
-                q["labeled_answer"] = f"{label}: {option}"
-                break
+        q["display_options"] = q["options"].copy()
+        random.shuffle(q["display_options"])
+        q["labeled_answer"] = q["answer"]
     return shuffled
 
 # Initialize session state
@@ -587,7 +410,6 @@ if "quiz_data" not in st.session_state:
         "time_left": 1800,  # 30 minutes
         "theme": "dark",
         "streak": 0,
-        "show_hint": False,
         "started": False
     })
 
@@ -616,29 +438,8 @@ def reset_quiz():
         "feedback": None,
         "time_left": 1800,
         "streak": 0,
-        "show_hint": False,
         "started": False
     })
-    st.rerun()
-
-# Skip question
-def skip_question():
-    st.session_state.answers[st.session_state.current_q] = {
-        "question": st.session_state.quiz_data[st.session_state.current_q]["question"],
-        "user_answer": "Skipped",
-        "correct_answer": st.session_state.quiz_data[st.session_state.current_q]["labeled_answer"],
-        "is_correct": False,
-        "difficulty": st.session_state.quiz_data[st.session_state.current_q]["difficulty"]
-    }
-    st.session_state.score = max(0, st.session_state.score - 0.5)
-    st.session_state.streak = 0
-    if st.session_state.current_q < len(quiz) - 1:
-        st.session_state.current_q += 1
-    else:
-        st.session_state.show_results = True
-    st.session_state.selected_option = None
-    st.session_state.feedback = None
-    st.session_state.show_hint = False
     st.rerun()
 
 # CSS for enhanced UI
@@ -717,7 +518,7 @@ st.markdown("""
     }
     .feedback-correct {
         color: #34c759;
-        font-weight: 600;
+        font-weight confronted: 600;
         font-size: 18px;
         margin: 15px 0;
         animation: fadeIn 0.5s ease;
@@ -821,7 +622,7 @@ if not st.session_state.started:
     st.markdown("""
     <div style="text-align: center;">
         <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 50 comprehensive questions!</p>
-        <p style="color: #b0b0d0;">30 minutes, 1-3 points per correct answer. Ready?</p>
+        <p style="color: #b0b0d0;">30 minutes, 2 points per correct answer. Ready?</p>
     </div>
     """, unsafe_allow_html=True)
     if st.button("Start Quiz", key="start_quiz"):
@@ -880,10 +681,8 @@ else:
                     if st.button(
                         option,
                         key=f"q{i}",
-                        disabled=st.session_state.selected_option is not None,
-                        help="Select this option"
+                        disabled=st.session_state.selected_option is not None
                     ):
-                        original_option = option[3:]
                         is_correct = option == q["labeled_answer"]
                         st.session_state.selected_option = option
                         st.session_state.feedback = {
@@ -899,13 +698,19 @@ else:
                             "difficulty": q["difficulty"]
                         }
                         if is_correct:
-                            points = {"Easy": 1, "Medium": 2, "Hard": 3}[q["difficulty"]]
-                            st.session_state.score += points
+                            st.session_state.score += 2  # 2 points for Medium difficulty
                             st.session_state.streak += 1
                             if st.session_state.streak >= 3:
                                 st.session_state.score += 0.5
                         else:
                             st.session_state.streak = 0
+                        # Automatically move to next question or show results
+                        if st.session_state.current_q < len(quiz) - 1:
+                            st.session_state.current_q += 1
+                            st.session_state.selected_option = None
+                            st.session_state.feedback = None
+                        else:
+                            st.session_state.show_results = True
                         st.rerun()
 
                 # Feedback
@@ -916,54 +721,12 @@ else:
                         st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
                         st.markdown(f'<div style="color: var(--text-color); font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
 
-                # Hint button
-                if st.button("💡 Show Hint", key="hint", disabled=st.session_state.show_hint or st.session_state.selected_option is not None):
-                    st.session_state.show_hint = True
-                    st.session_state.score = max(0, st.session_state.score - 0.25)
-                    st.rerun()
-                if st.session_state.show_hint:
-                    st.markdown(f'<div style="color: #facc15; font-size: 14px;">Hint: {q["hint"]}</div>', unsafe_allow_html=True)
-
-                # Navigation
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    if st.button("⬅ Previous", disabled=st.session_state.current_q == 0):
-                        if st.session_state.current_q > 0 and st.session_state.answers[st.session_state.current_q] and st.session_state.answers[st.session_state.current_q]["is_correct"]:
-                            points = {"Easy": 1, "Medium": 2, "Hard": 3}[st.session_state.answers[st.session_state.current_q]["difficulty"]]
-                            st.session_state.score -= points
-                            if st.session_state.streak >= 3:
-                                st.session_state.score -= 0.5
-                        st.session_state.current_q -= 1
-                        st.session_state.selected_option = None
-                        st.session_state.feedback = None
-                        st.session_state.show_hint = False
-                        st.rerun()
-                with col2:
-                    if st.button("⏭️ Skip", key="skip"):
-                        skip_question()
-                with col3:
-                    if st.session_state.current_q < len(quiz) - 1:
-                        if st.button("➡️ Next", disabled=st.session_state.selected_option is None):
-                            st.session_state.current_q += 1
-                            st.session_state.selected_option = None
-                            st.session_state.feedback = None
-                            st.session_state.show_hint = False
-                            st.rerun()
-                    else:
-                        if st.button("🏁 Finish", disabled=st.session_state.selected_option is None):
-                            st.session_state.show_results = True
-                            st.rerun()
-
-                # Reset quiz button
-                if st.button("🔄 Reset Quiz", key="reset"):
-                    reset_quiz()
-
                 st.markdown("</div>", unsafe_allow_html=True)
 
         else:
             # Results
             time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
-            total_possible_score = sum({"Easy": 1, "Medium": 2, "Hard": 3}[q["difficulty"]] for q in quiz)
+            total_possible_score = len(quiz) * 2  # 2 points per question
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
             st.markdown('<div class="question-container">', unsafe_allow_html=True)
             st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
@@ -974,7 +737,6 @@ else:
                 - 🎯 Accuracy: {accuracy:.1f}%<br>
                 - ✅ Correct: {sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])}<br>
                 - ❌ Incorrect: {sum(1 for ans in st.session_state.answers if ans and not ans["is_correct"])}<br>
-                - ⏭️ Skipped: {sum(1 for ans in st.session_state.answers if ans and ans["user_answer"] == "Skipped")}<br>
                 - 🔥 Max Streak: {st.session_state.streak}
             </div>
             """, unsafe_allow_html=True)
@@ -1007,10 +769,10 @@ else:
             st.markdown('<h3>📝 Review Your Answers</h3>', unsafe_allow_html=True)
             for i, ans in enumerate(st.session_state.answers):
                 if ans:
-                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})" if ans["user_answer"] != "Skipped" else "⏭️ Skipped"
+                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
                     st.markdown(f'<div style="color: var(--text-color);">Question {i+1}: {ans["question"]}<br>Your Answer: {ans["user_answer"]}<br>{status}<br>Explanation: {quiz[i]["explanation"]}</div>', unsafe_allow_html=True)
 
-            # Reset button
+            # Play Again button
             if st.button("🔄 Play Again", key="play_again"):
                 reset_quiz()
 
