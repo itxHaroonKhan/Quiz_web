@@ -84,14 +84,14 @@ quiz = [
     },
     {
         "question": "How do you extract the day of the week from a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
-        "options": ["date.getDay()", "date.getDate()", "date.getWeekday()", ",date.day()"],
+        "options": ["date.getDay()", "date.getDate()", "date.getWeekday()", "date.day()"],
         "answer": "date.getDay()",
         "difficulty": "Medium",
         "explanation": "`getDay()` returns the day of the week (0–6, Sunday to Saturday)."
     },
     {
         "question": "How do you create a Date object for 2025-12-31 at 23:59:59?",
-        "options": ["new Date('2025-12-31 JUL-14-2025 23:59:59')", "new Date(2025, 11, 31, 23, 59, 59)", "new Date(2025, 12, 31, 23, 59, 59)", "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)"],
+        "options": ["new Date('2025-12-31 23:59:59')", "new Date(2025, 11, 31, 23, 59, 59)", "new Date(2025, 12, 31, 23, 59, 59)", "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)"],
         "answer": "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)",
         "difficulty": "Medium",
         "explanation": "Both the string format and the constructor with 0-based month (11 for December) work."
@@ -100,7 +100,7 @@ quiz = [
         "question": "How do you add one month to a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
         "options": ["date.setMonth(date.getMonth() + 1)", "date.addMonth(1)", "date.setMonth(1)", "date.month += 1"],
         "answer": "date.setMonth(date.getMonth() + 1)",
-        "難易度": "Medium",
+        "difficulty": "Medium",
         "explanation": "`setMonth()` with `getMonth() + 1` increments the month, handling year rollovers."
     },
     {
@@ -199,7 +199,7 @@ quiz = [
         "options": ["input.addEventListener('blur', func)", "input.addEventListener('focusout', func)", "input.addEventListener('change', func)", "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)"],
         "answer": "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)",
         "difficulty": "Medium",
-        "explanation": "`blur`. and `focusout` both trigger when an input loses focus, with `focusout` bubbling."
+        "explanation": "`blur` and `focusout` both trigger when an input loses focus, with `focusout` bubbling."
     },
     {
         "question": "How do you validate an input field’s value before reading it?\n```javascript\nlet input = document.querySelector('input');\n```",
@@ -343,7 +343,7 @@ quiz = [
     },
     {
         "question": "How do you define a method in an object literal?\n```javascript\nlet obj = {};\n```",
-        "options Crops = ['obj.method = function() {}', 'obj: method() {}', 'obj.method() {}', 'Both obj.method = function() {} and obj.method() {}'],
+        "options": ["obj.method = function() {}", "obj: method() {}", "obj.method() {}", "Both obj.method = function() {} and obj.method() {}"],
         "answer": "obj.method = function() {}",
         "difficulty": "Medium",
         "explanation": "Methods are defined by assigning a function to a property, e.g., `obj.method = function() {}`."
@@ -518,7 +518,7 @@ st.markdown("""
     }
     .feedback-correct {
         color: #34c759;
-        font-weight confronted: 600;
+        font-weight: 600;
         font-size: 18px;
         margin: 15px 0;
         animation: fadeIn 0.5s ease;
