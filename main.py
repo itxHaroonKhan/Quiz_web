@@ -4,7 +4,7 @@ from datetime import datetime
 import uuid
 
 # Quiz data with 30 DOM-related questions
-quiz 
+quiz =
 
     [
     {
