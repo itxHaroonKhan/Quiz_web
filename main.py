@@ -4,33 +4,491 @@ from datetime import datetime
 import uuid
 
 # Quiz data with 30 DOM-related questions
-quiz = [
+quiz 
+
+    [
+    {
+        "question": "How do you convert a string to uppercase in JavaScript?",
+        "options": [
+            "str.toUpperCase()",
+            "str.upperCase()",
+            "str.toUpper()",
+            "str.makeUpperCase()"
+        ],
+        "answer": "str.toUpperCase()",
+        "difficulty": "Easy",
+        "explanation": "The `toUpperCase()` method converts all characters in a string to uppercase."
+    },
+    {
+        "question": "How do you measure the length of a string in JavaScript?",
+        "options": [
+            "str.length",
+            "str.size()",
+            "str.len()",
+            "str.count()"
+        ],
+        "answer": "str.length",
+        "difficulty": "Easy",
+        "explanation": "The `length` property returns the number of characters in a string."
+    },
+    {
+        "question": "How do you extract a substring from index 2 to 5 in a string?",
+        "options": [
+            "str.substring(2, 5)",
+            "str.slice(2, 6)",
+            "str.substr(2, 5)",
+            "str.extract(2, 5)"
+        ],
+        "answer": "str.substring(2, 5)",
+        "difficulty": "Medium",
+        "explanation": "`substring(2, 5)` extracts characters from index 2 up to, but not including, index 5."
+    },
+    {
+        "question": "How do you find the index of the first occurrence of 'cat' in a string?",
+        "options": [
+            "str.indexOf('cat')",
+            "str.search('cat')",
+            "str.find('cat')",
+            "str.locate('cat')"
+        ],
+        "answer": "str.indexOf('cat')",
+        "difficulty": "Medium",
+        "explanation": "`indexOf('cat')` returns the index of the first occurrence of 'cat' or -1 if not found."
+    },
+    {
+        "question": "How do you find the character at index 3 in a string?",
+        "options": [
+            "str.charAt(3)",
+            "str[3]",
+            "str.getChar(3)",
+            "str.at(3)"
+        ],
+        "answer": "str.charAt(3)",
+        "difficulty": "Easy",
+        "explanation": "`charAt(3)` returns the character at index 3 in the string."
+    },
+    {
+        "question": "How do you replace all occurrences of 'a' with 'b' in a string?",
+        "options": [
+            "str.replace(/a/g, 'b')",
+            "str.replace('a', 'b')",
+            "str.swap('a', 'b')",
+            "str.replaceAll('a', 'b')"
+        ],
+        "answer": "str.replace(/a/g, 'b')",
+        "difficulty": "Medium",
+        "explanation": "`replace(/a/g, 'b')` uses a regular expression with the global flag to replace all 'a's with 'b's."
+    },
+    {
+        "question": "How do you round a number to the nearest integer in JavaScript?",
+        "options": [
+            "Math.round(num)",
+            "Math.floor(num)",
+            "Math.ceil(num)",
+            "Math.trunc(num)"
+        ],
+        "answer": "Math.round(num)",
+        "difficulty": "Easy",
+        "explanation": "`Math.round(num)` rounds the number to the nearest integer."
+    },
+    {
+        "question": "How do you generate a random number between 0 and 1 in JavaScript?",
+        "options": [
+            "Math.random()",
+            "Math.rand()",
+            "Random.next()",
+            "Math.randomNumber()"
+        ],
+        "answer": "Math.random()",
+        "difficulty": "Easy",
+        "explanation": "`Math.random()` generates a random number between 0 (inclusive) and 1 (exclusive)."
+    },
+    {
+        "question": "How do you convert the string '123' to an integer?",
+        "options": [
+            "parseInt('123')",
+            "Number('123')",
+            "parseFloat('123')",
+            "int('123')"
+        ],
+        "answer": "parseInt('123')",
+        "difficulty": "Medium",
+        "explanation": "`parseInt('123')` converts a string to an integer."
+    },
+    {
+        "question": "How do you convert a number to a string in JavaScript?",
+        "options": [
+            "num.toString()",
+            "String(num)",
+            "num.toStr()",
+            "convertToString(num)"
+        ],
+        "answer": "num.toString()",
+        "difficulty": "Easy",
+        "explanation": "`toString()` converts a number to its string representation."
+    },
+    {
+        "question": "How do you limit a number to two decimal places?",
+        "options": [
+            "num.toFixed(2)",
+            "num.round(2)",
+            "num.toPrecision(2)",
+            "num.fixed(2)"
+        ],
+        "answer": "num.toFixed(2)",
+        "difficulty": "Medium",
+        "explanation": "`toFixed(2)` formats a number to two decimal places."
+    },
+    {
+        "question": "How do you get the current date and time in JavaScript?",
+        "options": [
+            "new Date()",
+            "Date.now()",
+            "Date.current()",
+            "new DateTime()"
+        ],
+        "answer": "new Date()",
+        "difficulty": "Easy",
+        "explanation": "`new Date()` creates a new Date object with the current date and time."
+    },
+    {
+        "question": "How do you extract the year from a Date object?",
+        "options": [
+            "date.getFullYear()",
+            "date.getYear()",
+            "date.year()",
+            "date.getDate()"
+        ],
+        "answer": "date.getFullYear()",
+        "difficulty": "Medium",
+        "explanation": "`getFullYear()` returns the four-digit year from a Date object."
+    },
+    {
+        "question": "How do you create a Date object for January 1, 2023?",
+        "options": [
+            "new Date(2023, 0, 1)",
+            "new Date('2023-01-01')",
+            "new Date(2023, 1, 1)",
+            "Date.create(2023, 1, 1)"
+        ],
+        "answer": "new Date(2023, 0, 1)",
+        "difficulty": "Medium",
+        "explanation": "Months are zero-based in JavaScript, so January is 0."
+    },
+    {
+        "question": "How do you set the year of a Date object to 2024?",
+        "options": [
+            "date.setFullYear(2024)",
+            "date.setYear(2024)",
+            "date.year = 2024",
+            "date.updateYear(2024)"
+        ],
+        "answer": "date.setFullYear(2024)",
+        "difficulty": "Medium",
+        "explanation": "`setFullYear(2024)` sets the year of a Date object."
+    },
+    {
+        "question": "How do you define a function in JavaScript?",
+        "options": [
+            "function myFunc() {}",
+            "def myFunc() {}",
+            "func myFunc() {}",
+            "myFunc() => {}"
+        ],
+        "answer": "function myFunc() {}",
+        "difficulty": "Easy",
+        "explanation": "A function is defined using the `function` keyword followed by the name and parentheses."
+    },
+    {
+        "question": "How do you pass a parameter to a function?",
+        "options": [
+            "function myFunc(param) {}",
+            "function myFunc: param {}",
+            "function myFunc[param] {}",
+            "function myFunc { param }"
+        ],
+        "answer": "function myFunc(param) {}",
+        "difficulty": "Easy",
+        "explanation": "Parameters are passed inside the parentheses of the function definition."
+    },
+    {
+        "question": "How do you return a value from a function?",
+        "options": [
+            "return value;",
+            "send value;",
+            "output value;",
+            "yield value;"
+        ],
+        "answer": "return value;",
+        "difficulty": "Easy",
+        "explanation": "The `return` statement sends a value back from a function."
+    },
+    {
+        "question": "What is the difference between local and global variables?",
+        "options": [
+            "Local variables are declared inside a function, global outside",
+            "Local variables are declared with `var`, global with `let`",
+            "Local variables are global, global are local",
+            "Local variables are constant, global are mutable"
+        ],
+        "answer": "Local variables are declared inside a function, global outside",
+        "difficulty": "Medium",
+        "explanation": "Local variables are scoped to the function they are declared in, while global variables are declared outside and accessible everywhere."
+    },
+    {
+        "question": "How do you start a switch statement in JavaScript?",
+        "options": [
+            "switch (expression) {",
+            "case (expression) {",
+            "switch { expression }",
+            "if (expression) {"
+        ],
+        "answer": "switch (expression) {",
+        "difficulty": "Easy",
+        "explanation": "A switch statement begins with `switch` followed by the expression in parentheses and an opening brace."
+    },
+    {
+        "question": "How do you complete a switch statement?",
+        "options": [
+            "Add a `default` case and close with `}`",
+            "Add a `break` and close with `}`",
+            "Add a `return` and close with `}`",
+            "Close with `end switch`"
+        ],
+        "answer": "Add a `default` case and close with `}`",
+        "difficulty": "Medium",
+        "explanation": "A switch statement typically includes a `default` case and ends with a closing brace `}`."
+    },
+    {
+        "question": "How do you write a while loop in JavaScript?",
+        "options": [
+            "while (condition) {}",
+            "loop (condition) {}",
+            "while condition {}",
+            "do while (condition) {}"
+        ],
+        "answer": "while (condition) {}",
+        "difficulty": "Easy",
+        "explanation": "A while loop uses the `while` keyword followed by a condition in parentheses and a block."
+    },
+    {
+        "question": "How do you write a do...while loop?",
+        "options": [
+            "do {} while (condition);",
+            "while (condition) do {}",
+            "do {condition} while {};",
+            "loop {} until (condition);"
+        ],
+        "answer": "do {} while (condition);",
+        "difficulty": "Medium",
+        "explanation": "A do...while loop executes the block first, then checks the condition, ending with a semicolon."
+    },
+    {
+        "question": "Where should JavaScript scripts be placed in an HTML file?",
+        "options": [
+            "Inside `<script>` tags in `<head>` or `<body>`",
+            "Inside `<js>` tags in `<head>`",
+            "Directly in `<body>` without tags",
+            "Only in external `.js` files"
+        ],
+        "answer": "Inside `<script>` tags in `<head>` or `<body>`",
+        "difficulty": "Easy",
+        "explanation": "JavaScript is placed in `<script>` tags, typically in `<head>` with `defer` or at the end of `<body>`."
+    },
+    {
+        "question": "How do you write a single-line comment in JavaScript?",
+        "options": [
+            "// Comment",
+            "# Comment",
+            "/* Comment */",
+            "<!-- Comment -->"
+        ],
+        "answer": "// Comment",
+        "difficulty": "Easy",
+        "explanation": "Single-line comments in JavaScript start with `//`."
+    },
+    {
+        "question": "How do you handle a click event on a link?",
+        "options": [
+            "link.addEventListener('click', handler)",
+            "link.onClick(handler)",
+            "link.click(handler)",
+            "link.event('click', handler)"
+        ],
+        "answer": "link.addEventListener('click', handler)",
+        "difficulty": "Medium",
+        "explanation": "`addEventListener('click', handler)` attaches a click event handler to a link."
+    },
+    {
+        "question": "How do you handle a click event on a button?",
+        "options": [
+            "button.addEventListener('click', handler)",
+            "button.onClick(handler)",
+            "button.click(handler)",
+            "button.event('click', handler)"
+        ],
+        "answer": "button.addEventListener('click', handler)",
+        "difficulty": "Medium",
+        "explanation": "`addEventListener('click', handler)` is used to handle button clicks."
+    },
+    {
+        "question": "How do you detect a mouseover event?",
+        "options": [
+            "element.addEventListener('mouseover', handler)",
+            "element.onMouseOver(handler)",
+            "element.mouseOver(handler)",
+            "element.event('mouseover', handler)"
+        ],
+        "answer": "element.addEventListener('mouseover', handler)",
+        "difficulty": "Medium",
+        "explanation": "`mouseover` event is detected using `addEventListener`."
+    },
+    {
+        "question": "How do you handle input field events?",
+        "options": [
+            "field.addEventListener('input', handler)",
+            "field.onInput(handler)",
+            "field.input(handler)",
+            "field.event('input', handler)"
+        ],
+        "answer": "field.addEventListener('input', handler)",
+        "difficulty": "Medium",
+        "explanation": "The `input` event is handled using `addEventListener` on input fields."
+    },
+    {
+        "question": "How do you read the value of an input field?",
+        "options": [
+            "field.value",
+            "field.getValue()",
+            "field.text",
+            "field.innerText"
+        ],
+        "answer": "field.value",
+        "difficulty": "Easy",
+        "explanation": "The `value` property retrieves the current value of an input field."
+    },
+    {
+        "question": "How do you set the value of an input field?",
+        "options": [
+            "field.value = 'new value'",
+            "field.setValue('new value')",
+            "field.text = 'new value'",
+            "field.innerText = 'new value'"
+        ],
+        "answer": "field.value = 'new value'",
+        "difficulty": "Easy",
+        "explanation": "Assigning to the `value` property sets the input field's value."
+    },
+    {
+        "question": "How do you set the text content of a paragraph?",
+        "options": [
+            "para.textContent = 'text'",
+            "para.innerText = 'text'",
+            "para.innerHTML = 'text'",
+            "para.content = 'text'"
+        ],
+        "answer": "para.textContent = 'text'",
+        "difficulty": "Medium",
+        "explanation": "`textContent` safely sets the text content of a paragraph."
+    },
+    {
+        "question": "How do you change the source of an image element?",
+        "options": [
+            "img.src = 'new.jpg'",
+            "img.setSrc('new.jpg')",
+            "img.image = 'new.jpg'",
+            "img.source = 'new.jpg'"
+        ],
+        "answer": "img.src = 'new.jpg'",
+        "difficulty": "Easy",
+        "explanation": "The `src` property sets the source of an image element."
+    },
+    {
+        "question": "How do you swap an image using JavaScript?",
+        "options": [
+            "img.src = 'new.jpg'",
+            "img.swap('new.jpg')",
+            "img.setImage('new.jpg')",
+            "img.change('new.jpg')"
+        ],
+        "answer": "img.src = 'new.jpg'",
+        "difficulty": "Easy",
+        "explanation": "Assigning a new URL to `img.src` swaps the image."
+    },
+    {
+        "question": "How do you add a class to an element?",
+        "options": [
+            "element.classList.add('class')",
+            "element.className = 'class'",
+            "element.addClass('class')",
+            "element.setClass('class')"
+        ],
+        "answer": "element.classList.add('class')",
+        "difficulty": "Medium",
+        "explanation": "`classList.add('class')` adds a class to an element without overwriting existing classes."
+    },
+    {
+        "question": "How do you set the style of an element?",
+        "options": [
+            "element.style.property = 'value'",
+            "element.setStyle('property', 'value')",
+            "element.css('property', 'value')",
+            "element.style = 'property: value'"
+        ],
+        "answer": "element.style.property = 'value'",
+        "difficulty": "Medium",
+        "explanation": "The `style` property is used to set CSS properties directly, e.g., `element.style.color = 'red'`."
+    },
+    {
+        "question": "How do you select all elements by tag name?",
+        "options": [
+            "document.getElementsByTagName('tag')",
+            "document.querySelectorAll('tag')",
+            "document.getTag('tag')",
+            "document.selectTag('tag')"
+        ],
+        "answer": "document.getElementsByTagName('tag')",
+        "difficulty": "Medium",
+        "explanation": "`getElementsByTagName('tag')` returns a live HTMLCollection of elements with the specified tag."
+    },
+    {
+        "question": "How do you select some elements by tag name with a specific class?",
+        "options": [
+            "document.querySelectorAll('tag.class')",
+            "document.getElementsByClassName('class')",
+            "document.getElementsByTag('tag.class')",
+            "document.select('tag.class')"
+        ],
+        "answer": "document.querySelectorAll('tag.class')",
+        "difficulty": "Medium",
+        "explanation": "`querySelectorAll('tag.class')` selects elements with the specified tag and class."
+    },
     {
         "question": "What is the DOM in JavaScript?",
         "options": [
-            "A tree-like representation of a webpage's structure",
-            "A database for storing webpage data",
-            "A method for styling webpages",
-            "A function for creating elements"
+            "Document Object Model",
+            "Data Object Model",
+            "Dynamic Object Model",
+            "Document Order Model"
         ],
-        "answer": "A tree-like representation of a webpage's structure",
+        "answer": "Document Object Model",
         "difficulty": "Easy",
-        "explanation": "The Document Object Model (DOM) is a tree-like structure representing the elements, attributes, and content of a webpage, allowing JavaScript to interact with it."
+        "explanation": "The DOM is a tree-like representation of the webpage's structure."
     },
     {
-        "question": "How do you access the parent node of a DOM element?",
+        "question": "How do you access the parent of a DOM element?",
         "options": [
             "element.parentNode",
-            "element.getParent()",
             "element.parent()",
-            "element.ancestor()"
+            "element.getParent()",
+            "element.parentElementNode"
         ],
         "answer": "element.parentNode",
         "difficulty": "Medium",
-        "explanation": "`parentNode` returns the immediate parent node of an element in the DOM tree, which could be an element or another node type."
+        "explanation": "`parentNode` returns the parent node of an element in the DOM."
     },
     {
-        "question": "How do you get all child elements of a DOM node?",
+        "question": "How do you find the children of a DOM element?",
         "options": [
             "element.children",
             "element.childNodes",
@@ -39,79 +497,31 @@ quiz = [
         ],
         "answer": "element.children",
         "difficulty": "Medium",
-        "explanation": "`children` returns an HTMLCollection of only the element nodes that are direct children of the specified node."
+        "explanation": "`children` returns an HTMLCollection of an element's child elements."
     },
     {
-        "question": "What does the `nodeType` property indicate in the DOM?",
+        "question": "What is the `nodeType` property used for in the DOM?",
         "options": [
-            "The type of the node",
-            "The number of child nodes",
-            "The node's position in the DOM",
-            "The node's CSS class"
+            "To identify the type of a node",
+            "To count nodes",
+            "To get node attributes",
+            "To set node styles"
         ],
-        "answer": "The type of the node",
+        "answer": "To identify the type of a node",
         "difficulty": "Medium",
-        "explanation": "`nodeType` returns a number indicating the type of node, such as 1 for elements, 3 for text nodes, or 8 for comments."
-    },
-    {
-        "question": "Which DOM nodeType value corresponds to an element node?",
-        "options": [
-            "1",
-            "3",
-            "8",
-            "9"
-        ],
-        "answer": "1",
-        "difficulty": "Hard",
-        "explanation": "In the DOM, a `nodeType` value of 1 represents an element node, such as a `<div>` or `<p>`."
+        "explanation": "`nodeType` returns a number indicating the type of node (e.g., 1 for elements, 3 for text)."
     },
     {
         "question": "How do you select an element by its ID in the DOM?",
         "options": [
             "document.getElementById('id')",
-            "document.querySelector('id')",
+            "document.querySelector('#id')",
             "document.getId('id')",
             "document.selectId('id')"
         ],
         "answer": "document.getElementById('id')",
         "difficulty": "Easy",
-        "explanation": "`getElementById('id')` is the most efficient way to select a single element by its unique ID."
-    },
-    {
-        "question": "How do you select all elements with a specific class using the DOM?",
-        "options": [
-            "document.getElementsByClassName('class')",
-            "document.querySelector('.class')",
-            "document.getClass('class')",
-            "document.selectClass('class')"
-        ],
-        "answer": "document.getElementsByClassName('class')",
-        "difficulty": "Medium",
-        "explanation": "`getElementsByClassName('class')` returns a live HTMLCollection of elements with the specified class name."
-    },
-    {
-        "question": "How do you select the first element matching a CSS selector?",
-        "options": [
-            "document.querySelector('selector')",
-            "document.getElementsByTagName('selector')[0]",
-            "document.select('selector')",
-            "document.find('selector')"
-        ],
-        "answer": "document.querySelector('selector')",
-        "difficulty": "Medium",
-        "explanation": "`querySelector('selector')` returns the first element that matches the specified CSS selector."
-    },
-    {
-        "question": "How do you select all elements matching a CSS selector?",
-        "options": [
-            "document.querySelectorAll('selector')",
-            "document.getElementsBySelector('selector')",
-            "document.selectAll('selector')",
-            "document.findAll('selector')"
-        ],
-        "answer": "document.querySelectorAll('selector')",
-        "difficulty": "Medium",
-        "explanation": "`querySelectorAll('selector')` returns a static NodeList of all elements matching the CSS selector."
+        "explanation": "`getElementById('id')` selects a single element by its ID."
     },
     {
         "question": "How do you get the tag name of a DOM element?",
@@ -123,34 +533,22 @@ quiz = [
         ],
         "answer": "element.tagName",
         "difficulty": "Medium",
-        "explanation": "`tagName` returns the tag name of an element (e.g., 'DIV') in uppercase."
-    },
-    {
-        "question": "What will `element.tagName` return for a `<p>` element?",
-        "options": [
-            "P",
-            "p",
-            "<p>",
-            "paragraph"
-        ],
-        "answer": "P",
-        "difficulty": "Medium",
-        "explanation": "`tagName` returns the tag name in uppercase, so for a `<p>` element, it returns 'P'."
+        "explanation": "`tagName` returns the tag name of an element in uppercase."
     },
     {
         "question": "How do you count the number of child elements in a DOM node?",
         "options": [
             "element.children.length",
-            "element.childNodes.length",
-            "element.countChildren()",
-            "element.getChildCount()"
+            "element.childCount()",
+            "element.children.size",
+            "element.getChildLength()"
         ],
         "answer": "element.children.length",
         "difficulty": "Medium",
-        "explanation": "The `length` property of `element.children` returns the number of child element nodes."
+        "explanation": "The `length` property of `element.children` gives the number of child elements."
     },
     {
-        "question": "How do you get the value of an attribute from a DOM element?",
+        "question": "How do you get an attribute of a DOM element?",
         "options": [
             "element.getAttribute('attr')",
             "element.attribute('attr')",
@@ -159,34 +557,10 @@ quiz = [
         ],
         "answer": "element.getAttribute('attr')",
         "difficulty": "Medium",
-        "explanation": "`getAttribute('attr')` retrieves the value of the specified attribute from an element."
+        "explanation": "`getAttribute('attr')` retrieves the value of the specified attribute."
     },
     {
-        "question": "How do you set an attribute on a DOM element?",
-        "options": [
-            "element.setAttribute('attr', 'value')",
-            "element.attribute('attr', 'value')",
-            "element.attr('attr', 'value')",
-            "element.setAttr('attr', 'value')"
-        ],
-        "answer": "element.setAttribute('attr', 'value')",
-        "difficulty": "Medium",
-        "explanation": "`setAttribute('attr', 'value')` sets or updates the value of the specified attribute."
-    },
-    {
-        "question": "How do you remove an attribute from a DOM element?",
-        "options": [
-            "element.removeAttribute('attr')",
-            "element.deleteAttribute('attr')",
-            "element.removeAttr('attr')",
-            "element.unsetAttribute('attr')"
-        ],
-        "answer": "element.removeAttribute('attr')",
-        "difficulty": "Medium",
-        "explanation": "`removeAttribute('attr')` removes the specified attribute from an element."
-    },
-    {
-        "question": "How do you get the name of the first attribute of a DOM element?",
+        "question": "How do you get the name of an attribute at index 0?",
         "options": [
             "element.attributes[0].name",
             "element.attributes[0].key",
@@ -195,34 +569,10 @@ quiz = [
         ],
         "answer": "element.attributes[0].name",
         "difficulty": "Hard",
-        "explanation": "The `attributes` property is a NamedNodeMap, and `element.attributes[0].name` gets the name of the first attribute."
+        "explanation": "`element.attributes[0].name` returns the name of the attribute at index 0."
     },
     {
-        "question": "How do you get the value of the first attribute of a DOM element?",
-        "options": [
-            "element.attributes[0].value",
-            "element.attributes[0].data",
-            "element.getAttributeValue(0)",
-            "element.attributes[0].attr"
-        ],
-        "answer": "element.attributes[0].value",
-        "difficulty": "Hard",
-        "explanation": "`element.attributes[0].value` retrieves the value of the first attribute in the element's attributes collection."
-    },
-    {
-        "question": "How do you check if an element has a specific attribute?",
-        "options": [
-            "element.hasAttribute('attr')",
-            "element.containsAttribute('attr')",
-            "element.checkAttribute('attr')",
-            "element.getAttribute('attr') !== null"
-        ],
-        "answer": "element.hasAttribute('attr')",
-        "difficulty": "Medium",
-        "explanation": "`hasAttribute('attr')` returns true if the element has the specified attribute, false otherwise."
-    },
-    {
-        "question": "How do you create a new element in the DOM?",
+        "question": "How do you add a new element to the DOM?",
         "options": [
             "document.createElement('tag')",
             "document.newElement('tag')",
@@ -231,141 +581,118 @@ quiz = [
         ],
         "answer": "document.createElement('tag')",
         "difficulty": "Medium",
-        "explanation": "`createElement('tag')` creates a new element node with the specified tag name."
+        "explanation": "`createElement('tag')` creates a new element node with the specified tag."
     },
     {
-        "question": "How do you add a new element as the last child of a parent node?",
+        "question": "How do you insert a node as a child of another node?",
         "options": [
-            "parent.appendChild(element)",
-            "parent.addChild(element)",
-            "parent.insert(element)",
-            "parent.append(element)"
+            "parent.appendChild(node)",
+            "parent.addChild(node)",
+            "parent.insert(node)",
+            "parent.append(node)"
         ],
-        "answer": "parent.appendChild(element)",
+        "answer": "parent.appendChild(node)",
         "difficulty": "Medium",
-        "explanation": "`appendChild(element)` adds the specified element as the last child of the parent node."
+        "explanation": "`appendChild(node)` adds a node as the last child of the parent."
     },
     {
-        "question": "How do you insert an element before another element in the DOM?",
+        "question": "How do you create an object in JavaScript?",
         "options": [
-            "parent.insertBefore(newElement, referenceElement)",
-            "parent.insert(newElement, referenceElement)",
-            "parent.addBefore(newElement, referenceElement)",
-            "parent.prepend(newElement, referenceElement)"
+            "let obj = {}",
+            "let obj = new Object{}",
+            "let obj = Object.create()",
+            "let obj = []"
         ],
-        "answer": "parent.insertBefore(newElement, referenceElement)",
+        "answer": "let obj = {}",
+        "difficulty": "Easy",
+        "explanation": "An object literal is created using curly braces `{}`."
+    },
+    {
+        "question": "How do you add a property to an object?",
+        "options": [
+            "obj.property = value",
+            "obj.addProperty('property', value)",
+            "obj.set('property', value)",
+            "obj['property'] = value"
+        ],
+        "answer": "obj.property = value",
+        "difficulty": "Easy",
+        "explanation": "Properties are added using dot notation or bracket notation."
+    },
+    {
+        "question": "How do you add a method to an object?",
+        "options": [
+            "obj.method = function() {}",
+            "obj.addMethod(function() {})",
+            "obj.setMethod(function() {})",
+            "obj.function = method()"
+        ],
+        "answer": "obj.method = function() {}",
+        "difficulty": "Medium",
+        "explanation": "A method is added by assigning a function to an object property."
+    },
+    {
+        "question": "How do you create an object constructor?",
+        "options": [
+            "function MyObj() {}",
+            "class MyObj {}",
+            "constructor MyObj() {}",
+            "object MyObj() {}"
+        ],
+        "answer": "function MyObj() {}",
+        "difficulty": "Medium",
+        "explanation": "A constructor is a function used with `new` to create objects."
+    },
+    {
+        "question": "How do you add a method to a constructor?",
+        "options": [
+            "MyObj.prototype.method = function() {}",
+            "MyObj.method = function() {}",
+            "MyObj.addMethod(function() {})",
+            "MyObj.function = method()"
+        ],
+        "answer": "MyObj.prototype.method = function() {}",
         "difficulty": "Hard",
-        "explanation": "`insertBefore(newElement, referenceElement)` inserts `newElement` before `referenceElement` as a child of `parent`."
+        "explanation": "Methods are added to a constructor's prototype to be shared by all instances."
     },
     {
-        "question": "What happens if you call `appendChild` with a node already in the DOM?",
+        "question": "What is a prototype in JavaScript?",
         "options": [
-            "The node is moved to the new location",
-            "The node is duplicated",
-            "An error is thrown",
-            "Nothing happens"
+            "An object from which other objects inherit properties",
+            "A function that creates objects",
+            "A property of an object",
+            "A type of variable"
         ],
-        "answer": "The node is moved to the new location",
+        "answer": "An object from which other objects inherit properties",
         "difficulty": "Hard",
-        "explanation": "`appendChild` moves an existing node to the new location if it’s already in the DOM, rather than duplicating it."
+        "explanation": "Prototypes are used for inheritance, allowing objects to share properties and methods."
     },
     {
-        "question": "How do you create a text node in the DOM?",
+        "question": "How do you check if an object has a specific property?",
         "options": [
-            "document.createTextNode('text')",
-            "document.newText('text')",
-            "document.createText('text')",
-            "document.addText('text')"
+            "'property' in obj",
+            "obj.hasProperty('property')",
+            "obj.propertyExists('property')",
+            "obj.checkProperty('property')"
         ],
-        "answer": "document.createTextNode('text')",
+        "answer": "'property' in obj",
         "difficulty": "Medium",
-        "explanation": "`createTextNode('text')` creates a text node with the specified content."
+        "explanation": "The `in` operator checks if a property exists in an object or its prototype chain."
     },
     {
-        "question": "How do you distinguish between element and non-element nodes in the DOM?",
+        "question": "How do you convert a string to lowercase and then capitalize only its first letter?\n```javascript\nlet str = 'JAVASCRIPT';\n```",
         "options": [
-            "Check the nodeType property",
-            "Check the tagName property",
-            "Check the attributes property",
-            "Check the children property"
+            "str.toLowerCase()[0].toUpperCase() + str.slice(1)",
+            "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)",
+            "str[0].toUpperCase() + str.toLowerCase().slice(1)",
+            "str.toLowerCase().replace(str[0], str[0].toUpperCase())"
         ],
-        "answer": "Check the nodeType property",
+        "answer": "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)",
         "difficulty": "Medium",
-        "explanation": "`nodeType` identifies whether a node is an element (1), text (3), comment (8), etc."
-    },
-    {
-        "question": "How do you get all child nodes, including text and comments?",
-        "options": [
-            "element.childNodes",
-            "element.children",
-            "element.getAllChildren()",
-            "element.nodes()"
-        ],
-        "answer": "element.childNodes",
-        "difficulty": "Medium",
-        "explanation": "`childNodes` returns a live NodeList of all child nodes, including elements, text, and comments."
-    },
-    {
-        "question": "What is the difference between `children` and `childNodes`?",
-        "options": [
-            "`children` returns only elements, `childNodes` includes all nodes",
-            "`children` includes text nodes, `childNodes` includes elements",
-            "`children` is a NodeList, `childNodes` is an HTMLCollection",
-            "`children` is static, `childNodes` is live"
-        ],
-        "answer": "`children` returns only elements, `childNodes` includes all nodes",
-        "difficulty": "Hard",
-        "explanation": "`children` returns only element nodes, while `childNodes` includes all node types (elements, text, comments, etc.)."
-    },
-    {
-        "question": "How do you replace an existing node with a new node in the DOM?",
-        "options": [
-            "parent.replaceChild(newNode, oldNode)",
-            "parent.swapNode(newNode, oldNode)",
-            "parent.replace(newNode, oldNode)",
-            "parent.updateChild(newNode, oldNode)"
-        ],
-        "answer": "parent.replaceChild(newNode, oldNode)",
-        "difficulty": "Hard",
-        "explanation": "`replaceChild(newNode, oldNode)` replaces `oldNode` with `newNode` in the parent’s child list."
-    },
-    {
-        "question": "How do you remove a child node from the DOM?",
-        "options": [
-            "parent.removeChild(child)",
-            "child.removeNode()",
-            "parent.deleteChild(child)",
-            "child.detach()"
-        ],
-        "answer": "parent.removeChild(child)",
-        "difficulty": "Medium",
-        "explanation": "`removeChild(child)` removes the specified child node from the parent."
-    },
-    {
-        "question": "What does `document.documentElement` return?",
-        "options": [
-            "The root element of the document (usually `<html>`)",
-            "The first child of the `<body>`",
-            "The `<head>` element",
-            "The entire DOM tree"
-        ],
-        "answer": "The root element of the document (usually `<html>`)",
-        "difficulty": "Medium",
-        "explanation": "`document.documentElement` returns the root element of the document, typically the `<html>` element."
-    },
-    {
-        "question": "How do you select elements by tag name in the DOM?",
-        "options": [
-            "document.getElementsByTagName('tag')",
-            "document.querySelectorAll('tag')",
-            "document.selectTag('tag')",
-            "document.findByTag('tag')"
-        ],
-        "answer": "document.getElementsByTagName('tag')",
-        "difficulty": "Medium",
-        "explanation": "`getElementsByTagName('tag')` returns a live HTMLCollection of elements with the specified tag name."
+        "explanation": "Convert the string to lowercase with `toLowerCase()`, use `charAt(0)` to get the first character, capitalize it with `toUpperCase()`, and append the rest with `slice(1)`."
     }
 ]
+
 
 # Cache shuffled quiz
 @st.cache_data
