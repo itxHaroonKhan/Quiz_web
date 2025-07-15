@@ -1283,7 +1283,6 @@ quiz = [
     }
 ]
 
-# Cache shuffled quiz
 @st.cache_data
 def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
@@ -1305,7 +1304,7 @@ if "quiz_data" not in st.session_state:
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 1800,  # 30 minutes
+        "time_left": 3600,  # 60 minutes
         "theme": "dark",
         "streak": 0,
         "started": False
@@ -1318,7 +1317,7 @@ def toggle_theme():
 # Timer logic
 def update_timer():
     elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-    st.session_state.time_left = max(1800 - elapsed, 0)
+    st.session_state.time_left = max(3600 - elapsed, 0)
     if st.session_state.time_left <= 0:
         st.session_state.show_results = True
         st.rerun()
@@ -1334,7 +1333,7 @@ def reset_quiz():
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 1800,
+        "time_left": 3600,
         "streak": 0,
         "started": False
     })
@@ -1507,8 +1506,8 @@ st.markdown("""
 
 # Main UI
 st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">', unsafe_allow_html=True)
-st.markdown('<h1 class="title">🚀 JavaScript Mastery Quiz</h1>', unsafe_allow_html=True)
-st.markdown('<p class="caption">Challenge Your JavaScript Expertise!</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="title">🚀 DOM Mastery Quiz</h1>', unsafe_allow_html=True)
+st.markdown('<p class="caption">Challenge Your JavaScript DOM Skills!</p>', unsafe_allow_html=True)
 
 # Theme toggle button
 if st.button("🌙 Toggle Theme", key="theme_toggle"):
@@ -1519,8 +1518,8 @@ if st.button("🌙 Toggle Theme", key="theme_toggle"):
 if not st.session_state.started:
     st.markdown("""
     <div style="text-align: center;">
-        <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 50 comprehensive questions!</p>
-        <p style="color: #b0b0d0;">30 minutes, 2 points per correct answer. Ready?</p>
+        <p style="color: var(--text-color); font-size: 18px;">Test your DOM skills with 30 comprehensive questions!</p>
+        <p style="color: #b0b0d0;">60 minutes, 2 points per correct answer. Ready?</p>
     </div>
     """, unsafe_allow_html=True)
     if st.button("Start Quiz", key="start_quiz"):
@@ -1560,13 +1559,13 @@ else:
                 st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
                 # Split question into text and code
-                if "```javascript" in q["question"] or "```html" in q["question"]:
-                    question_parts = q["question"].split("```javascript\n") if "```javascript" in q["question"] else q["question"].split("```html\n")
+                if "```javascript" in q["question"] or "```html
+                    question_parts = q["question"].split("```javascript\n") if "```javascript
                     question_text = question_parts[0].strip()
                     code_snippet = question_parts[1].split("```")[0].strip()
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{question_text}**")
-                    st.code(code_snippet, language="javascript" if "```javascript" in q["question"] else "html")
+                    st.code(code_snippet, language="javascript" if "```javascript
                 else:
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{q['question']}**")
@@ -1596,7 +1595,7 @@ else:
                             "difficulty": q["difficulty"]
                         }
                         if is_correct:
-                            st.session_state.score += 2  # 2 points for Medium difficulty
+                            st.session_state.score += 2  # 2 points for correct answer
                             st.session_state.streak += 1
                             if st.session_state.streak >= 3:
                                 st.session_state.score += 0.5
@@ -1623,7 +1622,7 @@ else:
 
         else:
             # Results
-            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
+            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 3600)
             total_possible_score = len(quiz) * 2  # 2 points per question
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
             st.markdown('<div class="question-container">', unsafe_allow_html=True)
@@ -1653,9 +1652,9 @@ else:
 
             # Leaderboard
             leaderboard = [
-                {"name": "Alice", "score": 80, "time": 1200},
-                {"name": "Bob", "score": 75, "time": 1300},
-                {"name": "Charlie", "score": 70, "time": 1250},
+                {"name": "Alice", "score": 48, "time": 2000},
+                {"name": "Bob", "score": 45, "time": 2100},
+                {"name": "Charlie", "score": 42, "time": 2050},
                 {"name": "You", "score": st.session_state.score, "time": int(time_taken)}
             ]
             leaderboard.sort(key=lambda x: (-x["score"], x["time"]))
