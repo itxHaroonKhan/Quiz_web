@@ -605,7 +605,7 @@ quiz = [
     }
 ]
 
-# Cache shuffled quiz (remove cache for testing)
+# Cache shuffled quiz (removed for testing, re-add if needed)
 def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
     for q in shuffled:
@@ -628,13 +628,12 @@ if "quiz_data" not in st.session_state:
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 1800,  # 30 minutes
+        "time_left": 3600,  # 60 minutes
         "theme": "dark",
         "streak": 0,
         "started": False,
-        "max_streak": 0  # Added max_streak
+        "max_streak": 0
     })
-    # Debug: Check quiz_data length
     st.write(f"Initialized quiz with {len(st.session_state.quiz_data)} questions")
 
 # Theme toggle
@@ -644,7 +643,7 @@ def toggle_theme():
 # Timer logic
 def update_timer():
     elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-    st.session_state.time_left = max(1800 - elapsed, 0)
+    st.session_state.time_left = max(3600 - elapsed, 0)  # 60 minutes
     if st.session_state.time_left <= 0:
         st.session_state.show_results = True
         st.rerun()
@@ -660,7 +659,7 @@ def reset_quiz():
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 1800,
+        "time_left": 3600,  # 60 minutes
         "streak": 0,
         "max_streak": 0,
         "started": False
@@ -847,7 +846,7 @@ if not st.session_state.started:
     st.markdown("""
     <div style="text-align: center;">
         <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 67 comprehensive questions!</p>
-        <p style="color: #b0b0d0;">30 minutes, 2 points per correct answer. Ready?</p>
+        <p style="color: #b0b0d0;">60 minutes, 2 points per correct answer. Ready?</p>
     </div>
     """, unsafe_allow_html=True)
     if st.button("Start Quiz", key="start_quiz"):
@@ -906,7 +905,7 @@ else:
                         button_class = "selected-correct" if option == q["labeled_answer"] else "selected-wrong"
                     if st.button(
                         option,
-                        key=f"q{i}_{st.session_state.current_q}",  # Unique key per question
+                        key=f"q{i}_{st.session_state.current_q}",
                         disabled=st.session_state.selected_option is not None
                     ):
                         is_correct = option == q["labeled_answer"]
@@ -953,7 +952,7 @@ else:
 
         else:
             # Results
-            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
+            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 3600)  # 60 minutes
             total_possible_score = len(quiz) * 2
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
             st.markdown('<div class="question-container">', unsafe_allow_html=True)
@@ -1002,4 +1001,3 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-
