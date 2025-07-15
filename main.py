@@ -1,7 +1,9 @@
+```python
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
+
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz = [
     # Topic 20: for loops nested
@@ -170,11 +172,11 @@ quiz = [
         "explanation": "The `replace()` method only replaces the first occurrence of 'hello' with 'hi'."
     },
     {
-        "question": "Which method replaces all occurrences of a substring?",
-        "options": ["replaceAll()", "replace()", "sub()", "swap()"],
-        "answer": "replaceAll()",
-        "difficulty": "Easy",
-        "explanation": "The `replaceAll()` method replaces all occurrences of a substring with a new string."
+        "question": "What does `'hello hello'.replaceAll('hello', 'hi')` return?",
+        "options": ["hi hi", "hi hello", "hello hi", "hello hello"],
+        "answer": "hi hi",
+        "difficulty": "Medium",
+        "explanation": "The `replaceAll()` method replaces all occurrences of 'hello' with 'hi'."
     },
     # Topic 26: Rounding numbers
     {
@@ -321,7 +323,7 @@ quiz = [
         ],
         "answer": "new Date().getFullYear()",
         "difficulty": "Easy",
-        "aswer": "`getFullYear()` returns the four-digit year of the current date."
+        "explanation": "`getFullYear()` returns the four-digit year of the current date."
     },
     # Topic 32: Extracting parts of the date and time
     {
@@ -602,7 +604,6 @@ quiz = [
         "explanation": "The value `x = 2` matches `case 2`, so 'Two' is printed, and `break` prevents further execution."
     }
 ]
-
 
 # Cache shuffled quiz (remove cache for testing)
 def shuffle_quiz(_quiz):
@@ -1001,3 +1002,4 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+```
