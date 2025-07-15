@@ -1069,20 +1069,30 @@ else:
             """, unsafe_allow_html=True)
 
             # Review Answers
-            st.markdown('<h3 style="color: var(--text-color); margin-bottom: 1rem;">📝 Review Your Answers</h3>', unsafe_allow_html=True)
-            for i, ans in enumerate(st.session_state.answers):
-                if ans:
-                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
-                    st.markdown(f"""
-                    <div style="background: var(--secondary-color); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                        <div style="font-weight: 600; color: var(--text-color); margin-bottom: 0.5rem;">Question {i+1}: {ans["question"]}</div>
-                        <div style="margin-bottom: 0.25rem;">Your Answer: {ans["user_answer"]}</div>
-                        <div style="margin-bottom: 0.5rem; color: {'var(--feedback-correct-bg)' if ans["is_correct"] else 'var(--feedback-wrong-bg)'}">{status}</div>
-                        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8; padding: 0.75rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
-                            Explanation: {quiz[i]["explanation"]}
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+           # Review Answers without raw HTML / DOM
+st.header("📝 Review Your Answers")
+
+for i, ans in enumerate(st.session_state.answers):
+    if ans:
+        status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
+
+        # Use container for better spacing
+        with st.container():
+            st.subheader(f"Question {i+1}: {ans['question']}")
+            st.write(f"**Your Answer:** {ans['user_answer']}")
+            
+            if ans["is_correct"]:
+                st.success(status)  # green colored success box
+            else:
+                st.error(status)    # red colored error box
+            
+            with st.expander("Explanation"):
+                st.write(quiz[i]["explanation"])
+
+# Play Again button
+if st.button("🔄 Play Again", key="play_again"):
+    reset_quiz()
+
 
             # Play Again button
             if st.button("🔄 Play Again", key="play_again"):
