@@ -1,6 +1,4 @@
-Here's the complete corrected code for your JavaScript quiz application:
 
-```python
 import streamlit as st
 import random
 from datetime import datetime
