@@ -7,29 +7,30 @@ import uuid
 quiz =[
 
     
+  
     {
         "question": "What is the DOM in JavaScript?",
         "options": [
-            "A tree-like representation of a webpage's structure",
-            "A database for storing webpage data",
-            "A method for styling webpages",
-            "A function for creating elements"
+            "Document Object Model",
+            "Data Object Model",
+            "Dynamic Object Model",
+            "Document Order Model"
         ],
-        "answer": "A tree-like representation of a webpage's structure",
+        "answer": "Document Object Model",
         "difficulty": "Easy",
-        "explanation": "The Document Object Model (DOM) is a tree-like structure representing the elements, attributes, and content of a webpage, allowing JavaScript to interact with it."
+        "explanation": "The DOM is a tree-like representation of a webpage's structure, allowing JavaScript to interact with HTML elements."
     },
     {
         "question": "How do you access the parent node of a DOM element?",
         "options": [
             "element.parentNode",
-            "element.getParent()",
             "element.parent()",
-            "element.ancestor()"
+            "element.getParent()",
+            "element.parentElementNode"
         ],
         "answer": "element.parentNode",
         "difficulty": "Medium",
-        "explanation": "`parentNode` returns the immediate parent node of an element in the DOM tree, which could be an element or another node type."
+        "explanation": "`parentNode` returns the parent node of an element in the DOM tree."
     },
     {
         "question": "How do you get all child elements of a DOM node?",
@@ -41,46 +42,58 @@ quiz =[
         ],
         "answer": "element.children",
         "difficulty": "Medium",
-        "explanation": "`children` returns an HTMLCollection of only the element nodes that are direct children of the specified node."
+        "explanation": "`children` returns an HTMLCollection of an element's child elements, excluding non-element nodes like text."
     },
     {
         "question": "What does the `nodeType` property indicate in the DOM?",
         "options": [
-            "The type of the node",
+            "The type of a node",
             "The number of child nodes",
-            "The node's position in the DOM",
-            "The node's CSS class"
+            "The node's attributes",
+            "The node's style"
         ],
-        "answer": "The type of the node",
+        "answer": "The type of a node",
         "difficulty": "Medium",
-        "explanation": "`nodeType` returns a number indicating the type of node, such as 1 for elements, 3 for text nodes, or 8 for comments."
+        "explanation": "`nodeType` returns a number indicating the node type, such as 1 for elements and 3 for text nodes."
     },
     {
-        "question": "Which DOM nodeType value corresponds to an element node?",
+        "question": "How do you check if a node is an element node using `nodeType`?",
         "options": [
-            "1",
-            "3",
-            "8",
-            "9"
+            "node.nodeType === 1",
+            "node.nodeType === 3",
+            "node.nodeType === 'element'",
+            "node.nodeType === 0"
         ],
-        "answer": "1",
+        "answer": "node.nodeType === 1",
+        "difficulty": "Medium",
+        "explanation": "Element nodes have a `nodeType` value of 1."
+    },
+    {
+        "question": "What is considered a 'junk artifact' in the DOM?",
+        "options": [
+            "Text nodes with only whitespace",
+            "Empty div elements",
+            "Nodes with no attributes",
+            "Nodes with invalid tags"
+        ],
+        "answer": "Text nodes with only whitespace",
         "difficulty": "Hard",
-        "explanation": "In the DOM, a `nodeType` value of 1 represents an element node, such as a `<div>` or `<p>`."
+        "explanation": "Junk artifacts are typically text nodes containing only whitespace, often created by formatting in HTML."
     },
     {
         "question": "How do you select an element by its ID in the DOM?",
         "options": [
             "document.getElementById('id')",
-            "document.querySelector('id')",
+            "document.querySelector('#id')",
             "document.getId('id')",
             "document.selectId('id')"
         ],
         "answer": "document.getElementById('id')",
         "difficulty": "Easy",
-        "explanation": "`getElementById('id')` is the most efficient way to select a single element by its unique ID."
+        "explanation": "`getElementById('id')` selects a single element by its unique ID."
     },
     {
-        "question": "How do you select all elements with a specific class using the DOM?",
+        "question": "How do you select all elements with a specific class in the DOM?",
         "options": [
             "document.getElementsByClassName('class')",
             "document.querySelector('.class')",
@@ -89,31 +102,19 @@ quiz =[
         ],
         "answer": "document.getElementsByClassName('class')",
         "difficulty": "Medium",
-        "explanation": "`getElementsByClassName('class')` returns a live HTMLCollection of elements with the specified class name."
+        "explanation": "`getElementsByClassName('class')` returns a live HTMLCollection of elements with the specified class."
     },
     {
         "question": "How do you select the first element matching a CSS selector?",
         "options": [
             "document.querySelector('selector')",
-            "document.getElementsByTagName('selector')[0]",
-            "document.select('selector')",
-            "document.find('selector')"
+            "document.getElementBySelector('selector')",
+            "document.selectFirst('selector')",
+            "document.querySelectorAll('selector')[0]"
         ],
         "answer": "document.querySelector('selector')",
         "difficulty": "Medium",
-        "explanation": "`querySelector('selector')` returns the first element that matches the specified CSS selector."
-    },
-    {
-        "question": "How do you select all elements matching a CSS selector?",
-        "options": [
-            "document.querySelectorAll('selector')",
-            "document.getElementsBySelector('selector')",
-            "document.selectAll('selector')",
-            "document.findAll('selector')"
-        ],
-        "answer": "document.querySelectorAll('selector')",
-        "difficulty": "Medium",
-        "explanation": "`querySelectorAll('selector')` returns a static NodeList of all elements matching the CSS selector."
+        "explanation": "`querySelector('selector')` returns the first element matching the CSS selector."
     },
     {
         "question": "How do you get the tag name of a DOM element?",
@@ -125,31 +126,19 @@ quiz =[
         ],
         "answer": "element.tagName",
         "difficulty": "Medium",
-        "explanation": "`tagName` returns the tag name of an element (e.g., 'DIV') in uppercase."
-    },
-    {
-        "question": "What will `element.tagName` return for a `<p>` element?",
-        "options": [
-            "P",
-            "p",
-            "<p>",
-            "paragraph"
-        ],
-        "answer": "P",
-        "difficulty": "Medium",
-        "explanation": "`tagName` returns the tag name in uppercase, so for a `<p>` element, it returns 'P'."
+        "explanation": "`tagName` returns the tag name of an element in uppercase, like 'DIV'."
     },
     {
         "question": "How do you count the number of child elements in a DOM node?",
         "options": [
             "element.children.length",
-            "element.childNodes.length",
-            "element.countChildren()",
-            "element.getChildCount()"
+            "element.childCount()",
+            "element.children.size",
+            "element.getChildLength()"
         ],
         "answer": "element.children.length",
         "difficulty": "Medium",
-        "explanation": "The `length` property of `element.children` returns the number of child element nodes."
+        "explanation": "The `length` property of `element.children` returns the number of child elements."
     },
     {
         "question": "How do you get the value of an attribute from a DOM element?",
@@ -161,7 +150,7 @@ quiz =[
         ],
         "answer": "element.getAttribute('attr')",
         "difficulty": "Medium",
-        "explanation": "`getAttribute('attr')` retrieves the value of the specified attribute from an element."
+        "explanation": "`getAttribute('attr')` retrieves the value of the specified attribute."
     },
     {
         "question": "How do you set an attribute on a DOM element?",
@@ -173,7 +162,7 @@ quiz =[
         ],
         "answer": "element.setAttribute('attr', 'value')",
         "difficulty": "Medium",
-        "explanation": "`setAttribute('attr', 'value')` sets or updates the value of the specified attribute."
+        "explanation": "`setAttribute('attr', 'value')` sets or updates the value of an attribute."
     },
     {
         "question": "How do you remove an attribute from a DOM element?",
@@ -197,31 +186,19 @@ quiz =[
         ],
         "answer": "element.attributes[0].name",
         "difficulty": "Hard",
-        "explanation": "The `attributes` property is a NamedNodeMap, and `element.attributes[0].name` gets the name of the first attribute."
+        "explanation": "`element.attributes[0].name` returns the name of the first attribute in the element's attributes collection."
     },
     {
         "question": "How do you get the value of the first attribute of a DOM element?",
         "options": [
             "element.attributes[0].value",
-            "element.attributes[0].data",
+            "element.attributes[0].val",
             "element.getAttributeValue(0)",
-            "element.attributes[0].attr"
+            "element.attributes[0].data"
         ],
         "answer": "element.attributes[0].value",
         "difficulty": "Hard",
-        "explanation": "`element.attributes[0].value` retrieves the value of the first attribute in the element's attributes collection."
-    },
-    {
-        "question": "How do you check if an element has a specific attribute?",
-        "options": [
-            "element.hasAttribute('attr')",
-            "element.containsAttribute('attr')",
-            "element.checkAttribute('attr')",
-            "element.getAttribute('attr') !== null"
-        ],
-        "answer": "element.hasAttribute('attr')",
-        "difficulty": "Medium",
-        "explanation": "`hasAttribute('attr')` returns true if the element has the specified attribute, false otherwise."
+        "explanation": "`element.attributes[0].value` retrieves the value of the first attribute."
     },
     {
         "question": "How do you create a new element in the DOM?",
@@ -236,139 +213,401 @@ quiz =[
         "explanation": "`createElement('tag')` creates a new element node with the specified tag name."
     },
     {
-        "question": "How do you add a new element as the last child of a parent node?",
+        "question": "How do you append a node as a child of another node?",
         "options": [
-            "parent.appendChild(element)",
-            "parent.addChild(element)",
-            "parent.insert(element)",
-            "parent.append(element)"
+            "parent.appendChild(node)",
+            "parent.addChild(node)",
+            "parent.insert(node)",
+            "parent.append(node)"
         ],
-        "answer": "parent.appendChild(element)",
+        "answer": "parent.appendChild(node)",
         "difficulty": "Medium",
-        "explanation": "`appendChild(element)` adds the specified element as the last child of the parent node."
+        "explanation": "`appendChild(node)` adds a node as the last child of the parent element."
     },
     {
-        "question": "How do you insert an element before another element in the DOM?",
+        "question": "How do you insert a node before an existing child in the DOM?",
         "options": [
-            "parent.insertBefore(newElement, referenceElement)",
-            "parent.insert(newElement, referenceElement)",
-            "parent.addBefore(newElement, referenceElement)",
-            "parent.prepend(newElement, referenceElement)"
+            "parent.insertBefore(newNode, existingNode)",
+            "parent.insert(newNode, existingNode)",
+            "parent.addBefore(newNode, existingNode)",
+            "parent.placeBefore(newNode, existingNode)"
         ],
-        "answer": "parent.insertBefore(newElement, referenceElement)",
+        "answer": "parent.insertBefore(newNode, existingNode)",
         "difficulty": "Hard",
-        "explanation": "`insertBefore(newElement, referenceElement)` inserts `newElement` before `referenceElement` as a child of `parent`."
+        "explanation": "`insertBefore(newNode, existingNode)` inserts a new node before an existing child node."
     },
     {
-        "question": "What happens if you call `appendChild` with a node already in the DOM?",
+        "question": "How do you remove a child node from a parent in the DOM?",
         "options": [
-            "The node is moved to the new location",
-            "The node is duplicated",
-            "An error is thrown",
-            "Nothing happens"
+            "parent.removeChild(child)",
+            "parent.deleteChild(child)",
+            "child.removeFrom(parent)",
+            "parent.remove(child)"
         ],
-        "answer": "The node is moved to the new location",
+        "answer": "parent.removeChild(child)",
+        "difficulty": "Medium",
+        "explanation": "`removeChild(child)` removes a specified child node from the parent."
+    },
+    {
+        "question": "How do you replace a child node in the DOM?",
+        "options": [
+            "parent.replaceChild(newNode, oldNode)",
+            "parent.swapChild(newNode, oldNode)",
+            "parent.replace(newNode, oldNode)",
+            "parent.updateChild(newNode, oldNode)"
+        ],
+        "answer": "parent.replaceChild(newNode, oldNode)",
         "difficulty": "Hard",
-        "explanation": "`appendChild` moves an existing node to the new location if it’s already in the DOM, rather than duplicating it."
+        "explanation": "`replaceChild(newNode, oldNode)` replaces an old child node with a new one."
+    },
+    {
+        "question": "How do you check if an element has a specific attribute?",
+        "options": [
+            "element.hasAttribute('attr')",
+            "element.containsAttribute('attr')",
+            "element.checkAttribute('attr')",
+            "element.getAttribute('attr') !== null"
+        ],
+        "answer": "element.hasAttribute('attr')",
+        "difficulty": "Medium",
+        "explanation": "`hasAttribute('attr')` returns true if the element has the specified attribute."
+    },
+    {
+        "question": "How do you get all elements with a specific tag name in the DOM?",
+        "options": [
+            "document.getElementsByTagName('tag')",
+            "document.querySelectorAll('tag')",
+            "document.getTag('tag')",
+            "document.selectTag('tag')"
+        ],
+        "answer": "document.getElementsByTagName('tag')",
+        "difficulty": "Medium",
+        "explanation": "`getElementsByTagName('tag')` returns a live HTMLCollection of elements with the specified tag."
+    },
+    {
+        "question": "How do you select elements with a specific attribute in the DOM?",
+        "options": [
+            "document.querySelectorAll('[attr]')",
+            "document.getElementsByAttribute('attr')",
+            "document.selectAttribute('attr')",
+            "document.findByAttribute('attr')"
+        ],
+        "answer": "document.querySelectorAll('[attr]')",
+        "difficulty": "Hard",
+        "explanation": "`querySelectorAll('[attr]')` selects all elements with the specified attribute using a CSS selector."
+    },
+    {
+        "question": "What is the difference between `children` and `childNodes`?",
+        "options": [
+            "`children` includes only elements, `childNodes` includes all nodes",
+            "`children` includes all nodes, `childNodes` includes only elements",
+            "`children` is live, `childNodes` is static",
+            "`children` includes attributes, `childNodes` does not"
+        ],
+        "answer": "`children` includes only elements, `childNodes` includes all nodes",
+        "difficulty": "Hard",
+        "explanation": "`children` returns only element nodes, while `childNodes` includes text, comments, and other nodes."
+    },
+    {
+        "question": "How do you access the first child element of a DOM node?",
+        "options": [
+            "element.firstElementChild",
+            "element.firstChild",
+            "element.children[0]",
+            "element.getFirstChild()"
+        ],
+        "answer": "element.firstElementChild",
+        "difficulty": "Medium",
+        "explanation": "`firstElementChild` returns the first child that is an element, ignoring text or comment nodes."
+    },
+    {
+        "question": "How do you access the last child element of a DOM node?",
+        "options": [
+            "element.lastElementChild",
+            "element.lastChild",
+            "element.children[element.children.length - 1]",
+            "element.getLastChild()"
+        ],
+        "answer": "element.lastElementChild",
+        "difficulty": "Medium",
+        "explanation": "`lastElementChild` returns the last child that is an element, ignoring non-element nodes."
+    },
+    {
+        "question": "How do you get the next sibling element in the DOM?",
+        "options": [
+            "element.nextElementSibling",
+            "element.nextSibling",
+            "element.getNext()",
+            "element.siblingNext()"
+        ],
+        "answer": "element.nextElementSibling",
+        "difficulty": "Medium",
+        "explanation": "`nextElementSibling` returns the next element sibling, skipping non-element nodes."
+    },
+    {
+        "question": "How do you get the previous sibling element in the DOM?",
+        "options": [
+            "element.previousElementSibling",
+            "element.previousSibling",
+            "element.getPrevious()",
+            "element.siblingPrevious()"
+        ],
+        "answer": "element.previousElementSibling",
+        "difficulty": "Medium",
+        "explanation": "`previousElementSibling` returns the previous element sibling, ignoring non-element nodes."
+    },
+    {
+        "question": "How do you check if a node is a text node using `nodeType`?",
+        "options": [
+            "node.nodeType === 3",
+            "node.nodeType === 1",
+            "node.nodeType === 'text'",
+            "node.nodeType === 2"
+        ],
+        "answer": "node.nodeType === 3",
+        "difficulty": "Hard",
+        "explanation": "Text nodes have a `nodeType` value of 3."
     },
     {
         "question": "How do you create a text node in the DOM?",
         "options": [
             "document.createTextNode('text')",
             "document.newText('text')",
-            "document.createText('text')",
-            "document.addText('text')"
+            "document.addText('text')",
+            "document.makeText('text')"
         ],
         "answer": "document.createTextNode('text')",
         "difficulty": "Medium",
-        "explanation": "`createTextNode('text')` creates a text node with the specified content."
+        "explanation": "`createTextNode('text')` creates a new text node with the specified content."
     },
     {
-        "question": "How do you distinguish between element and non-element nodes in the DOM?",
+        "question": "How do you get the number of attributes on a DOM element?",
         "options": [
-            "Check the nodeType property",
-            "Check the tagName property",
-            "Check the attributes property",
-            "Check the children property"
+            "element.attributes.length",
+            "element.attributeCount()",
+            "element.attributes.size",
+            "element.getAttributesLength()"
         ],
-        "answer": "Check the nodeType property",
-        "difficulty": "Medium",
-        "explanation": "`nodeType` identifies whether a node is an element (1), text (3), comment (8), etc."
-    },
-    {
-        "question": "How do you get all child nodes, including text and comments?",
-        "options": [
-            "element.childNodes",
-            "element.children",
-            "element.getAllChildren()",
-            "element.nodes()"
-        ],
-        "answer": "element.childNodes",
-        "difficulty": "Medium",
-        "explanation": "`childNodes` returns a live NodeList of all child nodes, including elements, text, and comments."
-    },
-    {
-        "question": "What is the difference between `children` and `childNodes`?",
-        "options": [
-            "`children` returns only elements, `childNodes` includes all nodes",
-            "`children` includes text nodes, `childNodes` includes elements",
-            "`children` is a NodeList, `childNodes` is an HTMLCollection",
-            "`children` is static, `childNodes` is live"
-        ],
-        "answer": "`children` returns only elements, `childNodes` includes all nodes",
+        "answer": "element.attributes.length",
         "difficulty": "Hard",
-        "explanation": "`children` returns only element nodes, while `childNodes` includes all node types (elements, text, comments, etc.)."
+        "explanation": "The `length` property of `element.attributes` returns the number of attributes."
     },
     {
-        "question": "How do you replace an existing node with a new node in the DOM?",
+        "question": "How do you clone a DOM element?",
         "options": [
-            "parent.replaceChild(newNode, oldNode)",
-            "parent.swapNode(newNode, oldNode)",
-            "parent.replace(newNode, oldNode)",
-            "parent.updateChild(newNode, oldNode)"
+            "element.cloneNode(true)",
+            "element.copyNode()",
+            "element.clone()",
+            "element.duplicate()"
         ],
-        "answer": "parent.replaceChild(newNode, oldNode)",
+        "answer": "element.cloneNode(true)",
         "difficulty": "Hard",
-        "explanation": "`replaceChild(newNode, oldNode)` replaces `oldNode` with `newNode` in the parent’s child list."
+        "explanation": "`cloneNode(true)` creates a deep copy of the element, including all its children."
     },
     {
-        "question": "How do you remove a child node from the DOM?",
+        "question": "How do you check if a node is part of the DOM?",
         "options": [
-            "parent.removeChild(child)",
-            "child.removeNode()",
-            "parent.deleteChild(child)",
-            "child.detach()"
+            "document.contains(node)",
+            "node.isConnected",
+            "node.inDocument()",
+            "document.hasNode(node)"
         ],
-        "answer": "parent.removeChild(child)",
-        "difficulty": "Medium",
-        "explanation": "`removeChild(child)` removes the specified child node from the parent."
+        "answer": "node.isConnected",
+        "difficulty": "Hard",
+        "explanation": "`isConnected` returns true if the node is connected to the DOM."
     },
     {
-        "question": "What does `document.documentElement` return?",
+        "question": "How do you get the root node of the document?",
         "options": [
-            "The root element of the document (usually `<html>`)",
-            "The first child of the `<body>`",
-            "The `<head>` element",
-            "The entire DOM tree"
+            "document.documentElement",
+            "document.root",
+            "document.getRootNode()",
+            "document.html"
         ],
-        "answer": "The root element of the document (usually `<html>`)",
+        "answer": "document.documentElement",
         "difficulty": "Medium",
-        "explanation": "`document.documentElement` returns the root element of the document, typically the `<html>` element."
+        "explanation": "`documentElement` returns the root element of the document, typically `<html>`."
     },
     {
-        "question": "How do you select elements by tag name in the DOM?",
+        "question": "How do you select elements with a specific attribute value?",
         "options": [
-            "document.getElementsByTagName('tag')",
-            "document.querySelectorAll('tag')",
-            "document.selectTag('tag')",
-            "document.findByTag('tag')"
+            "document.querySelectorAll('[attr=\"value\"]')",
+            "document.getElementsByAttribute('attr', 'value')",
+            "document.selectAttribute('attr', 'value')",
+            "document.findByAttr('attr', 'value')"
         ],
-        "answer": "document.getElementsByTagName('tag')",
-        "difficulty": "Medium",
-        "explanation": "`getElementsByTagName('tag')` returns a live HTMLCollection of elements with the specified tag name."
+        "answer": "document.querySelectorAll('[attr=\"value\"]')",
+        "difficulty": "Hard",
+        "explanation": "`querySelectorAll('[attr=\"value\"]')` selects elements with the exact attribute value."
     },
-
-
+    {
+        "question": "How do you get the text content of a DOM element?",
+        "options": [
+            "element.textContent",
+            "element.innerText",
+            "element.getText()",
+            "element.content()"
+        ],
+        "answer": "element.textContent",
+        "difficulty": "Medium",
+        "explanation": "`textContent` returns all text within an element, including hidden text, without formatting."
+    },
+    {
+        "question": "How do you set the text content of a DOM element?",
+        "options": [
+            "element.textContent = 'text'",
+            "element.innerText = 'text'",
+            "element.setText('text')",
+            "element.content = 'text'"
+        ],
+        "answer": "element.textContent = 'text'",
+        "difficulty": "Medium",
+        "explanation": "`textContent` safely sets the text content of an element, escaping HTML."
+    },
+    {
+        "question": "How do you get the HTML content of a DOM element?",
+        "options": [
+            "element.innerHTML",
+            "element.outerHTML",
+            "element.getHTML()",
+            "element.htmlContent"
+        ],
+        "answer": "element.innerHTML",
+        "difficulty": "Medium",
+        "explanation": "`innerHTML` returns the HTML content inside an element."
+    },
+    {
+        "question": "How do you set the HTML content of a DOM element?",
+        "options": [
+            "element.innerHTML = '<p>text</p>'",
+            "element.setHTML('<p>text</p>')",
+            "element.html = '<p>text</p>'",
+            "element.innerText = '<p>text</p>'"
+        ],
+        "answer": "element.innerHTML = '<p>text</p>'",
+        "difficulty": "Medium",
+        "explanation": "`innerHTML` sets the HTML content of an element, parsing the string as HTML."
+    },
+    {
+        "question": "How do you get the number of elements matching a CSS selector?",
+        "options": [
+            "document.querySelectorAll('selector').length",
+            "document.getElementsBySelector('selector').length",
+            "document.countElements('selector')",
+            "document.select('selector').size"
+        ],
+        "answer": "document.querySelectorAll('selector').length",
+        "difficulty": "Medium",
+        "explanation": "`querySelectorAll('selector').length` returns the number of elements matching the selector."
+    },
+    {
+        "question": "How do you check if an element is the first child of its parent?",
+        "options": [
+            "element === element.parentNode.firstElementChild",
+            "element.isFirstChild()",
+            "element.firstChild === element",
+            "element.getPosition() === 0"
+        ],
+        "answer": "element === element.parentNode.firstElementChild",
+        "difficulty": "Hard",
+        "explanation": "Comparing the element to `parentNode.firstElementChild` checks if it is the first child element."
+    },
+    {
+        "question": "How do you check if an element is the last child of its parent?",
+        "options": [
+            "element === element.parentNode.lastElementChild",
+            "element.isLastChild()",
+            "element.lastChild === element",
+            "element.getPosition() === -1"
+        ],
+        "answer": "element === element.parentNode.lastElementChild",
+        "difficulty": "Hard",
+        "explanation": "Comparing the element to `parentNode.lastElementChild` checks if it is the last child element."
+    },
+    {
+        "question": "How do you get all attributes of a DOM element as an object?",
+        "options": [
+            "element.attributes",
+            "element.getAttributes()",
+            "element.attrs",
+            "element.attributeMap()"
+        ],
+        "answer": "element.attributes",
+        "difficulty": "Hard",
+        "explanation": "`element.attributes` returns a NamedNodeMap of all attributes on the element."
+    },
+    {
+        "question": "How do you check if an element has child elements?",
+        "options": [
+            "element.children.length > 0",
+            "element.hasChildren()",
+            "element.childNodes.length > 0",
+            "element.isParent()"
+        ],
+        "answer": "element.children.length > 0",
+        "difficulty": "Medium",
+        "explanation": "`children.length > 0` checks if an element has any child elements."
+    },
+    {
+        "question": "How do you get the outer HTML of an element, including the element itself?",
+        "options": [
+            "element.outerHTML",
+            "element.innerHTML",
+            "element.getOuterHTML()",
+            "element.html()"
+        ],
+        "answer": "element.outerHTML",
+        "difficulty": "Medium",
+        "explanation": "`outerHTML` returns the HTML of the element and its content."
+    },
+    {
+        "question": "How do you select elements within a specific parent element?",
+        "options": [
+            "parent.querySelectorAll('selector')",
+            "parent.getElements('selector')",
+            "parent.select('selector')",
+            "parent.findElements('selector')"
+        ],
+        "answer": "parent.querySelectorAll('selector')",
+        "difficulty": "Medium",
+        "explanation": "`querySelectorAll('selector')` on a parent element selects matching descendants."
+    },
+    {
+        "question": "How do you check if a node is a comment node using `nodeType`?",
+        "options": [
+            "node.nodeType === 8",
+            "node.nodeType === 3",
+            "node.nodeType === 1",
+            "node.nodeType === 'comment'"
+        ],
+        "answer": "node.nodeType === 8",
+        "difficulty": "Hard",
+        "explanation": "Comment nodes have a `nodeType` value of 8."
+    },
+    {
+        "question": "How do you get the owner document of a DOM node?",
+        "options": [
+            "node.ownerDocument",
+            "node.document",
+            "node.getDocument()",
+            "node.parentDocument"
+        ],
+        "answer": "node.ownerDocument",
+        "difficulty": "Hard",
+        "explanation": "`ownerDocument` returns the document object that contains the node."
+    },
+    {
+        "question": "How do you check if two nodes are the same in the DOM?",
+        "options": [
+            "node1 === node2",
+            "node1.equals(node2)",
+            "node1.isSameNode(node2)",
+            "node1.compareNode(node2)"
+        ],
+        "answer": "node1.isSameNode(node2)",
+        "difficulty": "Hard",
+        "explanation": "`isSameNode(node2)` checks if two nodes are the same instance in the DOM."
+    },
 
 
 
