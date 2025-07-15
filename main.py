@@ -1,4 +1,4 @@
-```python
+
 import streamlit as st
 import random
 from datetime import datetime
@@ -1002,4 +1002,4 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-```
+
