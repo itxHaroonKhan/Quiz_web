@@ -90,227 +90,169 @@ def reset_quiz():
         "started": False
     })
     st.rerun()
-
-# Enhanced CSS
 st.markdown("""
     <style>
-    :root {
-        --primary: #6b21a8;
-        --primary-light: #a855f7;
-        --secondary: #f3e8ff;
-        --text: #1f2937;
-        --text-light: #6b7280;
-        --bg: #ffffff;
-        --card-bg: #f9fafb;
-        --correct: #34c759;
-        --wrong: #ff3b30;
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    [data-theme="dark"] {
-        --primary: #8b5cf6;
-        --primary-light: #c084fc;
-        --secondary: #2c2c54;
-        --text: #f3f4f6;
-        --text-light: #d1d5db;
-        --bg: #1a1a3b;
-        --card-bg: #2c2c54;
-        --correct: #4ade80;
-        --wrong: #f87171;
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    }
-
-    .main-container {
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        padding: 2rem 1rem;
+    body {
+        background: var(--bg-gradient);
+        color: var(--text-color);
+        font-family: 'Inter', 'Arial', sans-serif;
         transition: all 0.3s ease;
     }
-
-    .title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        background: linear-gradient(45deg, var(--primary), var(--primary-light));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        text-align: center;
-        margin-bottom: 0.5rem;
+    :root {
+        --bg-gradient: linear-gradient(180deg, #1a1a3b, #2c2c54);
+        --bg-container: #2c2c54;
+        --text-color: #ffffff;
+        --button-bg: linear-gradient(45deg, #6b21a8, #a855f7);
+        --button-hover: linear-gradient(45deg, #8b5cf6, #c084fc);
+        --code-bg: #1e1e1e;
+        --shadow: rgba(0,0,0,0.3);
     }
-
-    .caption {
-        font-size: 1.1rem;
-        color: var(--text-light);
-        text-align: center;
-        margin-bottom: 2rem;
+    [data-theme="light"] {
+        --bg-gradient: linear-gradient(180deg, #e0e7ff, #f3e8ff);
+        --bg-container: #ffffff;
+        --text-color: #1f2937;
+        --button-bg: linear-gradient(45deg, #4f46e5, #7c3aed);
+        --button-hover: linear-gradient(45deg, #6366f1, #a78bfa);
+        --code-bg: #f1f5f9;
+        --shadow: rgba(0,0,0,0.1);
     }
-
+    .main-container {
+        background: var(--bg-container);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px var(--shadow);
+        max-width: 900px;
+        margin: 20px auto;
+    }
     .stButton>button {
-        background: linear-gradient(45deg, var(--primary), var(--primary-light));
-        color: white;
+        background: var(--button-bg);
+        color: var(--text-color);
         border: none;
-        border-radius: 12px;
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
+        border-radius: 10px;
+        padding: 12px;
+        width: 100%;
+        font-size: 16px;
         font-weight: 600;
+        margin: 6px 0;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: var(--shadow);
-        width: 100%;
-        margin: 0.5rem 0;
+        transform: scale(1);
     }
-
     .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        background: var(--button-hover);
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px var(--shadow);
     }
-
     .stButton>button:disabled {
-        background: #9ca3af;
-        transform: none;
+        background: #6b7280;
         cursor: not-allowed;
+        transform: scale(1);
     }
-
+    .selected-correct {
+        background: #34c759 !important;
+        transform: scale(1.05);
+    }
+    .selected-wrong {
+        background: #ff3b30 !important;
+        transform: scale(1.05);
+    }
     .question-container {
-        background: var(--card-bg);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: var(--shadow);
-        transition: all 0.3s ease;
-    }
-
-    .difficulty {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .feedback-correct {
-        color: var(--correct);
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 1rem 0;
-        animation: fadeIn 0.5s ease;
-    }
-
-    .feedback-wrong {
-        color: var(--wrong);
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 1rem 0;
-        animation: fadeIn 0.5s ease;
-    }
-
-    .progress-container {
-        margin: 1.5rem 0;
-    }
-
-    .progress-bar {
-        background: #e5e7eb;
+        background: var(--bg-container);
+        padding: 25px;
         border-radius: 12px;
-        height: 8px;
-        overflow: hidden;
+        box-shadow: 0 4px 12px var(--shadow);
+        margin-bottom: 15px;
+    }
+    .feedback-correct {
+        color: #34c759;
+        font-weight: 600;
+        font-size: 18px;
+        margin: 15px 0;
+        animation: fadeIn 0.5s ease;
+    }
+    .feedback-wrong {
+        color: #ff3b30;
+        font-weight: 600;
+        font-size: 18px;
+        margin: 15px 0;
+        animation: fadeIn 0.5s ease;
+    }
+    .progress-bar {
+        background: #4b4b6b;
+        border-radius: 10px;
+        height: 12px;
+        margin: 10px 0;
         position: relative;
     }
-
     .progress-fill {
-        background: linear-gradient(45deg, var(--primary), var(--primary-light));
+        background: var(--button-bg);
         height: 100%;
-        border-radius: 12px;
+        border-radius: 10px;
         transition: width 0.5s ease;
     }
-
     .progress-text {
         position: absolute;
-        top: -22px;
+        top: -20px;
         right: 0;
-        color: var(--text);
-        font-size: 0.8rem;
+        color: var(--text-color);
+        font-size: 12px;
     }
-
+    .title {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 8px;
+        color: var(--text-color);
+    }
+    .caption {
+        text-align: center;
+        color: #b0b0d0;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
     .timer {
-        font-size: 1rem;
-        color: var(--primary-light);
+        font-size: 16px;
+        color: #ff6b6b;
         font-weight: 600;
         text-align: center;
-        margin: 1rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
+        margin-top: 10px;
     }
-
-    .results-container {
-        background: var(--card-bg);
-        border-radius: 16px;
-        padding: 2rem;
-        box-shadow: var(--shadow);
+    .difficulty {
+        font-size: 14px;
+        color: #b0b0d0;
+        margin-bottom: 10px;
     }
-
-    .score-display {
-        font-size: 3rem;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(45deg, var(--primary), var(--primary-light));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+    .stCodeBlock {
+        background-color: var(--code-bg) !important;
+        border-radius: 8px;
+        padding: 15px;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        border: 1px solid #4b4b6b;
     }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 2rem;
+    .stCodeBlock pre, .stCodeBlock code {
+        color: var(--text-color);
     }
-
-    .stat-item {
-        background: rgba(168, 85, 247, 0.1);
-        padding: 1rem;
-        border-radius: 12px;
-        text-align: center;
-    }
-
-    .selected-correct {
-        background: var(--correct) !important;
-        color: white !important;
-        animation: pulse 0.5s ease;
-    }
-
-    .selected-wrong {
-        background: var(--wrong) !important;
-        color: white !important;
-        animation: pulse 0.5s ease;
-    }
-
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-        .title {
-            font-size: 2rem;
+    @media (max-width: 600px) {
+        .main-container {
+            padding: 15px;
+            margin: 10px;
         }
-        .stats-grid {
-            grid-template-columns: 1fr;
+        .title {
+            font-size: 28px;
+        }
+        .stButton>button {
+            font-size: 14px;
+            padding: 8px;
         }
     }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 """, unsafe_allow_html=True)
-
 # Main UI
 st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">', unsafe_allow_html=True)
 st.markdown('<h1 class="title">🚀 DOM Mastery Quiz</h1>', unsafe_allow_html=True)
