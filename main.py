@@ -914,6 +914,42 @@ st.markdown("""
 .main-container[data-theme="light"] .stButton > button[key="play_again"]:hover {
     background-color: #1c7430;
 }
+
+/* Results section */
+.score-display {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-item {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -1069,30 +1105,24 @@ else:
             """, unsafe_allow_html=True)
 
             # Review Answers
-           # Review Answers without raw HTML / DOM
-st.header("📝 Review Your Answers")
+            st.header("📝 Review Your Answers")
 
-for i, ans in enumerate(st.session_state.answers):
-    if ans:
-        status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
+            for i, ans in enumerate(st.session_state.answers):
+                if ans:
+                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
 
-        # Use container for better spacing
-        with st.container():
-            st.subheader(f"Question {i+1}: {ans['question']}")
-            st.write(f"**Your Answer:** {ans['user_answer']}")
-            
-            if ans["is_correct"]:
-                st.success(status)  # green colored success box
-            else:
-                st.error(status)    # red colored error box
-            
-            with st.expander("Explanation"):
-                st.write(quiz[i]["explanation"])
-
-# Play Again button
-if st.button("🔄 Play Again", key="play_again"):
-    reset_quiz()
-
+                    # Use container for better spacing
+                    with st.container():
+                        st.subheader(f"Question {i+1}: {ans['question']}")
+                        st.write(f"**Your Answer:** {ans['user_answer']}")
+                        
+                        if ans["is_correct"]:
+                            st.success(status)
+                        else:
+                            st.error(status)
+                        
+                        with st.expander("Explanation"):
+                            st.write(quiz[i]["explanation"])
 
             # Play Again button
             if st.button("🔄 Play Again", key="play_again"):
