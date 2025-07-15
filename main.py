@@ -3,691 +3,385 @@ import random
 from datetime import datetime
 import uuid
 
-# Quiz data (67 questions on nested loops, strings, numbers, dates, functions, switch statements)
+# Quiz data with 50 questions covering all specified topics, options without a, b, c, d labels
 quiz = [
     {
-        "question": "How do you write a nested for loop to iterate over a 2D array in JavaScript?\n```javascript\nfor (let i = 0; i < array.length; i++) { for (let j = 0; j < array[i].length; j++) { } }\n```",
-        "options": [
-            "for (let i = 0; i < array.length; i++) { for (let j = 0; j < array[i].length; j++) { } }",
-            "for (let i = 0; i < array; i++) { for (let j = 0; j < array[i]; j++) { } }",
-            "for (let i in array) { for (let j in array[i]) { } }",
-            "for (let i of array) { for (let j of array) { } }"
-        ],
-        "answer": "for (let i = 0; i < array.length; i++) { for (let j = 0; j < array[i].length; j++) { } }",
+        "question": "How do you convert a string to lowercase and then capitalize only its first letter?\n```javascript\nlet str = 'JAVASCRIPT';\n```",
+        "options": ["str.toLowerCase()[0].toUpperCase() + str.slice(1)", "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)", "str[0].toUpperCase() + str.toLowerCase().slice(1)", "str.toLowerCase().replace(str[0], str[0].toUpperCase())"],
+        "answer": "str.toLowerCase().charAt(0).toUpperCase() + str.slice(1)",
         "difficulty": "Medium",
-        "explanation": "A nested for loop uses two indices: `i` for rows and `j` for columns, accessing each element as `array[i][j]`."
+        "explanation": "Convert the string to lowercase with `toLowerCase()`, use `charAt(0)` to get the first character, capitalize it with `toUpperCase()`, and append the rest with `slice(1)`."
     },
     {
-        "question": "What is the purpose of a nested for loop in JavaScript?",
-        "options": [
-            "To iterate over multi-dimensional data",
-            "To repeat a single loop multiple times",
-            "To create a function inside another function",
-            "To replace a while loop"
-        ],
-        "answer": "To iterate over multi-dimensional data",
-        "difficulty": "Easy",
-        "explanation": "Nested for loops are used to process multi-dimensional data, such as 2D arrays, by iterating over each dimension."
-    },
-    {
-        "question": "How many iterations does the inner loop perform in this code?\n```javascript\nfor (let i = 0; i < 4; i++) { for (let j = 0; j < 3; j++) { } }\n```",
-        "options": [
-            "12",
-            "4",
-            "3",
-            "7"
-        ],
-        "answer": "12",
+        "question": "How do you extract the last 3 characters of a string?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str.substring(str.length - 3)", "str.slice(-3)", "str.substr(-3)", "All of the above"],
+        "answer": "All of the above",
         "difficulty": "Medium",
-        "explanation": "The outer loop runs 4 times, and the inner loop runs 3 times per outer iteration, so 4 * 3 = 12 total iterations."
+        "explanation": "`substring(str.length - 3)`, `slice(-3)`, and `substr(-3)` all return the last 3 characters ('ipt') of the string."
     },
     {
-        "question": "What does the `toUpperCase()` method do in JavaScript?",
-        "options": [
-            "Converts a string to uppercase",
-            "Converts a string to lowercase",
-            "Capitalizes the first letter",
-            "Removes spaces from a string"
-        ],
-        "answer": "Converts a string to uppercase",
-        "difficulty": "Easy",
-        "explanation": "`toUpperCase()` converts all characters in a string to uppercase, e.g., 'hello' becomes 'HELLO'."
-    },
-    {
-        "question": "How do you convert a string to lowercase in JavaScript?",
-        "options": [
-            "string.toLowerCase()",
-            "string.toUpperCase()",
-            "string.lower()",
-            "string.toLowCase()"
-        ],
-        "answer": "string.toLowerCase()",
-        "difficulty": "Easy",
-        "explanation": "`toLowerCase()` converts all characters in a string to lowercase, e.g., 'HELLO' becomes 'hello'."
-    },
-    {
-        "question": "How do you capitalize the first letter of a string in JavaScript?",
-        "options": [
-            "string.charAt(0).toUpperCase() + string.slice(1)",
-            "string[0].toUpperCase() + string.slice(1)",
-            "string.capitalizeFirst()",
-            "string.toUpperCase(0)"
-        ],
-        "answer": "string.charAt(0).toUpperCase() + string.slice(1)",
+        "question": "How do you find the index of the first occurrence of 'Script' in a string?\n```javascript\nlet str = 'JavaScript is fun';\n```",
+        "options": ["str.find('Script')", "str.indexOf('Script')", "str.search('Script')", "Both str.indexOf('Script') and str.search('Script')"],
+        "answer": "Both str.indexOf('Script') and str.search('Script')",
         "difficulty": "Medium",
-        "explanation": "Use `charAt(0).toUpperCase()` for the first character and `slice(1)` for the rest of the string."
+        "explanation": "`indexOf()` and `search()` both return the starting index (4) of 'Script'. `search()` can also use regex."
     },
     {
-        "question": "What is the length of the string `'JavaScript'`?",
-        "options": [
-            "10",
-            "9",
-            "11",
-            "8"
-        ],
-        "answer": "10",
-        "difficulty": "Easy",
-        "explanation": "The `length` property returns the number of characters in a string, so `'JavaScript'.length` is 10."
-    },
-    {
-        "question": "How do you extract characters from index 2 to 5 in a string?",
-        "options": [
-            "string.slice(2, 6)",
-            "string.substring(2, 5)",
-            "string.substr(2, 4)",
-            "string.extract(2, 5)"
-        ],
-        "answer": "string.slice(2, 6)",
+        "question": "How do you safely access the character at index 10 of a string that may be shorter?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str[10] || ''", "str.charAt(10)", "str.at(10) || ''", "Both str[10] || '' and str.at(10) || ''"],
+        "answer": "Both str[10] || '' and str.at(10) || ''",
         "difficulty": "Medium",
-        "explanation": "`slice(2, 6)` extracts characters from index 2 up to (but not including) index 6."
+        "explanation": "`str[10]` returns `undefined` if out of bounds, and `at(10)` returns `undefined`, so both can be safely handled with a fallback like `|| ''`. `charAt(10)` returns an empty string."
     },
     {
-        "question": "What does `string.substr(1, 3)` return for the string `'hello'`?",
-        "options": [
-            "ell",
-            "hel",
-            "llo",
-            "lo"
-        ],
-        "answer": "ell",
+        "question": "How do you replace only the first 'a' with 'b' in a string case-insensitively?\n```javascript\nlet str = 'JavaScript';\n```",
+        "options": ["str.replace('a', 'b')", "str.replace(/a/i, 'b')", "str.replaceAll('a', 'b')", "str.replace(/a/, 'b')"],
+        "answer": "str.replace(/a/i, 'b')",
         "difficulty": "Medium",
-        "explanation": "`substr(1, 3)` extracts 3 characters starting from index 1, so `hello` becomes `ell`. Note: `substr` is deprecated."
+        "explanation": "`replace(/a/i, 'b')` uses a regex with the `i` flag to replace the first 'a' or 'A' with 'b'."
     },
     {
-        "question": "Which method checks if a string contains 'code'?",
-        "options": [
-            "string.includes('code')",
-            "string.contains('code')",
-            "string.has('code')",
-            "string.find('code')"
-        ],
-        "answer": "string.includes('code')",
-        "difficulty": "Easy",
-        "explanation": "`includes('code')` returns `true` if the string contains 'code', otherwise `false`."
-    },
-    {
-        "question": "What does `string.indexOf('test')` return if 'test' is not found?",
-        "options": [
-            "-1",
-            "0",
-            "null",
-            "undefined"
-        ],
-        "answer": "-1",
+        "question": "How do you round 3.14159 to the nearest tenth?",
+        "options": ["Math.round(3.14159 * 10) / 10", "Math.floor(3.14159 * 10) / 10", "Math.ceil(3.14159 * 10) / 10", "Math.trunc(3.14159 * 10) / 10"],
+        "answer": "Math.round(3.14159 * 10) / 10",
         "difficulty": "Medium",
-        "explanation": "`indexOf('test')` returns -1 if the substring 'test' is not found in the string."
+        "explanation": "Multiply by 10, use `Math.round()` to round to the nearest integer, then divide by 10 to get 3.1."
     },
     {
-        "question": "How do you find the character at index 4 in a string?",
-        "options": [
-            "string.charAt(4)",
-            "string.getChar(4)",
-            "string.char(4)",
-            "string.atIndex(4)"
-        ],
-        "answer": "string.charAt(4)",
-        "difficulty": "Easy",
-        "explanation": "`charAt(4)` returns the character at index 4. `string[4]` is also valid."
-    },
-    {
-        "question": "What does `string.at(2)` return for the string `'hello'`?",
-        "options": [
-            "l",
-            "h",
-            "e",
-            "o"
-        ],
-        "answer": "l",
+        "question": "How do you generate a random integer between 1 and 10?",
+        "options": ["Math.random() * 10", "Math.floor(Math.random() * 10) + 1", "Math.ceil(Math.random() * 10)", "Math.round(Math.random() * 10)"],
+        "answer": "Math.floor(Math.random() * 10) + 1",
         "difficulty": "Medium",
-        "explanation": "`at(2)` returns the character at index 2, which is 'l' in 'hello'. It supports negative indices."
+        "explanation": "`Math.random() * 10` gives a number from 0 to <10, `Math.floor()` makes it an integer (0–9), and `+ 1` shifts it to 1–10."
     },
     {
-        "question": "How do you replace the first 'a' with 'b' in a string?",
-        "options": [
-            "string.replace('a', 'b')",
-            "string.replaceAll('a', 'b')",
-            "string.swap('a', 'b')",
-            "string.change('a', 'b')"
-        ],
-        "answer": "string.replace('a', 'b')",
+        "question": "How do you convert '123.45' to a number with integer and decimal parts?",
+        "options": ["parseInt('123.45')", "parseFloat('123.45')", "Number('123.45')", "Both parseFloat('123.45') and Number('123.45')"],
+        "answer": "Both parseFloat('123.45') and Number('123.45')",
         "difficulty": "Medium",
-        "explanation": "`replace('a', 'b')` replaces only the first occurrence of 'a' with 'b'."
+        "explanation": "Both `parseFloat('123.45')` and `Number('123.45')` return 123.45, preserving the decimal part."
     },
     {
-        "question": "How do you replace all 'x' with 'y' in a string?",
-        "options": [
-            "string.replaceAll('x', 'y')",
-            "string.replace('x', 'y')",
-            "string.update('x', 'y')",
-            "string.modify('x', 'y')"
-        ],
-        "answer": "string.replaceAll('x', 'y')",
+        "question": "How do you convert a number to a string with a leading zero if less than 10?\n```javascript\nlet num = 5;\n```",
+        "options": ["num.toString().padStart(2, '0')", "num.toString(2)", "String(num).padEnd(2, '0')", "num + '0'"],
+        "answer": "num.toString().padStart(2, '0')",
         "difficulty": "Medium",
-        "explanation": "`replaceAll('x', 'y')` replaces all occurrences of 'x' with 'y'."
+        "explanation": "`padStart(2, '0')` adds a leading zero to make the string '05' if the number is single-digit."
     },
     {
-        "question": "What does `Math.round(4.6)` return?",
-        "options": [
-            "5",
-            "4",
-            "4.6",
-            "5.0"
-        ],
-        "answer": "5",
-        "difficulty": "Easy",
-        "explanation": "`Math.round(4.6)` rounds 4.6 to the nearest integer, which is 5."
-    },
-    {
-        "question": "How do you round a number down to the nearest integer?",
-        "options": [
-            "Math.floor(number)",
-            "Math.round(number)",
-            "Math.ceil(number)",
-            "Math.trunc(number)"
-        ],
-        "answer": "Math.floor(number)",
-        "difficulty": "Easy",
-        "explanation": "`Math.floor(number)` rounds a number down to the nearest integer, e.g., 4.9 becomes 4."
-    },
-    {
-        "question": "What does `Math.ceil(3.1)` return?",
-        "options": [
-            "4",
-            "3",
-            "3.1",
-            "4.0"
-        ],
-        "answer": "4",
-        "difficulty": "Easy",
-        "explanation": "`Math.ceil(3.1)` rounds 3.1 up to the nearest integer, which is 4."
-    },
-    {
-        "question": "What is the range of numbers returned by `Math.random()`?",
-        "options": [
-            "0 to 1 (exclusive)",
-            "0 to 1 (inclusive)",
-            "1 to 10",
-            "0 to 100"
-        ],
-        "answer": "0 to 1 (exclusive)",
-        "difficulty": "Easy",
-        "explanation": "`Math.random()` returns a random number from 0 (inclusive) to 1 (exclusive)."
-    },
-    {
-        "question": "How do you generate a random integer between 1 and 5?",
-        "options": [
-            "Math.floor(Math.random() * 5) + 1",
-            "Math.random() * 5",
-            "Math.round(Math.random() * 5)",
-            "Math.floor(Math.random() * 5)"
-        ],
-        "answer": "Math.floor(Math.random() * 5) + 1",
+        "question": "How do you format a number to exactly 3 decimal places as a number?\n```javascript\nlet num = 3.14159;\n```",
+        "options": ["Number(num.toFixed(3))", "num.toPrecision(3)", "Math.round(num * 1000) / 1000", "Both Number(num.toFixed(3)) and Math.round(num * 1000) / 1000"],
+        "answer": "Both Number(num.toFixed(3)) and Math.round(num * 1000) / 1000",
         "difficulty": "Medium",
-        "explanation": "`Math.random() * 5` gives 0 to 4.999..., `Math.floor` rounds down, and `+ 1` shifts to 1–5."
+        "explanation": "`toFixed(3)` returns a string with 3 decimals, converted back with `Number()`. `Math.round(num * 1000) / 1000` achieves the same numerically."
     },
     {
-        "question": "How do you convert the string '789' to an integer?",
-        "options": [
-            "parseInt('789')",
-            "parseFloat('789')",
-            "toInt('789')",
-            "String.toNumber('789')"
-        ],
-        "answer": "parseInt('789')",
+        "question": "How do you get the current date in 'YYYY-MM-DD' format?",
+        "options": ["new Date().toISOString().split('T')[0]", "new Date().toDateString()", "new Date().format('YYYY-MM-DD')", "new Date().getDate()"],
+        "answer": "new Date().toISOString().split('T')[0]",
         "difficulty": "Medium",
-        "explanation": "`parseInt('789')` converts the string '789' to the integer 789."
+        "explanation": "`toISOString()` returns a string like '2025-07-14T...', and `split('T')[0]` extracts '2025-07-14'."
     },
     {
-        "question": "What does `parseFloat('12.34')` return?",
-        "options": [
-            "12.34",
-            "12",
-            "12.34.0",
-            "13"
-        ],
-        "answer": "12.34",
+        "question": "How do you extract the day of the week from a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
+        "options": ["date.getDay()", "date.getDate()", "date.getWeekday()", ",date.day()"],
+        "answer": "date.getDay()",
         "difficulty": "Medium",
-        "explanation": "`parseFloat('12.34')` converts the string '12.34' to the floating-point number 12.34."
+        "explanation": "`getDay()` returns the day of the week (0–6, Sunday to Saturday)."
     },
     {
-        "question": "How do you convert a number to a string in JavaScript?",
-        "options": [
-            "number.toString()",
-            "number.toStr()",
-            "convertToString(number)",
-            "number.string()"
-        ],
-        "answer": "number.toString()",
-        "difficulty": "Easy",
-        "explanation": "`toString()` converts a number to a string, e.g., 123 becomes '123'."
-    },
-    {
-        "question": "How do you convert a string to a number using the Number constructor?",
-        "options": [
-            "Number(string)",
-            "string.toNumber()",
-            "parseNumber(string)",
-            "toNumber(string)"
-        ],
-        "answer": "Number(string)",
+        "question": "How do you create a Date object for 2025-12-31 at 23:59:59?",
+        "options": ["new Date('2025-12-31 JUL-14-2025 23:59:59')", "new Date(2025, 11, 31, 23, 59, 59)", "new Date(2025, 12, 31, 23, 59, 59)", "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)"],
+        "answer": "Both new Date('2025-12-31 23:59:59') and new Date(2025, 11, 31, 23, 59, 59)",
         "difficulty": "Medium",
-        "explanation": "`Number(string)` converts a string to a number, e.g., `Number('123')` returns 123."
+        "explanation": "Both the string format and the constructor with 0-based month (11 for December) work."
     },
     {
-        "question": "How do you limit a number to 2 decimal places?",
-        "options": [
-            "number.toFixed(2)",
-            "number.toPrecision(2)",
-            "number.round(2)",
-            "number.limit(2)"
-        ],
-        "answer": "number.toFixed(2)",
+        "question": "How do you add one month to a Date object?\n```javascript\nlet date = new Date('2025-07-14');\n```",
+        "options": ["date.setMonth(date.getMonth() + 1)", "date.addMonth(1)", "date.setMonth(1)", "date.month += 1"],
+        "answer": "date.setMonth(date.getMonth() + 1)",
+        "難易度": "Medium",
+        "explanation": "`setMonth()` with `getMonth() + 1` increments the month, handling year rollovers."
+    },
+    {
+        "question": "How do you write a function that accepts variable arguments?\n```javascript\nfunction sum(...numbers) {}\n```",
+        "options": ["Use the rest parameter syntax", "Use arguments object", "Both Use the rest parameter syntax and Use arguments object", "Use a fixed parameter list"],
+        "answer": "Both Use the rest parameter syntax and Use arguments object",
         "difficulty": "Medium",
-        "explanation": "`toFixed(2)` formats a number to 2 decimal places, returning a string, e.g., 3.14159 becomes '3.14'."
+        "explanation": "The rest parameter (`...numbers`) or the `arguments` object can handle variable arguments."
     },
     {
-        "question": "What does `number.toPrecision(3)` do?",
-        "options": [
-            "Formats a number to 3 significant digits",
-            "Formats a number to 3 decimal places",
-            "Rounds a number to 3 integers",
-            "Converts a number to a 3-character string"
-        ],
-        "answer": "Formats a number to 3 significant digits",
+        "question": "How do you pass an object as a parameter and access its properties?\n```javascript\nfunction process({name}) {}\n```",
+        "options": ["process({name: 'John'})", "process('John')", "process.name('John')", "process({name: 'John'}.name)"],
+        "answer": "process({name: 'John'})",
         "difficulty": "Medium",
-        "explanation": "`toPrecision(3)` formats a number to 3 significant digits, e.g., 123.456 becomes '123'."
+        "explanation": "Destructuring in the parameter allows direct access to the `name` property of the passed object."
     },
     {
-        "question": "How do you get the current date and time in JavaScript?",
-        "options": [
-            "new Date()",
-            "Date.now()",
-            "Date.getCurrent()",
-            "new DateTime()"
-        ],
-        "answer": "new Date()",
-        "difficulty": "Easy",
-        "explanation": "`new Date()` creates a Date object representing the current date and time."
-    },
-    {
-        "question": "What does `Date.now()` return?",
-        "options": [
-            "A timestamp in milliseconds",
-            "A Date object",
-            "The current date as a string",
-            "The current time in seconds"
-        ],
-        "answer": "A timestamp in milliseconds",
+        "question": "How do you return multiple values from a function?",
+        "options": ["return [val1, val2]", "return {val1, val2}", "return val1, val2", "Both return [val1, val2] and return {val1, val2}"],
+        "answer": "Both return [val1, val2] and return {val1, val2}",
         "difficulty": "Medium",
-        "explanation": "`Date.now()` returns the milliseconds since January 1, 1970 (Unix epoch)."
+        "explanation": "Returning an array or object allows multiple values to be returned and destructured by the caller."
     },
     {
-        "question": "How do you extract the year from a Date object?",
-        "options": [
-            "date.getFullYear()",
-            "date.getYear()",
-            "date.year()",
-            "date.getDate()"
-        ],
-        "answer": "date.getFullYear()",
+        "question": "How do you avoid global variable conflicts in a function?\n```javascript\nlet x = 10;\nfunction myFunc() {\n  let x = 20;\n}\n```",
+        "options": ["Use `let` or `const` inside the function", "Use `var` globally", "Avoid naming variables", "Use globalThis.x"],
+        "answer": "Use `let` or `const` inside the function",
         "difficulty": "Medium",
-        "explanation": "`getFullYear()` returns the four-digit year of a Date object, e.g., 2025."
+        "explanation": "Declaring variables with `let` or `const` inside a function creates local scope, avoiding global conflicts."
     },
     {
-        "question": "How do you get the month from a Date object?",
-        "options": [
-            "date.getMonth()",
-            "date.getDate()",
-            "date.month()",
-            "date.getMonthNumber()"
-        ],
-        "answer": "date.getMonth()",
+        "question": "How do you structure a switch statement to handle multiple cases?\n```javascript\nlet value = 2;\nswitch(value) {}\n```",
+        "options": ["switch(value) { case 1: case 2: return 'Low'; }", "switch(value) { case 1, 2: return 'Low'; }", "switch(value) { case 1 || 2: return 'Low'; }", "switch(value) { case [1, 2]: return 'Low'; }"],
+        "answer": "switch(value) { case 1: case 2: return 'Low'; }",
         "difficulty": "Medium",
-        "explanation": "`getMonth()` returns the month (0–11), where 0 is January."
+        "explanation": "Multiple cases can share the same block by listing them sequentially without breaks."
     },
     {
-        "question": "How do you create a Date object for February 20, 2024?",
-        "options": [
-            "new Date(2024, 1, 20)",
-            "new Date(2024, 2, 20)",
-            "new Date('2024-02-20')",
-            "new Date('February 20, 2024')"
-        ],
-        "answer": "new Date(2024, 1, 20)",
+        "question": "How do you ensure a switch statement handles an unexpected value?\n```javascript\nswitch(value) {}\n```",
+        "options": ["Add a default case", "Add a break statement", "Use a try-catch", "Add an else clause"],
+        "answer": "Add a default case",
         "difficulty": "Medium",
-        "explanation": "`new Date(2024, 1, 20)` creates a Date for February 20, 2024, as months are 0-based."
+        "explanation": "A `default` case handles values not matched by any `case`."
     },
     {
-        "question": "How do you specify a Date object for 10:30 AM on July 15, 2025?",
-        "options": [
-            "new Date(2025, 6, 15, 10, 30)",
-            "new Date(2025, 7, 15, 10, 30)",
-            "new Date('2025-07-15 10:30')",
-            "new Date('July 15, 2025 10:30')"
-        ],
-        "answer": "new Date(2025, 6, 15, 10, 30)",
+        "question": "How do you prevent an infinite while loop?\n```javascript\nlet i = 0;\nwhile (i < 5) {}\n```",
+        "options": ["Increment i inside the loop", "Use break", "Both Increment i inside the loop and Use break", "Set i outside the loop"],
+        "answer": "Both Increment i inside the loop and Use break",
         "difficulty": "Medium",
-        "explanation": "`new Date(2025, 6, 15, 10, 30)` creates a Date for July 15, 2025, at 10:30 AM."
+        "explanation": "Incrementing the loop variable (`i++`) or using `break` ensures the condition eventually becomes false."
     },
     {
-        "question": "How do you set the year of a Date object to 2026?",
-        "options": [
-            "date.setFullYear(2026)",
-            "date.setYear(2026)",
-            "date.updateYear(2026)",
-            "date.changeYear(2026)"
-        ],
-        "answer": "date.setFullYear(2026)",
+        "question": "How does a do...while loop ensure at least one execution?\n```javascript\nlet i = 0;\ndo {} while (i < 0);\n```",
+        "options": ["Condition is checked after the block", "Condition is checked before", "It uses a counter", "It requires a break"],
+        "answer": "Condition is checked after the block",
         "difficulty": "Medium",
-        "explanation": "`setFullYear(2026)` sets the year of a Date object to 2026."
+        "explanation": "A `do...while` loop runs the block first, then checks the condition, ensuring at least one execution."
     },
     {
-        "question": "How do you add 2 days to a Date object?",
-        "options": [
-            "date.setDate(date.getDate() + 2)",
-            "date.addDays(2)",
-            "date.setDay(date.getDay() + 2)",
-            "date.updateDate(2)"
-        ],
-        "answer": "date.setDate(date.getDate() + 2)",
+        "question": "Why might you place a `<script>` tag in the `<head>` with a defer attribute?",
+        "options": ["To load the script asynchronously", "To execute after DOM is parsed", "To improve performance", "Both To execute after DOM is parsed and To improve performance"],
+        "answer": "Both To execute after DOM is parsed and To improve performance",
         "difficulty": "Medium",
-        "explanation": "`setDate(date.getDate() + 2)` increments the day of the month by 2."
+        "explanation": "The `defer` attribute ensures the script runs after the DOM is fully parsed, improving performance."
     },
     {
-        "question": "How do you define a named function in JavaScript?",
-        "options": [
-            "function myFunc() {}",
-            "def myFunc() {}",
-            "func myFunc() {}",
-            "myFunc() => {}"
-        ],
-        "answer": "function myFunc() {}",
-        "difficulty": "Easy",
-        "explanation": "A named function is defined using the `function` keyword, a name, parentheses, and curly braces."
-    },
-    {
-        "question": "What is an arrow function in JavaScript?",
-        "options": [
-            "A concise function syntax using =>",
-            "A function with a return statement",
-            "A function inside a loop",
-            "A function with no parameters"
-        ],
-        "answer": "A concise function syntax using =>",
+        "question": "How do you write a multi-line comment that explains a function’s purpose?",
+        "options": ["/* Comment */", "// Comment", "# Comment", "<!-- Comment -->"],
+        "answer": "/* Comment */",
         "difficulty": "Medium",
-        "explanation": "Arrow functions use the `=>` syntax, e.g., `const myFunc = () => {}`."
+        "explanation": "Multi-line comments use `/* */` to document code, such as a function’s purpose."
     },
     {
-        "question": "How do you pass a parameter to a function?",
-        "options": [
-            "function myFunc(param) {}",
-            "function myFunc: param {}",
-            "function myFunc[param] {}",
-            "function myFunc { param }"
-        ],
-        "answer": "function myFunc(param) {}",
-        "difficulty": "Easy",
-        "explanation": "Parameters are defined inside the parentheses of a function, e.g., `myFunc(param)`."
-    },
-    {
-        "question": "How do you pass multiple parameters to a function?",
-        "options": [
-            "function myFunc(a, b) {}",
-            "function myFunc(a; b) {}",
-            "function myFunc[a, b] {}",
-            "function myFunc {a, b}"
-        ],
-        "answer": "function myFunc(a, b) {}",
-        "difficulty": "Easy",
-        "explanation": "Multiple parameters are separated by commas in the function definition."
-    },
-    {
-        "question": "What does a function return if it lacks a `return` statement?",
-        "options": [
-            "undefined",
-            "null",
-            "0",
-            "false"
-        ],
-        "answer": "undefined",
+        "question": "How do you handle a double-click event on a link?\n```javascript\nlet link = document.querySelector('a');\n```",
+        "options": ["link.addEventListener('dblclick', func)", "link.onclick = func", "link.doubleClick = func", "link.on('dblclick', func)"],
+        "answer": "link.addEventListener('dblclick', func)",
         "difficulty": "Medium",
-        "explanation": "A function without a `return` statement implicitly returns `undefined`."
+        "explanation": "The `dblclick` event is handled using `addEventListener` for double-clicks."
     },
     {
-        "question": "How do you return a value from a function?",
-        "options": [
-            "return value",
-            "output value",
-            "send value",
-            "give value"
-        ],
-        "answer": "return value",
-        "difficulty": "Easy",
-        "explanation": "The `return` statement sends a value back and stops function execution."
-    },
-    {
-        "question": "What is a local variable in a function?",
-        "options": [
-            "A variable declared inside a function",
-            "A variable declared outside a function",
-            "A variable shared across functions",
-            "A variable with a fixed value"
-        ],
-        "answer": "A variable declared inside a function",
+        "question": "How do you detect when a button is right-clicked?\n```javascript\nlet button = document.querySelector('button');\n```",
+        "options": ["button.addEventListener('contextmenu', func)", "button.onrightclick = func", "button.onclick = func", "button.addEventListener('rightclick', func)"],
+        "answer": "button.addEventListener('contextmenu', func)",
         "difficulty": "Medium",
-        "explanation": "Local variables are declared inside a function and are only accessible within it."
+        "explanation": "The `contextmenu` event fires on right-clicks, typically used for context menus."
     },
     {
-        "question": "What is a global variable in JavaScript?",
-        "options": [
-            "A variable declared outside any function",
-            "A variable inside a function",
-            "A variable passed to a function",
-            "A variable with block scope"
-        ],
-        "answer": "A variable declared outside any function",
+        "question": "How do you handle a mouse leaving an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.addEventListener('mouseout', func)", "el.addEventListener('mouseleave', func)", "el.addEventListener('mouseexit', func)", "Both el.addEventListener('mouseout', func) and el.addEventListener('mouseleave', func)"],
+        "answer": "Both el.addEventListener('mouseout', func) and el.addEventListener('mouseleave', func)",
         "difficulty": "Medium",
-        "explanation": "Global variables are declared outside functions and are accessible throughout the code."
+        "explanation": "`mouseout` and `mouseleave` both detect when the mouse leaves an element, with `mouseleave` not bubbling."
     },
     {
-        "question": "What happens if a local variable shadows a global variable?",
-        "options": [
-            "The local variable is used inside the function",
-            "The global variable is used",
-            "An error occurs",
-            "The variables merge"
-        ],
-        "answer": "The local variable is used inside the function",
+        "question": "How do you detect when an input field loses focus?\n```javascript\nlet input = document.querySelector('input');\n```",
+        "options": ["input.addEventListener('blur', func)", "input.addEventListener('focusout', func)", "input.addEventListener('change', func)", "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)"],
+        "answer": "Both input.addEventListener('blur', func) and input.addEventListener('focusout', func)",
         "difficulty": "Medium",
-        "explanation": "A local variable with the same name as a global variable takes precedence inside the function."
+        "explanation": "`blur`. and `focusout` both trigger when an input loses focus, with `focusout` bubbling."
     },
     {
-        "question": "How do you start a switch statement in JavaScript?",
-        "options": [
-            "switch (expression) {",
-            "case (expression) {",
-            "if (expression) {",
-            "match (expression) {"
-        ],
-        "answer": "switch (expression) {",
-        "difficulty": "Easy",
-        "explanation": "A `switch` statement starts with `switch (expression) {`, followed by case clauses."
-    },
-    {
-        "question": "What is the purpose of a `case` clause in a switch statement?",
-        "options": [
-            "To specify a value to match",
-            "To start the switch",
-            "To end the switch",
-            "To loop through values"
-        ],
-        "answer": "To specify a value to match",
-        "difficulty": "Easy",
-        "explanation": "A `case` clause specifies a value to compare against the switch expression."
-    },
-    {
-        "question": "How do you complete a switch statement?",
-        "options": [
-            "Add a `default` case and close with `}`",
-            "Add a `break` and close with `}`",
-            "Add a `return` and close with `}`",
-            "Add an `end` keyword"
-        ],
-        "answer": "Add a `default` case and close with `}`",
+        "question": "How do you validate an input field’s value before reading it?\n```javascript\nlet input = document.querySelector('input');\n```",
+        "options": ["if (input.value) {}", "if (input.value !== '') {}", "if (input.checkValidity()) {}", "Both if (input.value !== '') {} and if (input.checkValidity()) {}"],
+        "answer": "Both if (input.value !== '') {} and if (input.checkValidity()) {}",
         "difficulty": "Medium",
-        "explanation": "A `switch` statement typically includes a `default` case for unmatched values and ends with `}`."
+        "explanation": "Check if `value` is not empty or use `checkValidity()` for HTML5 validation constraints."
     },
     {
-        "question": "What does the `break` statement do in a switch case?",
-        "options": [
-            "Exits the current case",
-            "Skips to the next case",
-            "Returns a value",
-            "Stops the entire program"
-        ],
-        "answer": "Exits the current case",
+        "question": "How do you programmatically set a number input to 42?\n```javascript\nlet input = document.querySelector('input[type=\"number\"]');\n```",
+        "options": ["input.value = 42", "input.value = '42'", "input.setAttribute('value', 42)", "All of the above"],
+        "answer": "All of the above",
         "difficulty": "Medium",
-        "explanation": "The `break` statement exits the current case, preventing fall-through to the next case."
+        "explanation": "Setting `value` directly or via `setAttribute` updates the input; numbers are coerced to strings."
     },
     {
-        "question": "What happens if you omit `break` in a switch case?",
-        "options": [
-            "Execution continues to the next case",
-            "The switch stops",
-            "An error occurs",
-            "The function returns"
-        ],
-        "answer": "Execution continues to the next case",
+        "question": "How do you update a paragraph’s HTML content safely?\n```javascript\nlet p = document.querySelector('p');\n```",
+        "options": ["p.innerHTML = '<b>Text</b>'", "p.textContent = '<b>Text</b>'", "p.innerText = '<b>Text</b>'", "p.setHTML('<b>Text</b>')"],
+        "answer": "p.innerHTML = '<b>Text</b>'",
         "difficulty": "Medium",
-        "explanation": "Without `break`, execution falls through to the next case."
+        "explanation": "`innerHTML` sets HTML content, but use with caution to avoid XSS; `textContent` escapes HTML."
     },
     {
-        "question": "How do you handle multiple cases with the same action in a switch statement?",
-        "options": [
-            "case 'a': case 'b': code;",
-            "case 'a', 'b': code;",
-            "case 'a' || 'b': code;",
-            "case 'a' && 'b': code;"
-        ],
-        "answer": "case 'a': case 'b': code;",
+        "question": "How do you toggle an image’s visibility using styles?\n```javascript\nlet img = document.querySelector('img');\n```",
+        "options": ["img.style.display = img.style.display === 'none' ? 'block' : 'none'", "img.toggle('visible')", "img.style.visible = 'toggle'", "img.style.opacity = 0"],
+        "answer": "img.style.display = img.style.display === 'none' ? 'block' : 'none'",
         "difficulty": "Medium",
-        "explanation": "Multiple `case` labels without `break` share the same code block (fall-through)."
+        "explanation": "Toggling `display` between 'none' and 'block' shows or hides the image."
     },
     {
-        "question": "What does `'hello'.slice(-2)` return?",
-        "options": [
-            "lo",
-            "he",
-            "ll",
-            "el"
-        ],
-        "answer": "lo",
+        "question": "How do you swap an image and add a class on click?\n```javascript\nlet img = document.querySelector('img');\n```",
+        "options": ["img.src = 'new.jpg'; img.classList.add('active')", "img.setAttribute('src', 'new.jpg'); img.className = 'active'", "img.swapImage('new.jpg'); img.classList.add('active')", "Both img.src = 'new.jpg'; img.classList.add('active') and img.setAttribute('src', 'new.jpg'); img.className = 'active'"],
+        "answer": "Both img.src = 'new.jpg'; img.classList.add('active') and img.setAttribute('src', 'new.jpg'); img.className = 'active'",
         "difficulty": "Medium",
-        "explanation": "`slice(-2)` extracts the last 2 characters of 'hello', which is 'lo'."
+        "explanation": "Both setting `src` and `classList.add` or `setAttribute` and `className` work to swap the image and add a class."
     },
     {
-        "question": "What does `Math.trunc(7.8)` return?",
-        "options": [
-            "7",
-            "8",
-            "7.8",
-            "8.0"
-        ],
-        "answer": "7",
-        "difficulty": "Easy",
-        "explanation": "`Math.trunc(7.8)` removes the decimal part, returning 7."
-    },
-    {
-        "question": "How do you generate a random integer between 0 and 9?",
-        "options": [
-            "Math.floor(Math.random() * 10)",
-            "Math.random() * 10",
-            "Math.round(Math.random() * 10)",
-            "Math.floor(Math.random() * 9)"
-        ],
-        "answer": "Math.floor(Math.random() * 10)",
+        "question": "How do you set multiple styles on an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.style.cssText = 'color: blue; font-size: 16px'", "el.style = {color: 'blue', fontSize: '16px'}", "el.setStyles({color: 'blue', fontSize: '16px'})", "el.style.set('color: blue; font-size: 16px')"],
+        "answer": "el.style.cssText = 'color: blue; font-size: 16px'",
         "difficulty": "Medium",
-        "explanation": "`Math.random() * 10` generates 0 to 9.999..., and `Math.floor` rounds down to 0–9."
+        "explanation": "`cssText` sets multiple inline styles as a single CSS string."
     },
     {
-        "question": "How do you convert a string to a number using the unary plus operator?",
-        "options": [
-            "+string",
-            "string++",
-            "++string",
-            "-string"
-        ],
-        "answer": "+string",
+        "question": "How do you select all `<div>` elements and modify the first one?\n```javascript\nlet divs = document.getElementsByTagName('div');\n```",
+        "options": ["divs[0].style.color = 'blue'", "divs.first().style.color = 'blue'", "divs.item(0).style.color = 'blue'", "Both divs[0].style.color = 'blue' and divs.item(0).style.color = 'blue'"],
+        "answer": "Both divs[0].style.color = 'blue' and divs.item(0).style.color = 'blue'",
         "difficulty": "Medium",
-        "explanation": "The unary plus operator `+` converts a string to a number, e.g., +'123' returns 123."
+        "explanation": "`getElementsByTagName` returns an HTMLCollection; access the first element with `[0]` or `item(0)`."
     },
     {
-        "question": "How do you get the current minutes from a Date object?",
-        "options": [
-            "date.getMinutes()",
-            "date.getMinute()",
-            "date.minutes()",
-            "date.getTime().minutes"
-        ],
-        "answer": "date.getMinutes()",
+        "question": "How do you select `<p>` elements with a specific class?\n```javascript\ndocument.querySelectorAll('p.className');\n```",
+        "options": ["document.querySelectorAll('p.className')", "document.getElementsByClassName('className')", "document.querySelectorAll('p[class=\"className\"]')", "Both document.querySelectorAll('p.className') and document.querySelectorAll('p[class=\"className\"]')"],
+        "answer": "Both document.querySelectorAll('p.className') and document.querySelectorAll('p[class=\"className\"]')",
         "difficulty": "Medium",
-        "explanation": "`getMinutes()` returns the minutes (0–59) of a Date object."
+        "explanation": "CSS selectors `p.className` and `p[class=\"className\"]` both select `<p>` elements with the class 'className'."
     },
     {
-        "question": "How do you set the minutes of a Date object to 45?",
-        "options": [
-            "date.setMinutes(45)",
-            "date.setMinute(45)",
-            "date.updateMinutes(45)",
-            "date.changeMinutes(45)"
-        ],
-        "answer": "date.setMinutes(45)",
+        "question": "What is the DOM in JavaScript?",
+        "options": ["A programming interface for HTML documents", "A database of elements", "A styling framework", "A JavaScript library"],
+        "answer": "A programming interface for HTML documents",
         "difficulty": "Medium",
-        "explanation": "`setMinutes(45)` sets the minutes of a Date object to 45."
+        "explanation": "The DOM (Document Object Model) is a tree-like structure representing HTML, allowing JavaScript to manipulate it."
     },
     {
-        "question": "What is a function expression in JavaScript?",
-        "options": [
-            "A function assigned to a variable",
-            "A named function declaration",
-            "A function inside a loop",
-            "A function with no return value"
-        ],
-        "answer": "A function assigned to a variable",
+        "question": "How do you access the parent of an element?\n```javascript\nlet el = document.querySelector('span');\n```",
+        "options": ["el.parentNode", "el.parentElement", "el.getParent()", "Both el.parentNode and el.parentElement"],
+        "answer": "Both el.parentNode and el.parentElement",
         "difficulty": "Medium",
-        "explanation": "A function expression assigns an anonymous function to a variable, e.g., `const myFunc = function() {}`."
+        "explanation": "`parentNode` and `parentElement` both return the parent; `parentElement` returns null for non-element nodes."
     },
     {
-        "question": "What is the scope of a variable declared with `const` inside a function?",
-        "options": [
-            "Block scope",
-            "Global scope",
-            "Function scope",
-            "Module scope"
-        ],
-        "answer": "Block scope",
+        "question": "How do you get all child elements of a node?\n```javascript\nlet parent = document.querySelector('div');\n```",
+        "options": ["parent.children", "parent.childNodes", "parent.getChildren()", "Both parent.children and parent.childNodes"],
+        "answer": "Both parent.children and parent.childNodes",
         "difficulty": "Medium",
-        "explanation": "Variables declared with `const` inside a function have block scope, limited to the block they are defined in."
+        "explanation": "`children` returns only element children; `childNodes` includes all nodes (e.g., text nodes)."
+    },
+    {
+        "question": "How do you filter out non-element nodes from a node’s children?\n```javascript\nlet parent = document.querySelector('div');\n```",
+        "options": ["[...parent.childNodes].filter(node => node.nodeType === 1)", "[...parent.children].filter(node => node.nodeType === 1)", "parent.childNodes.filter(node => node.nodeType === 3)", "parent.getElements()"],
+        "answer": "[...parent.childNodes].filter(node => node.nodeType === 1)",
+        "difficulty": "Medium",
+        "explanation": "`childNodes` includes all nodes; filter with `nodeType === 1` to get only elements."
+    },
+    {
+        "question": "How do you select an element by its ID using the DOM?\n```javascript\ndocument.getElementById('myId');\n```",
+        "options": ["document.getElementById('myId')", "document.querySelector('#myId')", "document.find('#myId')", "Both document.getElementById('myId') and document.querySelector('#myId')"],
+        "answer": "Both document.getElementById('myId') and document.querySelector('#myId')",
+        "difficulty": "Medium",
+        "explanation": "`getElementById` and `querySelector('#myId')` both select an element by its ID."
+    },
+    {
+        "question": "How do you get the tag name of an element?\n```javascript\nlet el = document.querySelector('div');\n```",
+        "options": ["el.tagName", "el.nodeName", "el.name", "Both el.tagName and el.nodeName"],
+        "answer": "Both el.tagName and el.nodeName",
+        "difficulty": "Medium",
+        "explanation": "`tagName` and `nodeName` both return the tag name (e.g., 'DIV') of an element."
+    },
+    {
+        "question": "How do you count the number of `<p>` elements in a document?",
+        "options": ["document.querySelectorAll('p').length", "document.getElementsByTagName('p').count", "document.count('p')", "document.querySelector('p').length"],
+        "answer": "document.querySelectorAll('p').length",
+        "difficulty": "Medium",
+        "explanation": "`querySelectorAll('p')` returns a NodeList, and `length` gives the count of `<p>` elements."
+    },
+    {
+        "question": "How do you check if an element has a specific attribute?\n```javascript\nlet el = document.querySelector('input');\n```",
+        "options": ["el.hasAttribute('type')", "el.getAttribute('type')", "el.attributes['type']", "Both el.hasAttribute('type') and el.attributes['type']"],
+        "answer": "el.hasAttribute('type')",
+        "difficulty": "Medium",
+        "explanation": "`hasAttribute()` checks if an attribute exists, returning true or false."
+    },
+    {
+        "question": "How do you get the value of an element’s attribute?\n```javascript\nlet el = document.querySelector('input');\n```",
+        "options": ["el.getAttribute('value')", "el.attributes.value", "el.value", "Both el.getAttribute('value') and el.value"],
+        "answer": "Both el.getAttribute('value') and el.value",
+        "difficulty": "Medium",
+        "explanation": "`getAttribute('value')` gets the attribute value; `value` directly accesses the input’s current value."
+    },
+    {
+        "question": "How do you create and append a new `<div>` to the DOM?\n```javascript\nlet parent = document.querySelector('body');\n```",
+        "options": ["let div = document.createElement('div'); parent.appendChild(div)", "let div = new Element('div'); parent.append(div)", "parent.addElement('div')", "parent.createChild('div')"],
+        "answer": "let div = document.createElement('div'); parent.appendChild(div)",
+        "difficulty": "Medium",
+        "explanation": "`createElement` creates a new element, and `appendChild` adds it to the parent."
+    },
+    {
+        "question": "How do you insert a new element before an existing one?\n```javascript\nlet parent = document.querySelector('div');\nlet child = parent.firstChild;\n```",
+        "options": ["parent.insertBefore(newEl, child)", "parent.prepend(newEl)", "parent.insert(newEl, child)", "parent.addBefore(child, newEl)"],
+        "answer": "parent.insertBefore(newEl, child)",
+        "difficulty": "Medium",
+        "explanation": "`insertBefore(newEl, child)` inserts `newEl` before the specified `child` in the parent."
+    },
+    {
+        "question": "How do you create an object with a property in JavaScript?\n```javascript\nlet obj = {};\n```",
+        "options": ["obj.name = 'John'", "obj['name'] = 'John'", "obj.set('name', 'John')", "Both obj.name = 'John' and obj['name'] = 'John'"],
+        "answer": "Both obj.name = 'John' and obj['name'] = 'John'",
+        "difficulty": "Medium",
+        "explanation": "Properties can be set using dot notation (`obj.name`) or bracket notation (`obj['name']`)."
+    },
+    {
+        "question": "How do you define a method in an object literal?\n```javascript\nlet obj = {};\n```",
+        "options Crops = ['obj.method = function() {}', 'obj: method() {}', 'obj.method() {}', 'Both obj.method = function() {} and obj.method() {}'],
+        "answer": "obj.method = function() {}",
+        "difficulty": "Medium",
+        "explanation": "Methods are defined by assigning a function to a property, e.g., `obj.method = function() {}`."
+    },
+    {
+        "question": "How do you create an object method using concise syntax?\n```javascript\nlet obj = {\n  method() {}\n};\n```",
+        "options": ["method() {}", "function method() {}", "method: function() {}", "method = function() {}"],
+        "answer": "method() {}",
+        "difficulty": "Medium",
+        "explanation": "ES6 allows concise method syntax in object literals: `method() {}`."
+    },
+    {
+        "question": "How do you define a constructor function for objects?\n```javascript\nfunction Person(name) {}\n```",
+        "options": ["function Person(name) { this.name = name; }", "Person(name) { this.name = name; }", "class Person { name = name; }", "function Person(name) { name: name; }"],
+        "answer": "function Person(name) { this.name = name; }",
+        "difficulty": "Medium",
+        "explanation": "A constructor uses `function` and sets properties on `this`."
+    },
+    {
+        "question": "How do you add a method to a constructor’s prototype?\n```javascript\nfunction Person() {}\n```",
+        "options": ["Person.prototype.greet = function() {}", "Person.greet = function() {}", "Person.addMethod('greet', function() {})", "Person.method.greet = function() {}"],
+        "answer": "Person.prototype.greet = function() {}",
+        "difficulty": "Medium",
+        "explanation": "Methods added to `prototype` are shared by all instances of the constructor."
+    },
+    {
+        "question": "How do you add a property to all instances of a constructor?\n```javascript\nfunction Person() {}\n```",
+        "options": ["Person.prototype.prop = 'value'", "Person.prop = 'value'", "Person.setProp('value')", "Person.add('prop', 'value')"],
+        "answer": "Person.prototype.prop = 'value'",
+        "difficulty": "Medium",
+        "explanation": "Properties on `prototype` are inherited by all instances of the constructor."
+    },
+    {
+        "question": "How do you check if an object has a specific property?\n```javascript\nlet obj = {name: 'John'};\n```",
+        "options": ["'name' in obj", "obj.hasOwnProperty('name')", "obj.isProperty('name')", "Both 'name' in obj and obj.hasOwnProperty('name')"],
+        "answer": "Both 'name' in obj and obj.hasOwnProperty('name')",
+        "difficulty": "Medium",
+        "explanation": "`in` checks for properties in the object and its prototype chain; `hasOwnProperty` checks only the object itself."
     }
 ]
 
@@ -713,11 +407,10 @@ if "quiz_data" not in st.session_state:
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 3600,  # 60 minutes
+        "time_left": 1800,  # 30 minutes
         "theme": "dark",
         "streak": 0,
-        "started": False,
-        "max_streak": 0
+        "started": False
     })
 
 # Theme toggle
@@ -727,7 +420,7 @@ def toggle_theme():
 # Timer logic
 def update_timer():
     elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-    st.session_state.time_left = max(3600 - elapsed, 0)
+    st.session_state.time_left = max(1800 - elapsed, 0)
     if st.session_state.time_left <= 0:
         st.session_state.show_results = True
         st.rerun()
@@ -743,14 +436,13 @@ def reset_quiz():
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 3600,
+        "time_left": 1800,
         "streak": 0,
-        "max_streak": 0,
         "started": False
     })
     st.rerun()
 
-# CSS styling
+# CSS for enhanced UI
 st.markdown("""
     <style>
     body {
@@ -767,10 +459,6 @@ st.markdown("""
         --button-hover: linear-gradient(45deg, #8b5cf6, #c084fc);
         --code-bg: #1e1e1e;
         --shadow: rgba(0,0,0,0.3);
-        --correct: #34c759;
-        --wrong: #ff3b30;
-        --text-light: #b0b0d0;
-        --card-bg: #2c2c54;
     }
     [data-theme="light"] {
         --bg-gradient: linear-gradient(180deg, #e0e7ff, #f3e8ff);
@@ -780,10 +468,6 @@ st.markdown("""
         --button-hover: linear-gradient(45deg, #6366f1, #a78bfa);
         --code-bg: #f1f5f9;
         --shadow: rgba(0,0,0,0.1);
-        --correct: #34c759;
-        --wrong: #ff3b30;
-        --text-light: #6b7280;
-        --card-bg: #ffffff;
     }
     .main-container {
         background: var(--bg-container);
@@ -818,11 +502,11 @@ st.markdown("""
         transform: scale(1);
     }
     .selected-correct {
-        background: var(--correct) !important;
+        background: #34c759 !important;
         transform: scale(1.05);
     }
     .selected-wrong {
-        background: var(--wrong) !important;
+        background: #ff3b30 !important;
         transform: scale(1.05);
     }
     .question-container {
@@ -833,14 +517,14 @@ st.markdown("""
         margin-bottom: 15px;
     }
     .feedback-correct {
-        color: var(--correct);
-        font-weight: 600;
+        color: #34c759;
+        font-weight confronted: 600;
         font-size: 18px;
         margin: 15px 0;
         animation: fadeIn 0.5s ease;
     }
     .feedback-wrong {
-        color: var(--wrong);
+        color: #ff3b30;
         font-weight: 600;
         font-size: 18px;
         margin: 15px 0;
@@ -874,7 +558,7 @@ st.markdown("""
     }
     .caption {
         text-align: center;
-        color: var(--text-light);
+        color: #b0b0d0;
         font-size: 16px;
         margin-bottom: 20px;
     }
@@ -887,35 +571,8 @@ st.markdown("""
     }
     .difficulty {
         font-size: 14px;
-        color: var(--text-light);
+        color: #b0b0d0;
         margin-bottom: 10px;
-    }
-    .score-display {
-        font-size: 2rem;
-        font-weight: 700;
-        text-align: center;
-        color: var(--text-color);
-        margin-bottom: 1rem;
-    }
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        text-align: center;
-    }
-    .stat-item {
-        background: rgba(168, 85, 247, 0.05);
-        padding: 1rem;
-        border-radius: 12px;
-    }
-    .stat-value {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text-color);
-    }
-    .stat-label {
-        font-size: 0.9rem;
-        color: var(--text-light);
     }
     .stCodeBlock {
         background-color: var(--code-bg) !important;
@@ -928,7 +585,6 @@ st.markdown("""
     }
     .stCodeBlock pre, .stCodeBlock code {
         color: var(--text-color);
-        white-space: pre-wrap;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -946,9 +602,6 @@ st.markdown("""
             font-size: 14px;
             padding: 8px;
         }
-        .stats-grid {
-            grid-template-columns: 1fr;
-        }
     }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -956,8 +609,8 @@ st.markdown("""
 
 # Main UI
 st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">', unsafe_allow_html=True)
-st.markdown('<h1 class="title">🚀 JavaScript Fundamentals Quiz</h1>', unsafe_allow_html=True)
-st.markdown('<p class="caption">Test Your JavaScript Skills!</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="title">🚀 JavaScript Mastery Quiz</h1>', unsafe_allow_html=True)
+st.markdown('<p class="caption">Challenge Your JavaScript Expertise!</p>', unsafe_allow_html=True)
 
 # Theme toggle button
 if st.button("🌙 Toggle Theme", key="theme_toggle"):
@@ -968,8 +621,8 @@ if st.button("🌙 Toggle Theme", key="theme_toggle"):
 if not st.session_state.started:
     st.markdown("""
     <div style="text-align: center;">
-        <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 67 questions on loops, strings, numbers, dates, functions, and switch statements!</p>
-        <p style="color: var(--text-light);">60 minutes, 2 points per correct answer, 0.5 bonus for streaks of 3+ correct answers. Ready?</p>
+        <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 50 comprehensive questions!</p>
+        <p style="color: #b0b0d0;">30 minutes, 2 points per correct answer. Ready?</p>
     </div>
     """, unsafe_allow_html=True)
     if st.button("Start Quiz", key="start_quiz"):
@@ -991,14 +644,12 @@ else:
         progress = st.session_state.current_q / len(st.session_state.quiz_data)
         progress_percentage = int(progress * 100)
         st.markdown(f"""
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: {progress_percentage}%"></div>
-                <div class="progress-text">{progress_percentage}%</div>
-            </div>
-            <div style="color: var(--text-color); font-size: 13px; text-align: center;">
-                Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
-            </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {progress_percentage}%"></div>
+            <div class="progress-text">{progress_percentage}%</div>
+        </div>
+        <div style="color: var(--text-color); font-size: 13px; text-align: center;">
+            Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
         </div>
         """, unsafe_allow_html=True)
 
@@ -1011,14 +662,13 @@ else:
                 st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
                 # Split question into text and code
-                if "```javascript\n" in q["question"]:
-                    parts = q["question"].split("```javascript
-                    question_text = parts[0].strip()
-                    code_snippet = parts[1].split("```")[0].strip() if len(parts) > 1 else ""
+                if "```javascript" in q["question"] or "```html" in q["question"]:
+                    question_parts = q["question"].split("```javascript\n") if "```javascript" in q["question"] else q["question"].split("```html\n")
+                    question_text = question_parts[0].strip()
+                    code_snippet = question_parts[1].split("```")[0].strip()
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{question_text}**")
-                    if code_snippet:
-                        st.code(code_snippet, language="javascript")
+                    st.code(code_snippet, language="javascript" if "```javascript" in q["question"] else "html")
                 else:
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{q['question']}**")
@@ -1030,7 +680,7 @@ else:
                         button_class = "selected-correct" if option == q["labeled_answer"] else "selected-wrong"
                     if st.button(
                         option,
-                        key=f"q{i}_{q['id']}",
+                        key=f"q{i}",
                         disabled=st.session_state.selected_option is not None
                     ):
                         is_correct = option == q["labeled_answer"]
@@ -1048,15 +698,13 @@ else:
                             "difficulty": q["difficulty"]
                         }
                         if is_correct:
-                            st.session_state.score += 2  # 2 points for correct answer
+                            st.session_state.score += 2  # 2 points for Medium difficulty
                             st.session_state.streak += 1
-                            if st.session_state.streak > st.session_state.max_streak:
-                                st.session_state.max_streak = st.session_state.streak
                             if st.session_state.streak >= 3:
                                 st.session_state.score += 0.5
                         else:
                             st.session_state.streak = 0
-                        # Move to next question or show results
+                        # Automatically move to next question or show results
                         if st.session_state.current_q < len(quiz) - 1:
                             st.session_state.current_q += 1
                             st.session_state.selected_option = None
@@ -1064,3 +712,70 @@ else:
                         else:
                             st.session_state.show_results = True
                         st.rerun()
+
+                # Feedback
+                if st.session_state.feedback:
+                    if st.session_state.feedback["is_correct"]:
+                        st.markdown('<div class="feedback-correct">✅ Correct!</div>', unsafe_allow_html=True)
+                    else:
+                        st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div style="color: var(--text-color); font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
+
+                st.markdown("</div>", unsafe_allow_html=True)
+
+        else:
+            # Results
+            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 1800)
+            total_possible_score = len(quiz) * 2  # 2 points per question
+            accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
+            st.markdown('<div class="question-container">', unsafe_allow_html=True)
+            st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
+            st.markdown(f"""
+            <h3>📊 Results</h3>
+            <div style="color: var(--text-color); font-size: 15px;">
+                - ⏱️ Time: {int(time_taken) // 60}m {int(time_taken) % 60}s<br>
+                - 🎯 Accuracy: {accuracy:.1f}%<br>
+                - ✅ Correct: {sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])}<br>
+                - ❌ Incorrect: {sum(1 for ans in st.session_state.answers if ans and not ans["is_correct"])}<br>
+                - 🔥 Max Streak: {st.session_state.streak}
+            </div>
+            """, unsafe_allow_html=True)
+
+            # Confetti for high score
+            if accuracy > 80:
+                st.markdown("""
+                <script>
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                </script>
+                """, unsafe_allow_html=True)
+
+            # Leaderboard
+            leaderboard = [
+                {"name": "Alice", "score": 80, "time": 1200},
+                {"name": "Bob", "score": 75, "time": 1300},
+                {"name": "Charlie", "score": 70, "time": 1250},
+                {"name": "You", "score": st.session_state.score, "time": int(time_taken)}
+            ]
+            leaderboard.sort(key=lambda x: (-x["score"], x["time"]))
+            st.markdown('<h3>🏅 Leaderboard</h3>', unsafe_allow_html=True)
+            for i, entry in enumerate(leaderboard[:4], 1):
+                st.markdown(f'<div style="color: var(--text-color);">{i}. <b>{entry["name"]}</b>: {entry["score"]}/{total_possible_score} (Time: {entry["time"]//60}m {entry["time"]%60}s)</div>', unsafe_allow_html=True)
+
+            # Review Answers
+            st.markdown('<h3>📝 Review Your Answers</h3>', unsafe_allow_html=True)
+            for i, ans in enumerate(st.session_state.answers):
+                if ans:
+                    status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
+                    st.markdown(f'<div style="color: var(--text-color);">Question {i+1}: {ans["question"]}<br>Your Answer: {ans["user_answer"]}<br>{status}<br>Explanation: {quiz[i]["explanation"]}</div>', unsafe_allow_html=True)
+
+            # Play Again button
+            if st.button("🔄 Play Again", key="play_again"):
+                reset_quiz()
+
+            st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
