@@ -6,605 +6,595 @@ import uuid
 
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz = [
-    # Topic 20: for loops nested
     {
-        "question": "What does the following nested loop output?\n```javascript\nfor (let i = 1; i <= 2; i++) {\n  for (let j = 1; j <= 2; j++) {\n    console.log(i, j);\n  }\n}\n```",
+        "question": "What is the primary purpose of the `async` keyword in JavaScript?",
         "options": [
-            "1 1, 1 2, 2 1, 2 2",
-            "1 1, 2 2",
-            "1 2, 2 1",
-            "1 1, 1 1, 2 2, 2 2"
+            "To define a function that returns a Promise",
+            "To execute a function synchronously",
+            "To create a loop that runs asynchronously",
+            "To handle errors in synchronous code"
         ],
-        "answer": "1 1, 1 2, 2 1, 2 2",
+        "answer": "To define a function that returns a Promise",
+        "difficulty": "Easy",
+        "explanation": "The `async` keyword before a function ensures it returns a Promise, allowing the use of `await` inside it to handle asynchronous operations."
+    },
+    {
+        "question": "What does the `await` keyword do in an async function?",
+        "options": [
+            "Pauses execution until a Promise resolves",
+            "Executes a callback function immediately",
+            "Skips the Promise and continues execution",
+            "Converts a Promise to a synchronous function"
+        ],
+        "answer": "Pauses execution until a Promise resolves",
+        "difficulty": "Easy",
+        "explanation": "`await` pauses the execution of an async function until the Promise it is waiting for resolves or rejects, then resumes with the resolved value."
+    },
+    {
+        "question": "What happens if you use `await` outside of an async function?",
+        "options": [
+            "It works normally",
+            "It throws a SyntaxError",
+            "It converts the function to async",
+            "It ignores the await keyword"
+        ],
+        "answer": "It throws a SyntaxError",
         "difficulty": "Medium",
-        "explanation": "The outer loop runs for i=1 and i=2. For each i, the inner loop runs for j=1 and j=2, printing each combination."
+        "explanation": "`await` can only be used inside an `async` function. Using it outside results in a SyntaxError because it requires an async context."
     },
     {
-        "question": "How many times will 'Hello' be printed in this nested loop?\n```javascript\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 2; j++) {\n    console.log('Hello');\n  }\n}\n```",
-        "options": ["3", "5", "6", "2"],
-        "answer": "6",
-        "difficulty": "Easy",
-        "explanation": "The outer loop runs 3 times, and for each iteration, the inner loop runs 2 times, resulting in 3 * 2 = 6 prints."
-    },
-    {
-        "question": "What is the purpose of a nested for loop in JavaScript?",
+        "question": "What does the following code output?\n```javascript\nasync function test() {\n  return 'Hello';\n}\ntest().then(result => console.log(result));\n```",
         "options": [
-            "To repeat a single task multiple times",
-            "To iterate over multi-dimensional arrays or perform repeated tasks for each iteration",
-            "To replace a while loop",
-            "To execute asynchronous code"
+            "undefined",
+            "Hello",
+            "Promise { 'Hello' }",
+            "Error"
         ],
-        "answer": "To iterate over multi-dimensional arrays or perform repeated tasks for each iteration",
+        "answer": "Hello",
         "difficulty": "Easy",
-        "explanation": "Nested for loops are used to handle multi-dimensional data structures or to perform tasks for each combination of indices."
+        "explanation": "The `async` function `test` returns a Promise that resolves to 'Hello'. The `.then` method logs the resolved value, which is 'Hello'."
     },
-    # Topic 21: Changing case
     {
-        "question": "How do you convert a string to uppercase in JavaScript?",
+        "question": "What is a Promise in JavaScript?",
         "options": [
-            "str.toUpperCase()",
-            "str.upperCase()",
-            "str.toUpper()",
-            "str.makeUpperCase()"
+            "A function that runs synchronously",
+            "An object representing the eventual completion or failure of an asynchronous operation",
+            "A method to handle synchronous callbacks",
+            "A loop that executes asynchronously"
         ],
-        "answer": "str.toUpperCase()",
+        "answer": "An object representing the eventual completion or failure of an asynchronous operation",
         "difficulty": "Easy",
-        "explanation": "The `toUpperCase()` method converts all characters in a string to uppercase."
+        "explanation": "A Promise is an object that represents the result of an asynchronous operation, which can either resolve (success) or reject (failure)."
     },
     {
-        "question": "What does `str.toLowerCase()` do in JavaScript?",
+        "question": "What does the `.then()` method do on a Promise?",
         "options": [
-            "Converts a string to lowercase",
-            "Converts a string to uppercase",
-            "Removes spaces from a string",
-            "Reverses a string"
+            "Executes a callback when the Promise is rejected",
+            "Executes a callback when the Promise is resolved",
+            "Pauses execution until the Promise resolves",
+            "Converts the Promise to a synchronous function"
         ],
-        "answer": "Converts a string to lowercase",
+        "answer": "Executes a callback when the Promise is resolved",
         "difficulty": "Easy",
-        "explanation": "The `toLowerCase()` method converts all characters in a string to lowercase."
+        "explanation": "The `.then()` method is called when a Promise resolves, passing the resolved value to the callback function."
     },
     {
-        "question": "What will `'Hello World'.toUpperCase()` return?",
-        "options": ["hello world", "HELLO WORLD", "Hello World", "hELLO wORLD"],
-        "answer": "HELLO WORLD",
+        "question": "What does the `.catch()` method do on a Promise?",
+        "options": [
+            "Handles resolved values",
+            "Handles rejected Promises",
+            "Executes a synchronous callback",
+            "Pauses the Promise execution"
+        ],
+        "answer": "Handles rejected Promises",
         "difficulty": "Easy",
-        "explanation": "`toUpperCase()` converts all characters to uppercase, so 'Hello World' becomes 'HELLO WORLD'."
-    },
-    # Topic 22: Strings: measuring length and extracting parts
-    {
-        "question": "How do you measure the length of a string in JavaScript?",
-        "options": ["str.length", "str.size()", "str.len()", "str.count()"],
-        "answer": "str.length",
-        "difficulty": "Easy",
-        "explanation": "The `length` property returns the number of characters in a string."
+        "explanation": "The `.catch()` method is used to handle errors when a Promise is rejected, allowing error handling in asynchronous code."
     },
     {
-        "question": "What does `'Hello'.slice(1, 3)` return?",
-        "options": ["He", "el", "ell", "lo"],
-        "answer": "el",
+        "question": "What is the output of this code?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nconsole.log('B');\n```",
+        "options": [
+            "A, B",
+            "B, A",
+            "A",
+            "B"
+        ],
+        "answer": "B, A",
         "difficulty": "Medium",
-        "explanation": "The `slice(start, end)` method extracts characters from index `start` to `end-1`. Here, `slice(1, 3)` returns characters at indices 1 and 2, which are 'e' and 'l'."
+        "explanation": "`setTimeout` schedules 'A' to be logged after a delay (even if 0), so it runs after synchronous code. 'B' is logged first, then 'A'."
     },
     {
-        "question": "How do you extract the first 3 characters of a string 'JavaScript'?",
+        "question": "What is an asynchronous callback in JavaScript?",
         "options": [
-            "'JavaScript'.substring(0, 3)",
-            "'JavaScript'.slice(3, 0)",
-            "'JavaScript'.substr(0, 3)",
-            "Both A and C"
+            "A function that executes immediately",
+            "A function passed to another function to be executed later",
+            "A function that returns a Promise",
+            "A function that runs synchronously"
         ],
-        "answer": "Both A and C",
-        "difficulty": "Medium",
-        "explanation": "Both `substring(0, 3)` and `substr(0, 3)` extract characters from index 0 to 2, returning 'Jav'."
-    },
-    # Topic 23: Strings: finding segments
-    {
-        "question": "What does `'Hello World'.indexOf('World')` return?",
-        "options": ["5", "6", "-1", "0"],
-        "answer": "6",
-        "difficulty": "Medium",
-        "explanation": "The `indexOf()` method returns the starting index of the first occurrence of 'World', which is at index 6 (after 'Hello ')."
+        "answer": "A function passed to another function to be executed later",
+        "difficulty": "Easy",
+        "explanation": "An asynchronous callback is a function passed as an argument to another function, executed later when an asynchronous operation completes."
     },
     {
-        "question": "What happens if `'test'.indexOf('x')` is called?",
+        "question": "What does `Promise.all()` do?",
         "options": [
-            "Returns -1",
-            "Returns 0",
-            "Throws an error",
-            "Returns the length of the string"
+            "Executes Promises one by one",
+            "Waits for all Promises to resolve or one to reject",
+            "Converts callbacks to Promises",
+            "Runs Promises synchronously"
         ],
-        "answer": "Returns -1",
-        "difficulty": "Easy",
-        "explanation": "If the substring is not found, `indexOf()` returns -1."
-    },
-    {
-        "question": "Which method checks if a string contains a substring?",
-        "options": ["includes()", "contains()", "has()", "search()"],
-        "answer": "includes()",
-        "difficulty": "Easy",
-        "explanation": "The `includes()` method returns `true` if the string contains the specified substring, otherwise `false`."
-    },
-    # Topic 24: Strings: finding a character at a location
-    {
-        "question": "How do you find the character at index 2 in 'Hello'?",
-        "options": ["'Hello'[2]", "'Hello'.charAt(2)", "Both A and B", "'Hello'.getChar(2)"],
-        "answer": "Both A and B",
-        "difficulty": "Easy",
-        "explanation": "Both bracket notation (`[2]`) and `charAt(2)` return the character at index 2, which is 'l'."
-    },
-    {
-        "question": "What does `'JavaScript'.charAt(4)` return?",
-        "options": ["S", "c", "r", "i"],
-        "answer": "S",
-        "difficulty": "Easy",
-        "explanation": "The `charAt(4)` method returns the character at index 4, which is 'S' in 'JavaScript'."
-    },
-    {
-        "question": "What happens if you call `'test'.charAt(10)`?",
-        "options": [
-            "Returns an empty string",
-            "Throws an error",
-            "Returns undefined",
-            "Returns the last character"
-        ],
-        "answer": "Returns an empty string",
+        "answer": "Waits for all Promises to resolve or one to reject",
         "difficulty": "Medium",
-        "explanation": "If the index is out of range, `charAt()` returns an empty string."
+        "explanation": "`Promise.all()` takes an array of Promises and returns a new Promise that resolves when all input Promises resolve or rejects if any Promise rejects."
     },
-    # Topic 25: Strings: replacing characters
     {
-        "question": "How do you replace 'cat' with 'dog' in 'I have a cat'?",
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  await Promise.resolve('Hello');\n  console.log('World');\n}\ntest();\n```",
         "options": [
-            "'I have a cat'.replace('cat', 'dog')",
-            "'I have a cat'.replaceAll('cat', 'dog')",
-            "Both A and B",
-            "'I have a cat'.sub('cat', 'dog')"
+            "Hello",
+            "World",
+            "Hello, World",
+            "Nothing"
         ],
-        "answer": "Both A and B",
+        "answer": "World",
         "difficulty": "Medium",
-        "explanation": "`replace('cat', 'dog')` replaces the first occurrence, while `replaceAll('cat', 'dog')` replaces all occurrences. Both work here since there's only one 'cat'."
+        "explanation": "The `await` resolves the Promise, and then 'World' is logged. 'Hello' is not logged because it is the resolved value, not printed."
     },
     {
-        "question": "What does `'hello hello'.replace('hello', 'hi')` return?",
-        "options": ["hi hi", "hi hello", "hello hi", "hello hello"],
-        "answer": "hi hello",
-        "difficulty": "Medium",
-        "explanation": "The `replace()` method only replaces the first occurrence of 'hello' with 'hi'."
-    },
-    {
-        "question": "What does `'hello hello'.replaceAll('hello', 'hi')` return?",
-        "options": ["hi hi", "hi hello", "hello hi", "hello hello"],
-        "answer": "hi hi",
-        "difficulty": "Medium",
-        "explanation": "The `replaceAll()` method replaces all occurrences of 'hello' with 'hi'."
-    },
-    # Topic 26: Rounding numbers
-    {
-        "question": "How do you round 3.6 to the nearest integer?",
-        "options": ["Math.round(3.6)", "Math.floor(3.6)", "Math.ceil(3.6)", "Math.trunc(3.6)"],
-        "answer": "Math.round(3.6)",
-        "difficulty": "Easy",
-        "explanation": "`Math.round()` rounds to the nearest integer, so 3.6 becomes 4."
-    },
-    {
-        "question": "What does `Math.floor(5.9)` return?",
-        "options": ["5", "6", "5.9", "0"],
-        "answer": "5",
-        "difficulty": "Easy",
-        "explanation": "`Math.floor()` rounds down to the nearest integer."
-    },
-    {
-        "question": "What does `Math.ceil(4.1)` return?",
-        "options": ["4", "5", "4.1", "0"],
-        "answer": "5",
-        "difficulty": "Easy",
-        "explanation": "`Math.ceil()` rounds up to the nearest integer."
-    },
-    # Topic 27: Generating random numbers
-    {
-        "question": "How do you generate a random number between 0 and 1 in JavaScript?",
-        "options": ["Math.random()", "Math.rand()", "Random.next()", "Math.floor()"],
-        "answer": "Math.random()",
-        "difficulty": "Easy",
-        "explanation": "`Math.random()` generates a random floating-point number between 0 (inclusive) and 1 (exclusive)."
-    },
-    {
-        "question": "How do you generate a random integer between 1 and 10?",
+        "question": "What happens if a Promise rejects inside an async function without a try-catch block?",
         "options": [
-            "Math.floor(Math.random() * 10) + 1",
-            "Math.random() * 10",
-            "Math.ceil(Math.random() * 10)",
-            "Math.round(Math.random() * 10)"
+            "The error is silently ignored",
+            "The async function throws an error",
+            "The Promise resolves with undefined",
+            "The function continues execution"
         ],
-        "answer": "Math.floor(Math.random() * 10) + 1",
+        "answer": "The async function throws an error",
         "difficulty": "Medium",
-        "explanation": "`Math.random() * 10` gives a number between 0 and 10, `Math.floor()` rounds it down, and `+ 1` shifts the range to 1–10."
+        "explanation": "If a Promise rejects in an async function and is not caught with try-catch, the async function rejects with that error."
     },
     {
-        "question": "What is the range of `Math.random()`?",
-        "options": ["0 to 1", "0 to 100", "1 to 10", "-1 to 1"],
-        "answer": "0 to 1",
+        "question": "What does the following code output?\n```javascript\nconsole.log('Start');\nsetTimeout(() => console.log('Timeout'), 0);\nPromise.resolve().then(() => console.log('Promise'));\nconsole.log('End');\n```",
+        "options": [
+            "Start, End, Promise, Timeout",
+            "Start, Promise, End, Timeout",
+            "Start, End, Timeout, Promise",
+            "Start, Timeout, Promise, End"
+        ],
+        "answer": "Start, End, Promise, Timeout",
+        "difficulty": "Hard",
+        "explanation": "Synchronous code ('Start', 'End') runs first. Microtasks (Promise) run before macrotasks (setTimeout), so the order is Start, End, Promise, Timeout."
+    },
+    {
+        "question": "What is the purpose of `Promise.resolve()`?",
+        "options": [
+            "To create a rejected Promise",
+            "To create a resolved Promise with a given value",
+            "To pause a Promise",
+            "To convert a callback to a Promise"
+        ],
+        "answer": "To create a resolved Promise with a given value",
         "difficulty": "Easy",
-        "explanation": "`Math.random()` returns a value between 0 (inclusive) and 1 (exclusive)."
+        "explanation": "`Promise.resolve(value)` creates a Promise that is already resolved with the specified value."
     },
-    # Topic 28: Converting strings to integers and decimals
     {
-        "question": "How do you convert the string '123' to an integer?",
-        "options": ["parseInt('123')", "parseFloat('123')", "Number('123')", "Both A and C"],
-        "answer": "Both A and C",
+        "question": "What does `Promise.reject()` do?",
+        "options": [
+            "Creates a resolved Promise",
+            "Creates a rejected Promise with a given reason",
+            "Converts a Promise to a callback",
+            "Pauses a Promise"
+        ],
+        "answer": "Creates a rejected Promise with a given reason",
+        "difficulty": "Easy",
+        "explanation": "`Promise.reject(reason)` creates a Promise that is already rejected with the specified reason."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  try {\n    await Promise.reject('Error');\n  } catch (e) {\n    console.log(e);\n  }\n}\ntest();\n```",
+        "options": [
+            "Error",
+            "undefined",
+            "Nothing",
+            "SyntaxError"
+        ],
+        "answer": "Error",
         "difficulty": "Medium",
-        "explanation": "`parseInt('123')` and `Number('123')` both convert the string '123' to the integer 123."
+        "explanation": "The `await Promise.reject('Error')` throws an error, which is caught by the try-catch block and logged as 'Error'."
     },
     {
-        "question": "What does `parseFloat('12.34')` return?",
-        "options": ["12", "12.34", "12.3", "1234"],
-        "answer": "12.34",
-        "difficulty": "Easy",
-        "explanation": "`parseFloat()` converts a string to a floating-point number."
-    },
-    {
-        "question": "What happens if you call `parseInt('abc')`?",
-        "options": ["NaN", "0", "undefined", "Throws an error"],
-        "answer": "NaN",
+        "question": "What is a key difference between callbacks and Promises?",
+        "options": [
+            "Callbacks are always synchronous, Promises are always asynchronous",
+            "Promises can handle errors more easily with `.catch()`",
+            "Callbacks return Promises",
+            "Promises are executed immediately"
+        ],
+        "answer": "Promises can handle errors more easily with `.catch()`",
         "difficulty": "Medium",
-        "explanation": "`parseInt()` returns `NaN` if the string cannot be converted to an integer."
-    },
-    # Topic 29: Converting strings to numbers, numbers to strings
-    {
-        "question": "How do you convert the number 42 to a string?",
-        "options": ["42.toString()", "String(42)", "Both A and B", "'42'"],
-        "answer": "Both A and B",
-        "difficulty": "Easy",
-        "explanation": "Both `toString()` and `String()` convert a number to a string."
+        "explanation": "Promises provide a cleaner way to handle errors using `.catch()`, while callbacks often require explicit error handling logic."
     },
     {
-        "question": "What does `Number('56')` return?",
-        "options": ["56", "'56'", "NaN", "undefined"],
-        "answer": "56",
-        "difficulty": "Easy",
-        "explanation": "`Number()` converts a string to a number if possible."
-    },
-    {
-        "question": "What is the result of `'123' + 1`?",
-        "options": ["124", "'1231'", "NaN", "1231"],
-        "answer": "'1231'",
+        "question": "What does the following code output?\n```javascript\nsetTimeout(() => console.log('A'), 100);\nsetTimeout(() => console.log('B'), 0);\nconsole.log('C');\n```",
+        "options": [
+            "C, B, A",
+            "A, B, C",
+            "C, A, B",
+            "B, C, A"
+        ],
+        "answer": "C, B, A",
         "difficulty": "Medium",
-        "explanation": "The `+` operator concatenates a string with a number, converting the number to a string."
+        "explanation": "Synchronous code ('C') runs first. `setTimeout` with 0ms ('B') runs before `setTimeout` with 100ms ('A') due to the shorter delay."
     },
-    # Topic 30: Controlling the length of decimals
     {
-        "question": "How do you format 3.14159 to two decimal places?",
-        "options": ["3.14159.toFixed(2)", "3.14159.toPrecision(2)", "Math.round(3.14159, 2)", "3.14159.format(2)"],
-        "answer": "3.14159.toFixed(2)",
+        "question": "What is the purpose of `async/await` compared to raw Promises?",
+        "options": [
+            "To make asynchronous code look synchronous",
+            "To replace synchronous code",
+            "To execute code faster",
+            "To avoid using Promises"
+        ],
+        "answer": "To make asynchronous code look synchronous",
+        "difficulty": "Easy",
+        "explanation": "`async/await` is syntactic sugar over Promises, making asynchronous code easier to read by resembling synchronous code."
+    },
+    {
+        "question": "What does `Promise.race()` do?",
+        "options": [
+            "Resolves when all Promises resolve",
+            "Resolves or rejects as soon as one Promise resolves or rejects",
+            "Rejects all Promises",
+            "Runs Promises sequentially"
+        ],
+        "answer": "Resolves or rejects as soon as one Promise resolves or rejects",
         "difficulty": "Medium",
-        "explanation": "`toFixed(2)` formats a number to 2 decimal places, returning '3.14' as a string."
+        "explanation": "`Promise.race()` takes an array of Promises and resolves or rejects as soon as any one of the Promises settles."
     },
     {
-        "question": "What does `5.6789.toFixed(1)` return?",
-        "options": ["'5.7'", "5.7", "'5.6'", "6"],
-        "answer": "'5.7'",
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('Start');\n  await new Promise(resolve => setTimeout(resolve, 1000));\n  console.log('End');\n}\ntest();\nconsole.log('Outside');\n```",
+        "options": [
+            "Start, End, Outside",
+            "Start, Outside, End",
+            "Outside, Start, End",
+            "End, Start, Outside"
+        ],
+        "answer": "Start, Outside, End",
+        "difficulty": "Hard",
+        "explanation": "'Start' logs first, then `await` pauses `test`. 'Outside' logs next (synchronous). After 1 second, 'End' logs when the Promise resolves."
+    },
+    {
+        "question": "What happens if you forget to return a Promise in an async function?",
+        "options": [
+            "The function returns undefined",
+            "The function automatically returns a resolved Promise",
+            "The function throws an error",
+            "The function waits indefinitely"
+        ],
+        "answer": "The function automatically returns a resolved Promise",
         "difficulty": "Medium",
-        "explanation": "`toFixed(1)` rounds to one decimal place and returns a string."
+        "explanation": "An async function always returns a Promise. If no value is returned, it returns a Promise that resolves to `undefined`."
     },
     {
-        "question": "What does `3.14159.toPrecision(3)` return?",
-        "options": ["'3.14'", "'3.141'", "3.14", "3.1"],
-        "answer": "'3.14'",
+        "question": "What is callback hell?",
+        "options": [
+            "A Promise chain that fails",
+            "Nested callbacks causing unreadable code",
+            "A rejected Promise",
+            "An async function with too many awaits"
+        ],
+        "answer": "Nested callbacks causing unreadable code",
+        "difficulty": "Easy",
+        "explanation": "Callback hell refers to deeply nested callbacks in asynchronous code, making it hard to read and maintain."
+    },
+    {
+        "question": "What does the following code output?\n```javascript\nfunction delay(ms) {\n  return new Promise(resolve => setTimeout(() => resolve('Done'), ms));\n}\nasync function test() {\n  console.log(await delay(100));\n}\ntest();\n```",
+        "options": [
+            "Done",
+            "undefined",
+            "Promise { 'Done' }",
+            "Error"
+        ],
+        "answer": "Done",
         "difficulty": "Medium",
-        "explanation": "`toPrecision(3)` formats the number to 3 significant digits, returning a string."
-    },
-    # Topic 31: Getting the current date and time
-    {
-        "question": "How do you get the current date and time in JavaScript?",
-        "options": ["new Date()", "Date.now()", "new Date().toString()", "Date.getCurrent()"],
-        "answer": "new Date()",
-        "difficulty": "Easy",
-        "explanation": "`new Date()` creates a Date object with the current date and time."
+        "explanation": "The `delay` function returns a Promise that resolves to 'Done' after 100ms. `await` gets the resolved value, so 'Done' is logged."
     },
     {
-        "question": "What does `Date.now()` return?",
+        "question": "What is the main advantage of using Promises over callbacks?",
         "options": [
-            "A timestamp in milliseconds",
-            "A Date object",
-            "A string representation of the date",
-            "The current year"
+            "Promises are faster",
+            "Promises avoid nested code with chaining",
+            "Promises are synchronous",
+            "Promises eliminate errors"
         ],
-        "answer": "A timestamp in milliseconds",
-        "difficulty": "Easy",
-        "explanation": "`Date.now()` returns the number of milliseconds since January 1, 1970."
-    },
-    {
-        "question": "How do you get the current year using a Date object?",
-        "options": [
-            "new Date().getFullYear()",
-            "new Date().getYear()",
-            "new Date().year()",
-            "new Date().getCurrentYear()"
-        ],
-        "answer": "new Date().getFullYear()",
-        "difficulty": "Easy",
-        "explanation": "`getFullYear()` returns the four-digit year of the current date."
-    },
-    # Topic 32: Extracting parts of the date and time
-    {
-        "question": "How do you get the current month from a Date object?",
-        "options": ["getMonth()", "getDate()", "getDay()", "getYear()"],
-        "answer": "getMonth()",
-        "difficulty": "Easy",
-        "explanation": "`getMonth()` returns the month (0–11) of a Date object."
-    },
-    {
-        "question": "What does `new Date().getDay()` return?",
-        "options": [
-            "The day of the week (0–6)",
-            "The day of the month",
-            "The month",
-            "The year"
-        ],
-        "answer": "The day of the week (0–6)",
-        "difficulty": "Easy",
-        "explanation": "`getDay()` returns the day of the week (0 for Sunday, 6 for Saturday)."
-    },
-    {
-        "question": "What does `new Date().getHours()` return?",
-        "options": ["0–23", "0–59", "1–12", "0–11"],
-        "answer": "0–23",
-        "difficulty": "Easy",
-        "explanation": "`getHours()` returns the hour of the day in 24-hour format (0–23)."
-    },
-    # Topic 33: Specifying a date and time
-    {
-        "question": "How do you create a Date object for January 1, 2023?",
-        "options": [
-            "new Date(2023, 0, 1)",
-            "new Date(2023, 1, 1)",
-            "new Date('2023/1/1')",
-            "Both A and C"
-        ],
-        "answer": "Both A and C",
+        "answer": "Promises avoid nested code with chaining",
         "difficulty": "Medium",
-        "explanation": "`new Date(2023, 0, 1)` uses month index 0 for January, and `new Date('2023/1/1')` parses the string."
+        "explanation": "Promises allow chaining with `.then()`, reducing the nesting seen in callback-based code, improving readability."
     },
     {
-        "question": "What does `new Date('2023-01-01')` represent?",
+        "question": "What does `Promise.allSettled()` do?",
         "options": [
-            "January 1, 2023",
-            "January 1, 2022",
-            "December 1, 2023",
-            "Invalid date"
+            "Resolves when all Promises resolve",
+            "Resolves when any Promise resolves",
+            "Returns the status and result of all Promises, regardless of whether they resolve or reject",
+            "Rejects if any Promise rejects"
         ],
-        "answer": "January 1, 2023",
-        "difficulty": "Easy",
-        "explanation": "The string '2023-01-01' is parsed as January 1, 2023 in ISO format."
-    },
-    {
-        "question": "What is the month index for March in `new Date(year, month, day)`?",
-        "options": ["2", "3", "1", "0"],
-        "answer": "2",
+        "answer": "Returns the status and result of all Promises, regardless of whether they resolve or reject",
         "difficulty": "Medium",
-        "explanation": "Months are 0-based in JavaScript, so March is index 2."
+        "explanation": "`Promise.allSettled()` waits for all Promises to settle (resolve or reject) and returns an array of their statuses and results."
     },
-    # Topic 34: Changing elements of a date and time
     {
-        "question": "How do you set the year of a Date object to 2025?",
+        "question": "What is the output of this code?\n```javascript\nconsole.log('A');\nPromise.resolve().then(() => console.log('B'));\nsetTimeout(() => console.log('C'), 0);\nPromise.resolve().then(() => console.log('D'));\nconsole.log('E');\n```",
         "options": [
-            "date.setFullYear(2025)",
-            "date.setYear(2025)",
-            "date.year = 2025",
-            "date.setDate(2025)"
+            "A, E, B, D, C",
+            "A, B, D, E, C",
+            "A, E, C, B, D",
+            "A, B, E, D, C"
         ],
-        "answer": "date.setFullYear(2025)",
-        "difficulty": "Easy",
-        "explanation": "`setFullYear()` sets the year of a Date object."
+        "answer": "A, E, B, D, C",
+        "difficulty": "Hard",
+        "explanation": "Synchronous code ('A', 'E') runs first. Microtasks ('B', 'D') run next in order. `setTimeout` ('C') runs last as a macrotask."
     },
     {
-        "question": "What does `date.setHours(15)` do?",
+        "question": "What does the `finally()` method do on a Promise?",
         "options": [
-            "Sets the hour to 3 PM",
-            "Sets the hour to 3 AM",
-            "Sets the minutes to 15",
-            "Throws an error"
+            "Executes a callback whether the Promise resolves or rejects",
+            "Resolves the Promise",
+            "Rejects the Promise",
+            "Pauses the Promise"
         ],
-        "answer": "Sets the hour to 3 PM",
-        "difficulty": "Easy",
-        "explanation": "`setHours(15)` sets the hour to 15:00 (3 PM) in 24-hour format."
-    },
-    {
-        "question": "How do you set the month to June in a Date object?",
-        "options": ["date.setMonth(5)", "date.setMonth(6)", "date.month = 6", "date.setMonth(0, 6)"],
-        "answer": "date.setMonth(5)",
+        "answer": "Executes a callback whether the Promise resolves or rejects",
         "difficulty": "Medium",
-        "explanation": "June is month index 5 (0-based) in `setMonth()`."
-    },
-    # Topic 35: Functions
-    {
-        "question": "How do you define a function in JavaScript?",
-        "options": [
-            "function myFunc() {}",
-            "def myFunc() {}",
-            "func myFunc() {}",
-            "myFunc() => {}"
-        ],
-        "answer": "function myFunc() {}",
-        "difficulty": "Easy",
-        "explanation": "A function is defined using the `function` keyword, followed by the name and parentheses."
+        "explanation": "The `.finally()` method runs a callback after a Promise settles, regardless of whether it resolved or rejected."
     },
     {
-        "question": "What is an arrow function in JavaScript?",
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  return await Promise.resolve('Test');\n}\ntest().then(console.log);\n```",
         "options": [
-            "() => {}",
-            "function() {}",
-            "=> function() {}",
-            "arrow() {}"
+            "Test",
+            "undefined",
+            "Promise { 'Test' }",
+            "Error"
         ],
-        "answer": "() => {}",
+        "answer": "Test",
         "difficulty": "Medium",
-        "explanation": "An arrow function is defined using the `=>` syntax, introduced in ES6."
+        "explanation": "The `await` resolves the Promise to 'Test', which is returned by the async function and logged by `.then(console.log)`."
     },
     {
-        "question": "What does a function without a `return` statement return?",
-        "options": ["undefined", "null", "0", "false"],
-        "answer": "undefined",
-        "difficulty": "Easy",
-        "explanation": "If no `return` statement is used, a function returns `undefined` by default."
-    },
-    # Topic 36: Functions: passing them data
-    {
-        "question": "How do you pass a parameter to a function?",
+        "question": "What is the purpose of wrapping a callback-based function in a Promise?",
         "options": [
-            "function myFunc(x) {}",
-            "function myFunc = x {}",
-            "function myFunc[x] {}",
-            "myFunc(x) => {}"
+            "To make it synchronous",
+            "To allow it to be used with async/await",
+            "To make it run faster",
+            "To avoid errors"
         ],
-        "answer": "function myFunc(x) {}",
-        "difficulty": "Easy",
-        "explanation": "Parameters are defined in the parentheses of a function declaration."
-    },
-    {
-        "question": "What does `myFunc(5)` do in this code?\n```javascript\nfunction myFunc(num) { return num * 2; }\n```",
-        "options": ["Returns 10", "Returns 5", "Throws an error", "Returns undefined"],
-        "answer": "Returns 10",
-        "difficulty": "Easy",
-        "explanation": "The function doubles the input parameter, so `myFunc(5)` returns 5 * 2 = 10."
-    },
-    {
-        "question": "How many arguments can a function accept?",
-        "options": [
-            "Any number",
-            "Only one",
-            "Up to three",
-            "Depends on the function type"
-        ],
-        "answer": "Any number",
-        "difficulty": "Easy",
-        "explanation": "JavaScript functions can accept any number of arguments, accessible via the `arguments` object or defined parameters."
-    },
-    # Topic 37: Functions: passing data back from them
-    {
-        "question": "How do you return a value from a function?",
-        "options": ["return value;", "output value;", "send value;", "value;"],
-        "answer": "return value;",
-        "difficulty": "Easy",
-        "explanation": "The `return` statement sends a value back from a function and stops its execution."
-    },
-    {
-        "question": "What does this function return?\n```javascript\nfunction add(a, b) { return a + b; }\n```",
-        "options": ["a + b", "The sum of a and b", "undefined", "null"],
-        "answer": "The sum of a and b",
-        "difficulty": "Easy",
-        "explanation": "The function returns the result of `a + b`."
-    },
-    {
-        "question": "What happens if a function has multiple `return` statements?",
-        "options": [
-            "Only the first executed `return` runs",
-            "All `return` statements run",
-            "The last `return` statement runs",
-            "It causes an error"
-        ],
-        "answer": "Only the first executed `return` runs",
+        "answer": "To allow it to be used with async/await",
         "difficulty": "Medium",
-        "explanation": "A function exits as soon as a `return` statement is executed, so only the first one encountered runs."
+        "explanation": "Wrapping a callback-based function in a Promise allows it to be used with `async/await`, making asynchronous code easier to manage."
     },
-    # Topic 38: Functions: local vs. global variables
     {
-        "question": "What is a local variable in a function?",
+        "question": "What does the following code output?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nnew Promise(resolve => {\n  console.log('B');\n  resolve();\n}).then(() => console.log('C'));\nconsole.log('D');\n```",
         "options": [
-            "A variable declared inside the function",
-            "A variable declared outside the function",
-            "A variable passed as an argument",
-            "A variable in the global object"
+            "B, D, C, A",
+            "A, B, C, D",
+            "B, C, D, A",
+            "D, B, C, A"
         ],
-        "answer": "A variable declared inside the function",
-        "difficulty": "Easy",
-        "explanation": "Local variables are declared within a function and are only accessible within that function's scope."
+        "answer": "B, D, C, A",
+        "difficulty": "Hard",
+        "explanation": "Synchronous code ('B', 'D') runs first. The Promise's `.then` ('C') runs as a microtask. `setTimeout` ('A') runs last as a macrotask."
     },
     {
-        "question": "What happens if you access a global variable inside a function?",
+        "question": "What happens if you call `await` on a non-Promise value?",
         "options": [
-            "The global variable is accessible",
             "It throws an error",
-            "The variable becomes local",
-            "It returns undefined"
+            "It wraps the value in a resolved Promise",
+            "It skips the await",
+            "It pauses execution indefinitely"
         ],
-        "answer": "The global variable is accessible",
-        "difficulty": "Easy",
-        "explanation": "Global variables are accessible inside functions unless shadowed by a local variable."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nlet x = 10;\nfunction test() { let x = 20; console.log(x); }\ntest();\n```",
-        "options": ["20", "10", "undefined", "Error"],
-        "answer": "20",
+        "answer": "It wraps the value in a resolved Promise",
         "difficulty": "Medium",
-        "explanation": "The local variable `x` inside the function shadows the global `x`, so `20` is printed."
+        "explanation": "`await` on a non-Promise value automatically wraps it in a resolved Promise, so the value is returned immediately."
     },
-    # Topic 39: switch statements: how to start them
     {
-        "question": "How do you start a switch statement in JavaScript?",
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('A');\n  await Promise.resolve();\n  console.log('B');\n}\ntest();\nconsole.log('C');\n```",
         "options": [
-            "switch (expression) {",
-            "case (expression):",
-            "switch: expression {",
-            "if (expression) {"
+            "A, B, C",
+            "A, C, B",
+            "C, A, B",
+            "B, A, C"
         ],
-        "answer": "switch (expression) {",
-        "difficulty": "Easy",
-        "explanation": "A switch statement begins with `switch (expression) {`, followed by case clauses."
+        "answer": "A, C, B",
+        "difficulty": "Hard",
+        "explanation": "'A' logs first, then `await` pauses `test`. 'C' logs next (synchronous). After the Promise resolves, 'B' logs."
     },
     {
-        "question": "What does the `switch` keyword evaluate?",
+        "question": "What is the difference between `Promise.all()` and `Promise.race()`?",
         "options": [
-            "An expression",
-            "A boolean",
-            "A function",
-            "A loop"
+            "Promise.all waits for all to resolve, Promise.race waits for any to settle",
+            "Promise.race waits for all to resolve, Promise.all waits for any to settle",
+            "Promise.all is synchronous, Promise.race is asynchronous",
+            "Promise.race handles errors, Promise.all does not"
         ],
-        "answer": "An expression",
-        "difficulty": "Easy",
-        "explanation": "The `switch` statement evaluates an expression and matches it against case values."
-    },
-    {
-        "question": "What is the role of the `case` keyword in a switch statement?",
-        "options": [
-            "Defines possible values to match",
-            "Ends the switch statement",
-            "Declares a variable",
-            "Loops through values"
-        ],
-        "answer": "Defines possible values to match",
-        "difficulty": "Easy",
-        "explanation": "The `case` keyword specifies a value to compare against the switch expression."
-    },
-    # Topic 40: switch statements: how to complete them
-    {
-        "question": "How do you prevent fall-through in a switch statement?",
-        "options": ["Use break;", "Use return;", "Use continue;", "Use exit;"],
-        "answer": "Use break;",
-        "difficulty": "Easy",
-        "explanation": "The `break` statement exits the switch block, preventing execution of subsequent cases."
-    },
-    {
-        "question": "What is the purpose of the `default` case in a switch statement?",
-        "options": [
-            "Executes if no case matches",
-            "Executes first",
-            "Declares a variable",
-            "Loops through cases"
-        ],
-        "answer": "Executes if no case matches",
-        "difficulty": "Easy",
-        "explanation": "The `default` case runs if none of the case values match the switch expression."
-    },
-    {
-        "question": "What is the output of this switch statement?\n```javascript\nlet x = 2;\nswitch (x) {\n  case 1: console.log('One'); break;\n  case 2: console.log('Two'); break;\n  default: console.log('None');\n}\n```",
-        "options": ["Two", "One", "None", "Error"],
-        "answer": "Two",
+        "answer": "Promise.all waits for all to resolve, Promise.race waits for any to settle",
         "difficulty": "Medium",
-        "explanation": "The value `x = 2` matches `case 2`, so 'Two' is printed, and `break` prevents further execution."
+        "explanation": "`Promise.all` resolves when all Promises resolve or one rejects. `Promise.race` settles as soon as any Promise settles."
+    },
+    {
+        "question": "What does this code output?\n```javascript\nfunction callback(cb) {\n  setTimeout(() => cb('Done'), 100);\n}\ncallback(result => console.log(result));\n```",
+        "options": [
+            "Done",
+            "undefined",
+            "Error",
+            "Nothing"
+        ],
+        "answer": "Done",
+        "difficulty": "Easy",
+        "explanation": "The `callback` function calls the provided callback with 'Done' after 100ms, so 'Done' is logged."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  await Promise.reject('Error').catch(e => console.log(e));\n  console.log('Continue');\n}\ntest();\n```",
+        "options": [
+            "Error, Continue",
+            "Continue, Error",
+            "Error",
+            "Continue"
+        ],
+        "answer": "Error, Continue",
+        "difficulty": "Medium",
+        "explanation": "The rejected Promise is caught by `.catch`, logging 'Error'. The async function continues, logging 'Continue'."
+    },
+    {
+        "question": "What is the purpose of the `async` keyword when used with an arrow function?",
+        "options": [
+            "To make the arrow function synchronous",
+            "To return a Promise from the arrow function",
+            "To execute the arrow function immediately",
+            "To prevent errors in the arrow function"
+        ],
+        "answer": "To return a Promise from the arrow function",
+        "difficulty": "Easy",
+        "explanation": "The `async` keyword with an arrow function ensures it returns a Promise, just like with regular functions."
+    },
+    {
+        "question": "What does this code output?\n```javascript\nPromise.resolve('A').then(v => console.log(v));\nPromise.resolve('B').then(v => console.log(v));\nconsole.log('C');\n```",
+        "options": [
+            "C, A, B",
+            "A, B, C",
+            "C, B, A",
+            "A, C, B"
+        ],
+        "answer": "C, A, B",
+        "difficulty": "Hard",
+        "explanation": "Synchronous code ('C') runs first. The `.then` callbacks ('A', 'B') run as microtasks in the order they were queued."
+    },
+    {
+        "question": "What happens if you chain multiple `.then()` calls on a Promise?",
+        "options": [
+            "Only the first `.then` executes",
+            "Each `.then` executes in sequence, passing the result to the next",
+            "All `.then` calls execute simultaneously",
+            "The Promise rejects"
+        ],
+        "answer": "Each `.then` executes in sequence, passing the result to the next",
+        "difficulty": "Medium",
+        "explanation": "Chaining `.then()` calls allows sequential processing of a Promise's result, with each `.then` receiving the previous one's return value."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('A');\n  await new Promise(resolve => setTimeout(() => resolve('B'), 0));\n  console.log(await Promise.resolve('C'));\n}\ntest();\nconsole.log('D');\n```",
+        "options": [
+            "A, D, C",
+            "A, C, D",
+            "D, A, C",
+            "A, D, B"
+        ],
+        "answer": "A, D, C",
+        "difficulty": "Hard",
+        "explanation": "'A' logs first, then `await` pauses `test`. 'D' logs next (synchronous). After the Promise resolves, 'C' is logged."
+    },
+    {
+        "question": "What is the benefit of using `async/await` over Promise chains?",
+        "options": [
+            "It runs code faster",
+            "It makes asynchronous code easier to read and write",
+            "It eliminates the need for Promises",
+            "It handles synchronous code better"
+        ],
+        "answer": "It makes asynchronous code easier to read and write",
+        "difficulty": "Easy",
+        "explanation": "`async/await` simplifies asynchronous code by making it look synchronous, improving readability over nested `.then()` chains."
+    },
+    {
+        "question": "What does this code output?\n```javascript\nfunction asyncTask(cb) {\n  setTimeout(() => cb('Done'), 100);\n}\nasyncTask(result => console.log(result));\n```",
+        "options": [
+            "Done",
+            "undefined",
+            "Error",
+            "Nothing"
+        ],
+        "answer": "Done",
+        "difficulty": "Easy",
+        "explanation": "The `asyncTask` function calls the callback with 'Done' after 100ms, so 'Done' is logged."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  return Promise.resolve('Success');\n}\ntest().then(v => console.log(v));\n```",
+        "options": [
+            "Success",
+            "undefined",
+            "Promise { 'Success' }",
+            "Error"
+        ],
+        "answer": "Success",
+        "difficulty": "Medium",
+        "explanation": "The async function returns a Promise resolving to 'Success', which is logged by the `.then` callback."
+    },
+    {
+        "question": "What is the purpose of the `setTimeout` function in asynchronous code?",
+        "options": [
+            "To execute code synchronously",
+            "To delay execution of a callback",
+            "To resolve a Promise",
+            "To pause the event loop"
+        ],
+        "answer": "To delay execution of a callback",
+        "difficulty": "Easy",
+        "explanation": "`setTimeout` schedules a callback to run after a specified delay, making it useful for asynchronous operations."
+    },
+    {
+        "question": "What does this code output?\n```javascript\nasync function test() {\n  console.log('A');\n  await Promise.resolve('B');\n  console.log('C');\n  await Promise.resolve('D');\n  console.log('E');\n}\ntest();\nconsole.log('F');\n```",
+        "options": [
+            "A, F, C, E",
+            "A, C, E, F",
+            "F, A, C, E",
+            "A, C, F, E"
+        ],
+        "answer": "A, F, C, E",
+        "difficulty": "Hard",
+        "explanation": "'A' logs first, then `await` pauses `test`. 'F' logs next (synchronous). After the first Promise resolves, 'C' logs, then 'E' after the second."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nPromise.reject('Error').catch(e => console.log(e));\nconsole.log('Done');\n```",
+        "options": [
+            "Error, Done",
+            "Done, Error",
+            "Error",
+            "Done"
+        ],
+        "answer": "Done, Error",
+        "difficulty": "Hard",
+        "explanation": "'Done' logs first (synchronous). The rejected Promise is caught by `.catch`, logging 'Error' as a microtask."
+    },
+    {
+        "question": "What is the purpose of converting a callback-based function to a Promise?",
+        "options": [
+            "To make it run faster",
+            "To allow chaining and better error handling",
+            "To make it synchronous",
+            "To avoid using callbacks entirely"
+        ],
+        "answer": "To allow chaining and better error handling",
+        "difficulty": "Medium",
+        "explanation": "Converting callbacks to Promises allows chaining with `.then()` and centralized error handling with `.catch()`."
+    },
+    {
+        "question": "What does this code output?\n```javascript\nasync function test() {\n  console.log(await Promise.resolve('A'));\n  console.log('B');\n}\ntest();\nconsole.log('C');\n```",
+        "options": [
+            "A, B, C",
+            "A, C, B",
+            "C, A, B",
+            "B, A, C"
+        ],
+        "answer": "C, A, B",
+        "difficulty": "Hard",
+        "explanation": "'C' logs first (synchronous). The async function logs 'A' after the Promise resolves, then 'B'."
+    },
+    {
+        "question": "What is the output of this code?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nnew Promise(resolve => resolve('B')).then(v => console.log(v));\nconsole.log('C');\n```",
+        "options": [
+            "C, B, A",
+            "A, B, C",
+            "C, A, B",
+            "B, C, A"
+        ],
+        "answer": "C, B, A",
+        "difficulty": "Hard",
+        "explanation": "Synchronous code ('C') runs first. The Promise's `.then` ('B') runs as a microtask. `setTimeout` ('A') runs last as a macrotask."
     }
 ]
-
 # Cache shuffled quiz (removed for testing, re-add if needed)
 def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
