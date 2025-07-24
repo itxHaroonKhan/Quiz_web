@@ -7,592 +7,589 @@ import uuid
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz = [
     {
-        "question": "What is the primary purpose of the `async` keyword in JavaScript?",
-        "options": [
-            "To define a function that returns a Promise",
-            "To execute a function synchronously",
-            "To create a loop that runs asynchronously",
-            "To handle errors in synchronous code"
-        ],
-        "answer": "To define a function that returns a Promise",
+        "question": "Which event is triggered when a user clicks on an HTML element?",
+        "options": ["onmouseover", "onclick", "onchange", "onkeydown"],
+        "answer": "onclick",
         "difficulty": "Easy",
-        "explanation": "The `async` keyword before a function ensures it returns a Promise, allowing the use of `await` inside it to handle asynchronous operations."
+        "explanation": "The 'onclick' event is triggered when a user clicks on an element."
     },
     {
-        "question": "What does the `await` keyword do in an async function?",
+        "question": "What does the 'onmouseover' event do?",
         "options": [
-            "Pauses execution until a Promise resolves",
-            "Executes a callback function immediately",
-            "Skips the Promise and continues execution",
-            "Converts a Promise to a synchronous function"
+            "Triggers when the mouse pointer moves over an element",
+            "Triggers when an element is clicked",
+            "Triggers when a key is pressed",
+            "Triggers when a form is submitted"
         ],
-        "answer": "Pauses execution until a Promise resolves",
+        "answer": "Triggers when the mouse pointer moves over an element",
         "difficulty": "Easy",
-        "explanation": "`await` pauses the execution of an async function until the Promise it is waiting for resolves or rejects, then resumes with the resolved value."
+        "explanation": "The 'onmouseover' event fires when the mouse pointer enters an element."
     },
     {
-        "question": "What happens if you use `await` outside of an async function?",
+        "question": "How do you add an event listener to a button in JavaScript?",
         "options": [
-            "It works normally",
-            "It throws a SyntaxError",
-            "It converts the function to async",
-            "It ignores the await keyword"
+            "button.addEventListener('click', myFunction);",
+            "button.onClick = myFunction;",
+            "button.attachEvent('click', myFunction);",
+            "button.event('click', myFunction);"
         ],
-        "answer": "It throws a SyntaxError",
+        "answer": "button.addEventListener('click', myFunction);",
         "difficulty": "Medium",
-        "explanation": "`await` can only be used inside an `async` function. Using it outside results in a SyntaxError because it requires an async context."
+        "explanation": "'addEventListener' is the standard way to attach an event handler to an element."
     },
     {
-        "question": "What does the following code output?\n```javascript\nasync function test() {\n  return 'Hello';\n}\ntest().then(result => console.log(result));\n```",
-        "options": [
-            "undefined",
-            "Hello",
-            "Promise { 'Hello' }",
-            "Error"
-        ],
-        "answer": "Hello",
+        "question": "Which event is fired when a user presses a key on the keyboard?",
+        "options": ["onkeypress", "onchange", "onclick", "onfocus"],
+        "answer": "onkeypress",
         "difficulty": "Easy",
-        "explanation": "The `async` function `test` returns a Promise that resolves to 'Hello'. The `.then` method logs the resolved value, which is 'Hello'."
+        "explanation": "The 'onkeypress' event is triggered when a key is pressed and released."
     },
     {
-        "question": "What is a Promise in JavaScript?",
+        "question": "How can you get the value of an input field with id='myInput'?",
         "options": [
-            "A function that runs synchronously",
-            "An object representing the eventual completion or failure of an asynchronous operation",
-            "A method to handle synchronous callbacks",
-            "A loop that executes asynchronously"
+            "document.getElementById('myInput').value",
+            "document.querySelector('myInput').value",
+            "document.getElementById('myInput').text",
+            "document.getElementById('myInput').innerHTML"
         ],
-        "answer": "An object representing the eventual completion or failure of an asynchronous operation",
-        "difficulty": "Easy",
-        "explanation": "A Promise is an object that represents the result of an asynchronous operation, which can either resolve (success) or reject (failure)."
-    },
-    {
-        "question": "What does the `.then()` method do on a Promise?",
-        "options": [
-            "Executes a callback when the Promise is rejected",
-            "Executes a callback when the Promise is resolved",
-            "Pauses execution until the Promise resolves",
-            "Converts the Promise to a synchronous function"
-        ],
-        "answer": "Executes a callback when the Promise is resolved",
-        "difficulty": "Easy",
-        "explanation": "The `.then()` method is called when a Promise resolves, passing the resolved value to the callback function."
-    },
-    {
-        "question": "What does the `.catch()` method do on a Promise?",
-        "options": [
-            "Handles resolved values",
-            "Handles rejected Promises",
-            "Executes a synchronous callback",
-            "Pauses the Promise execution"
-        ],
-        "answer": "Handles rejected Promises",
-        "difficulty": "Easy",
-        "explanation": "The `.catch()` method is used to handle errors when a Promise is rejected, allowing error handling in asynchronous code."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nconsole.log('B');\n```",
-        "options": [
-            "A, B",
-            "B, A",
-            "A",
-            "B"
-        ],
-        "answer": "B, A",
+        "answer": "document.getElementById('myInput').value",
         "difficulty": "Medium",
-        "explanation": "`setTimeout` schedules 'A' to be logged after a delay (even if 0), so it runs after synchronous code. 'B' is logged first, then 'A'."
+        "explanation": "The 'value' property retrieves the current value of an input element."
     },
     {
-        "question": "What is an asynchronous callback in JavaScript?",
+        "question": "How do you set the value of an input field with id='myInput' to 'Hello'?",
         "options": [
-            "A function that executes immediately",
-            "A function passed to another function to be executed later",
-            "A function that returns a Promise",
-            "A function that runs synchronously"
+            "document.getElementById('myInput').value = 'Hello';",
+            "document.getElementById('myInput').text = 'Hello';",
+            "document.getElementById('myInput').innerHTML = 'Hello';",
+            "document.querySelector('myInput').value = 'Hello';"
         ],
-        "answer": "A function passed to another function to be executed later",
-        "difficulty": "Easy",
-        "explanation": "An asynchronous callback is a function passed as an argument to another function, executed later when an asynchronous operation completes."
-    },
-    {
-        "question": "What does `Promise.all()` do?",
-        "options": [
-            "Executes Promises one by one",
-            "Waits for all Promises to resolve or one to reject",
-            "Converts callbacks to Promises",
-            "Runs Promises synchronously"
-        ],
-        "answer": "Waits for all Promises to resolve or one to reject",
+        "answer": "document.getElementById('myInput').value = 'Hello';",
         "difficulty": "Medium",
-        "explanation": "`Promise.all()` takes an array of Promises and returns a new Promise that resolves when all input Promises resolve or rejects if any Promise rejects."
+        "explanation": "The 'value' property is used to set the value of an input element."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  await Promise.resolve('Hello');\n  console.log('World');\n}\ntest();\n```",
+        "question": "How can you change the text of a paragraph with id='myPara' to 'New Text'?",
         "options": [
-            "Hello",
-            "World",
-            "Hello, World",
-            "Nothing"
+            "document.getElementById('myPara').innerText = 'New Text';",
+            "document.getElementById('myPara').value = 'New Text';",
+            "document.getElementById('myPara').style = 'New Text';",
+            "document.getElementById('myPara').textContent = 'New Text';"
         ],
-        "answer": "World",
+        "answer": "document.getElementById('myPara').innerText = 'New Text';",
         "difficulty": "Medium",
-        "explanation": "The `await` resolves the Promise, and then 'World' is logged. 'Hello' is not logged because it is the resolved value, not printed."
+        "explanation": "Both 'innerText' and 'textContent' can be used, but 'innerText' is more commonly used for visible text."
     },
     {
-        "question": "What happens if a Promise rejects inside an async function without a try-catch block?",
+        "question": "What is the difference between 'innerText' and 'textContent'?",
         "options": [
-            "The error is silently ignored",
-            "The async function throws an error",
-            "The Promise resolves with undefined",
-            "The function continues execution"
+            "'innerText' considers CSS styling, 'textContent' includes all text including hidden elements",
+            "'innerText' is for inputs, 'textContent' is for divs",
+            "'innerText' is faster, 'textContent' is slower",
+            "There is no difference"
         ],
-        "answer": "The async function throws an error",
-        "difficulty": "Medium",
-        "explanation": "If a Promise rejects in an async function and is not caught with try-catch, the async function rejects with that error."
-    },
-    {
-        "question": "What does the following code output?\n```javascript\nconsole.log('Start');\nsetTimeout(() => console.log('Timeout'), 0);\nPromise.resolve().then(() => console.log('Promise'));\nconsole.log('End');\n```",
-        "options": [
-            "Start, End, Promise, Timeout",
-            "Start, Promise, End, Timeout",
-            "Start, End, Timeout, Promise",
-            "Start, Timeout, Promise, End"
-        ],
-        "answer": "Start, End, Promise, Timeout",
+        "answer": "'innerText' considers CSS styling, 'textContent' includes all text including hidden elements",
         "difficulty": "Hard",
-        "explanation": "Synchronous code ('Start', 'End') runs first. Microtasks (Promise) run before macrotasks (setTimeout), so the order is Start, End, Promise, Timeout."
+        "explanation": "'innerText' reflects visible text, while 'textContent' includes all text, even in hidden elements."
     },
     {
-        "question": "What is the purpose of `Promise.resolve()`?",
+        "question": "How do you change the source of an image with id='myImage' to 'new.jpg'?",
         "options": [
-            "To create a rejected Promise",
-            "To create a resolved Promise with a given value",
-            "To pause a Promise",
-            "To convert a callback to a Promise"
+            "document.getElementById('myImage').src = 'new.jpg';",
+            "document.getElementById('myImage').image = 'new.jpg';",
+            "document.getElementById('myImage').url = 'new.jpg';",
+            "document.getElementById('myImage').href = 'new.jpg';"
         ],
-        "answer": "To create a resolved Promise with a given value",
+        "answer": "document.getElementById('myImage').src = 'new.jpg';",
+        "difficulty": "Medium",
+        "explanation": "The 'src' property is used to set the source of an image element."
+    },
+    {
+        "question": "How can you swap the sources of two images with ids 'img1' and 'img2'?",
+        "options": [
+            "let temp = img1.src; img1.src = img2.src; img2.src = temp;",
+            "img1.src = img2.src; img2.src = img1.src;",
+            "img1.swap(img2);",
+            "img1.src.swap(img2.src);"
+        ],
+        "answer": "let temp = img1.src; img1.src = img2.src; img2.src = temp;",
+        "difficulty": "Medium",
+        "explanation": "A temporary variable is needed to swap the 'src' properties to avoid overwriting."
+    },
+    {
+        "question": "How do you add a class 'active' to an element with id='myDiv'?",
+        "options": [
+            "document.getElementById('myDiv').classList.add('active');",
+            "document.getElementById('myDiv').class = 'active';",
+            "document.getElementById('myDiv').style = 'active';",
+            "document.getElementById('myDiv').addClass('active');"
+        ],
+        "answer": "document.getElementById('myDiv').classList.add('active');",
+        "difficulty": "Medium",
+        "explanation": "'classList.add' is the proper way to add a class without overwriting existing classes."
+    },
+    {
+        "question": "How do you set the background color of an element with id='myDiv' to blue?",
+        "options": [
+            "document.getElementById('myDiv').style.backgroundColor = 'blue';",
+            "document.getElementById('myDiv').background = 'blue';",
+            "document.getElementById('myDiv').style.color = 'blue';",
+            "document.getElementById('myDiv').style = 'blue';"
+        ],
+        "answer": "document.getElementById('myDiv').style.backgroundColor = 'blue';",
+        "difficulty": "Medium",
+        "explanation": "The 'style.backgroundColor' property sets the background color of an element."
+    },
+    {
+        "question": "How do you select all 'div' elements on a page?",
+        "options": [
+            "document.getElementsByTagName('div');",
+            "document.querySelector('div');",
+            "document.getElementsByClassName('div');",
+            "document.getElementById('div');"
+        ],
+        "answer": "document.getElementsByTagName('div');",
+        "difficulty": "Medium",
+        "explanation": "'getElementsByTagName' returns a live HTMLCollection of all elements with the specified tag."
+    },
+    {
+        "question": "How do you select all elements with class 'item'?",
+        "options": [
+            "document.querySelectorAll('.item');",
+            "document.getElementsByTagName('.item');",
+            "document.getElementById('item');",
+            "document.querySelector('item');"
+        ],
+        "answer": "document.querySelectorAll('.item');",
+        "difficulty": "Medium",
+        "explanation": "'querySelectorAll' returns a NodeList of elements matching the CSS selector."
+    },
+    {
+        "question": "What is the DOM in JavaScript?",
+        "options": [
+            "A programming interface for HTML and XML documents",
+            "A database for storing web data",
+            "A styling framework for web pages",
+            "A JavaScript library"
+        ],
+        "answer": "A programming interface for HTML and XML documents",
         "difficulty": "Easy",
-        "explanation": "`Promise.resolve(value)` creates a Promise that is already resolved with the specified value."
+        "explanation": "The DOM (Document Object Model) represents the structure of a document as a tree of objects."
     },
     {
-        "question": "What does `Promise.reject()` do?",
+        "question": "How do you access the parent node of an element?",
         "options": [
-            "Creates a resolved Promise",
-            "Creates a rejected Promise with a given reason",
-            "Converts a Promise to a callback",
-            "Pauses a Promise"
+            "element.parentNode",
+            "element.childNode",
+            "element.nextSibling",
+            "element.previousSibling"
         ],
-        "answer": "Creates a rejected Promise with a given reason",
-        "difficulty": "Easy",
-        "explanation": "`Promise.reject(reason)` creates a Promise that is already rejected with the specified reason."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  try {\n    await Promise.reject('Error');\n  } catch (e) {\n    console.log(e);\n  }\n}\ntest();\n```",
-        "options": [
-            "Error",
-            "undefined",
-            "Nothing",
-            "SyntaxError"
-        ],
-        "answer": "Error",
+        "answer": "element.parentNode",
         "difficulty": "Medium",
-        "explanation": "The `await Promise.reject('Error')` throws an error, which is caught by the try-catch block and logged as 'Error'."
+        "explanation": "'parentNode' returns the parent node of the specified element in the DOM tree."
     },
     {
-        "question": "What is a key difference between callbacks and Promises?",
+        "question": "How do you get all child nodes of an element with id='myDiv'?",
         "options": [
-            "Callbacks are always synchronous, Promises are always asynchronous",
-            "Promises can handle errors more easily with `.catch()`",
-            "Callbacks return Promises",
-            "Promises are executed immediately"
+            "document.getElementById('myDiv').childNodes",
+            "document.getElementById('myDiv').childrenNodes",
+            "document.getElementById('myDiv').nodes",
+            "document.getElementById('myDiv').child"
         ],
-        "answer": "Promises can handle errors more easily with `.catch()`",
+        "answer": "document.getElementById('myDiv').childNodes",
         "difficulty": "Medium",
-        "explanation": "Promises provide a cleaner way to handle errors using `.catch()`, while callbacks often require explicit error handling logic."
+        "explanation": "'childNodes' returns a NodeList of all child nodes, including text and comment nodes."
     },
     {
-        "question": "What does the following code output?\n```javascript\nsetTimeout(() => console.log('A'), 100);\nsetTimeout(() => console.log('B'), 0);\nconsole.log('C');\n```",
+        "question": "What is the difference between 'childNodes' and 'children'?",
         "options": [
-            "C, B, A",
-            "A, B, C",
-            "C, A, B",
-            "B, C, A"
+            "'childNodes' includes all nodes, 'children' includes only element nodes",
+            "'childNodes' is for text, 'children' is for images",
+            "'childNodes' is faster, 'children' is slower",
+            "There is no difference"
         ],
-        "answer": "C, B, A",
-        "difficulty": "Medium",
-        "explanation": "Synchronous code ('C') runs first. `setTimeout` with 0ms ('B') runs before `setTimeout` with 100ms ('A') due to the shorter delay."
-    },
-    {
-        "question": "What is the purpose of `async/await` compared to raw Promises?",
-        "options": [
-            "To make asynchronous code look synchronous",
-            "To replace synchronous code",
-            "To execute code faster",
-            "To avoid using Promises"
-        ],
-        "answer": "To make asynchronous code look synchronous",
-        "difficulty": "Easy",
-        "explanation": "`async/await` is syntactic sugar over Promises, making asynchronous code easier to read by resembling synchronous code."
-    },
-    {
-        "question": "What does `Promise.race()` do?",
-        "options": [
-            "Resolves when all Promises resolve",
-            "Resolves or rejects as soon as one Promise resolves or rejects",
-            "Rejects all Promises",
-            "Runs Promises sequentially"
-        ],
-        "answer": "Resolves or rejects as soon as one Promise resolves or rejects",
-        "difficulty": "Medium",
-        "explanation": "`Promise.race()` takes an array of Promises and resolves or rejects as soon as any one of the Promises settles."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('Start');\n  await new Promise(resolve => setTimeout(resolve, 1000));\n  console.log('End');\n}\ntest();\nconsole.log('Outside');\n```",
-        "options": [
-            "Start, End, Outside",
-            "Start, Outside, End",
-            "Outside, Start, End",
-            "End, Start, Outside"
-        ],
-        "answer": "Start, Outside, End",
+        "answer": "'childNodes' includes all nodes, 'children' includes only element nodes",
         "difficulty": "Hard",
-        "explanation": "'Start' logs first, then `await` pauses `test`. 'Outside' logs next (synchronous). After 1 second, 'End' logs when the Promise resolves."
+        "explanation": "'childNodes' includes text, comments, and elements, while 'children' includes only HTML elements."
     },
     {
-        "question": "What happens if you forget to return a Promise in an async function?",
+        "question": "What is the 'nodeType' property used for in the DOM?",
         "options": [
-            "The function returns undefined",
-            "The function automatically returns a resolved Promise",
-            "The function throws an error",
-            "The function waits indefinitely"
+            "To identify the type of a node",
+            "To count the number of nodes",
+            "To set the style of a node",
+            "To find the parent node"
         ],
-        "answer": "The function automatically returns a resolved Promise",
+        "answer": "To identify the type of a node",
         "difficulty": "Medium",
-        "explanation": "An async function always returns a Promise. If no value is returned, it returns a Promise that resolves to `undefined`."
+        "explanation": "'nodeType' returns a number indicating the type of node (e.g., 1 for element, 3 for text)."
     },
     {
-        "question": "What is callback hell?",
-        "options": [
-            "A Promise chain that fails",
-            "Nested callbacks causing unreadable code",
-            "A rejected Promise",
-            "An async function with too many awaits"
-        ],
-        "answer": "Nested callbacks causing unreadable code",
-        "difficulty": "Easy",
-        "explanation": "Callback hell refers to deeply nested callbacks in asynchronous code, making it hard to read and maintain."
-    },
-    {
-        "question": "What does the following code output?\n```javascript\nfunction delay(ms) {\n  return new Promise(resolve => setTimeout(() => resolve('Done'), ms));\n}\nasync function test() {\n  console.log(await delay(100));\n}\ntest();\n```",
-        "options": [
-            "Done",
-            "undefined",
-            "Promise { 'Done' }",
-            "Error"
-        ],
-        "answer": "Done",
-        "difficulty": "Medium",
-        "explanation": "The `delay` function returns a Promise that resolves to 'Done' after 100ms. `await` gets the resolved value, so 'Done' is logged."
-    },
-    {
-        "question": "What is the main advantage of using Promises over callbacks?",
-        "options": [
-            "Promises are faster",
-            "Promises avoid nested code with chaining",
-            "Promises are synchronous",
-            "Promises eliminate errors"
-        ],
-        "answer": "Promises avoid nested code with chaining",
-        "difficulty": "Medium",
-        "explanation": "Promises allow chaining with `.then()`, reducing the nesting seen in callback-based code, improving readability."
-    },
-    {
-        "question": "What does `Promise.allSettled()` do?",
-        "options": [
-            "Resolves when all Promises resolve",
-            "Resolves when any Promise resolves",
-            "Returns the status and result of all Promises, regardless of whether they resolve or reject",
-            "Rejects if any Promise rejects"
-        ],
-        "answer": "Returns the status and result of all Promises, regardless of whether they resolve or reject",
-        "difficulty": "Medium",
-        "explanation": "`Promise.allSettled()` waits for all Promises to settle (resolve or reject) and returns an array of their statuses and results."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nconsole.log('A');\nPromise.resolve().then(() => console.log('B'));\nsetTimeout(() => console.log('C'), 0);\nPromise.resolve().then(() => console.log('D'));\nconsole.log('E');\n```",
-        "options": [
-            "A, E, B, D, C",
-            "A, B, D, E, C",
-            "A, E, C, B, D",
-            "A, B, E, D, C"
-        ],
-        "answer": "A, E, B, D, C",
+        "question": "Which 'nodeType' value represents an element node?",
+        "options": ["1", "3", "8", "10"],
+        "answer": "1",
         "difficulty": "Hard",
-        "explanation": "Synchronous code ('A', 'E') runs first. Microtasks ('B', 'D') run next in order. `setTimeout` ('C') runs last as a macrotask."
+        "explanation": "A 'nodeType' of 1 indicates an element node in the DOM."
     },
     {
-        "question": "What does the `finally()` method do on a Promise?",
+        "question": "How do you select an element with a specific attribute, like [data-id='123']?",
         "options": [
-            "Executes a callback whether the Promise resolves or rejects",
-            "Resolves the Promise",
-            "Rejects the Promise",
-            "Pauses the Promise"
+            "document.querySelector('[data-id=\"123\"]');",
+            "document.getElementById('data-id=123');",
+            "document.getElementsByTagName('data-id');",
+            "document.querySelectorAll('data-id=123');"
         ],
-        "answer": "Executes a callback whether the Promise resolves or rejects",
+        "answer": "document.querySelector('[data-id=\"123\"]');",
         "difficulty": "Medium",
-        "explanation": "The `.finally()` method runs a callback after a Promise settles, regardless of whether it resolved or rejected."
+        "explanation": "'querySelector' uses CSS selector syntax to find the first matching element."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  return await Promise.resolve('Test');\n}\ntest().then(console.log);\n```",
+        "question": "How do you get the tag name of an element?",
         "options": [
-            "Test",
-            "undefined",
-            "Promise { 'Test' }",
-            "Error"
+            "element.tagName",
+            "element.name",
+            "element.id",
+            "element.className"
         ],
-        "answer": "Test",
+        "answer": "element.tagName",
         "difficulty": "Medium",
-        "explanation": "The `await` resolves the Promise to 'Test', which is returned by the async function and logged by `.then(console.log)`."
+        "explanation": "'tagName' returns the tag name of an element (e.g., 'DIV', 'P') in uppercase."
     },
     {
-        "question": "What is the purpose of wrapping a callback-based function in a Promise?",
+        "question": "How do you count the number of 'p' elements on a page?",
         "options": [
-            "To make it synchronous",
-            "To allow it to be used with async/await",
-            "To make it run faster",
-            "To avoid errors"
+            "document.getElementsByTagName('p').length",
+            "document.querySelector('p').length",
+            "document.getElementsByClassName('p').length",
+            "document.getElementById('p').length"
         ],
-        "answer": "To allow it to be used with async/await",
+        "answer": "document.getElementsByTagName('p').length",
         "difficulty": "Medium",
-        "explanation": "Wrapping a callback-based function in a Promise allows it to be used with `async/await`, making asynchronous code easier to manage."
+        "explanation": "'getElementsByTagName' returns a collection, and 'length' gives the count."
     },
     {
-        "question": "What does the following code output?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nnew Promise(resolve => {\n  console.log('B');\n  resolve();\n}).then(() => console.log('C'));\nconsole.log('D');\n```",
+        "question": "How do you check if an element has a specific attribute?",
         "options": [
-            "B, D, C, A",
-            "A, B, C, D",
-            "B, C, D, A",
-            "D, B, C, A"
+            "element.hasAttribute('name');",
+            "element.getAttribute('name');",
+            "element.attribute('name');",
+            "element.checkAttribute('name');"
         ],
-        "answer": "B, D, C, A",
+        "answer": "element.hasAttribute('name');",
+        "difficulty": "Medium",
+        "explanation": "'hasAttribute' returns true if the element has the specified attribute."
+    },
+    {
+        "question": "How do you get the value of an attribute 'data-id' from an element?",
+        "options": [
+            "element.getAttribute('data-id');",
+            "element.dataId;",
+            "element.attribute('data-id');",
+            "element.getProperty('data-id');"
+        ],
+        "answer": "element.getAttribute('data-id');",
+        "difficulty": "Medium",
+        "explanation": "'getAttribute' retrieves the value of the specified attribute."
+    },
+    {
+        "question": "How do you set an attribute 'data-id' to '123' on an element?",
+        "options": [
+            "element.setAttribute('data-id', '123');",
+            "element.dataId = '123';",
+            "element.attribute('data-id', '123');",
+            "element.setProperty('data-id', '123');"
+        ],
+        "answer": "element.setAttribute('data-id', '123');",
+        "difficulty": "Medium",
+        "explanation": "'setAttribute' sets the value of an attribute on an element."
+    },
+    {
+        "question": "How do you create a new 'div' element in JavaScript?",
+        "options": [
+            "document.createElement('div');",
+            "document.newElement('div');",
+            "document.createNode('div');",
+            "document.addElement('div');"
+        ],
+        "answer": "document.createElement('div');",
+        "difficulty": "Medium",
+        "explanation": "'createElement' creates a new element node with the specified tag name."
+    },
+    {
+        "question": "How do you append a new element as a child of an element with id='myDiv'?",
+        "options": [
+            "document.getElementById('myDiv').appendChild(newElement);",
+            "document.getElementById('myDiv').addChild(newElement);",
+            "document.getElementById('myDiv').insert(newElement);",
+            "document.getElementById('myDiv').append(newElement);"
+        ],
+        "answer": "document.getElementById('myDiv').appendChild(newElement);",
+        "difficulty": "Medium",
+        "explanation": "'appendChild' adds a node as the last child of the specified parent."
+    },
+    {
+        "question": "How do you insert an element before another element in the DOM?",
+        "options": [
+            "parentElement.insertBefore(newElement, referenceElement);",
+            "parentElement.addBefore(newElement, referenceElement);",
+            "parentElement.insert(newElement, referenceElement);",
+            "parentElement.prepend(newElement, referenceElement);"
+        ],
+        "answer": "parentElement.insertBefore(newElement, referenceElement);",
         "difficulty": "Hard",
-        "explanation": "Synchronous code ('B', 'D') runs first. The Promise's `.then` ('C') runs as a microtask. `setTimeout` ('A') runs last as a macrotask."
+        "explanation": "'insertBefore' inserts a new node before the specified reference node."
     },
     {
-        "question": "What happens if you call `await` on a non-Promise value?",
+        "question": "What happens when you use 'element.remove()'?",
         "options": [
-            "It throws an error",
-            "It wraps the value in a resolved Promise",
-            "It skips the await",
-            "It pauses execution indefinitely"
+            "Removes the element from the DOM",
+            "Hides the element",
+            "Clears the element's content",
+            "Removes the element's attributes"
         ],
-        "answer": "It wraps the value in a resolved Promise",
+        "answer": "Removes the element from the DOM",
         "difficulty": "Medium",
-        "explanation": "`await` on a non-Promise value automatically wraps it in a resolved Promise, so the value is returned immediately."
+        "explanation": "'remove' removes the element and its children from the DOM tree."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('A');\n  await Promise.resolve();\n  console.log('B');\n}\ntest();\nconsole.log('C');\n```",
+        "question": "How do you toggle a class 'active' on an element?",
         "options": [
-            "A, B, C",
-            "A, C, B",
-            "C, A, B",
-            "B, A, C"
+            "element.classList.toggle('active');",
+            "element.classList.switch('active');",
+            "element.toggleClass('active');",
+            "element.className = 'active';"
         ],
-        "answer": "A, C, B",
-        "difficulty": "Hard",
-        "explanation": "'A' logs first, then `await` pauses `test`. 'C' logs next (synchronous). After the Promise resolves, 'B' logs."
-    },
-    {
-        "question": "What is the difference between `Promise.all()` and `Promise.race()`?",
-        "options": [
-            "Promise.all waits for all to resolve, Promise.race waits for any to settle",
-            "Promise.race waits for all to resolve, Promise.all waits for any to settle",
-            "Promise.all is synchronous, Promise.race is asynchronous",
-            "Promise.race handles errors, Promise.all does not"
-        ],
-        "answer": "Promise.all waits for all to resolve, Promise.race waits for any to settle",
+        "answer": "element.classList.toggle('active');",
         "difficulty": "Medium",
-        "explanation": "`Promise.all` resolves when all Promises resolve or one rejects. `Promise.race` settles as soon as any Promise settles."
+        "explanation": "'classList.toggle' adds the class if absent, removes it if present."
     },
     {
-        "question": "What does this code output?\n```javascript\nfunction callback(cb) {\n  setTimeout(() => cb('Done'), 100);\n}\ncallback(result => console.log(result));\n```",
+        "question": "What does 'querySelectorAll' return?",
         "options": [
-            "Done",
-            "undefined",
-            "Error",
-            "Nothing"
+            "A static NodeList of matching elements",
+            "A single element",
+            "A live HTMLCollection",
+            "An array of elements"
         ],
-        "answer": "Done",
-        "difficulty": "Easy",
-        "explanation": "The `callback` function calls the provided callback with 'Done' after 100ms, so 'Done' is logged."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  await Promise.reject('Error').catch(e => console.log(e));\n  console.log('Continue');\n}\ntest();\n```",
-        "options": [
-            "Error, Continue",
-            "Continue, Error",
-            "Error",
-            "Continue"
-        ],
-        "answer": "Error, Continue",
+        "answer": "A static NodeList of matching elements",
         "difficulty": "Medium",
-        "explanation": "The rejected Promise is caught by `.catch`, logging 'Error'. The async function continues, logging 'Continue'."
+        "explanation": "'querySelectorAll' returns a static NodeList of elements matching the CSS selector."
     },
     {
-        "question": "What is the purpose of the `async` keyword when used with an arrow function?",
+        "question": "How do you get the first child element of a parent element?",
         "options": [
-            "To make the arrow function synchronous",
-            "To return a Promise from the arrow function",
-            "To execute the arrow function immediately",
-            "To prevent errors in the arrow function"
+            "parentElement.firstElementChild",
+            "parentElement.firstChild",
+            "parentElement.children[0]",
+            "Both A and C"
         ],
-        "answer": "To return a Promise from the arrow function",
-        "difficulty": "Easy",
-        "explanation": "The `async` keyword with an arrow function ensures it returns a Promise, just like with regular functions."
-    },
-    {
-        "question": "What does this code output?\n```javascript\nPromise.resolve('A').then(v => console.log(v));\nPromise.resolve('B').then(v => console.log(v));\nconsole.log('C');\n```",
-        "options": [
-            "C, A, B",
-            "A, B, C",
-            "C, B, A",
-            "A, C, B"
-        ],
-        "answer": "C, A, B",
+        "answer": "Both A and C",
         "difficulty": "Hard",
-        "explanation": "Synchronous code ('C') runs first. The `.then` callbacks ('A', 'B') run as microtasks in the order they were queued."
+        "explanation": "'firstElementChild' and 'children[0]' both return the first child element, excluding non-element nodes."
     },
     {
-        "question": "What happens if you chain multiple `.then()` calls on a Promise?",
+        "question": "What is the purpose of 'element.innerHTML'?",
         "options": [
-            "Only the first `.then` executes",
-            "Each `.then` executes in sequence, passing the result to the next",
-            "All `.then` calls execute simultaneously",
-            "The Promise rejects"
+            "Gets or sets the HTML content of an element",
+            "Gets or sets the text content of an element",
+            "Gets or sets the style of an element",
+            "Gets or sets the attributes of an element"
         ],
-        "answer": "Each `.then` executes in sequence, passing the result to the next",
+        "answer": "Gets or sets the HTML content of an element",
         "difficulty": "Medium",
-        "explanation": "Chaining `.then()` calls allows sequential processing of a Promise's result, with each `.then` receiving the previous one's return value."
+        "explanation": "'innerHTML' allows you to read or write HTML content within an element."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  console.log('A');\n  await new Promise(resolve => setTimeout(() => resolve('B'), 0));\n  console.log(await Promise.resolve('C'));\n}\ntest();\nconsole.log('D');\n```",
+        "question": "What is a potential risk of using 'innerHTML'?",
         "options": [
-            "A, D, C",
-            "A, C, D",
-            "D, A, C",
-            "A, D, B"
+            "It can lead to cross-site scripting (XSS) attacks",
+            "It slows down the browser",
+            "It removes all event listeners",
+            "It only works in older browsers"
         ],
-        "answer": "A, D, C",
+        "answer": "It can lead to cross-site scripting (XSS) attacks",
         "difficulty": "Hard",
-        "explanation": "'A' logs first, then `await` pauses `test`. 'D' logs next (synchronous). After the Promise resolves, 'C' is logged."
+        "explanation": "Using 'innerHTML' with untrusted input can allow malicious scripts to execute."
     },
     {
-        "question": "What is the benefit of using `async/await` over Promise chains?",
+        "question": "How do you remove an attribute 'data-id' from an element?",
         "options": [
-            "It runs code faster",
-            "It makes asynchronous code easier to read and write",
-            "It eliminates the need for Promises",
-            "It handles synchronous code better"
+            "element.removeAttribute('data-id');",
+            "element.deleteAttribute('data-id');",
+            "element.remove('data-id');",
+            "element.setAttribute('data-id', null);"
         ],
-        "answer": "It makes asynchronous code easier to read and write",
-        "difficulty": "Easy",
-        "explanation": "`async/await` simplifies asynchronous code by making it look synchronous, improving readability over nested `.then()` chains."
-    },
-    {
-        "question": "What does this code output?\n```javascript\nfunction asyncTask(cb) {\n  setTimeout(() => cb('Done'), 100);\n}\nasyncTask(result => console.log(result));\n```",
-        "options": [
-            "Done",
-            "undefined",
-            "Error",
-            "Nothing"
-        ],
-        "answer": "Done",
-        "difficulty": "Easy",
-        "explanation": "The `asyncTask` function calls the callback with 'Done' after 100ms, so 'Done' is logged."
-    },
-    {
-        "question": "What is the output of this code?\n```javascript\nasync function test() {\n  return Promise.resolve('Success');\n}\ntest().then(v => console.log(v));\n```",
-        "options": [
-            "Success",
-            "undefined",
-            "Promise { 'Success' }",
-            "Error"
-        ],
-        "answer": "Success",
+        "answer": "element.removeAttribute('data-id');",
         "difficulty": "Medium",
-        "explanation": "The async function returns a Promise resolving to 'Success', which is logged by the `.then` callback."
+        "explanation": "'removeAttribute' removes the specified attribute from an element."
     },
     {
-        "question": "What is the purpose of the `setTimeout` function in asynchronous code?",
+        "question": "What does 'element.nextSibling' return?",
         "options": [
-            "To execute code synchronously",
-            "To delay execution of a callback",
-            "To resolve a Promise",
-            "To pause the event loop"
+            "The next node in the DOM, including text or comment nodes",
+            "The next element node only",
+            "The parent node",
+            "The previous node"
         ],
-        "answer": "To delay execution of a callback",
-        "difficulty": "Easy",
-        "explanation": "`setTimeout` schedules a callback to run after a specified delay, making it useful for asynchronous operations."
-    },
-    {
-        "question": "What does this code output?\n```javascript\nasync function test() {\n  console.log('A');\n  await Promise.resolve('B');\n  console.log('C');\n  await Promise.resolve('D');\n  console.log('E');\n}\ntest();\nconsole.log('F');\n```",
-        "options": [
-            "A, F, C, E",
-            "A, C, E, F",
-            "F, A, C, E",
-            "A, C, F, E"
-        ],
-        "answer": "A, F, C, E",
+        "answer": "The next node in the DOM, including text or comment nodes",
         "difficulty": "Hard",
-        "explanation": "'A' logs first, then `await` pauses `test`. 'F' logs next (synchronous). After the first Promise resolves, 'C' logs, then 'E' after the second."
+        "explanation": "'nextSibling' returns the next node, which could be an element, text, or comment."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nPromise.reject('Error').catch(e => console.log(e));\nconsole.log('Done');\n```",
+        "question": "How do you get the last child element of a parent element?",
         "options": [
-            "Error, Done",
-            "Done, Error",
-            "Error",
-            "Done"
+            "parentElement.lastElementChild",
+            "parentElement.lastChild",
+            "parentElement.children[-1]",
+            "parentElement.childNodes.last"
         ],
-        "answer": "Done, Error",
-        "difficulty": "Hard",
-        "explanation": "'Done' logs first (synchronous). The rejected Promise is caught by `.catch`, logging 'Error' as a microtask."
-    },
-    {
-        "question": "What is the purpose of converting a callback-based function to a Promise?",
-        "options": [
-            "To make it run faster",
-            "To allow chaining and better error handling",
-            "To make it synchronous",
-            "To avoid using callbacks entirely"
-        ],
-        "answer": "To allow chaining and better error handling",
+        "answer": "parentElement.lastElementChild",
         "difficulty": "Medium",
-        "explanation": "Converting callbacks to Promises allows chaining with `.then()` and centralized error handling with `.catch()`."
+        "explanation": "'lastElementChild' returns the last child element, excluding non-element nodes."
     },
     {
-        "question": "What does this code output?\n```javascript\nasync function test() {\n  console.log(await Promise.resolve('A'));\n  console.log('B');\n}\ntest();\nconsole.log('C');\n```",
+        "question": "What does 'document.createTextNode' do?",
         "options": [
-            "A, B, C",
-            "A, C, B",
-            "C, A, B",
-            "B, A, C"
+            "Creates a new text node",
+            "Creates a new element node",
+            "Creates a new attribute",
+            "Creates a new comment node"
         ],
-        "answer": "C, A, B",
-        "difficulty": "Hard",
-        "explanation": "'C' logs first (synchronous). The async function logs 'A' after the Promise resolves, then 'B'."
+        "answer": "Creates a new text node",
+        "difficulty": "Medium",
+        "explanation": "'createTextNode' creates a text node that can be added to the DOM."
     },
     {
-        "question": "What is the output of this code?\n```javascript\nsetTimeout(() => console.log('A'), 0);\nnew Promise(resolve => resolve('B')).then(v => console.log(v));\nconsole.log('C');\n```",
+        "question": "How do you replace an existing node with a new node?",
         "options": [
-            "C, B, A",
-            "A, B, C",
-            "C, A, B",
-            "B, C, A"
+            "parentElement.replaceChild(newNode, oldNode);",
+            "parentElement.swapChild(newNode, oldNode);",
+            "parentElement.replace(newNode, oldNode);",
+            "parentElement.insertChild(newNode, oldNode);"
         ],
-        "answer": "C, B, A",
+        "answer": "parentElement.replaceChild(newNode, oldNode);",
         "difficulty": "Hard",
-        "explanation": "Synchronous code ('C') runs first. The Promise's `.then` ('B') runs as a microtask. `setTimeout` ('A') runs last as a macrotask."
+        "explanation": "'replaceChild' replaces an existing child node with a new node."
+    },
+    {
+        "question": "What is the purpose of 'element.className'?",
+        "options": [
+            "Gets or sets the class attribute of an element",
+            "Adds a new class to an element",
+            "Removes a class from an element",
+            "Toggles a class on an element"
+        ],
+        "answer": "Gets or sets the class attribute of an element",
+        "difficulty": "Medium",
+        "explanation": "'className' gets or sets the entire class string, but 'classList' is preferred for manipulation."
+    },
+    {
+        "question": "How do you check if an element has a specific class?",
+        "options": [
+            "element.classList.contains('className');",
+            "element.className.includes('className');",
+            "element.hasClass('className');",
+            "element.class('className');"
+        ],
+        "answer": "element.classList.contains('className');",
+        "difficulty": "Medium",
+        "explanation": "'classList.contains' checks if the specified class is present on the element."
+    },
+    {
+        "question": "What does 'element.getBoundingClientRect()' return?",
+        "options": [
+            "An object with the element's size and position",
+            "The element's text content",
+            "The element's attributes",
+            "The element's parent node"
+        ],
+        "answer": "An object with the element's size and position",
+        "difficulty": "Hard",
+        "explanation": "'getBoundingClientRect' returns an object with properties like width, height, top, and left."
+    },
+    {
+        "question": "How do you get all attributes of an element?",
+        "options": [
+            "element.attributes",
+            "element.getAttributes()",
+            "element.allAttributes",
+            "element.attributeList"
+        ],
+        "answer": "element.attributes",
+        "difficulty": "Hard",
+        "explanation": "'attributes' returns a NamedNodeMap of all attributes on the element."
+    },
+    {
+        "question": "What is the difference between 'appendChild' and 'append'?",
+        "options": [
+            "'appendChild' adds one node, 'append' can add multiple nodes or strings",
+            "'appendChild' is faster, 'append' is slower",
+            "'appendChild' adds text, 'append' adds elements",
+            "There is no difference"
+        ],
+        "answer": "'appendChild' adds one node, 'append' can add multiple nodes or strings",
+        "difficulty": "Hard",
+        "explanation": "'append' is more flexible, allowing multiple nodes or strings, while 'appendChild' takes a single node."
+    },
+    {
+        "question": "How do you get the computed style of an element?",
+        "options": [
+            "window.getComputedStyle(element);",
+            "element.style;",
+            "element.getStyle();",
+            "document.getStyle(element);"
+        ],
+        "answer": "window.getComputedStyle(element);",
+        "difficulty": "Hard",
+        "explanation": "'getComputedStyle' returns the computed CSS styles applied to an element."
+    },
+    {
+        "question": "What does 'element.closest(selector)' do?",
+        "options": [
+            "Finds the nearest ancestor matching the selector",
+            "Finds the nearest sibling matching the selector",
+            "Finds all descendants matching the selector",
+            "Finds the parent element only"
+        ],
+        "answer": "Finds the nearest ancestor matching the selector",
+        "difficulty": "Hard",
+        "explanation": "'closest' traverses up the DOM to find the nearest ancestor that matches the selector."
+    },
+    {
+        "question": "How do you prevent the default action of an event?",
+        "options": [
+            "event.preventDefault();",
+            "event.stopPropagation();",
+            "event.cancel();",
+            "event.defaultPrevent();"
+        ],
+        "answer": "event.preventDefault();",
+        "difficulty": "Medium",
+        "explanation": "'preventDefault' stops the default action of an event, like form submission or link navigation."
+    },
+    {
+        "question": "What does 'event.stopPropagation()' do?",
+        "options": [
+            "Prevents the event from bubbling up the DOM tree",
+            "Prevents the default action of the event",
+            "Stops all events on the page",
+            "Removes the event listener"
+        ],
+        "answer": "Prevents the event from bubbling up the DOM tree",
+        "difficulty": "Hard",
+        "explanation": "'stopPropagation' prevents the event from reaching parent elements in the bubbling phase."
+    },
+    {
+        "question": "How do you clone an element in the DOM?",
+        "options": [
+            "element.cloneNode(true);",
+            "element.copyNode();",
+            "element.clone();",
+            "element.duplicate();"
+        ],
+        "answer": "element.cloneNode(true);",
+        "difficulty": "Hard",
+        "explanation": "'cloneNode(true)' creates a deep copy of the element, including its children."
     }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
