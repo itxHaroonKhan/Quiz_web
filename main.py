@@ -7,589 +7,568 @@ import uuid
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz = [
     {
-        "question": "Which event is triggered when a user clicks on an HTML element?",
-        "options": ["onmouseover", "onclick", "onchange", "onkeydown"],
-        "answer": "onclick",
-        "difficulty": "Easy",
-        "explanation": "The 'onclick' event is triggered when a user clicks on an element."
-    },
-    {
-        "question": "What does the 'onmouseover' event do?",
+        "question": "What does the 'click' event do when attached to a button element?",
         "options": [
-            "Triggers when the mouse pointer moves over an element",
-            "Triggers when an element is clicked",
-            "Triggers when a key is pressed",
-            "Triggers when a form is submitted"
+            "Triggers when the button is hovered over",
+            "Triggers when the button is clicked",
+            "Triggers when the button loses focus",
+            "Triggers when the button is double-clicked"
         ],
-        "answer": "Triggers when the mouse pointer moves over an element",
-        "difficulty": "Easy",
-        "explanation": "The 'onmouseover' event fires when the mouse pointer enters an element."
-    },
-    {
-        "question": "How do you add an event listener to a button in JavaScript?",
-        "options": [
-            "button.addEventListener('click', myFunction);",
-            "button.onClick = myFunction;",
-            "button.attachEvent('click', myFunction);",
-            "button.event('click', myFunction);"
-        ],
-        "answer": "button.addEventListener('click', myFunction);",
+        "answer": "Triggers when the button is clicked",
         "difficulty": "Medium",
-        "explanation": "'addEventListener' is the standard way to attach an event handler to an element."
+        "explanation": "The 'click' event fires when a user presses and releases the mouse button on an element, such as a button."
     },
     {
-        "question": "Which event is fired when a user presses a key on the keyboard?",
-        "options": ["onkeypress", "onchange", "onclick", "onfocus"],
-        "answer": "onkeypress",
-        "difficulty": "Easy",
-        "explanation": "The 'onkeypress' event is triggered when a key is pressed and released."
-    },
-    {
-        "question": "How can you get the value of an input field with id='myInput'?",
+        "question": "How can you add an event listener to a button with the ID 'myButton' in JavaScript?",
         "options": [
-            "document.getElementById('myInput').value",
-            "document.querySelector('myInput').value",
-            "document.getElementById('myInput').text",
-            "document.getElementById('myInput').innerHTML"
+            "document.getElementById('myButton').addEventListener('click', myFunction);",
+            "document.getElementById('myButton').onclick = myFunction();",
+            "document.getElementById('myButton').on('click', myFunction);",
+            "document.getElementById('myButton').addListener('click', myFunction);"
         ],
-        "answer": "document.getElementById('myInput').value",
+        "answer": "document.getElementById('myButton').addEventListener('click', myFunction);",
         "difficulty": "Medium",
-        "explanation": "The 'value' property retrieves the current value of an input element."
+        "explanation": "The `addEventListener` method is the standard way to attach an event handler to an element without overwriting existing handlers."
     },
     {
-        "question": "How do you set the value of an input field with id='myInput' to 'Hello'?",
+        "question": "Which event is triggered when a user moves the mouse pointer over an element?",
         "options": [
-            "document.getElementById('myInput').value = 'Hello';",
-            "document.getElementById('myInput').text = 'Hello';",
-            "document.getElementById('myInput').innerHTML = 'Hello';",
-            "document.querySelector('myInput').value = 'Hello';"
+            "onclick",
+            "onmouseover",
+            "onmousemove",
+            "onmouseout"
         ],
-        "answer": "document.getElementById('myInput').value = 'Hello';",
+        "answer": "onmouseover",
         "difficulty": "Medium",
-        "explanation": "The 'value' property is used to set the value of an input element."
+        "explanation": "The 'onmouseover' event fires when the mouse pointer enters an element's boundaries."
     },
     {
-        "question": "How can you change the text of a paragraph with id='myPara' to 'New Text'?",
+        "question": "What does the 'input' event do when attached to a text field?",
         "options": [
-            "document.getElementById('myPara').innerText = 'New Text';",
-            "document.getElementById('myPara').value = 'New Text';",
-            "document.getElementById('myPara').style = 'New Text';",
-            "document.getElementById('myPara').textContent = 'New Text';"
+            "Fires when the field is clicked",
+            "Fires when the field value changes",
+            "Fires when the field loses focus",
+            "Fires when the form is submitted"
         ],
-        "answer": "document.getElementById('myPara').innerText = 'New Text';",
+        "answer": "Fires when the field value changes",
         "difficulty": "Medium",
-        "explanation": "Both 'innerText' and 'textContent' can be used, but 'innerText' is more commonly used for visible text."
+        "explanation": "The 'input' event triggers whenever the value of an input element changes, such as when typing in a text field."
     },
     {
-        "question": "What is the difference between 'innerText' and 'textContent'?",
+        "question": "How do you read the value of a text input with ID 'username'?",
         "options": [
-            "'innerText' considers CSS styling, 'textContent' includes all text including hidden elements",
-            "'innerText' is for inputs, 'textContent' is for divs",
-            "'innerText' is faster, 'textContent' is slower",
-            "There is no difference"
+            "document.getElementById('username').value",
+            "document.getElementById('username').text",
+            "document.getElementById('username').innerText",
+            "document.getElementById('username').innerHTML"
         ],
-        "answer": "'innerText' considers CSS styling, 'textContent' includes all text including hidden elements",
-        "difficulty": "Hard",
-        "explanation": "'innerText' reflects visible text, while 'textContent' includes all text, even in hidden elements."
+        "answer": "document.getElementById('username').value",
+        "difficulty": "Medium",
+        "explanation": "The `value` property retrieves the current value of an input element, such as a text field."
     },
     {
-        "question": "How do you change the source of an image with id='myImage' to 'new.jpg'?",
+        "question": "How can you set the value of an input field with ID 'email' to 'test@example.com'?",
+        "options": [
+            "document.getElementById('email').value = 'test@example.com';",
+            "document.getElementById('email').innerHTML = 'test@example.com';",
+            "document.getElementById('email').text = 'test@example.com';",
+            "document.getElementById('email').setValue('test@example.com');"
+        ],
+        "answer": "document.getElementById('email').value = 'test@example.com';",
+        "difficulty": "Medium",
+        "explanation": "The `value` property is used to set the value of an input element programmatically."
+    },
+    {
+        "question": "How do you change the text content of a paragraph with ID 'info'?",
+        "options": [
+            "document.getElementById('info').innerHTML = 'New text';",
+            "document.getElementById('info').value = 'New text';",
+            "document.getElementById('info').text = 'New text';",
+            "document.getElementById('info').setText('New text');"
+        ],
+        "answer": "document.getElementById('info').innerHTML = 'New text';",
+        "difficulty": "Medium",
+        "explanation": "The `innerHTML` property is used to set the content of non-input elements like paragraphs."
+    },
+    {
+        "question": "How can you change the source of an image with ID 'myImage' to 'new.jpg'?",
         "options": [
             "document.getElementById('myImage').src = 'new.jpg';",
             "document.getElementById('myImage').image = 'new.jpg';",
             "document.getElementById('myImage').url = 'new.jpg';",
-            "document.getElementById('myImage').href = 'new.jpg';"
+            "document.getElementById('myImage').innerHTML = 'new.jpg';"
         ],
         "answer": "document.getElementById('myImage').src = 'new.jpg';",
         "difficulty": "Medium",
-        "explanation": "The 'src' property is used to set the source of an image element."
+        "explanation": "The `src` property is used to set or change the source URL of an image element."
     },
     {
-        "question": "How can you swap the sources of two images with ids 'img1' and 'img2'?",
+        "question": "How do you swap the source of an image with ID 'img1' between 'pic1.jpg' and 'pic2.jpg' on click?",
         "options": [
-            "let temp = img1.src; img1.src = img2.src; img2.src = temp;",
-            "img1.src = img2.src; img2.src = img1.src;",
-            "img1.swap(img2);",
-            "img1.src.swap(img2.src);"
+            "document.getElementById('img1').addEventListener('click', () => { document.getElementById('img1').src = document.getElementById('img1').src === 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg'; });",
+            "document.getElementById('img1').onclick = () => { document.getElementById('img1').src = 'pic2.jpg'; };",
+            "document.getElementById('img1').src = 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg';",
+            "document.getElementById('img1').toggle('pic1.jpg', 'pic2.jpg');"
         ],
-        "answer": "let temp = img1.src; img1.src = img2.src; img2.src = temp;",
+        "answer": "document.getElementById('img1').addEventListener('click', () => { document.getElementById('img1').src = document.getElementById('img1').src === 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg'; });",
         "difficulty": "Medium",
-        "explanation": "A temporary variable is needed to swap the 'src' properties to avoid overwriting."
+        "explanation": "The event listener checks the current `src` and toggles it between 'pic1.jpg' and 'pic2.jpg' using a ternary operator."
     },
     {
-        "question": "How do you add a class 'active' to an element with id='myDiv'?",
+        "question": "How do you add a class 'active' to an element with ID 'myDiv'?",
         "options": [
             "document.getElementById('myDiv').classList.add('active');",
-            "document.getElementById('myDiv').class = 'active';",
-            "document.getElementById('myDiv').style = 'active';",
-            "document.getElementById('myDiv').addClass('active');"
+            "document.getElementById('myDiv').className = 'active';",
+            "document.getElementById('myDiv').addClass('active');",
+            "document.getElementById('myDiv').class = 'active';"
         ],
         "answer": "document.getElementById('myDiv').classList.add('active');",
         "difficulty": "Medium",
-        "explanation": "'classList.add' is the proper way to add a class without overwriting existing classes."
+        "explanation": "The `classList.add` method safely adds a class to an element without overwriting existing classes."
     },
     {
-        "question": "How do you set the background color of an element with id='myDiv' to blue?",
+        "question": "How can you set the background color of an element with ID 'box' to blue?",
         "options": [
-            "document.getElementById('myDiv').style.backgroundColor = 'blue';",
-            "document.getElementById('myDiv').background = 'blue';",
-            "document.getElementById('myDiv').style.color = 'blue';",
-            "document.getElementById('myDiv').style = 'blue';"
+            "document.getElementById('box').style.backgroundColor = 'blue';",
+            "document.getElementById('box').background = 'blue';",
+            "document.getElementById('box').style.color = 'blue';",
+            "document.getElementById('box').setStyle('backgroundColor', 'blue');"
         ],
-        "answer": "document.getElementById('myDiv').style.backgroundColor = 'blue';",
+        "answer": "document.getElementById('box').style.backgroundColor = 'blue';",
         "difficulty": "Medium",
-        "explanation": "The 'style.backgroundColor' property sets the background color of an element."
+        "explanation": "The `style` property allows direct manipulation of CSS properties, with `backgroundColor` being the correct property name."
     },
     {
-        "question": "How do you select all 'div' elements on a page?",
+        "question": "How do you select all paragraph elements in a document?",
         "options": [
-            "document.getElementsByTagName('div');",
-            "document.querySelector('div');",
-            "document.getElementsByClassName('div');",
-            "document.getElementById('div');"
+            "document.getElementsByTagName('p');",
+            "document.querySelectorAll('paragraph');",
+            "document.getElementsByClassName('p');",
+            "document.getElementById('p');"
         ],
-        "answer": "document.getElementsByTagName('div');",
+        "answer": "document.getElementsByTagName('p');",
         "difficulty": "Medium",
-        "explanation": "'getElementsByTagName' returns a live HTMLCollection of all elements with the specified tag."
+        "explanation": "The `getElementsByTagName` method returns a live HTMLCollection of all elements with the specified tag name."
     },
     {
-        "question": "How do you select all elements with class 'item'?",
+        "question": "How can you select all elements with the class 'item' using querySelectorAll?",
         "options": [
             "document.querySelectorAll('.item');",
-            "document.getElementsByTagName('.item');",
-            "document.getElementById('item');",
-            "document.querySelector('item');"
+            "document.getElementsByClassName('item');",
+            "document.querySelectorAll('#item');",
+            "document.querySelectorAll('item');"
         ],
         "answer": "document.querySelectorAll('.item');",
         "difficulty": "Medium",
-        "explanation": "'querySelectorAll' returns a NodeList of elements matching the CSS selector."
+        "explanation": "The `querySelectorAll` method with a '.class' selector returns all elements with the specified class."
     },
     {
-        "question": "What is the DOM in JavaScript?",
+        "question": "What does the DOM stand for in JavaScript?",
         "options": [
-            "A programming interface for HTML and XML documents",
-            "A database for storing web data",
-            "A styling framework for web pages",
-            "A JavaScript library"
+            "Document Object Model",
+            "Data Object Model",
+            "Document Order Model",
+            "Dynamic Object Manipulation"
         ],
-        "answer": "A programming interface for HTML and XML documents",
-        "difficulty": "Easy",
-        "explanation": "The DOM (Document Object Model) represents the structure of a document as a tree of objects."
-    },
-    {
-        "question": "How do you access the parent node of an element?",
-        "options": [
-            "element.parentNode",
-            "element.childNode",
-            "element.nextSibling",
-            "element.previousSibling"
-        ],
-        "answer": "element.parentNode",
+        "answer": "Document Object Model",
         "difficulty": "Medium",
-        "explanation": "'parentNode' returns the parent node of the specified element in the DOM tree."
+        "explanation": "The DOM is a programming interface that represents the structure of a webpage as a tree of objects."
     },
     {
-        "question": "How do you get all child nodes of an element with id='myDiv'?",
+        "question": "How can you access the parent element of an element with ID 'child'?",
         "options": [
-            "document.getElementById('myDiv').childNodes",
-            "document.getElementById('myDiv').childrenNodes",
-            "document.getElementById('myDiv').nodes",
-            "document.getElementById('myDiv').child"
+            "document.getElementById('child').parentNode;",
+            "document.getElementById('child').parent;",
+            "document.getElementById('child').getParent();",
+            "document.getElementById('child').parentElementNode;"
         ],
-        "answer": "document.getElementById('myDiv').childNodes",
+        "answer": "document.getElementById('child').parentNode;",
         "difficulty": "Medium",
-        "explanation": "'childNodes' returns a NodeList of all child nodes, including text and comment nodes."
+        "explanation": "The `parentNode` property returns the parent node of an element in the DOM tree."
     },
     {
-        "question": "What is the difference between 'childNodes' and 'children'?",
+        "question": "How do you access the first child element of an element with ID 'parent'?",
         "options": [
-            "'childNodes' includes all nodes, 'children' includes only element nodes",
-            "'childNodes' is for text, 'children' is for images",
-            "'childNodes' is faster, 'children' is slower",
-            "There is no difference"
+            "document.getElementById('parent').firstChild;",
+            "document.getElementById('parent').child[0];",
+            "document.getElementById('parent').firstElement;",
+            "document.getElementById('parent').children.first;"
         ],
-        "answer": "'childNodes' includes all nodes, 'children' includes only element nodes",
-        "difficulty": "Hard",
-        "explanation": "'childNodes' includes text, comments, and elements, while 'children' includes only HTML elements."
-    },
-    {
-        "question": "What is the 'nodeType' property used for in the DOM?",
-        "options": [
-            "To identify the type of a node",
-            "To count the number of nodes",
-            "To set the style of a node",
-            "To find the parent node"
-        ],
-        "answer": "To identify the type of a node",
+        "answer": "document.getElementById('parent').firstChild;",
         "difficulty": "Medium",
-        "explanation": "'nodeType' returns a number indicating the type of node (e.g., 1 for element, 3 for text)."
+        "explanation": "The `firstChild` property returns the first child node, which may include text or comment nodes."
     },
     {
-        "question": "Which 'nodeType' value represents an element node?",
-        "options": ["1", "3", "8", "10"],
-        "answer": "1",
-        "difficulty": "Hard",
-        "explanation": "A 'nodeType' of 1 indicates an element node in the DOM."
-    },
-    {
-        "question": "How do you select an element with a specific attribute, like [data-id='123']?",
+        "question": "What is the purpose of the `nodeType` property in the DOM?",
         "options": [
-            "document.querySelector('[data-id=\"123\"]');",
-            "document.getElementById('data-id=123');",
-            "document.getElementsByTagName('data-id');",
-            "document.querySelectorAll('data-id=123');"
+            "To identify the type of a node (e.g., element, text, comment)",
+            "To count the number of child nodes",
+            "To get the tag name of an element",
+            "To check if a node is visible"
         ],
-        "answer": "document.querySelector('[data-id=\"123\"]');",
+        "answer": "To identify the type of a node (e.g., element, text, comment)",
         "difficulty": "Medium",
-        "explanation": "'querySelector' uses CSS selector syntax to find the first matching element."
+        "explanation": "The `nodeType` property returns a number indicating the type of node, such as 1 for elements or 3 for text."
     },
     {
-        "question": "How do you get the tag name of an element?",
+        "question": "How can you select an element with the class 'highlight' using querySelector?",
         "options": [
-            "element.tagName",
-            "element.name",
-            "element.id",
-            "element.className"
+            "document.querySelector('.highlight');",
+            "document.getElementByClass('highlight');",
+            "document.querySelector('#highlight');",
+            "document.querySelector('highlight');"
         ],
-        "answer": "element.tagName",
+        "answer": "document.querySelector('.highlight');",
         "difficulty": "Medium",
-        "explanation": "'tagName' returns the tag name of an element (e.g., 'DIV', 'P') in uppercase."
+        "explanation": "The `querySelector` method with a '.class' selector returns the first element with the specified class."
     },
     {
-        "question": "How do you count the number of 'p' elements on a page?",
+        "question": "How do you get the tag name of an element with ID 'myElement'?",
         "options": [
-            "document.getElementsByTagName('p').length",
-            "document.querySelector('p').length",
-            "document.getElementsByClassName('p').length",
-            "document.getElementById('p').length"
+            "document.getElementById('myElement').tagName;",
+            "document.getElementById('myElement').name;",
+            "document.getElementById('myElement').elementName;",
+            "document.getElementById('myElement').getTag();"
         ],
-        "answer": "document.getElementsByTagName('p').length",
+        "answer": "document.getElementById('myElement').tagName;",
         "difficulty": "Medium",
-        "explanation": "'getElementsByTagName' returns a collection, and 'length' gives the count."
+        "explanation": "The `tagName` property returns the tag name of an element in uppercase (e.g., 'DIV')."
     },
     {
-        "question": "How do you check if an element has a specific attribute?",
+        "question": "How can you count the number of list items in an unordered list with ID 'myList'?",
         "options": [
-            "element.hasAttribute('name');",
-            "element.getAttribute('name');",
-            "element.attribute('name');",
-            "element.checkAttribute('name');"
+            "document.getElementById('myList').getElementsByTagName('li').length;",
+            "document.getElementById('myList').children.count;",
+            "document.getElementById('myList').items.length;",
+            "document.getElementById('myList').childNodes.length;"
         ],
-        "answer": "element.hasAttribute('name');",
+        "answer": "document.getElementById('myList').getElementsByTagName('li').length;",
         "difficulty": "Medium",
-        "explanation": "'hasAttribute' returns true if the element has the specified attribute."
+        "explanation": "The `getElementsByTagName` method returns a collection of 'li' elements, and `length` gives the count."
     },
     {
-        "question": "How do you get the value of an attribute 'data-id' from an element?",
+        "question": "How do you get the value of an attribute named 'data-id' from an element with ID 'myElement'?",
         "options": [
-            "element.getAttribute('data-id');",
-            "element.dataId;",
-            "element.attribute('data-id');",
-            "element.getProperty('data-id');"
+            "document.getElementById('myElement').getAttribute('data-id');",
+            "document.getElementById('myElement').dataId;",
+            "document.getElementById('myElement').attribute('data-id');",
+            "document.getElementById('myElement').getData('id');"
         ],
-        "answer": "element.getAttribute('data-id');",
+        "answer": "document.getElementById('myElement').getAttribute('data-id');",
         "difficulty": "Medium",
-        "explanation": "'getAttribute' retrieves the value of the specified attribute."
+        "explanation": "The `getAttribute` method retrieves the value of the specified attribute from an element."
     },
     {
-        "question": "How do you set an attribute 'data-id' to '123' on an element?",
+        "question": "How can you set the 'title' attribute of an element with ID 'myDiv' to 'Tooltip'?",
         "options": [
-            "element.setAttribute('data-id', '123');",
-            "element.dataId = '123';",
-            "element.attribute('data-id', '123');",
-            "element.setProperty('data-id', '123');"
+            "document.getElementById('myDiv').setAttribute('title', 'Tooltip');",
+            "document.getElementById('myDiv').title = 'Tooltip';",
+            "document.getElementById('myDiv').attribute('title', 'Tooltip');",
+            "document.getElementById('myDiv').setTitle('Tooltip');"
         ],
-        "answer": "element.setAttribute('data-id', '123');",
+        "answer": "document.getElementById('myDiv').setAttribute('title', 'Tooltip');",
         "difficulty": "Medium",
-        "explanation": "'setAttribute' sets the value of an attribute on an element."
+        "explanation": "The `setAttribute` method sets or updates the value of an attribute on an element."
     },
     {
-        "question": "How do you create a new 'div' element in JavaScript?",
+        "question": "How do you create a new paragraph element in JavaScript?",
         "options": [
-            "document.createElement('div');",
-            "document.newElement('div');",
-            "document.createNode('div');",
-            "document.addElement('div');"
+            "document.createElement('p');",
+            "document.newElement('p');",
+            "document.createNode('p');",
+            "document.makeElement('p');"
         ],
-        "answer": "document.createElement('div');",
+        "answer": "document.createElement('p');",
         "difficulty": "Medium",
-        "explanation": "'createElement' creates a new element node with the specified tag name."
+        "explanation": "The `createElement` method creates a new element node with the specified tag name."
     },
     {
-        "question": "How do you append a new element as a child of an element with id='myDiv'?",
+        "question": "How can you append a new paragraph element to a div with ID 'container'?",
         "options": [
-            "document.getElementById('myDiv').appendChild(newElement);",
-            "document.getElementById('myDiv').addChild(newElement);",
-            "document.getElementById('myDiv').insert(newElement);",
-            "document.getElementById('myDiv').append(newElement);"
+            "document.getElementById('container').appendChild(document.createElement('p'));",
+            "document.getElementById('container').add(document.createElement('p'));",
+            "document.getElementById('container').insert(document.createElement('p'));",
+            "document.getElementById('container').append(document.createElement('p'));"
         ],
-        "answer": "document.getElementById('myDiv').appendChild(newElement);",
+        "answer": "document.getElementById('container').appendChild(document.createElement('p'));",
         "difficulty": "Medium",
-        "explanation": "'appendChild' adds a node as the last child of the specified parent."
+        "explanation": "The `appendChild` method adds a node as the last child of the specified parent element."
     },
     {
-        "question": "How do you insert an element before another element in the DOM?",
+        "question": "What happens when you use `insertBefore(newNode, referenceNode)`?",
         "options": [
-            "parentElement.insertBefore(newElement, referenceElement);",
-            "parentElement.addBefore(newElement, referenceElement);",
-            "parentElement.insert(newElement, referenceElement);",
-            "parentElement.prepend(newElement, referenceElement);"
+            "Inserts newNode before referenceNode in the parent",
+            "Inserts newNode after referenceNode in the parent",
+            "Replaces referenceNode with newNode",
+            "Appends newNode as the last child"
         ],
-        "answer": "parentElement.insertBefore(newElement, referenceElement);",
-        "difficulty": "Hard",
-        "explanation": "'insertBefore' inserts a new node before the specified reference node."
-    },
-    {
-        "question": "What happens when you use 'element.remove()'?",
-        "options": [
-            "Removes the element from the DOM",
-            "Hides the element",
-            "Clears the element's content",
-            "Removes the element's attributes"
-        ],
-        "answer": "Removes the element from the DOM",
+        "answer": "Inserts newNode before referenceNode in the parent",
         "difficulty": "Medium",
-        "explanation": "'remove' removes the element and its children from the DOM tree."
+        "explanation": "The `insertBefore` method inserts a new node before the specified reference node in the parent's child list."
     },
     {
-        "question": "How do you toggle a class 'active' on an element?",
+        "question": "Which event is triggered when a user clicks a link?",
         "options": [
-            "element.classList.toggle('active');",
-            "element.classList.switch('active');",
-            "element.toggleClass('active');",
-            "element.className = 'active';"
+            "onclick",
+            "onlink",
+            "onhref",
+            "onnavigate"
         ],
-        "answer": "element.classList.toggle('active');",
+        "answer": "onclick",
         "difficulty": "Medium",
-        "explanation": "'classList.toggle' adds the class if absent, removes it if present."
+        "explanation": "The 'onclick' event is used to detect clicks on any element, including links (<a> tags)."
     },
     {
-        "question": "What does 'querySelectorAll' return?",
-        "options": [
-            "A static NodeList of matching elements",
-            "A single element",
-            "A live HTMLCollection",
-            "An array of elements"
-        ],
-        "answer": "A static NodeList of matching elements",
-        "difficulty": "Medium",
-        "explanation": "'querySelectorAll' returns a static NodeList of elements matching the CSS selector."
-    },
-    {
-        "question": "How do you get the first child element of a parent element?",
-        "options": [
-            "parentElement.firstElementChild",
-            "parentElement.firstChild",
-            "parentElement.children[0]",
-            "Both A and C"
-        ],
-        "answer": "Both A and C",
-        "difficulty": "Hard",
-        "explanation": "'firstElementChild' and 'children[0]' both return the first child element, excluding non-element nodes."
-    },
-    {
-        "question": "What is the purpose of 'element.innerHTML'?",
-        "options": [
-            "Gets or sets the HTML content of an element",
-            "Gets or sets the text content of an element",
-            "Gets or sets the style of an element",
-            "Gets or sets the attributes of an element"
-        ],
-        "answer": "Gets or sets the HTML content of an element",
-        "difficulty": "Medium",
-        "explanation": "'innerHTML' allows you to read or write HTML content within an element."
-    },
-    {
-        "question": "What is a potential risk of using 'innerHTML'?",
-        "options": [
-            "It can lead to cross-site scripting (XSS) attacks",
-            "It slows down the browser",
-            "It removes all event listeners",
-            "It only works in older browsers"
-        ],
-        "answer": "It can lead to cross-site scripting (XSS) attacks",
-        "difficulty": "Hard",
-        "explanation": "Using 'innerHTML' with untrusted input can allow malicious scripts to execute."
-    },
-    {
-        "question": "How do you remove an attribute 'data-id' from an element?",
-        "options": [
-            "element.removeAttribute('data-id');",
-            "element.deleteAttribute('data-id');",
-            "element.remove('data-id');",
-            "element.setAttribute('data-id', null);"
-        ],
-        "answer": "element.removeAttribute('data-id');",
-        "difficulty": "Medium",
-        "explanation": "'removeAttribute' removes the specified attribute from an element."
-    },
-    {
-        "question": "What does 'element.nextSibling' return?",
-        "options": [
-            "The next node in the DOM, including text or comment nodes",
-            "The next element node only",
-            "The parent node",
-            "The previous node"
-        ],
-        "answer": "The next node in the DOM, including text or comment nodes",
-        "difficulty": "Hard",
-        "explanation": "'nextSibling' returns the next node, which could be an element, text, or comment."
-    },
-    {
-        "question": "How do you get the last child element of a parent element?",
-        "options": [
-            "parentElement.lastElementChild",
-            "parentElement.lastChild",
-            "parentElement.children[-1]",
-            "parentElement.childNodes.last"
-        ],
-        "answer": "parentElement.lastElementChild",
-        "difficulty": "Medium",
-        "explanation": "'lastElementChild' returns the last child element, excluding non-element nodes."
-    },
-    {
-        "question": "What does 'document.createTextNode' do?",
-        "options": [
-            "Creates a new text node",
-            "Creates a new element node",
-            "Creates a new attribute",
-            "Creates a new comment node"
-        ],
-        "answer": "Creates a new text node",
-        "difficulty": "Medium",
-        "explanation": "'createTextNode' creates a text node that can be added to the DOM."
-    },
-    {
-        "question": "How do you replace an existing node with a new node?",
-        "options": [
-            "parentElement.replaceChild(newNode, oldNode);",
-            "parentElement.swapChild(newNode, oldNode);",
-            "parentElement.replace(newNode, oldNode);",
-            "parentElement.insertChild(newNode, oldNode);"
-        ],
-        "answer": "parentElement.replaceChild(newNode, oldNode);",
-        "difficulty": "Hard",
-        "explanation": "'replaceChild' replaces an existing child node with a new node."
-    },
-    {
-        "question": "What is the purpose of 'element.className'?",
-        "options": [
-            "Gets or sets the class attribute of an element",
-            "Adds a new class to an element",
-            "Removes a class from an element",
-            "Toggles a class on an element"
-        ],
-        "answer": "Gets or sets the class attribute of an element",
-        "difficulty": "Medium",
-        "explanation": "'className' gets or sets the entire class string, but 'classList' is preferred for manipulation."
-    },
-    {
-        "question": "How do you check if an element has a specific class?",
-        "options": [
-            "element.classList.contains('className');",
-            "element.className.includes('className');",
-            "element.hasClass('className');",
-            "element.class('className');"
-        ],
-        "answer": "element.classList.contains('className');",
-        "difficulty": "Medium",
-        "explanation": "'classList.contains' checks if the specified class is present on the element."
-    },
-    {
-        "question": "What does 'element.getBoundingClientRect()' return?",
-        "options": [
-            "An object with the element's size and position",
-            "The element's text content",
-            "The element's attributes",
-            "The element's parent node"
-        ],
-        "answer": "An object with the element's size and position",
-        "difficulty": "Hard",
-        "explanation": "'getBoundingClientRect' returns an object with properties like width, height, top, and left."
-    },
-    {
-        "question": "How do you get all attributes of an element?",
-        "options": [
-            "element.attributes",
-            "element.getAttributes()",
-            "element.allAttributes",
-            "element.attributeList"
-        ],
-        "answer": "element.attributes",
-        "difficulty": "Hard",
-        "explanation": "'attributes' returns a NamedNodeMap of all attributes on the element."
-    },
-    {
-        "question": "What is the difference between 'appendChild' and 'append'?",
-        "options": [
-            "'appendChild' adds one node, 'append' can add multiple nodes or strings",
-            "'appendChild' is faster, 'append' is slower",
-            "'appendChild' adds text, 'append' adds elements",
-            "There is no difference"
-        ],
-        "answer": "'appendChild' adds one node, 'append' can add multiple nodes or strings",
-        "difficulty": "Hard",
-        "explanation": "'append' is more flexible, allowing multiple nodes or strings, while 'appendChild' takes a single node."
-    },
-    {
-        "question": "How do you get the computed style of an element?",
-        "options": [
-            "window.getComputedStyle(element);",
-            "element.style;",
-            "element.getStyle();",
-            "document.getStyle(element);"
-        ],
-        "answer": "window.getComputedStyle(element);",
-        "difficulty": "Hard",
-        "explanation": "'getComputedStyle' returns the computed CSS styles applied to an element."
-    },
-    {
-        "question": "What does 'element.closest(selector)' do?",
-        "options": [
-            "Finds the nearest ancestor matching the selector",
-            "Finds the nearest sibling matching the selector",
-            "Finds all descendants matching the selector",
-            "Finds the parent element only"
-        ],
-        "answer": "Finds the nearest ancestor matching the selector",
-        "difficulty": "Hard",
-        "explanation": "'closest' traverses up the DOM to find the nearest ancestor that matches the selector."
-    },
-    {
-        "question": "How do you prevent the default action of an event?",
+        "question": "How do you prevent the default behavior of a link when clicked?",
         "options": [
             "event.preventDefault();",
             "event.stopPropagation();",
             "event.cancel();",
-            "event.defaultPrevent();"
+            "event.stopDefault();"
         ],
         "answer": "event.preventDefault();",
         "difficulty": "Medium",
-        "explanation": "'preventDefault' stops the default action of an event, like form submission or link navigation."
+        "explanation": "The `preventDefault` method stops the default action of an event, such as navigating to a link's URL."
     },
     {
-        "question": "What does 'event.stopPropagation()' do?",
+        "question": "What does `event.target` refer to in an event handler?",
         "options": [
-            "Prevents the event from bubbling up the DOM tree",
-            "Prevents the default action of the event",
-            "Stops all events on the page",
-            "Removes the event listener"
+            "The element that triggered the event",
+            "The parent of the element",
+            "The document object",
+            "The event type"
         ],
-        "answer": "Prevents the event from bubbling up the DOM tree",
-        "difficulty": "Hard",
-        "explanation": "'stopPropagation' prevents the event from reaching parent elements in the bubbling phase."
+        "answer": "The element that triggered the event",
+        "difficulty": "Medium",
+        "explanation": "The `event.target` property refers to the element that dispatched the event."
     },
     {
-        "question": "How do you clone an element in the DOM?",
+        "question": "How can you get the value of a select dropdown with ID 'options'?",
         "options": [
-            "element.cloneNode(true);",
-            "element.copyNode();",
-            "element.clone();",
-            "element.duplicate();"
+            "document.getElementById('options').value;",
+            "document.getElementById('options').selected;",
+            "document.getElementById('options').innerHTML;",
+            "document.getElementById('options').text;"
         ],
-        "answer": "element.cloneNode(true);",
-        "difficulty": "Hard",
-        "explanation": "'cloneNode(true)' creates a deep copy of the element, including its children."
+        "answer": "document.getElementById('options').value;",
+        "difficulty": "Medium",
+        "explanation": "The `value` property of a `<select>` element returns the value of the selected option."
+    },
+    {
+        "question": "How do you toggle a class 'hidden' on an element with ID 'myElement'?",
+        "options": [
+            "document.getElementById('myElement').classList.toggle('hidden');",
+            "document.getElementById('myElement').className = 'hidden';",
+            "document.getElementById('myElement').toggleClass('hidden');",
+            "document.getElementById('myElement').classList.add('hidden');"
+        ],
+        "answer": "document.getElementById('myElement').classList.toggle('hidden');",
+        "difficulty": "Medium",
+        "explanation": "The `classList.toggle` method adds the class if it’s not present and removes it if it is."
+    },
+    {
+        "question": "How do you set the font size of an element with ID 'text' to 20px?",
+        "options": [
+            "document.getElementById('text').style.fontSize = '20px';",
+            "document.getElementById('text').fontSize = '20px';",
+            "document.getElementById('text').style.font = '20px';",
+            "document.getElementById('text').setStyle('fontSize', '20px');"
+        ],
+        "answer": "document.getElementById('text').style.fontSize = '20px';",
+        "difficulty": "Medium",
+        "explanation": "The `style.fontSize` property sets the font size of an element in CSS units like 'px'."
+    },
+    {
+        "question": "How can you select all div elements with the class 'box'?",
+        "options": [
+            "document.querySelectorAll('div.box');",
+            "document.getElementsByClassName('box');",
+            "document.querySelectorAll('.box.div');",
+            "document.getElementsByTagName('div.box');"
+        ],
+        "answer": "document.querySelectorAll('div.box');",
+        "difficulty": "Medium",
+        "explanation": "The `querySelectorAll` method with 'tag.class' syntax selects all elements of the specified tag with the given class."
+    },
+    {
+        "question": "What is the difference between `childNodes` and `children` in the DOM?",
+        "options": [
+            "`childNodes` includes all nodes, `children` includes only element nodes",
+            "`childNodes` includes only elements, `children` includes all nodes",
+            "`childNodes` includes parents, `children` includes siblings",
+            "`childNodes` is read-only, `children` is modifiable"
+        ],
+        "answer": "`childNodes` includes all nodes, `children` includes only element nodes",
+        "difficulty": "Medium",
+        "explanation": "`childNodes` returns all child nodes (including text and comments), while `children` returns only element nodes."
+    },
+    {
+        "question": "How do you check if an element has a specific class 'active'?",
+        "options": [
+            "document.getElementById('myElement').classList.contains('active');",
+            "document.getElementById('myElement').hasClass('active');",
+            "document.getElementById('myElement').className.includes('active');",
+            "document.getElementById('myElement').class.contains('active');"
+        ],
+        "answer": "document.getElementById('myElement').classList.contains('active');",
+        "difficulty": "Medium",
+        "explanation": "The `classList.contains` method checks if an element has the specified class."
+    },
+    {
+        "question": "How do you remove a class 'highlight' from an element with ID 'myDiv'?",
+        "options": [
+            "document.getElementById('myDiv').classList.remove('highlight');",
+            "document.getElementById('myDiv').className = '';",
+            "document.getElementById('myDiv').removeClass('highlight');",
+            "document.getElementById('myDiv').classList.delete('highlight');"
+        ],
+        "answer": "document.getElementById('myDiv').classList.remove('highlight');",
+        "difficulty": "Medium",
+        "explanation": "The `classList.remove` method removes the specified class from an element."
+    },
+    {
+        "question": "What does `document.createTextNode('Hello')` do?",
+        "options": [
+            "Creates a text node with the content 'Hello'",
+            "Creates a paragraph element with 'Hello'",
+            "Appends 'Hello' to the document",
+            "Creates an attribute named 'Hello'"
+        ],
+        "answer": "Creates a text node with the content 'Hello'",
+        "difficulty": "Medium",
+        "explanation": "The `createTextNode` method creates a text node that can be appended to an element."
+    },
+    {
+        "question": "How can you insert a new div before the first child of an element with ID 'container'?",
+        "options": [
+            "document.getElementById('container').insertBefore(document.createElement('div'), document.getElementById('container').firstChild);",
+            "document.getElementById('container').prepend(document.createElement('div'));",
+            "document.getElementById('container').insert(document.createElement('div'));",
+            "document.getElementById('container').addFirst(document.createElement('div'));"
+        ],
+        "answer": "document.getElementById('container').insertBefore(document.createElement('div'), document.getElementById('container').firstChild);",
+        "difficulty": "Medium",
+        "explanation": "The `insertBefore` method inserts a new node before the specified child node."
+    },
+    {
+        "question": "How do you get the number of attributes on an element with ID 'myElement'?",
+        "options": [
+            "document.getElementById('myElement').attributes.length;",
+            "document.getElementById('myElement').getAttributes().length;",
+            "document.getElementById('myElement').attributeCount;",
+            "document.getElementById('myElement').attributes.count;"
+        ],
+        "answer": "document.getElementById('myElement').attributes.length;",
+        "difficulty": "Medium",
+        "explanation": "The `attributes` property returns a collection of an element's attributes, and `length` gives the count."
+    },
+    {
+        "question": "What is the purpose of the `onfocus` event?",
+        "options": [
+            "Triggers when an element gains focus",
+            "Triggers when an element loses focus",
+            "Triggers when an element is clicked",
+            "Triggers when an element is hovered"
+        ],
+        "answer": "Triggers when an element gains focus",
+        "difficulty": "Medium",
+        "explanation": "The `onfocus` event fires when an element, such as an input, becomes active or gains focus."
+    },
+    {
+        "question": "How do you get the text content of an element without its HTML tags?",
+        "options": [
+            "document.getElementById('myElement').textContent;",
+            "document.getElementById('myElement').innerHTML;",
+            "document.getElementById('myElement').value;",
+            "document.getElementById('myElement').innerText;"
+        ],
+        "answer": "document.getElementById('myElement').textContent;",
+        "difficulty": "Medium",
+        "explanation": "The `textContent` property returns the text content of an element, excluding HTML tags."
+    },
+    {
+        "question": "How can you remove an element with ID 'myElement' from the DOM?",
+        "options": [
+            "document.getElementById('myElement').remove();",
+            "document.getElementById('myElement').delete();",
+            "document.getElementById('myElement').removeChild();",
+            "document.getElementById('myElement').parentNode.remove();"
+        ],
+        "answer": "document.getElementById('myElement').remove();",
+        "difficulty": "Medium",
+        "explanation": "The `remove` method removes an element from the DOM tree."
+    },
+    {
+        "question": "What does the `onblur` event do?",
+        "options": [
+            "Triggers when an element loses focus",
+            "Triggers when an element is clicked",
+            "Triggers when an element is hovered",
+            "Triggers when an element is submitted"
+        ],
+        "answer": "Triggers when an element loses focus",
+        "difficulty": "Medium",
+        "explanation": "The `onblur` event fires when an element, such as an input, loses focus."
+    },
+    {
+        "question": "How do you get all child elements of a div with ID 'container'?",
+        "options": [
+            "document.getElementById('container').children;",
+            "document.getElementById('container').childNodes;",
+            "document.getElementById('container').getChildren();",
+            "document.getElementById('container').allChildren;"
+        ],
+        "answer": "document.getElementById('container').children;",
+        "difficulty": "Medium",
+        "explanation": "The `children` property returns a live HTMLCollection of an element's child elements."
+    },
+    {
+        "question": "How can you check if an element has a specific attribute 'data-type'?",
+        "options": [
+            "document.getElementById('myElement').hasAttribute('data-type');",
+            "document.getElementById('myElement').containsAttribute('data-type');",
+            "document.getElementById('myElement').getAttribute('data-type') !== null;",
+            "document.getElementById('myElement').has('data-type');"
+        ],
+        "answer": "document.getElementById('myElement').hasAttribute('data-type');",
+        "difficulty": "Medium",
+        "explanation": "The `hasAttribute` method checks if an element has the specified attribute."
+    },
+    {
+        "question": "How do you create a new text node and append it to a paragraph with ID 'myPara'?",
+        "options": [
+            "document.getElementById('myPara').appendChild(document.createTextNode('Hello'));",
+            "document.getElementById('myPara').addText('Hello');",
+            "document.getElementById('myPara').text = 'Hello';",
+            "document.getElementById('myPara').innerHTML = 'Hello';"
+        ],
+        "answer": "document.getElementById('myPara').appendChild(document.createTextNode('Hello'));",
+        "difficulty": "Medium",
+        "explanation": "The `createTextNode` method creates a text node, which can be appended using `appendChild`."
+    },
+    {
+        "question": "How do you get the name of an input element's attribute, such as 'name'?",
+        "options": [
+            "document.getElementById('myInput').getAttribute('name');",
+            "document.getElementById('myInput').name;",
+            "document.getElementById('myInput').attributeName;",
+            "document.getElementById('myInput').getName();"
+        ],
+        "answer": "document.getElementById('myInput').getAttribute('name');",
+        "difficulty": "Medium",
+        "explanation": "The `getAttribute` method retrieves the value of the 'name' attribute, or you can use the `name` property directly."
+    },
+    {
+        "question": "How can you replace an existing node with a new div element in a parent with ID 'container'?",
+        "options": [
+            "document.getElementById('container').replaceChild(document.createElement('div'), document.getElementById('container').firstChild);",
+            "document.getElementById('container').replace(document.createElement('div'));",
+            "document.getElementById('container').swap(document.createElement('div'));",
+            "document.getElementById('container').replaceNode(document.createElement('div'));"
+        ],
+        "answer": "document.getElementById('container').replaceChild(document.createElement('div'), document.getElementById('container').firstChild);",
+        "difficulty": "Medium",
+        "explanation": "The `replaceChild` method replaces an existing child node with a new node in the parent."
     }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
