@@ -6,570 +6,642 @@ import uuid
 
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz = [
-    {
-        "question": "What does the 'click' event do when attached to a button element?",
-        "options": [
-            "Triggers when the button is hovered over",
-            "Triggers when the button is clicked",
-            "Triggers when the button loses focus",
-            "Triggers when the button is double-clicked"
-        ],
-        "answer": "Triggers when the button is clicked",
-        "difficulty": "Medium",
-        "explanation": "The 'click' event fires when a user presses and releases the mouse button on an element, such as a button."
-    },
-    {
-        "question": "How can you add an event listener to a button with the ID 'myButton' in JavaScript?",
-        "options": [
-            "document.getElementById('myButton').addEventListener('click', myFunction);",
-            "document.getElementById('myButton').onclick = myFunction();",
-            "document.getElementById('myButton').on('click', myFunction);",
-            "document.getElementById('myButton').addListener('click', myFunction);"
-        ],
-        "answer": "document.getElementById('myButton').addEventListener('click', myFunction);",
-        "difficulty": "Medium",
-        "explanation": "The `addEventListener` method is the standard way to attach an event handler to an element without overwriting existing handlers."
-    },
-    {
-        "question": "Which event is triggered when a user moves the mouse pointer over an element?",
-        "options": [
-            "onclick",
-            "onmouseover",
-            "onmousemove",
-            "onmouseout"
-        ],
-        "answer": "onmouseover",
-        "difficulty": "Medium",
-        "explanation": "The 'onmouseover' event fires when the mouse pointer enters an element's boundaries."
-    },
-    {
-        "question": "What does the 'input' event do when attached to a text field?",
-        "options": [
-            "Fires when the field is clicked",
-            "Fires when the field value changes",
-            "Fires when the field loses focus",
-            "Fires when the form is submitted"
-        ],
-        "answer": "Fires when the field value changes",
-        "difficulty": "Medium",
-        "explanation": "The 'input' event triggers whenever the value of an input element changes, such as when typing in a text field."
-    },
-    {
-        "question": "How do you read the value of a text input with ID 'username'?",
-        "options": [
-            "document.getElementById('username').value",
-            "document.getElementById('username').text",
-            "document.getElementById('username').innerText",
-            "document.getElementById('username').innerHTML"
-        ],
-        "answer": "document.getElementById('username').value",
-        "difficulty": "Medium",
-        "explanation": "The `value` property retrieves the current value of an input element, such as a text field."
-    },
-    {
-        "question": "How can you set the value of an input field with ID 'email' to 'test@example.com'?",
-        "options": [
-            "document.getElementById('email').value = 'test@example.com';",
-            "document.getElementById('email').innerHTML = 'test@example.com';",
-            "document.getElementById('email').text = 'test@example.com';",
-            "document.getElementById('email').setValue('test@example.com');"
-        ],
-        "answer": "document.getElementById('email').value = 'test@example.com';",
-        "difficulty": "Medium",
-        "explanation": "The `value` property is used to set the value of an input element programmatically."
-    },
-    {
-        "question": "How do you change the text content of a paragraph with ID 'info'?",
-        "options": [
-            "document.getElementById('info').innerHTML = 'New text';",
-            "document.getElementById('info').value = 'New text';",
-            "document.getElementById('info').text = 'New text';",
-            "document.getElementById('info').setText('New text');"
-        ],
-        "answer": "document.getElementById('info').innerHTML = 'New text';",
-        "difficulty": "Medium",
-        "explanation": "The `innerHTML` property is used to set the content of non-input elements like paragraphs."
-    },
-    {
-        "question": "How can you change the source of an image with ID 'myImage' to 'new.jpg'?",
-        "options": [
-            "document.getElementById('myImage').src = 'new.jpg';",
-            "document.getElementById('myImage').image = 'new.jpg';",
-            "document.getElementById('myImage').url = 'new.jpg';",
-            "document.getElementById('myImage').innerHTML = 'new.jpg';"
-        ],
-        "answer": "document.getElementById('myImage').src = 'new.jpg';",
-        "difficulty": "Medium",
-        "explanation": "The `src` property is used to set or change the source URL of an image element."
-    },
-    {
-        "question": "How do you swap the source of an image with ID 'img1' between 'pic1.jpg' and 'pic2.jpg' on click?",
-        "options": [
-            "document.getElementById('img1').addEventListener('click', () => { document.getElementById('img1').src = document.getElementById('img1').src === 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg'; });",
-            "document.getElementById('img1').onclick = () => { document.getElementById('img1').src = 'pic2.jpg'; };",
-            "document.getElementById('img1').src = 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg';",
-            "document.getElementById('img1').toggle('pic1.jpg', 'pic2.jpg');"
-        ],
-        "answer": "document.getElementById('img1').addEventListener('click', () => { document.getElementById('img1').src = document.getElementById('img1').src === 'pic1.jpg' ? 'pic2.jpg' : 'pic1.jpg'; });",
-        "difficulty": "Medium",
-        "explanation": "The event listener checks the current `src` and toggles it between 'pic1.jpg' and 'pic2.jpg' using a ternary operator."
-    },
-    {
-        "question": "How do you add a class 'active' to an element with ID 'myDiv'?",
-        "options": [
-            "document.getElementById('myDiv').classList.add('active');",
-            "document.getElementById('myDiv').className = 'active';",
-            "document.getElementById('myDiv').addClass('active');",
-            "document.getElementById('myDiv').class = 'active';"
-        ],
-        "answer": "document.getElementById('myDiv').classList.add('active');",
-        "difficulty": "Medium",
-        "explanation": "The `classList.add` method safely adds a class to an element without overwriting existing classes."
-    },
-    {
-        "question": "How can you set the background color of an element with ID 'box' to blue?",
-        "options": [
-            "document.getElementById('box').style.backgroundColor = 'blue';",
-            "document.getElementById('box').background = 'blue';",
-            "document.getElementById('box').style.color = 'blue';",
-            "document.getElementById('box').setStyle('backgroundColor', 'blue');"
-        ],
-        "answer": "document.getElementById('box').style.backgroundColor = 'blue';",
-        "difficulty": "Medium",
-        "explanation": "The `style` property allows direct manipulation of CSS properties, with `backgroundColor` being the correct property name."
-    },
-    {
-        "question": "How do you select all paragraph elements in a document?",
-        "options": [
-            "document.getElementsByTagName('p');",
-            "document.querySelectorAll('paragraph');",
-            "document.getElementsByClassName('p');",
-            "document.getElementById('p');"
-        ],
-        "answer": "document.getElementsByTagName('p');",
-        "difficulty": "Medium",
-        "explanation": "The `getElementsByTagName` method returns a live HTMLCollection of all elements with the specified tag name."
-    },
-    {
-        "question": "How can you select all elements with the class 'item' using querySelectorAll?",
-        "options": [
-            "document.querySelectorAll('.item');",
-            "document.getElementsByClassName('item');",
-            "document.querySelectorAll('#item');",
-            "document.querySelectorAll('item');"
-        ],
-        "answer": "document.querySelectorAll('.item');",
-        "difficulty": "Medium",
-        "explanation": "The `querySelectorAll` method with a '.class' selector returns all elements with the specified class."
-    },
-    {
-        "question": "What does the DOM stand for in JavaScript?",
-        "options": [
-            "Document Object Model",
-            "Data Object Model",
-            "Document Order Model",
-            "Dynamic Object Manipulation"
-        ],
-        "answer": "Document Object Model",
-        "difficulty": "Medium",
-        "explanation": "The DOM is a programming interface that represents the structure of a webpage as a tree of objects."
-    },
-    {
-        "question": "How can you access the parent element of an element with ID 'child'?",
-        "options": [
-            "document.getElementById('child').parentNode;",
-            "document.getElementById('child').parent;",
-            "document.getElementById('child').getParent();",
-            "document.getElementById('child').parentElementNode;"
-        ],
-        "answer": "document.getElementById('child').parentNode;",
-        "difficulty": "Medium",
-        "explanation": "The `parentNode` property returns the parent node of an element in the DOM tree."
-    },
-    {
-        "question": "How do you access the first child element of an element with ID 'parent'?",
-        "options": [
-            "document.getElementById('parent').firstChild;",
-            "document.getElementById('parent').child[0];",
-            "document.getElementById('parent').firstElement;",
-            "document.getElementById('parent').children.first;"
-        ],
-        "answer": "document.getElementById('parent').firstChild;",
-        "difficulty": "Medium",
-        "explanation": "The `firstChild` property returns the first child node, which may include text or comment nodes."
-    },
-    {
-        "question": "What is the purpose of the `nodeType` property in the DOM?",
-        "options": [
-            "To identify the type of a node (e.g., element, text, comment)",
-            "To count the number of child nodes",
-            "To get the tag name of an element",
-            "To check if a node is visible"
-        ],
-        "answer": "To identify the type of a node (e.g., element, text, comment)",
-        "difficulty": "Medium",
-        "explanation": "The `nodeType` property returns a number indicating the type of node, such as 1 for elements or 3 for text."
-    },
-    {
-        "question": "How can you select an element with the class 'highlight' using querySelector?",
-        "options": [
-            "document.querySelector('.highlight');",
-            "document.getElementByClass('highlight');",
-            "document.querySelector('#highlight');",
-            "document.querySelector('highlight');"
-        ],
-        "answer": "document.querySelector('.highlight');",
-        "difficulty": "Medium",
-        "explanation": "The `querySelector` method with a '.class' selector returns the first element with the specified class."
-    },
-    {
-        "question": "How do you get the tag name of an element with ID 'myElement'?",
-        "options": [
-            "document.getElementById('myElement').tagName;",
-            "document.getElementById('myElement').name;",
-            "document.getElementById('myElement').elementName;",
-            "document.getElementById('myElement').getTag();"
-        ],
-        "answer": "document.getElementById('myElement').tagName;",
-        "difficulty": "Medium",
-        "explanation": "The `tagName` property returns the tag name of an element in uppercase (e.g., 'DIV')."
-    },
-    {
-        "question": "How can you count the number of list items in an unordered list with ID 'myList'?",
-        "options": [
-            "document.getElementById('myList').getElementsByTagName('li').length;",
-            "document.getElementById('myList').children.count;",
-            "document.getElementById('myList').items.length;",
-            "document.getElementById('myList').childNodes.length;"
-        ],
-        "answer": "document.getElementById('myList').getElementsByTagName('li').length;",
-        "difficulty": "Medium",
-        "explanation": "The `getElementsByTagName` method returns a collection of 'li' elements, and `length` gives the count."
-    },
-    {
-        "question": "How do you get the value of an attribute named 'data-id' from an element with ID 'myElement'?",
-        "options": [
-            "document.getElementById('myElement').getAttribute('data-id');",
-            "document.getElementById('myElement').dataId;",
-            "document.getElementById('myElement').attribute('data-id');",
-            "document.getElementById('myElement').getData('id');"
-        ],
-        "answer": "document.getElementById('myElement').getAttribute('data-id');",
-        "difficulty": "Medium",
-        "explanation": "The `getAttribute` method retrieves the value of the specified attribute from an element."
-    },
-    {
-        "question": "How can you set the 'title' attribute of an element with ID 'myDiv' to 'Tooltip'?",
-        "options": [
-            "document.getElementById('myDiv').setAttribute('title', 'Tooltip');",
-            "document.getElementById('myDiv').title = 'Tooltip';",
-            "document.getElementById('myDiv').attribute('title', 'Tooltip');",
-            "document.getElementById('myDiv').setTitle('Tooltip');"
-        ],
-        "answer": "document.getElementById('myDiv').setAttribute('title', 'Tooltip');",
-        "difficulty": "Medium",
-        "explanation": "The `setAttribute` method sets or updates the value of an attribute on an element."
-    },
-    {
-        "question": "How do you create a new paragraph element in JavaScript?",
-        "options": [
-            "document.createElement('p');",
-            "document.newElement('p');",
-            "document.createNode('p');",
-            "document.makeElement('p');"
-        ],
-        "answer": "document.createElement('p');",
-        "difficulty": "Medium",
-        "explanation": "The `createElement` method creates a new element node with the specified tag name."
-    },
-    {
-        "question": "How can you append a new paragraph element to a div with ID 'container'?",
-        "options": [
-            "document.getElementById('container').appendChild(document.createElement('p'));",
-            "document.getElementById('container').add(document.createElement('p'));",
-            "document.getElementById('container').insert(document.createElement('p'));",
-            "document.getElementById('container').append(document.createElement('p'));"
-        ],
-        "answer": "document.getElementById('container').appendChild(document.createElement('p'));",
-        "difficulty": "Medium",
-        "explanation": "The `appendChild` method adds a node as the last child of the specified parent element."
-    },
-    {
-        "question": "What happens when you use `insertBefore(newNode, referenceNode)`?",
-        "options": [
-            "Inserts newNode before referenceNode in the parent",
-            "Inserts newNode after referenceNode in the parent",
-            "Replaces referenceNode with newNode",
-            "Appends newNode as the last child"
-        ],
-        "answer": "Inserts newNode before referenceNode in the parent",
-        "difficulty": "Medium",
-        "explanation": "The `insertBefore` method inserts a new node before the specified reference node in the parent's child list."
-    },
-    {
-        "question": "Which event is triggered when a user clicks a link?",
-        "options": [
-            "onclick",
-            "onlink",
-            "onhref",
-            "onnavigate"
-        ],
-        "answer": "onclick",
-        "difficulty": "Medium",
-        "explanation": "The 'onclick' event is used to detect clicks on any element, including links (<a> tags)."
-    },
-    {
-        "question": "How do you prevent the default behavior of a link when clicked?",
-        "options": [
-            "event.preventDefault();",
-            "event.stopPropagation();",
-            "event.cancel();",
-            "event.stopDefault();"
-        ],
-        "answer": "event.preventDefault();",
-        "difficulty": "Medium",
-        "explanation": "The `preventDefault` method stops the default action of an event, such as navigating to a link's URL."
-    },
-    {
-        "question": "What does `event.target` refer to in an event handler?",
-        "options": [
-            "The element that triggered the event",
-            "The parent of the element",
-            "The document object",
-            "The event type"
-        ],
-        "answer": "The element that triggered the event",
-        "difficulty": "Medium",
-        "explanation": "The `event.target` property refers to the element that dispatched the event."
-    },
-    {
-        "question": "How can you get the value of a select dropdown with ID 'options'?",
-        "options": [
-            "document.getElementById('options').value;",
-            "document.getElementById('options').selected;",
-            "document.getElementById('options').innerHTML;",
-            "document.getElementById('options').text;"
-        ],
-        "answer": "document.getElementById('options').value;",
-        "difficulty": "Medium",
-        "explanation": "The `value` property of a `<select>` element returns the value of the selected option."
-    },
-    {
-        "question": "How do you toggle a class 'hidden' on an element with ID 'myElement'?",
-        "options": [
-            "document.getElementById('myElement').classList.toggle('hidden');",
-            "document.getElementById('myElement').className = 'hidden';",
-            "document.getElementById('myElement').toggleClass('hidden');",
-            "document.getElementById('myElement').classList.add('hidden');"
-        ],
-        "answer": "document.getElementById('myElement').classList.toggle('hidden');",
-        "difficulty": "Medium",
-        "explanation": "The `classList.toggle` method adds the class if it’s not present and removes it if it is."
-    },
-    {
-        "question": "How do you set the font size of an element with ID 'text' to 20px?",
-        "options": [
-            "document.getElementById('text').style.fontSize = '20px';",
-            "document.getElementById('text').fontSize = '20px';",
-            "document.getElementById('text').style.font = '20px';",
-            "document.getElementById('text').setStyle('fontSize', '20px');"
-        ],
-        "answer": "document.getElementById('text').style.fontSize = '20px';",
-        "difficulty": "Medium",
-        "explanation": "The `style.fontSize` property sets the font size of an element in CSS units like 'px'."
-    },
-    {
-        "question": "How can you select all div elements with the class 'box'?",
-        "options": [
-            "document.querySelectorAll('div.box');",
-            "document.getElementsByClassName('box');",
-            "document.querySelectorAll('.box.div');",
-            "document.getElementsByTagName('div.box');"
-        ],
-        "answer": "document.querySelectorAll('div.box');",
-        "difficulty": "Medium",
-        "explanation": "The `querySelectorAll` method with 'tag.class' syntax selects all elements of the specified tag with the given class."
-    },
-    {
-        "question": "What is the difference between `childNodes` and `children` in the DOM?",
-        "options": [
-            "`childNodes` includes all nodes, `children` includes only element nodes",
-            "`childNodes` includes only elements, `children` includes all nodes",
-            "`childNodes` includes parents, `children` includes siblings",
-            "`childNodes` is read-only, `children` is modifiable"
-        ],
-        "answer": "`childNodes` includes all nodes, `children` includes only element nodes",
-        "difficulty": "Medium",
-        "explanation": "`childNodes` returns all child nodes (including text and comments), while `children` returns only element nodes."
-    },
-    {
-        "question": "How do you check if an element has a specific class 'active'?",
-        "options": [
-            "document.getElementById('myElement').classList.contains('active');",
-            "document.getElementById('myElement').hasClass('active');",
-            "document.getElementById('myElement').className.includes('active');",
-            "document.getElementById('myElement').class.contains('active');"
-        ],
-        "answer": "document.getElementById('myElement').classList.contains('active');",
-        "difficulty": "Medium",
-        "explanation": "The `classList.contains` method checks if an element has the specified class."
-    },
-    {
-        "question": "How do you remove a class 'highlight' from an element with ID 'myDiv'?",
-        "options": [
-            "document.getElementById('myDiv').classList.remove('highlight');",
-            "document.getElementById('myDiv').className = '';",
-            "document.getElementById('myDiv').removeClass('highlight');",
-            "document.getElementById('myDiv').classList.delete('highlight');"
-        ],
-        "answer": "document.getElementById('myDiv').classList.remove('highlight');",
-        "difficulty": "Medium",
-        "explanation": "The `classList.remove` method removes the specified class from an element."
-    },
-    {
-        "question": "What does `document.createTextNode('Hello')` do?",
-        "options": [
-            "Creates a text node with the content 'Hello'",
-            "Creates a paragraph element with 'Hello'",
-            "Appends 'Hello' to the document",
-            "Creates an attribute named 'Hello'"
-        ],
-        "answer": "Creates a text node with the content 'Hello'",
-        "difficulty": "Medium",
-        "explanation": "The `createTextNode` method creates a text node that can be appended to an element."
-    },
-    {
-        "question": "How can you insert a new div before the first child of an element with ID 'container'?",
-        "options": [
-            "document.getElementById('container').insertBefore(document.createElement('div'), document.getElementById('container').firstChild);",
-            "document.getElementById('container').prepend(document.createElement('div'));",
-            "document.getElementById('container').insert(document.createElement('div'));",
-            "document.getElementById('container').addFirst(document.createElement('div'));"
-        ],
-        "answer": "document.getElementById('container').insertBefore(document.createElement('div'), document.getElementById('container').firstChild);",
-        "difficulty": "Medium",
-        "explanation": "The `insertBefore` method inserts a new node before the specified child node."
-    },
-    {
-        "question": "How do you get the number of attributes on an element with ID 'myElement'?",
-        "options": [
-            "document.getElementById('myElement').attributes.length;",
-            "document.getElementById('myElement').getAttributes().length;",
-            "document.getElementById('myElement').attributeCount;",
-            "document.getElementById('myElement').attributes.count;"
-        ],
-        "answer": "document.getElementById('myElement').attributes.length;",
-        "difficulty": "Medium",
-        "explanation": "The `attributes` property returns a collection of an element's attributes, and `length` gives the count."
-    },
-    {
-        "question": "What is the purpose of the `onfocus` event?",
-        "options": [
-            "Triggers when an element gains focus",
-            "Triggers when an element loses focus",
-            "Triggers when an element is clicked",
-            "Triggers when an element is hovered"
-        ],
-        "answer": "Triggers when an element gains focus",
-        "difficulty": "Medium",
-        "explanation": "The `onfocus` event fires when an element, such as an input, becomes active or gains focus."
-    },
-    {
-        "question": "How do you get the text content of an element without its HTML tags?",
-        "options": [
-            "document.getElementById('myElement').textContent;",
-            "document.getElementById('myElement').innerHTML;",
-            "document.getElementById('myElement').value;",
-            "document.getElementById('myElement').innerText;"
-        ],
-        "answer": "document.getElementById('myElement').textContent;",
-        "difficulty": "Medium",
-        "explanation": "The `textContent` property returns the text content of an element, excluding HTML tags."
-    },
-    {
-        "question": "How can you remove an element with ID 'myElement' from the DOM?",
-        "options": [
-            "document.getElementById('myElement').remove();",
-            "document.getElementById('myElement').delete();",
-            "document.getElementById('myElement').removeChild();",
-            "document.getElementById('myElement').parentNode.remove();"
-        ],
-        "answer": "document.getElementById('myElement').remove();",
-        "difficulty": "Medium",
-        "explanation": "The `remove` method removes an element from the DOM tree."
-    },
-    {
-        "question": "What does the `onblur` event do?",
-        "options": [
-            "Triggers when an element loses focus",
-            "Triggers when an element is clicked",
-            "Triggers when an element is hovered",
-            "Triggers when an element is submitted"
-        ],
-        "answer": "Triggers when an element loses focus",
-        "difficulty": "Medium",
-        "explanation": "The `onblur` event fires when an element, such as an input, loses focus."
-    },
-    {
-        "question": "How do you get all child elements of a div with ID 'container'?",
-        "options": [
-            "document.getElementById('container').children;",
-            "document.getElementById('container').childNodes;",
-            "document.getElementById('container').getChildren();",
-            "document.getElementById('container').allChildren;"
-        ],
-        "answer": "document.getElementById('container').children;",
-        "difficulty": "Medium",
-        "explanation": "The `children` property returns a live HTMLCollection of an element's child elements."
-    },
-    {
-        "question": "How can you check if an element has a specific attribute 'data-type'?",
-        "options": [
-            "document.getElementById('myElement').hasAttribute('data-type');",
-            "document.getElementById('myElement').containsAttribute('data-type');",
-            "document.getElementById('myElement').getAttribute('data-type') !== null;",
-            "document.getElementById('myElement').has('data-type');"
-        ],
-        "answer": "document.getElementById('myElement').hasAttribute('data-type');",
-        "difficulty": "Medium",
-        "explanation": "The `hasAttribute` method checks if an element has the specified attribute."
-    },
-    {
-        "question": "How do you create a new text node and append it to a paragraph with ID 'myPara'?",
-        "options": [
-            "document.getElementById('myPara').appendChild(document.createTextNode('Hello'));",
-            "document.getElementById('myPara').addText('Hello');",
-            "document.getElementById('myPara').text = 'Hello';",
-            "document.getElementById('myPara').innerHTML = 'Hello';"
-        ],
-        "answer": "document.getElementById('myPara').appendChild(document.createTextNode('Hello'));",
-        "difficulty": "Medium",
-        "explanation": "The `createTextNode` method creates a text node, which can be appended using `appendChild`."
-    },
-    {
-        "question": "How do you get the name of an input element's attribute, such as 'name'?",
-        "options": [
-            "document.getElementById('myInput').getAttribute('name');",
-            "document.getElementById('myInput').name;",
-            "document.getElementById('myInput').attributeName;",
-            "document.getElementById('myInput').getName();"
-        ],
-        "answer": "document.getElementById('myInput').getAttribute('name');",
-        "difficulty": "Medium",
-        "explanation": "The `getAttribute` method retrieves the value of the 'name' attribute, or you can use the `name` property directly."
-    },
-    {
-        "question": "How can you replace an existing node with a new div element in a parent with ID 'container'?",
-        "options": [
-            "document.getElementById('container').replaceChild(document.createElement('div'), document.getElementById('container').firstChild);",
-            "document.getElementById('container').replace(document.createElement('div'));",
-            "document.getElementById('container').swap(document.createElement('div'));",
-            "document.getElementById('container').replaceNode(document.createElement('div'));"
-        ],
-        "answer": "document.getElementById('container').replaceChild(document.createElement('div'), document.getElementById('container').firstChild);",
-        "difficulty": "Medium",
-        "explanation": "The `replaceChild` method replaces an existing child node with a new node in the parent."
-    }
+  {
+    "question": "What is a Function Declaration in JavaScript?",
+    "options": [
+      "A function that is stored in a variable",
+      "A named function defined using the 'function' keyword",
+      "A function immediately executed after creation",
+      "An anonymous function passed as an argument"
+    ],
+    "answer": "A named function defined using the 'function' keyword",
+    "difficulty": "Easy",
+    "explanation": "Function Declarations are named functions created using the 'function' keyword and are hoisted."
+  },
+  {
+    "question": "Which syntax is used to create an Arrow Function?",
+    "options": [
+      "function() => {}",
+      "() => {}",
+      "=> function() {}",
+      "function => () {}"
+    ],
+    "answer": "() => {}",
+    "difficulty": "Easy",
+    "explanation": "Arrow functions use the '() => {}' syntax introduced in ES6."
+  },
+  {
+    "question": "What is an Immediately Invoked Function Expression (IIFE)?",
+    "options": [
+      "A function that runs when an event occurs",
+      "A function that runs only once after page load",
+      "A function that is executed immediately after being defined",
+      "A function that calls itself recursively"
+    ],
+    "answer": "A function that is executed immediately after being defined",
+    "difficulty": "Medium",
+    "explanation": "IIFEs are functions wrapped in parentheses and immediately invoked to create isolated scopes."
+  },
+  {
+    "question": "What does the 'this' keyword refer to inside a function defined in an object method?",
+    "options": [
+      "The global object",
+      "The object itself",
+      "Undefined",
+      "The function itself"
+    ],
+    "answer": "The object itself",
+    "difficulty": "Medium",
+    "explanation": "'this' inside an object method refers to the object owning that method."
+  },
+  {
+    "question": "How do you define a constructor function in JavaScript?",
+    "options": [
+      "function Person() { this.name = 'Name'; }",
+      "let Person = () => { this.name = 'Name'; }",
+      "class Person { name = 'Name'; }",
+      "function Person => { this.name = 'Name'; }"
+    ],
+    "answer": "function Person() { this.name = 'Name'; }",
+    "difficulty": "Medium",
+    "explanation": "Constructor functions are defined like normal functions but used with 'new' to create objects."
+  },
+  {
+    "question": "What is the primary use of the 'prototype' property in JavaScript?",
+    "options": [
+      "To add properties and methods to all instances of an object",
+      "To create a new object",
+      "To inherit variables from another function",
+      "To execute functions asynchronously"
+    ],
+    "answer": "To add properties and methods to all instances of an object",
+    "difficulty": "Medium",
+    "explanation": "The prototype allows sharing methods and properties among all instances created by a constructor."
+  },
+  {
+    "question": "What is a callback function?",
+    "options": [
+      "A function that is called immediately when defined",
+      "A function passed as an argument to another function to be called later",
+      "A function that returns another function",
+      "A function that can only be used inside classes"
+    ],
+    "answer": "A function passed as an argument to another function to be called later",
+    "difficulty": "Easy",
+    "explanation": "Callbacks enable asynchronous programming by allowing functions to be called after an operation finishes."
+  },
+  {
+    "question": "How do you define an asynchronous function in JavaScript?",
+    "options": [
+      "function async() {}",
+      "async function myFunc() {}",
+      "function* myFunc() {}",
+      "await function myFunc() {}"
+    ],
+    "answer": "async function myFunc() {}",
+    "difficulty": "Medium",
+    "explanation": "The 'async' keyword before a function allows it to use 'await' for asynchronous operations."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nfunction test() {\n  console.log(this);\n}\ntest();\n```",
+    "options": [
+      "The global object (window in browser)",
+      "undefined",
+      "The test function itself",
+      "An error"
+    ],
+    "answer": "The global object (window in browser)",
+    "difficulty": "Medium",
+    "explanation": "In non-strict mode, 'this' inside a normal function points to the global object."
+  },
+  {
+    "question": "Which of these is NOT a function type in JavaScript?",
+    "options": [
+      "Generator function",
+      "Arrow function",
+      "Class function",
+      "Recursive function"
+    ],
+    "answer": "Class function",
+    "difficulty": "Easy",
+    "explanation": "Classes have methods, but 'Class function' is not a standard function type."
+  },
+  {
+    "question": "What does the 'bind' method do in JavaScript?",
+    "options": [
+      "Executes a function immediately",
+      "Creates a new function with a fixed 'this' value",
+      "Combines two functions into one",
+      "Pauses function execution"
+    ],
+    "answer": "Creates a new function with a fixed 'this' value",
+    "difficulty": "Medium",
+    "explanation": "The 'bind' method creates a new function with its 'this' keyword set to the provided value."
+  },
+  {
+    "question": "What is the purpose of the 'call' method in JavaScript?",
+    "options": [
+      "To invoke a function with a specified 'this' value and arguments",
+      "To create a new object",
+      "To loop through an array",
+      "To define a new function"
+    ],
+    "answer": "To invoke a function with a specified 'this' value and arguments",
+    "difficulty": "Medium",
+    "explanation": "'call' invokes a function with a given 'this' value and individual arguments."
+  },
+  {
+    "question": "What does the 'apply' method do in JavaScript?",
+    "options": [
+      "Executes a function with arguments as an array",
+      "Adds a new property to an object",
+      "Clones an object",
+      "Defines a recursive function"
+    ],
+    "answer": "Executes a function with arguments as an array",
+    "difficulty": "Medium",
+    "explanation": "'apply' is similar to 'call' but accepts arguments as an array."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst obj = {\n  value: 42,\n  getValue: function() { return this.value; }\n};\nconsole.log(obj.getValue());\n```",
+    "options": [
+      "42",
+      "undefined",
+      "null",
+      "An error"
+    ],
+    "answer": "42",
+    "difficulty": "Easy",
+    "explanation": "'this' refers to 'obj', so 'getValue' returns the 'value' property of 'obj'."
+  },
+  {
+    "question": "What is a higher-order function in JavaScript?",
+    "options": [
+      "A function that takes another function as an argument or returns a function",
+      "A function that runs faster than others",
+      "A function defined inside a class",
+      "A function that is called only once"
+    ],
+    "answer": "A function that takes another function as an argument or returns a function",
+    "difficulty": "Medium",
+    "explanation": "Higher-order functions either accept functions as arguments or return functions."
+  },
+  {
+    "question": "What does the following code return?\n\n```js\nfunction outer() {\n  let x = 10;\n  return function inner() { return x; };\n}\nconst fn = outer();\nconsole.log(fn());\n```",
+    "options": [
+      "10",
+      "undefined",
+      "null",
+      "An error"
+    ],
+    "answer": "10",
+    "difficulty": "Medium",
+    "explanation": "The inner function retains access to 'x' via closure, so it returns 10."
+  },
+  {
+    "question": "What is the purpose of the 'new' keyword in JavaScript?",
+    "options": [
+      "To create a new variable",
+      "To instantiate an object from a constructor function",
+      "To declare a new function",
+      "To reset an object's properties"
+    ],
+    "answer": "To instantiate an object from a constructor function",
+    "difficulty": "Easy",
+    "explanation": "'new' creates a new object and sets its prototype to the constructor's prototype."
+  },
+  {
+    "question": "Which method is used to create a shallow copy of an object?",
+    "options": [
+      "Object.assign()",
+      "Object.create()",
+      "Object.defineProperty()",
+      "Object.keys()"
+    ],
+    "answer": "Object.assign()",
+    "difficulty": "Medium",
+    "explanation": "'Object.assign()' copies enumerable own properties from one or more source objects to a target object."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.forEach(item => console.log(item * 2));\n```",
+    "options": [
+      "2, 4, 6",
+      "[2, 4, 6]",
+      "undefined",
+      "An error"
+    ],
+    "answer": "2, 4, 6",
+    "difficulty": "Easy",
+    "explanation": "'forEach' iterates over the array, and the arrow function logs each item multiplied by 2."
+  },
+  {
+    "question": "What is a Generator function in JavaScript?",
+    "options": [
+      "A function that generates random numbers",
+      "A function that can pause and resume its execution",
+      "A function that runs asynchronously",
+      "A function that creates objects"
+    ],
+    "answer": "A function that can pause and resume its execution",
+    "difficulty": "Medium",
+    "explanation": "Generator functions, defined with 'function*', use 'yield' to pause and resume execution."
+  },
+  {
+421
+    "question": "What does the 'Object.keys()' method return?",
+    "options": [
+      "An array of an object's enumerable property names",
+      "An array of an object's values",
+      "A new object with copied properties",
+      "The prototype of the object"
+    ],
+    "answer": "An array of an object's enumerable property names",
+    "difficulty": "Easy",
+    "explanation": "'Object.keys()' returns an array containing the names of an object's enumerable properties."
+  },
+  {
+    "question": "What is the purpose of the 'map' method in JavaScript?",
+    "options": [
+      "To create a new array with transformed elements",
+      "To loop through an array without returning anything",
+      "To filter elements from an array",
+      "To sort an array"
+    ],
+    "answer": "To create a new array with transformed elements",
+    "difficulty": "Easy",
+    "explanation": "'map' applies a function to each array element and returns a new array with the results."
+  },
+  {
+    "question": "What does the following code return?\n\n```js\nconst numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);\n```",
+    "options": [
+      "[2, 4, 6]",
+      "[1, 2, 3]",
+      "2, 4, 6",
+      "An error"
+    ],
+    "answer": "[2, 4, 6]",
+    "difficulty": "Easy",
+    "explanation": "'map' creates a new array with each element doubled."
+  },
+  {
+    "question": "What is the difference between 'let' and 'const' in function scope?",
+    "options": [
+      "'let' allows reassignment, 'const' does not",
+      "'const' allows reassignment, 'let' does not",
+      "'let' is block-scoped, 'const' is not",
+      "'const' is hoisted, 'let' is not"
+    ],
+    "answer": "'let' allows reassignment, 'const' does not",
+    "difficulty": "Easy",
+    "explanation": "'let' allows variable reassignment, while 'const' prevents it after initial declaration."
+  },
+  {
+    "question": "What is a closure in JavaScript?",
+    "options": [
+      "A function that closes over variables from its outer scope",
+      "A function that runs only once",
+      "A function that has no parameters",
+      "A function that returns an object"
+    ],
+    "answer": "A function that closes over variables from its outer scope",
+    "difficulty": "Medium",
+    "explanation": "Closures allow inner functions to access variables from their outer scope even after the outer function finishes."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nfunction example() {\n  return () => { console.log('Hello'); };\n}\nconst fn = example();\nfn();\n```",
+    "options": [
+      "Hello",
+      "undefined",
+      "null",
+      "An error"
+    ],
+    "answer": "Hello",
+    "difficulty": "Medium",
+    "explanation": "The inner arrow function is returned and executed, logging 'Hello'."
+  },
+  {
+    "question": "What does the 'reduce' method do in JavaScript?",
+    "options": [
+      "Reduces an array to a single value by applying a function",
+      "Removes elements from an array",
+      "Sorts an array in descending order",
+      "Creates a new array with filtered elements"
+    ],
+    "answer": "Reduces an array to a single value by applying a function",
+    "difficulty": "Medium",
+    "explanation": "'reduce' applies a function to an accumulator and each array element to produce a single value."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst sum = nums.reduce((acc, curr) => acc + curr, 0);\nconsole.log(sum);\n```",
+    "options": [
+      "6",
+      "[1, 2, 3]",
+      "0",
+      "An error"
+    ],
+    "answer": "6",
+    "difficulty": "Medium",
+    "explanation": "'reduce' sums all elements in the array starting with an initial accumulator value of 0."
+  },
+  {
+    "question": "What does 'Object.create()' do in JavaScript?",
+    "options": [
+      "Creates a new object with the specified prototype",
+      "Clones an existing object",
+      "Creates a new array",
+      "Defines a new function"
+    ],
+    "answer": "Creates a new object with the specified prototype",
+    "difficulty": "Medium",
+    "explanation": "'Object.create()' creates a new object with the specified prototype object and properties."
+  },
+  {
+    "question": "What is the purpose of the 'filter' method in JavaScript?",
+    "options": [
+      "To create a new array with elements that pass a test",
+      "To transform each element in an array",
+      "To sort an array",
+      "To reduce an array to a single value"
+    ],
+    "answer": "To create a new array with elements that pass a test",
+    "difficulty": "Easy",
+    "explanation": "'filter' creates a new array with elements that return true for the provided function."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3, 4];\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens);\n```",
+    "options": [
+      "[2, 4]",
+      "[1, 3]",
+      "[1, 2, 3, 4]",
+      "An error"
+    ],
+    "answer": "[2, 4]",
+    "difficulty": "Easy",
+    "explanation": "'filter' creates a new array with only even numbers from the original array."
+  },
+  {
+    "question": "What does the 'Object.defineProperty()' method do?",
+    "options": [
+      "Defines a new property or modifies an existing one on an object",
+      "Creates a new object",
+      "Deletes a property from an object",
+      "Returns an array of object properties"
+    ],
+    "answer": "Defines a new property or modifies an existing one on an object",
+    "difficulty": "Medium",
+    "explanation": "'Object.defineProperty()' allows precise control over property attributes like writability."
+  },
+  {
+    "question": "What is a pure function in JavaScript?",
+    "options": [
+      "A function that always returns the same output for the same input and has no side effects",
+      "A function that modifies global variables",
+      "A function that runs asynchronously",
+      "A function that returns another function"
+    ],
+    "answer": "A function that always returns the same output for the same input and has no side effects",
+    "difficulty": "Medium",
+    "explanation": "Pure functions are predictable, producing consistent outputs without modifying external state."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst obj = {};\nObject.defineProperty(obj, 'prop', { value: 42, writable: false });\nobj.prop = 100;\nconsole.log(obj.prop);\n```",
+    "options": [
+      "42",
+      "100",
+      "undefined",
+      "An error"
+    ],
+    "answer": "42",
+    "difficulty": "Medium",
+    "explanation": "'writable: false' prevents 'prop' from being reassigned, so it remains 42."
+  },
+  {
+    "question": "What does the 'some' method do in JavaScript?",
+    "options": [
+      "Checks if at least one element in an array passes a test",
+      "Returns a new array with transformed elements",
+      "Sums all elements in an array",
+      "Filters out duplicate elements"
+    ],
+    "answer": "Checks if at least one element in an array passes a test",
+    "difficulty": "Medium",
+    "explanation": "'some' returns true if at least one element satisfies the provided function."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst hasEven = nums.some(n => n % 2 === 0);\nconsole.log(hasEven);\n```",
+    "options": [
+      "true",
+      "false",
+      "[2]",
+      "An error"
+    ],
+    "answer": "true",
+    "difficulty": "Easy",
+    "explanation": "'some' returns true because at least one element (2) is even."
+  },
+  {
+    "question": "What is the purpose of the 'every' method in JavaScript?",
+    "options": [
+      "Checks if all elements in an array pass a test",
+      "Transforms each element in an array",
+      "Reduces an array to a single value",
+      "Sorts an array"
+    ],
+    "answer": "Checks if all elements in an array pass a test",
+    "difficulty": "Medium",
+    "explanation": "'every' returns true if all elements satisfy the provided function."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst nums = [2, 4, 6];\nconst allEven = nums.every(n => n % 2 === 0);\nconsole.log(allEven);\n```",
+    "options": [
+      "true",
+      "false",
+      "[2, 4, 6]",
+      "An error"
+    ],
+    "answer": "true",
+    "difficulty": "Easy",
+    "explanation": "'every' returns true because all elements are even."
+  },
+  {
+    "question": "What does the 'Object.freeze()' method do?",
+    "options": [
+      "Prevents modifications to an object",
+      "Creates a new object",
+      "Clones an object",
+      "Removes properties from an object"
+    ],
+    "answer": "Prevents modifications to an object",
+    "difficulty": "Medium",
+    "explanation": "'Object.freeze()' makes an object immutable, preventing property additions or changes."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst obj = Object.freeze({ x: 1 });\nobj.x = 2;\nconsole.log(obj.x);\n```",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "An error"
+    ],
+    "answer": "1",
+    "difficulty": "Medium",
+    "explanation": "'Object.freeze()' prevents changes, so 'x' remains 1."
+  },
+  {
+    "question": "What is a method in JavaScript?",
+    "options": [
+      "A function that is a property of an object",
+      "A function that runs asynchronously",
+      "A function that returns another function",
+      "A function that cannot take arguments"
+    ],
+    "answer": "A function that is a property of an object",
+    "difficulty": "Easy",
+    "explanation": "Methods are functions defined as properties of objects."
+  },
+  {
+    "question": "What does the 'slice' method do when called on an array?",
+    "options": [
+      "Returns a shallow copy of a portion of an array",
+      "Removes elements from an array",
+      "Adds elements to an array",
+      "Sorts an array"
+    ],
+    "answer": "Returns a shallow copy of a portion of an array",
+    "difficulty": "Easy",
+    "explanation": "'slice' returns a new array with elements from the specified start to end indices."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3, 4];\nconsole.log(arr.slice(1, 3));\n```",
+    "options": [
+      "[2, 3]",
+      "[1, 2, 3]",
+      "[3, 4]",
+      "An error"
+    ],
+    "answer": "[2, 3]",
+    "difficulty": "Easy",
+    "explanation": "'slice(1, 3)' returns a new array with elements from index 1 to 2."
+  },
+  {
+    "question": "What does the 'splice' method do in JavaScript?",
+    "options": [
+      "Modifies an array by adding or removing elements",
+      "Creates a shallow copy of an array",
+      "Filters elements from an array",
+      "Maps elements to a new array"
+    ],
+    "answer": "Modifies an array by adding or removing elements",
+    "difficulty": "Medium",
+    "explanation": "'splice' changes the original array by removing or adding elements at a specified index."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.splice(1, 1, 5);\nconsole.log(arr);\n```",
+    "options": [
+      "[1, 5, 3]",
+      "[1, 2, 3]",
+      "[1, 5]",
+      "An error"
+    ],
+    "answer": "[1, 5, 3]",
+    "difficulty": "Medium",
+    "explanation": "'splice(1, 1, 5)' removes 1 element at index 1 and inserts 5."
+  },
+  {
+    "question": "What is the purpose of the 'Object.entries()' method?",
+    "options": [
+      "Returns an array of an object's key-value pairs",
+      "Creates a new object",
+      "Deletes properties from an object",
+      "Returns an array of object values"
+    ],
+    "answer": "Returns an array of an object's key-value pairs",
+    "difficulty": "Medium",
+    "explanation": "'Object.entries()' returns an array of arrays, each containing a key-value pair."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.entries(obj));\n```",
+    "options": [
+      "[['a', 1], ['b', 2]]",
+      "{ a: 1, b: 2 }",
+      "['a', 'b']",
+      "[1, 2]"
+    ],
+    "answer": "[['a', 1], ['b', 2]]",
+   ,en": "'Object.entries()' returns an array of key-value pair arrays."
+  },
+  {
+    "question": "What does the 'find' method do in JavaScript?",
+    "options": [
+      "Returns the first element in an array that passes a test",
+      "Returns all elements that pass a test",
+      "Transforms an array",
+      "Sorts an array"
+    ],
+    "answer": "Returns the first element in an array that passes a test",
+    "difficulty": "Easy",
+    "explanation": "'find' returns the first element that satisfies the provided function or undefined."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\nconst found = arr.find(n => n > 1);\nconsole.log(found);\n```",
+    "options": [
+      "2",
+      "[2, 3]",
+      "1",
+      "undefined"
+    ],
+    "answer": "2",
+    "difficulty": "Easy",
+    "explanation": "'find' returns the first element greater than 1, which is 2."
+  },
+  {
+    "question": "What does the 'Object.values()' method do?",
+    "options": [
+      "Returns an array of an object's values",
+      "Returns an array of an object's keys",
+      "Creates a new object",
+      "Freezes an object"
+    ],
+    "answer": "Returns an array of an object's values",
+    "difficulty": "Easy",
+    "explanation": "'Object.values()' returns an array containing the values of an object's enumerable properties."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.values(obj));\n```",
+    "options": [
+      "[1, 2]",
+      "['a', 'b']",
+      "{ a: 1, b: 2 }",
+      "An error"
+    ],
+    "answer": "[1, 2]",
+    "difficulty": "Easy",
+    "explanation": "'Object.values()' returns an array of the object's values."
+  },
+  {
+    "question": "What is a factory function in JavaScript?",
+    "options": [
+      "A function that returns a new object",
+      "A function that creates a new array",
+      "A function that modifies the global scope",
+      "A function that runs asynchronously"
+    ],
+    "answer": "A function that returns a new object",
+    "difficulty": "Medium",
+    "explanation": "Factory functions create and return new objects without using the 'new' keyword."
+  },
+  {
+    "question": "What is the output of this code?\n\n```js\nfunction createPerson(name) {\n  return { name };\n}\nconst person = createPerson('Alice');\nconsole.log(person.name);\n```",
+    "options": [
+      "Alice",
+      "undefined",
+      "null",
+      "An error"
+    ],
+    "answer": "Alice",
+    "difficulty": "Easy",
+    "explanation": "The factory function 'createPerson' returns an object with a 'name' property."
+  }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
 def shuffle_quiz(_quiz):
@@ -967,3 +1039,4 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
