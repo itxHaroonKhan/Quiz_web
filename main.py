@@ -9,14 +9,14 @@ quiz = [
   {
     "question": "What is a Function Declaration in JavaScript?",
     "options": [
-      "A function that is stored in a variable",
+      "A function stored in a variable",
       "A named function defined using the 'function' keyword",
-      "A function immediately executed after creation",
+      "A function executed immediately after creation",
       "An anonymous function passed as an argument"
     ],
     "answer": "A named function defined using the 'function' keyword",
     "difficulty": "Easy",
-    "explanation": "Function Declarations are named functions created using the 'function' keyword and are hoisted."
+    "explanation": "Function Declarations are named functions created using the 'function' keyword and are hoisted, allowing them to be called before their definition."
   },
   {
     "question": "Which syntax is used to create an Arrow Function?",
@@ -28,22 +28,22 @@ quiz = [
     ],
     "answer": "() => {}",
     "difficulty": "Easy",
-    "explanation": "Arrow functions use the '() => {}' syntax introduced in ES6."
+    "explanation": "Arrow functions, introduced in ES6, use the '() => {}' syntax and have a concise form with implicit returns."
   },
   {
     "question": "What is an Immediately Invoked Function Expression (IIFE)?",
     "options": [
-      "A function that runs when an event occurs",
-      "A function that runs only once after page load",
-      "A function that is executed immediately after being defined",
-      "A function that calls itself recursively"
+      "A function that runs on an event",
+      "A function executed immediately after definition",
+      "A function that calls itself recursively",
+      "A function stored in a variable"
     ],
-    "answer": "A function that is executed immediately after being defined",
+    "answer": "A function executed immediately after definition",
     "difficulty": "Medium",
-    "explanation": "IIFEs are functions wrapped in parentheses and immediately invoked to create isolated scopes."
+    "explanation": "IIFEs are wrapped in parentheses and invoked immediately to create a private scope, preventing global pollution."
   },
   {
-    "question": "What does the 'this' keyword refer to inside a function defined in an object method?",
+    "question": "What does 'this' refer to in an object method?",
     "options": [
       "The global object",
       "The object itself",
@@ -52,70 +52,70 @@ quiz = [
     ],
     "answer": "The object itself",
     "difficulty": "Medium",
-    "explanation": "'this' inside an object method refers to the object owning that method."
+    "explanation": "In an object method, 'this' refers to the object that owns the method, allowing access to its properties."
   },
   {
-    "question": "How do you define a constructor function in JavaScript?",
+    "question": "How do you define a constructor function in JavaScript?\n\n```js\nfunction Person(name) {\n  this.name = name;\n}\n```",
     "options": [
-      "function Person() { this.name = 'Name'; }",
-      "let Person = () => { this.name = 'Name'; }",
-      "class Person { name = 'Name'; }",
-      "function Person => { this.name = 'Name'; }"
+      "The code above is correct",
+      "let Person = () => { this.name = name; }",
+      "class Person { name = name; }",
+      "function Person => { this.name = name; }"
     ],
-    "answer": "function Person() { this.name = 'Name'; }",
+    "answer": "The code above is correct",
     "difficulty": "Medium",
-    "explanation": "Constructor functions are defined like normal functions but used with 'new' to create objects."
+    "explanation": "Constructor functions use the 'function' keyword and 'this' to set properties, invoked with 'new' to create objects."
   },
   {
-    "question": "What is the primary use of the 'prototype' property in JavaScript?",
+    "question": "What is the 'prototype' property used for?",
     "options": [
-      "To add properties and methods to all instances of an object",
+      "To add methods to all instances of an object",
       "To create a new object",
       "To inherit variables from another function",
       "To execute functions asynchronously"
     ],
-    "answer": "To add properties and methods to all instances of an object",
+    "answer": "To add methods to all instances of an object",
     "difficulty": "Medium",
-    "explanation": "The prototype allows sharing methods and properties among all instances created by a constructor."
+    "explanation": "The 'prototype' property allows sharing methods and properties across all instances created by a constructor."
   },
   {
     "question": "What is a callback function?",
     "options": [
-      "A function that is called immediately when defined",
-      "A function passed as an argument to another function to be called later",
+      "A function called immediately when defined",
+      "A function passed as an argument to be called later",
       "A function that returns another function",
-      "A function that can only be used inside classes"
+      "A function used only in classes"
     ],
-    "answer": "A function passed as an argument to another function to be called later",
+    "answer": "A function passed as an argument to be called later",
     "difficulty": "Easy",
-    "explanation": "Callbacks enable asynchronous programming by allowing functions to be called after an operation finishes."
+    "explanation": "Callbacks are passed to other functions and executed later, commonly used for asynchronous operations."
   },
   {
-    "question": "How do you define an asynchronous function in JavaScript?",
+    "question": "How do you define an async function?\n\n```js\nasync function fetchData() {\n  return await fetch('url');\n}\n```",
     "options": [
-      "function async() {}",
-      "async function myFunc() {}",
-      "function* myFunc() {}",
-      "await function myFunc() {}"
+      "The code above is correct",
+      "function async fetchData() {}",
+      "function* fetchData() {}",
+      "await function fetchData() {}"
     ],
-    "answer": "async function myFunc() {}",
+    "answer": "The code above is correct",
     "difficulty": "Medium",
-    "explanation": "The 'async' keyword before a function allows it to use 'await' for asynchronous operations."
+    "explanation": "Async functions are defined with the 'async' keyword and can use 'await' for asynchronous operations."
   },
   {
     "question": "What is the output of this code?\n\n```js\nfunction test() {\n  console.log(this);\n}\ntest();\n```",
     "options": [
       "The global object (window in browser)",
       "undefined",
-      "The test function itself",
+      "The test function",
       "An error"
     ],
     "answer": "The global object (window in browser)",
     "difficulty": "Medium",
-    "explanation": "In non-strict mode, 'this' inside a normal function points to the global object."
+    "explanation": "In non-strict mode, 'this' in a regular function refers to the global object (e.g., window in browsers)."
   },
   {
-    "question": "Which of these is NOT a function type in JavaScript?",
+    "question": "Which is NOT a function type in JavaScript?",
     "options": [
       "Generator function",
       "Arrow function",
@@ -124,43 +124,43 @@ quiz = [
     ],
     "answer": "Class function",
     "difficulty": "Easy",
-    "explanation": "Classes have methods, but 'Class function' is not a standard function type."
+    "explanation": "Classes have methods, but 'Class function' is not a recognized function type in JavaScript."
   },
   {
-    "question": "What does the 'bind' method do in JavaScript?",
+    "question": "What does the 'bind' method do?\n\n```js\nconst obj = { x: 1 };\nconst fn = function() { return this.x; }.bind(obj);\n```",
     "options": [
-      "Executes a function immediately",
-      "Creates a new function with a fixed 'this' value",
-      "Combines two functions into one",
+      "Executes the function immediately",
+      "Creates a new function with a fixed 'this'",
+      "Combines two functions",
       "Pauses function execution"
     ],
-    "answer": "Creates a new function with a fixed 'this' value",
+    "answer": "Creates a new function with a fixed 'this'",
     "difficulty": "Medium",
-    "explanation": "The 'bind' method creates a new function with its 'this' keyword set to the provided value."
+    "explanation": "'bind' creates a new function with its 'this' set to the provided value, here 'obj'."
   },
   {
-    "question": "What is the purpose of the 'call' method in JavaScript?",
+    "question": "What does the 'call' method do?\n\n```js\nconst obj = { x: 1 };\nfunction fn() { return this.x; }\nfn.call(obj);\n```",
     "options": [
-      "To invoke a function with a specified 'this' value and arguments",
-      "To create a new object",
-      "To loop through an array",
-      "To define a new function"
+      "Invokes a function with a specified 'this' and arguments",
+      "Creates a new object",
+      "Loops through an array",
+      "Defines a new function"
     ],
-    "answer": "To invoke a function with a specified 'this' value and arguments",
+    "answer": "Invokes a function with a specified 'this' and arguments",
     "difficulty": "Medium",
     "explanation": "'call' invokes a function with a given 'this' value and individual arguments."
   },
   {
-    "question": "What does the 'apply' method do in JavaScript?",
+    "question": "What does the 'apply' method do?\n\n```js\nconst obj = { x: 1 };\nfunction fn(a, b) { return this.x + a + b; }\nfn.apply(obj, [2, 3]);\n```",
     "options": [
       "Executes a function with arguments as an array",
-      "Adds a new property to an object",
+      "Adds a property to an object",
       "Clones an object",
       "Defines a recursive function"
     ],
     "answer": "Executes a function with arguments as an array",
     "difficulty": "Medium",
-    "explanation": "'apply' is similar to 'call' but accepts arguments as an array."
+    "explanation": "'apply' is like 'call' but takes arguments as an array."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst obj = {\n  value: 42,\n  getValue: function() { return this.value; }\n};\nconsole.log(obj.getValue());\n```",
@@ -172,22 +172,22 @@ quiz = [
     ],
     "answer": "42",
     "difficulty": "Easy",
-    "explanation": "'this' refers to 'obj', so 'getValue' returns the 'value' property of 'obj'."
+    "explanation": "'this' refers to 'obj', so 'getValue' returns the 'value' property (42)."
   },
   {
-    "question": "What is a higher-order function in JavaScript?",
+    "question": "What is a higher-order function?\n\n```js\nfunction map(arr, fn) {\n  return arr.map(fn);\n}\n```",
     "options": [
-      "A function that takes another function as an argument or returns a function",
-      "A function that runs faster than others",
-      "A function defined inside a class",
-      "A function that is called only once"
+      "A function that takes or returns a function",
+      "A function that runs faster",
+      "A function inside a class",
+      "A function called once"
     ],
-    "answer": "A function that takes another function as an argument or returns a function",
+    "answer": "A function that takes or returns a function",
     "difficulty": "Medium",
-    "explanation": "Higher-order functions either accept functions as arguments or return functions."
+    "explanation": "Higher-order functions either accept functions as arguments or return functions, like 'map'."
   },
   {
-    "question": "What does the following code return?\n\n```js\nfunction outer() {\n  let x = 10;\n  return function inner() { return x; };\n}\nconst fn = outer();\nconsole.log(fn());\n```",
+    "question": "What does this code return?\n\n```js\nfunction outer() {\n  let x = 10;\n  return function inner() { return x; };\n}\nconst fn = outer();\nconsole.log(fn());\n```",
     "options": [
       "10",
       "undefined",
@@ -196,22 +196,22 @@ quiz = [
     ],
     "answer": "10",
     "difficulty": "Medium",
-    "explanation": "The inner function retains access to 'x' via closure, so it returns 10."
+    "explanation": "The inner function retains access to 'x' via closure, returning 10."
   },
   {
-    "question": "What is the purpose of the 'new' keyword in JavaScript?",
+    "question": "What is the purpose of the 'new' keyword?\n\n```js\nfunction Person(name) {\n  this.name = name;\n}\nconst p = new Person('Alice');\n```",
     "options": [
       "To create a new variable",
-      "To instantiate an object from a constructor function",
+      "To instantiate an object",
       "To declare a new function",
-      "To reset an object's properties"
+      "To reset object properties"
     ],
-    "answer": "To instantiate an object from a constructor function",
+    "answer": "To instantiate an object",
     "difficulty": "Easy",
-    "explanation": "'new' creates a new object and sets its prototype to the constructor's prototype."
+    "explanation": "'new' creates a new object with the constructor's prototype."
   },
   {
-    "question": "Which method is used to create a shallow copy of an object?",
+    "question": "Which method creates a shallow copy of an object?\n\n```js\nconst obj = { a: 1 };\nconst copy = Object.assign({}, obj);\n```",
     "options": [
       "Object.assign()",
       "Object.create()",
@@ -220,7 +220,7 @@ quiz = [
     ],
     "answer": "Object.assign()",
     "difficulty": "Medium",
-    "explanation": "'Object.assign()' copies enumerable own properties from one or more source objects to a target object."
+    "explanation": "'Object.assign()' copies enumerable properties to a target object."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.forEach(item => console.log(item * 2));\n```",
@@ -232,47 +232,46 @@ quiz = [
     ],
     "answer": "2, 4, 6",
     "difficulty": "Easy",
-    "explanation": "'forEach' iterates over the array, and the arrow function logs each item multiplied by 2."
+    "explanation": "'forEach' logs each element multiplied by 2."
   },
   {
-    "question": "What is a Generator function in JavaScript?",
+    "question": "What is a Generator function?\n\n```js\nfunction* gen() {\n  yield 1;\n  yield 2;\n}\n```",
     "options": [
-      "A function that generates random numbers",
-      "A function that can pause and resume its execution",
-      "A function that runs asynchronously",
-      "A function that creates objects"
+      "Generates random numbers",
+      "Pauses and resumes execution",
+      "Runs asynchronously",
+      "Creates objects"
     ],
-    "answer": "A function that can pause and resume its execution",
+    "answer": "Pauses and resumes execution",
     "difficulty": "Medium",
-    "explanation": "Generator functions, defined with 'function*', use 'yield' to pause and resume execution."
+    "explanation": "Generator functions use 'function*' and 'yield' to pause and resume."
   },
   {
-421
-    "question": "What does the 'Object.keys()' method return?",
+    "question": "What does 'Object.keys()' return?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.keys(obj));\n```",
     "options": [
-      "An array of an object's enumerable property names",
-      "An array of an object's values",
-      "A new object with copied properties",
-      "The prototype of the object"
+      "['a', 'b']",
+      "[1, 2]",
+      "{ a: 1, b: 2 }",
+      "The prototype"
     ],
-    "answer": "An array of an object's enumerable property names",
+    "answer": "['a', 'b']",
     "difficulty": "Easy",
-    "explanation": "'Object.keys()' returns an array containing the names of an object's enumerable properties."
+    "explanation": "'Object.keys()' returns an array of an object's enumerable property names."
   },
   {
-    "question": "What is the purpose of the 'map' method in JavaScript?",
+    "question": "What is the purpose of the 'map' method?\n\n```js\nconst arr = [1, 2, 3];\narr.map(x => x * 2);\n```",
     "options": [
-      "To create a new array with transformed elements",
-      "To loop through an array without returning anything",
-      "To filter elements from an array",
-      "To sort an array"
+      "Creates a new array with transformed elements",
+      "Loops without returning",
+      "Filters elements",
+      "Sorts an array"
     ],
-    "answer": "To create a new array with transformed elements",
+    "answer": "Creates a new array with transformed elements",
     "difficulty": "Easy",
-    "explanation": "'map' applies a function to each array element and returns a new array with the results."
+    "explanation": "'map' applies a function to each element and returns a new array."
   },
   {
-    "question": "What does the following code return?\n\n```js\nconst numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);\n```",
+    "question": "What does this code return?\n\n```js\nconst numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);\n```",
     "options": [
       "[2, 4, 6]",
       "[1, 2, 3]",
@@ -284,7 +283,7 @@ quiz = [
     "explanation": "'map' creates a new array with each element doubled."
   },
   {
-    "question": "What is the difference between 'let' and 'const' in function scope?",
+    "question": "What is the difference between 'let' and 'const' in a function?",
     "options": [
       "'let' allows reassignment, 'const' does not",
       "'const' allows reassignment, 'let' does not",
@@ -293,19 +292,19 @@ quiz = [
     ],
     "answer": "'let' allows reassignment, 'const' does not",
     "difficulty": "Easy",
-    "explanation": "'let' allows variable reassignment, while 'const' prevents it after initial declaration."
+    "explanation": "'let' allows variable reassignment, while 'const' prevents it."
   },
   {
-    "question": "What is a closure in JavaScript?",
+    "question": "What is a closure?\n\n```js\nfunction outer() {\n  let x = 5;\n  return () => x;\n}\n```",
     "options": [
-      "A function that closes over variables from its outer scope",
-      "A function that runs only once",
-      "A function that has no parameters",
-      "A function that returns an object"
+      "A function accessing outer scope variables",
+      "A function that runs once",
+      "A function with no parameters",
+      "A function returning an object"
     ],
-    "answer": "A function that closes over variables from its outer scope",
+    "answer": "A function accessing outer scope variables",
     "difficulty": "Medium",
-    "explanation": "Closures allow inner functions to access variables from their outer scope even after the outer function finishes."
+    "explanation": "Closures allow inner functions to access outer scope variables."
   },
   {
     "question": "What is the output of this code?\n\n```js\nfunction example() {\n  return () => { console.log('Hello'); };\n}\nconst fn = example();\nfn();\n```",
@@ -317,19 +316,19 @@ quiz = [
     ],
     "answer": "Hello",
     "difficulty": "Medium",
-    "explanation": "The inner arrow function is returned and executed, logging 'Hello'."
+    "explanation": "The inner arrow function logs 'Hello' when executed."
   },
   {
-    "question": "What does the 'reduce' method do in JavaScript?",
+    "question": "What does the 'reduce' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.reduce((acc, curr) => acc + curr, 0);\n```",
     "options": [
-      "Reduces an array to a single value by applying a function",
-      "Removes elements from an array",
-      "Sorts an array in descending order",
-      "Creates a new array with filtered elements"
+      "Reduces an array to a single value",
+      "Removes elements",
+      "Sorts an array",
+      "Filters elements"
     ],
-    "answer": "Reduces an array to a single value by applying a function",
+    "answer": "Reduces an array to a single value",
     "difficulty": "Medium",
-    "explanation": "'reduce' applies a function to an accumulator and each array element to produce a single value."
+    "explanation": "'reduce' applies a function to an accumulator and each element."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst sum = nums.reduce((acc, curr) => acc + curr, 0);\nconsole.log(sum);\n```",
@@ -341,31 +340,31 @@ quiz = [
     ],
     "answer": "6",
     "difficulty": "Medium",
-    "explanation": "'reduce' sums all elements in the array starting with an initial accumulator value of 0."
+    "explanation": "'reduce' sums all elements starting with an accumulator of 0."
   },
   {
-    "question": "What does 'Object.create()' do in JavaScript?",
+    "question": "What does 'Object.create()' do?\n\n```js\nconst proto = { x: 1 };\nconst obj = Object.create(proto);\n```",
     "options": [
-      "Creates a new object with the specified prototype",
-      "Clones an existing object",
+      "Creates a new object with specified prototype",
+      "Clones an object",
       "Creates a new array",
       "Defines a new function"
     ],
-    "answer": "Creates a new object with the specified prototype",
+    "answer": "Creates a new object with specified prototype",
     "difficulty": "Medium",
-    "explanation": "'Object.create()' creates a new object with the specified prototype object and properties."
+    "explanation": "'Object.create()' creates an object with the specified prototype."
   },
   {
-    "question": "What is the purpose of the 'filter' method in JavaScript?",
+    "question": "What is the purpose of the 'filter' method?\n\n```js\nconst arr = [1, 2, 3, 4];\narr.filter(n => n % 2 === 0);\n```",
     "options": [
-      "To create a new array with elements that pass a test",
-      "To transform each element in an array",
-      "To sort an array",
-      "To reduce an array to a single value"
+      "Creates a new array with elements passing a test",
+      "Transforms elements",
+      "Sorts an array",
+      "Reduces an array"
     ],
-    "answer": "To create a new array with elements that pass a test",
+    "answer": "Creates a new array with elements passing a test",
     "difficulty": "Easy",
-    "explanation": "'filter' creates a new array with elements that return true for the provided function."
+    "explanation": "'filter' returns a new array with elements that pass the test."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3, 4];\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens);\n```",
@@ -377,31 +376,31 @@ quiz = [
     ],
     "answer": "[2, 4]",
     "difficulty": "Easy",
-    "explanation": "'filter' creates a new array with only even numbers from the original array."
+    "explanation": "'filter' returns even numbers in a new array."
   },
   {
-    "question": "What does the 'Object.defineProperty()' method do?",
+    "question": "What does 'Object.defineProperty()' do?\n\n```js\nconst obj = {};\nObject.defineProperty(obj, 'x', { value: 42, writable: false });\n```",
     "options": [
-      "Defines a new property or modifies an existing one on an object",
+      "Defines or modifies a property",
       "Creates a new object",
-      "Deletes a property from an object",
-      "Returns an array of object properties"
+      "Deletes a property",
+      "Returns property names"
     ],
-    "answer": "Defines a new property or modifies an existing one on an object",
+    "answer": "Defines or modifies a property",
     "difficulty": "Medium",
-    "explanation": "'Object.defineProperty()' allows precise control over property attributes like writability."
+    "explanation": "'Object.defineProperty()' sets or modifies property attributes."
   },
   {
-    "question": "What is a pure function in JavaScript?",
+    "question": "What is a pure function?",
     "options": [
-      "A function that always returns the same output for the same input and has no side effects",
-      "A function that modifies global variables",
-      "A function that runs asynchronously",
-      "A function that returns another function"
+      "Returns same output for same input, no side effects",
+      "Modifies global variables",
+      "Runs asynchronously",
+      "Returns another function"
     ],
-    "answer": "A function that always returns the same output for the same input and has no side effects",
+    "answer": "Returns same output for same input, no side effects",
     "difficulty": "Medium",
-    "explanation": "Pure functions are predictable, producing consistent outputs without modifying external state."
+    "explanation": "Pure functions are predictable and don't affect external state."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst obj = {};\nObject.defineProperty(obj, 'prop', { value: 42, writable: false });\nobj.prop = 100;\nconsole.log(obj.prop);\n```",
@@ -413,19 +412,19 @@ quiz = [
     ],
     "answer": "42",
     "difficulty": "Medium",
-    "explanation": "'writable: false' prevents 'prop' from being reassigned, so it remains 42."
+    "explanation": "'writable: false' prevents reassignment, so 'prop' remains 42."
   },
   {
-    "question": "What does the 'some' method do in JavaScript?",
+    "question": "What does the 'some' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.some(n => n % 2 === 0);\n```",
     "options": [
-      "Checks if at least one element in an array passes a test",
-      "Returns a new array with transformed elements",
-      "Sums all elements in an array",
-      "Filters out duplicate elements"
+      "Checks if at least one element passes a test",
+      "Transforms elements",
+      "Sums elements",
+      "Filters duplicates"
     ],
-    "answer": "Checks if at least one element in an array passes a test",
+    "answer": "Checks if at least one element passes a test",
     "difficulty": "Medium",
-    "explanation": "'some' returns true if at least one element satisfies the provided function."
+    "explanation": "'some' returns true if at least one element passes the test."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst hasEven = nums.some(n => n % 2 === 0);\nconsole.log(hasEven);\n```",
@@ -437,19 +436,19 @@ quiz = [
     ],
     "answer": "true",
     "difficulty": "Easy",
-    "explanation": "'some' returns true because at least one element (2) is even."
+    "explanation": "'some' returns true because 2 is even."
   },
   {
-    "question": "What is the purpose of the 'every' method in JavaScript?",
+    "question": "What is the purpose of the 'every' method?\n\n```js\nconst arr = [2, 4, 6];\narr.every(n => n % 2 === 0);\n```",
     "options": [
-      "Checks if all elements in an array pass a test",
-      "Transforms each element in an array",
-      "Reduces an array to a single value",
+      "Checks if all elements pass a test",
+      "Transforms elements",
+      "Reduces an array",
       "Sorts an array"
     ],
-    "answer": "Checks if all elements in an array pass a test",
+    "answer": "Checks if all elements pass a test",
     "difficulty": "Medium",
-    "explanation": "'every' returns true if all elements satisfy the provided function."
+    "explanation": "'every' returns true if all elements pass the test."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst nums = [2, 4, 6];\nconst allEven = nums.every(n => n % 2 === 0);\nconsole.log(allEven);\n```",
@@ -464,16 +463,16 @@ quiz = [
     "explanation": "'every' returns true because all elements are even."
   },
   {
-    "question": "What does the 'Object.freeze()' method do?",
+    "question": "What does 'Object.freeze()' do?\n\n```js\nconst obj = Object.freeze({ x: 1 });\nobj.x = 2;\n```",
     "options": [
-      "Prevents modifications to an object",
+      "Prevents object modifications",
       "Creates a new object",
       "Clones an object",
-      "Removes properties from an object"
+      "Removes properties"
     ],
-    "answer": "Prevents modifications to an object",
+    "answer": "Prevents object modifications",
     "difficulty": "Medium",
-    "explanation": "'Object.freeze()' makes an object immutable, preventing property additions or changes."
+    "explanation": "'Object.freeze()' makes an object immutable."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst obj = Object.freeze({ x: 1 });\nobj.x = 2;\nconsole.log(obj.x);\n```",
@@ -488,28 +487,28 @@ quiz = [
     "explanation": "'Object.freeze()' prevents changes, so 'x' remains 1."
   },
   {
-    "question": "What is a method in JavaScript?",
+    "question": "What is a method in JavaScript?\n\n```js\nconst obj = { fn: function() { return 'hi'; } };\n```",
     "options": [
-      "A function that is a property of an object",
+      "A function that is an object property",
       "A function that runs asynchronously",
-      "A function that returns another function",
-      "A function that cannot take arguments"
+      "A function that returns a function",
+      "A function with no arguments"
     ],
-    "answer": "A function that is a property of an object",
+    "answer": "A function that is an object property",
     "difficulty": "Easy",
-    "explanation": "Methods are functions defined as properties of objects."
+    "explanation": "Methods are functions defined as object properties."
   },
   {
-    "question": "What does the 'slice' method do when called on an array?",
+    "question": "What does the 'slice' method do?\n\n```js\nconst arr = [1, 2, 3, 4];\narr.slice(1, 3);\n```",
     "options": [
-      "Returns a shallow copy of a portion of an array",
-      "Removes elements from an array",
-      "Adds elements to an array",
+      "Returns a shallow copy of a portion",
+      "Removes elements",
+      "Adds elements",
       "Sorts an array"
     ],
-    "answer": "Returns a shallow copy of a portion of an array",
+    "answer": "Returns a shallow copy of a portion",
     "difficulty": "Easy",
-    "explanation": "'slice' returns a new array with elements from the specified start to end indices."
+    "explanation": "'slice' returns a new array with elements from start to end indices."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3, 4];\nconsole.log(arr.slice(1, 3));\n```",
@@ -521,19 +520,19 @@ quiz = [
     ],
     "answer": "[2, 3]",
     "difficulty": "Easy",
-    "explanation": "'slice(1, 3)' returns a new array with elements from index 1 to 2."
+    "explanation": "'slice(1, 3)' returns elements from index 1 to 2."
   },
   {
-    "question": "What does the 'splice' method do in JavaScript?",
+    "question": "What does the 'splice' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.splice(1, 1, 5);\n```",
     "options": [
-      "Modifies an array by adding or removing elements",
-      "Creates a shallow copy of an array",
-      "Filters elements from an array",
-      "Maps elements to a new array"
+      "Modifies an array by adding/removing elements",
+      "Creates a shallow copy",
+      "Filters elements",
+      "Maps elements"
     ],
-    "answer": "Modifies an array by adding or removing elements",
+    "answer": "Modifies an array by adding/removing elements",
     "difficulty": "Medium",
-    "explanation": "'splice' changes the original array by removing or adding elements at a specified index."
+    "explanation": "'splice' changes the original array by adding or removing elements."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.splice(1, 1, 5);\nconsole.log(arr);\n```",
@@ -548,16 +547,16 @@ quiz = [
     "explanation": "'splice(1, 1, 5)' removes 1 element at index 1 and inserts 5."
   },
   {
-    "question": "What is the purpose of the 'Object.entries()' method?",
+    "question": "What does 'Object.entries()' do?\n\n```js\nconst obj = { a: 1, b: 2 };\nObject.entries(obj);\n```",
     "options": [
-      "Returns an array of an object's key-value pairs",
+      "Returns key-value pair arrays",
       "Creates a new object",
-      "Deletes properties from an object",
-      "Returns an array of object values"
+      "Deletes properties",
+      "Returns object values"
     ],
-    "answer": "Returns an array of an object's key-value pairs",
+    "answer": "Returns key-value pair arrays",
     "difficulty": "Medium",
-    "explanation": "'Object.entries()' returns an array of arrays, each containing a key-value pair."
+    "explanation": "'Object.entries()' returns an array of key-value pair arrays."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.entries(obj));\n```",
@@ -568,19 +567,20 @@ quiz = [
       "[1, 2]"
     ],
     "answer": "[['a', 1], ['b', 2]]",
-   ,en": "'Object.entries()' returns an array of key-value pair arrays."
+    "difficulty": "Medium",
+    "explanation": "'Object.entries()' returns an array of key-value pair arrays."
   },
   {
-    "question": "What does the 'find' method do in JavaScript?",
+    "question": "What does the 'find' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.find(n => n > 1);\n```",
     "options": [
-      "Returns the first element in an array that passes a test",
-      "Returns all elements that pass a test",
+      "Returns the first element passing a test",
+      "Returns all elements passing a test",
       "Transforms an array",
       "Sorts an array"
     ],
-    "answer": "Returns the first element in an array that passes a test",
+    "answer": "Returns the first element passing a test",
     "difficulty": "Easy",
-    "explanation": "'find' returns the first element that satisfies the provided function or undefined."
+    "explanation": "'find' returns the first element that satisfies the function."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\nconst found = arr.find(n => n > 1);\nconsole.log(found);\n```",
@@ -595,16 +595,16 @@ quiz = [
     "explanation": "'find' returns the first element greater than 1, which is 2."
   },
   {
-    "question": "What does the 'Object.values()' method do?",
+    "question": "What does 'Object.values()' do?\n\n```js\nconst obj = { a: 1, b: 2 };\nObject.values(obj);\n```",
     "options": [
-      "Returns an array of an object's values",
-      "Returns an array of an object's keys",
+      "Returns an array of object values",
+      "Returns an array of keys",
       "Creates a new object",
       "Freezes an object"
     ],
-    "answer": "Returns an array of an object's values",
+    "answer": "Returns an array of object values",
     "difficulty": "Easy",
-    "explanation": "'Object.values()' returns an array containing the values of an object's enumerable properties."
+    "explanation": "'Object.values()' returns an array of the object's enumerable values."
   },
   {
     "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.values(obj));\n```",
@@ -616,19 +616,19 @@ quiz = [
     ],
     "answer": "[1, 2]",
     "difficulty": "Easy",
-    "explanation": "'Object.values()' returns an array of the object's values."
+    "explanation": "'Object.values()' returns the object's values in an array."
   },
   {
-    "question": "What is a factory function in JavaScript?",
+    "question": "What is a factory function?\n\n```js\nfunction createPerson(name) {\n  return { name };\n}\n```",
     "options": [
       "A function that returns a new object",
-      "A function that creates a new array",
-      "A function that modifies the global scope",
+      "A function that creates an array",
+      "A function that modifies global scope",
       "A function that runs asynchronously"
     ],
     "answer": "A function that returns a new object",
     "difficulty": "Medium",
-    "explanation": "Factory functions create and return new objects without using the 'new' keyword."
+    "explanation": "Factory functions create and return objects without 'new'."
   },
   {
     "question": "What is the output of this code?\n\n```js\nfunction createPerson(name) {\n  return { name };\n}\nconst person = createPerson('Alice');\nconsole.log(person.name);\n```",
@@ -640,7 +640,7 @@ quiz = [
     ],
     "answer": "Alice",
     "difficulty": "Easy",
-    "explanation": "The factory function 'createPerson' returns an object with a 'name' property."
+    "explanation": "The factory function returns an object with a 'name' property."
   }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
@@ -1039,4 +1039,5 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
