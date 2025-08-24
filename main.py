@@ -5,642 +5,690 @@ from datetime import datetime
 import uuid
 
 # Quiz data with 67 questions covering specified JavaScript topics
-quiz = [
+quiz =[
   {
-    "question": "What is a Function Declaration in JavaScript?",
+    "question": "What is the primary purpose of a while loop in JavaScript?",
     "options": [
-      "A function stored in a variable",
-      "A named function defined using the 'function' keyword",
-      "A function executed immediately after creation",
-      "An anonymous function passed as an argument"
+      "To execute a block of code a fixed number of times",
+      "To execute a block of code as long as a condition is true",
+      "To define a function",
+      "To create an array"
     ],
-    "answer": "A named function defined using the 'function' keyword",
+    "answer": "To execute a block of code as long as a condition is true",
     "difficulty": "Easy",
-    "explanation": "Function Declarations are named functions created using the 'function' keyword and are hoisted, allowing them to be called before their definition."
+    "explanation": "A while loop continues to execute its block of code as long as the specified condition evaluates to true."
   },
   {
-    "question": "Which syntax is used to create an Arrow Function?",
+    "question": "What happens if the condition in a while loop is never false?",
     "options": [
-      "function() => {}",
-      "() => {}",
-      "=> function() {}",
-      "function => () {}"
+      "The loop runs once",
+      "The loop causes an infinite loop",
+      "The loop skips the code block",
+      "The loop throws an error"
     ],
-    "answer": "() => {}",
+    "answer": "The loop causes an infinite loop",
     "difficulty": "Easy",
-    "explanation": "Arrow functions, introduced in ES6, use the '() => {}' syntax and have a concise form with implicit returns."
+    "explanation": "If the condition in a while loop never becomes false, it will run indefinitely, causing an infinite loop."
   },
   {
-    "question": "What is an Immediately Invoked Function Expression (IIFE)?",
+    "question": "Which keyword can be used to exit a while loop prematurely?",
     "options": [
-      "A function that runs on an event",
-      "A function executed immediately after definition",
-      "A function that calls itself recursively",
-      "A function stored in a variable"
+      "continue",
+      "break",
+      "return",
+      "exit"
     ],
-    "answer": "A function executed immediately after definition",
-    "difficulty": "Medium",
-    "explanation": "IIFEs are wrapped in parentheses and invoked immediately to create a private scope, preventing global pollution."
-  },
-  {
-    "question": "What does 'this' refer to in an object method?",
-    "options": [
-      "The global object",
-      "The object itself",
-      "Undefined",
-      "The function itself"
-    ],
-    "answer": "The object itself",
-    "difficulty": "Medium",
-    "explanation": "In an object method, 'this' refers to the object that owns the method, allowing access to its properties."
-  },
-  {
-    "question": "How do you define a constructor function in JavaScript?\n\n```js\nfunction Person(name) {\n  this.name = name;\n}\n```",
-    "options": [
-      "The code above is correct",
-      "let Person = () => { this.name = name; }",
-      "class Person { name = name; }",
-      "function Person => { this.name = name; }"
-    ],
-    "answer": "The code above is correct",
-    "difficulty": "Medium",
-    "explanation": "Constructor functions use the 'function' keyword and 'this' to set properties, invoked with 'new' to create objects."
-  },
-  {
-    "question": "What is the 'prototype' property used for?",
-    "options": [
-      "To add methods to all instances of an object",
-      "To create a new object",
-      "To inherit variables from another function",
-      "To execute functions asynchronously"
-    ],
-    "answer": "To add methods to all instances of an object",
-    "difficulty": "Medium",
-    "explanation": "The 'prototype' property allows sharing methods and properties across all instances created by a constructor."
-  },
-  {
-    "question": "What is a callback function?",
-    "options": [
-      "A function called immediately when defined",
-      "A function passed as an argument to be called later",
-      "A function that returns another function",
-      "A function used only in classes"
-    ],
-    "answer": "A function passed as an argument to be called later",
+    "answer": "break",
     "difficulty": "Easy",
-    "explanation": "Callbacks are passed to other functions and executed later, commonly used for asynchronous operations."
+    "explanation": "The 'break' keyword immediately exits a while loop, stopping further iterations."
   },
   {
-    "question": "How do you define an async function?\n\n```js\nasync function fetchData() {\n  return await fetch('url');\n}\n```",
+    "question": "What is the main difference between a while loop and a do...while loop?",
     "options": [
-      "The code above is correct",
-      "function async fetchData() {}",
-      "function* fetchData() {}",
-      "await function fetchData() {}"
+      "A do...while loop runs at least once",
+      "A while loop always runs at least once",
+      "A do...while loop cannot use break",
+      "A while loop is faster"
     ],
-    "answer": "The code above is correct",
-    "difficulty": "Medium",
-    "explanation": "Async functions are defined with the 'async' keyword and can use 'await' for asynchronous operations."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nfunction test() {\n  console.log(this);\n}\ntest();\n```",
-    "options": [
-      "The global object (window in browser)",
-      "undefined",
-      "The test function",
-      "An error"
-    ],
-    "answer": "The global object (window in browser)",
-    "difficulty": "Medium",
-    "explanation": "In non-strict mode, 'this' in a regular function refers to the global object (e.g., window in browsers)."
-  },
-  {
-    "question": "Which is NOT a function type in JavaScript?",
-    "options": [
-      "Generator function",
-      "Arrow function",
-      "Class function",
-      "Recursive function"
-    ],
-    "answer": "Class function",
+    "answer": "A do...while loop runs at least once",
     "difficulty": "Easy",
-    "explanation": "Classes have methods, but 'Class function' is not a recognized function type in JavaScript."
+    "explanation": "A do...while loop executes its code block at least once before checking the condition."
   },
   {
-    "question": "What does the 'bind' method do?\n\n```js\nconst obj = { x: 1 };\nconst fn = function() { return this.x; }.bind(obj);\n```",
+    "question": "What is guaranteed in a do...while loop?",
     "options": [
-      "Executes the function immediately",
-      "Creates a new function with a fixed 'this'",
-      "Combines two functions",
-      "Pauses function execution"
+      "The loop runs indefinitely",
+      "The loop executes at least once",
+      "The loop never runs",
+      "The loop requires a counter"
     ],
-    "answer": "Creates a new function with a fixed 'this'",
-    "difficulty": "Medium",
-    "explanation": "'bind' creates a new function with its 'this' set to the provided value, here 'obj'."
-  },
-  {
-    "question": "What does the 'call' method do?\n\n```js\nconst obj = { x: 1 };\nfunction fn() { return this.x; }\nfn.call(obj);\n```",
-    "options": [
-      "Invokes a function with a specified 'this' and arguments",
-      "Creates a new object",
-      "Loops through an array",
-      "Defines a new function"
-    ],
-    "answer": "Invokes a function with a specified 'this' and arguments",
-    "difficulty": "Medium",
-    "explanation": "'call' invokes a function with a given 'this' value and individual arguments."
-  },
-  {
-    "question": "What does the 'apply' method do?\n\n```js\nconst obj = { x: 1 };\nfunction fn(a, b) { return this.x + a + b; }\nfn.apply(obj, [2, 3]);\n```",
-    "options": [
-      "Executes a function with arguments as an array",
-      "Adds a property to an object",
-      "Clones an object",
-      "Defines a recursive function"
-    ],
-    "answer": "Executes a function with arguments as an array",
-    "difficulty": "Medium",
-    "explanation": "'apply' is like 'call' but takes arguments as an array."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst obj = {\n  value: 42,\n  getValue: function() { return this.value; }\n};\nconsole.log(obj.getValue());\n```",
-    "options": [
-      "42",
-      "undefined",
-      "null",
-      "An error"
-    ],
-    "answer": "42",
+    "answer": "The loop executes at least once",
     "difficulty": "Easy",
-    "explanation": "'this' refers to 'obj', so 'getValue' returns the 'value' property (42)."
+    "explanation": "A do...while loop always executes its code block at least once before evaluating the condition."
   },
   {
-    "question": "What is a higher-order function?\n\n```js\nfunction map(arr, fn) {\n  return arr.map(fn);\n}\n```",
+    "question": "Where is the condition checked in a do...while loop?",
     "options": [
-      "A function that takes or returns a function",
-      "A function that runs faster",
-      "A function inside a class",
-      "A function called once"
+      "Before the loop starts",
+      "After the loop executes once",
+      "During the loop execution",
+      "At the end of each iteration"
     ],
-    "answer": "A function that takes or returns a function",
+    "answer": "After the loop executes once",
     "difficulty": "Medium",
-    "explanation": "Higher-order functions either accept functions as arguments or return functions, like 'map'."
+    "explanation": "The condition in a do...while loop is checked after the code block executes, ensuring at least one run."
   },
   {
-    "question": "What does this code return?\n\n```js\nfunction outer() {\n  let x = 10;\n  return function inner() { return x; };\n}\nconst fn = outer();\nconsole.log(fn());\n```",
+    "question": "Where should JavaScript scripts typically be placed in an HTML file for optimal performance?",
     "options": [
-      "10",
-      "undefined",
-      "null",
-      "An error"
+      "In the <head> section",
+      "At the top of the <body> section",
+      "At the bottom of the <body> section",
+      "In a separate CSS file"
     ],
-    "answer": "10",
-    "difficulty": "Medium",
-    "explanation": "The inner function retains access to 'x' via closure, returning 10."
-  },
-  {
-    "question": "What is the purpose of the 'new' keyword?\n\n```js\nfunction Person(name) {\n  this.name = name;\n}\nconst p = new Person('Alice');\n```",
-    "options": [
-      "To create a new variable",
-      "To instantiate an object",
-      "To declare a new function",
-      "To reset object properties"
-    ],
-    "answer": "To instantiate an object",
+    "answer": "At the bottom of the <body> section",
     "difficulty": "Easy",
-    "explanation": "'new' creates a new object with the constructor's prototype."
+    "explanation": "Placing scripts at the bottom of the <body> allows the HTML content to load before the script runs."
   },
   {
-    "question": "Which method creates a shallow copy of an object?\n\n```js\nconst obj = { a: 1 };\nconst copy = Object.assign({}, obj);\n```",
+    "question": "What does the 'defer' attribute do when added to a <script> tag?",
     "options": [
-      "Object.assign()",
-      "Object.create()",
-      "Object.defineProperty()",
-      "Object.keys()"
+      "Executes the script immediately",
+      "Delays script execution until the DOM is fully loaded",
+      "Prevents the script from running",
+      "Loads the script asynchronously without waiting"
     ],
-    "answer": "Object.assign()",
+    "answer": "Delays script execution until the DOM is fully loaded",
     "difficulty": "Medium",
-    "explanation": "'Object.assign()' copies enumerable properties to a target object."
+    "explanation": "The 'defer' attribute ensures the script runs after the HTML is fully parsed."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.forEach(item => console.log(item * 2));\n```",
+    "question": "Which symbol is used for single-line comments in JavaScript?",
     "options": [
-      "2, 4, 6",
-      "[2, 4, 6]",
-      "undefined",
-      "An error"
+      "//",
+      "/* */",
+      "#",
+      "<!-- -->"
     ],
-    "answer": "2, 4, 6",
+    "answer": "//",
     "difficulty": "Easy",
-    "explanation": "'forEach' logs each element multiplied by 2."
+    "explanation": "Single-line comments in JavaScript start with '//' and continue until the end of the line."
   },
   {
-    "question": "What is a Generator function?\n\n```js\nfunction* gen() {\n  yield 1;\n  yield 2;\n}\n```",
+    "question": "How do you write a multi-line comment in JavaScript?",
     "options": [
-      "Generates random numbers",
-      "Pauses and resumes execution",
-      "Runs asynchronously",
-      "Creates objects"
+      "// Comment",
+      "/* Comment */",
+      "# Comment",
+      "<!-- Comment -->"
     ],
-    "answer": "Pauses and resumes execution",
-    "difficulty": "Medium",
-    "explanation": "Generator functions use 'function*' and 'yield' to pause and resume."
-  },
-  {
-    "question": "What does 'Object.keys()' return?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.keys(obj));\n```",
-    "options": [
-      "['a', 'b']",
-      "[1, 2]",
-      "{ a: 1, b: 2 }",
-      "The prototype"
-    ],
-    "answer": "['a', 'b']",
+    "answer": "/* Comment */",
     "difficulty": "Easy",
-    "explanation": "'Object.keys()' returns an array of an object's enumerable property names."
+    "explanation": "Multi-line comments are enclosed within '/*' and '*/' in JavaScript."
   },
   {
-    "question": "What is the purpose of the 'map' method?\n\n```js\nconst arr = [1, 2, 3];\narr.map(x => x * 2);\n```",
+    "question": "Which event is triggered when a user clicks a link?",
     "options": [
-      "Creates a new array with transformed elements",
-      "Loops without returning",
-      "Filters elements",
-      "Sorts an array"
+      "onmouseover",
+      "onclick",
+      "onchange",
+      "onload"
     ],
-    "answer": "Creates a new array with transformed elements",
+    "answer": "onclick",
     "difficulty": "Easy",
-    "explanation": "'map' applies a function to each element and returns a new array."
+    "explanation": "The 'onclick' event fires when a user clicks a link or any element."
   },
   {
-    "question": "What does this code return?\n\n```js\nconst numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);\n```",
+    "question": "How can you prevent the default behavior of a link click event?",
     "options": [
-      "[2, 4, 6]",
-      "[1, 2, 3]",
-      "2, 4, 6",
-      "An error"
+      "event.stopPropagation()",
+      "event.preventDefault()",
+      "event.cancel()",
+      "event.halt()"
     ],
-    "answer": "[2, 4, 6]",
+    "answer": "event.preventDefault()",
+    "difficulty": "Medium",
+    "explanation": "Calling 'event.preventDefault()' stops the default action, such as navigating to a link's href."
+  },
+  {
+    "question": "Which event is triggered when a button is clicked?",
+    "options": [
+      "onfocus",
+      "onclick",
+      "onhover",
+      "onsubmit"
+    ],
+    "answer": "onclick",
     "difficulty": "Easy",
-    "explanation": "'map' creates a new array with each element doubled."
+    "explanation": "The 'onclick' event is triggered when a user clicks a button."
   },
   {
-    "question": "What is the difference between 'let' and 'const' in a function?",
+    "question": "What does the 'ondblclick' event do?",
     "options": [
-      "'let' allows reassignment, 'const' does not",
-      "'const' allows reassignment, 'let' does not",
-      "'let' is block-scoped, 'const' is not",
-      "'const' is hoisted, 'let' is not"
+      "Triggers on a single click",
+      "Triggers on a double click",
+      "Triggers on mouse hover",
+      "Triggers on form submission"
     ],
-    "answer": "'let' allows reassignment, 'const' does not",
+    "answer": "Triggers on a double click",
+    "difficulty": "Medium",
+    "explanation": "The 'ondblclick' event fires when an element is double-clicked."
+  },
+  {
+    "question": "Which mouse event is triggered when the mouse pointer enters an element?",
+    "options": [
+      "onmouseout",
+      "onmouseover",
+      "onmousedown",
+      "onmouseup"
+    ],
+    "answer": "onmouseover",
     "difficulty": "Easy",
-    "explanation": "'let' allows variable reassignment, while 'const' prevents it."
+    "explanation": "The 'onmouseover' event occurs when the mouse pointer enters an element."
   },
   {
-    "question": "What is a closure?\n\n```js\nfunction outer() {\n  let x = 5;\n  return () => x;\n}\n```",
+    "question": "What does the 'onmouseout' event do?",
     "options": [
-      "A function accessing outer scope variables",
-      "A function that runs once",
-      "A function with no parameters",
-      "A function returning an object"
+      "Triggers when the mouse clicks an element",
+      "Triggers when the mouse leaves an element",
+      "Triggers when the mouse moves over an element",
+      "Triggers when the mouse button is pressed"
     ],
-    "answer": "A function accessing outer scope variables",
-    "difficulty": "Medium",
-    "explanation": "Closures allow inner functions to access outer scope variables."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nfunction example() {\n  return () => { console.log('Hello'); };\n}\nconst fn = example();\nfn();\n```",
-    "options": [
-      "Hello",
-      "undefined",
-      "null",
-      "An error"
-    ],
-    "answer": "Hello",
-    "difficulty": "Medium",
-    "explanation": "The inner arrow function logs 'Hello' when executed."
-  },
-  {
-    "question": "What does the 'reduce' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.reduce((acc, curr) => acc + curr, 0);\n```",
-    "options": [
-      "Reduces an array to a single value",
-      "Removes elements",
-      "Sorts an array",
-      "Filters elements"
-    ],
-    "answer": "Reduces an array to a single value",
-    "difficulty": "Medium",
-    "explanation": "'reduce' applies a function to an accumulator and each element."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst sum = nums.reduce((acc, curr) => acc + curr, 0);\nconsole.log(sum);\n```",
-    "options": [
-      "6",
-      "[1, 2, 3]",
-      "0",
-      "An error"
-    ],
-    "answer": "6",
-    "difficulty": "Medium",
-    "explanation": "'reduce' sums all elements starting with an accumulator of 0."
-  },
-  {
-    "question": "What does 'Object.create()' do?\n\n```js\nconst proto = { x: 1 };\nconst obj = Object.create(proto);\n```",
-    "options": [
-      "Creates a new object with specified prototype",
-      "Clones an object",
-      "Creates a new array",
-      "Defines a new function"
-    ],
-    "answer": "Creates a new object with specified prototype",
-    "difficulty": "Medium",
-    "explanation": "'Object.create()' creates an object with the specified prototype."
-  },
-  {
-    "question": "What is the purpose of the 'filter' method?\n\n```js\nconst arr = [1, 2, 3, 4];\narr.filter(n => n % 2 === 0);\n```",
-    "options": [
-      "Creates a new array with elements passing a test",
-      "Transforms elements",
-      "Sorts an array",
-      "Reduces an array"
-    ],
-    "answer": "Creates a new array with elements passing a test",
+    "answer": "Triggers when the mouse leaves an element",
     "difficulty": "Easy",
-    "explanation": "'filter' returns a new array with elements that pass the test."
+    "explanation": "The 'onmouseout' event fires when the mouse pointer leaves an element."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3, 4];\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens);\n```",
+    "question": "Which event is triggered when an input field gains focus?",
     "options": [
-      "[2, 4]",
-      "[1, 3]",
-      "[1, 2, 3, 4]",
-      "An error"
+      "onchange",
+      "onblur",
+      "onfocus",
+      "onselect"
     ],
-    "answer": "[2, 4]",
+    "answer": "onfocus",
     "difficulty": "Easy",
-    "explanation": "'filter' returns even numbers in a new array."
+    "explanation": "The 'onfocus' event occurs when an input field or element gains focus."
   },
   {
-    "question": "What does 'Object.defineProperty()' do?\n\n```js\nconst obj = {};\nObject.defineProperty(obj, 'x', { value: 42, writable: false });\n```",
+    "question": "What does the 'onchange' event do for form fields?",
     "options": [
-      "Defines or modifies a property",
-      "Creates a new object",
-      "Deletes a property",
-      "Returns property names"
+      "Triggers when the field is clicked",
+      "Triggers when the field's value changes and loses focus",
+      "Triggers when the field gains focus",
+      "Triggers when the form is submitted"
     ],
-    "answer": "Defines or modifies a property",
+    "answer": "Triggers when the field's value changes and loses focus",
     "difficulty": "Medium",
-    "explanation": "'Object.defineProperty()' sets or modifies property attributes."
+    "explanation": "The 'onchange' event fires when a field's value changes and it loses focus."
   },
   {
-    "question": "What is a pure function?",
+    "question": "How do you read the value of an input field with id='myInput'?",
     "options": [
-      "Returns same output for same input, no side effects",
-      "Modifies global variables",
-      "Runs asynchronously",
-      "Returns another function"
+      "document.getElementById('myInput').value",
+      "document.querySelector('myInput').value",
+      "document.getElementById('myInput').text",
+      "document.getElementById('myInput').innerHTML"
     ],
-    "answer": "Returns same output for same input, no side effects",
-    "difficulty": "Medium",
-    "explanation": "Pure functions are predictable and don't affect external state."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst obj = {};\nObject.defineProperty(obj, 'prop', { value: 42, writable: false });\nobj.prop = 100;\nconsole.log(obj.prop);\n```",
-    "options": [
-      "42",
-      "100",
-      "undefined",
-      "An error"
-    ],
-    "answer": "42",
-    "difficulty": "Medium",
-    "explanation": "'writable: false' prevents reassignment, so 'prop' remains 42."
-  },
-  {
-    "question": "What does the 'some' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.some(n => n % 2 === 0);\n```",
-    "options": [
-      "Checks if at least one element passes a test",
-      "Transforms elements",
-      "Sums elements",
-      "Filters duplicates"
-    ],
-    "answer": "Checks if at least one element passes a test",
-    "difficulty": "Medium",
-    "explanation": "'some' returns true if at least one element passes the test."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst nums = [1, 2, 3];\nconst hasEven = nums.some(n => n % 2 === 0);\nconsole.log(hasEven);\n```",
-    "options": [
-      "true",
-      "false",
-      "[2]",
-      "An error"
-    ],
-    "answer": "true",
+    "answer": "document.getElementById('myInput').value",
     "difficulty": "Easy",
-    "explanation": "'some' returns true because 2 is even."
+    "explanation": "The 'value' property retrieves the current value of an input field."
   },
   {
-    "question": "What is the purpose of the 'every' method?\n\n```js\nconst arr = [2, 4, 6];\narr.every(n => n % 2 === 0);\n```",
+    "question": "How can you set the value of an input field with id='myInput' to 'Hello'?",
     "options": [
-      "Checks if all elements pass a test",
-      "Transforms elements",
-      "Reduces an array",
-      "Sorts an array"
+      "document.getElementById('myInput').value = 'Hello';",
+      "document.getElementById('myInput').text = 'Hello';",
+      "document.getElementById('myInput').innerHTML = 'Hello';",
+      "document.querySelector('myInput').value = 'Hello';"
     ],
-    "answer": "Checks if all elements pass a test",
-    "difficulty": "Medium",
-    "explanation": "'every' returns true if all elements pass the test."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst nums = [2, 4, 6];\nconst allEven = nums.every(n => n % 2 === 0);\nconsole.log(allEven);\n```",
-    "options": [
-      "true",
-      "false",
-      "[2, 4, 6]",
-      "An error"
-    ],
-    "answer": "true",
+    "answer": "document.getElementById('myInput').value = 'Hello';",
     "difficulty": "Easy",
-    "explanation": "'every' returns true because all elements are even."
+    "explanation": "The 'value' property is used to set the value of an input field."
   },
   {
-    "question": "What does 'Object.freeze()' do?\n\n```js\nconst obj = Object.freeze({ x: 1 });\nobj.x = 2;\n```",
+    "question": "How do you read the text content of a paragraph with id='myPara'?",
     "options": [
-      "Prevents object modifications",
-      "Creates a new object",
-      "Clones an object",
-      "Removes properties"
+      "document.getElementById('myPara').value",
+      "document.getElementById('myPara').innerHTML",
+      "document.getElementById('myPara').textContent",
+      "document.querySelector('myPara').text"
     ],
-    "answer": "Prevents object modifications",
-    "difficulty": "Medium",
-    "explanation": "'Object.freeze()' makes an object immutable."
+    "answer": "document.getElementById('myPara').textContent",
+    "difficulty": "Easy",
+    "explanation": "'textContent' retrieves the text content of an element, excluding HTML tags."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nconst obj = Object.freeze({ x: 1 });\nobj.x = 2;\nconsole.log(obj.x);\n```",
+    "question": "How do you set the text content of a paragraph with id='myPara' to 'New Text'?",
+    "options": [
+      "document.getElementById('myPara').value = 'New Text';",
+      "document.getElementById('myPara').innerHTML = 'New Text';",
+      "document.getElementById('myPara').textContent = 'New Text';",
+      "document.getElementById('myPara').setText('New Text');"
+    ],
+    "answer": "document.getElementById('myPara').textContent = 'New Text';",
+    "difficulty": "Easy",
+    "explanation": "'textContent' sets the text content of an element without interpreting HTML."
+  },
+  {
+    "question": "How can you change the src attribute of an image with id='myImage'?",
+    "options": [
+      "document.getElementById('myImage').src = 'new.jpg';",
+      "document.getElementById('myImage').image = 'new.jpg';",
+      "document.getElementById('myImage').setSrc('new.jpg');",
+      "document.querySelector('myImage').src = 'new.jpg';"
+    ],
+    "answer": "document.getElementById('myImage').src = 'new.jpg';",
+    "difficulty": "Easy",
+    "explanation": "The 'src' property is used to change the source of an image element."
+  },
+  {
+    "question": "What is a common way to swap images on a mouseover event?",
+    "options": [
+      "Change the image's class",
+      "Change the image's src attribute",
+      "Change the image's textContent",
+      "Change the image's innerHTML"
+    ],
+    "answer": "Change the image's src attribute",
+    "difficulty": "Medium",
+    "explanation": "Swapping images typically involves changing the 'src' attribute to a new image URL."
+  },
+  {
+    "question": "How do you swap an image and add a class to it?",
+    "options": [
+      "element.src = 'new.jpg'; element.classList.add('newClass');",
+      "element.src = 'new.jpg'; element.className = 'newClass';",
+      "element.image = 'new.jpg'; element.classList.add('newClass');",
+      "element.src = 'new.jpg'; element.addClass('newClass');"
+    ],
+    "answer": "element.src = 'new.jpg'; element.classList.add('newClass');",
+    "difficulty": "Medium",
+    "explanation": "Use 'src' to swap the image and 'classList.add' to apply a class."
+  },
+  {
+    "question": "How do you set the CSS style of an element with id='myElement' to have a red background?",
+    "options": [
+      "document.getElementById('myElement').style.backgroundColor = 'red';",
+      "document.getElementById('myElement').css.background = 'red';",
+      "document.getElementById('myElement').style = 'red';",
+      "document.getElementById('myElement').background = 'red';"
+    ],
+    "answer": "document.getElementById('myElement').style.backgroundColor = 'red';",
+    "difficulty": "Easy",
+    "explanation": "The 'style' property is used to set CSS properties, such as 'backgroundColor'."
+  },
+  {
+    "question": "How do you select all <p> elements in a document?",
+    "options": [
+      "document.querySelector('p')",
+      "document.getElementsByTagName('p')",
+      "document.getElementById('p')",
+      "document.querySelectorAll('p')"
+    ],
+    "answer": "document.querySelectorAll('p')",
+    "difficulty": "Easy",
+    "explanation": "'querySelectorAll' returns a NodeList of all elements matching the tag name."
+  },
+  {
+    "question": "How do you select some <div> elements with a specific class 'myClass'?",
+    "options": [
+      "document.getElementsByClassName('myClass')",
+      "document.querySelector('div.myClass')",
+      "document.getElementsByTagName('div.myClass')",
+      "document.querySelectorAll('div.myClass')"
+    ],
+    "answer": "document.querySelectorAll('div.myClass')",
+    "difficulty": "Medium",
+    "explanation": "'querySelectorAll' selects all <div> elements with the class 'myClass'."
+  },
+  {
+    "question": "What does the DOM represent in JavaScript?",
+    "options": [
+      "Document Object Model",
+      "Data Object Model",
+      "Dynamic Object Method",
+      "Document Order Model"
+    ],
+    "answer": "Document Object Model",
+    "difficulty": "Easy",
+    "explanation": "The DOM is a programming interface for HTML and XML documents, representing their structure."
+  },
+  {
+    "question": "In the DOM, what is a parent element?",
+    "options": [
+      "An element inside another element",
+      "An element containing other elements",
+      "The first element in the document",
+      "An element with no attributes"
+    ],
+    "answer": "An element containing other elements",
+    "difficulty": "Easy",
+    "explanation": "A parent element contains child elements in the DOM hierarchy."
+  },
+  {
+    "question": "How do you access the first child of an element in the DOM?",
+    "options": [
+      "element.firstChild",
+      "element.childNodes[0]",
+      "element.children[0]",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "Medium",
+    "explanation": "'firstChild', 'childNodes[0]', and 'children[0]' can all access the first child, though 'children' excludes non-element nodes."
+  },
+  {
+    "question": "What is the purpose of the nodeType property in the DOM?",
+    "options": [
+      "To identify the type of a node",
+      "To count the number of nodes",
+      "To set the node’s value",
+      "To change the node’s style"
+    ],
+    "answer": "To identify the type of a node",
+    "difficulty": "Medium",
+    "explanation": "The 'nodeType' property returns a number indicating the type of node, such as 1 for elements or 3 for text."
+  },
+  {
+    "question": "Which nodeType value represents an element node?",
     "options": [
       "1",
-      "2",
-      "undefined",
-      "An error"
+      "3",
+      "8",
+      "9"
     ],
     "answer": "1",
     "difficulty": "Medium",
-    "explanation": "'Object.freeze()' prevents changes, so 'x' remains 1."
+    "explanation": "A 'nodeType' of 1 indicates an element node in the DOM."
   },
   {
-    "question": "What is a method in JavaScript?\n\n```js\nconst obj = { fn: function() { return 'hi'; } };\n```",
+    "question": "How can you target an element by its class name in the DOM?",
     "options": [
-      "A function that is an object property",
-      "A function that runs asynchronously",
-      "A function that returns a function",
-      "A function with no arguments"
+      "document.getElementById('class')",
+      "document.querySelector('.className')",
+      "document.getElementsByTagName('class')",
+      "document.querySelector('#className')"
     ],
-    "answer": "A function that is an object property",
+    "answer": "document.querySelector('.className')",
     "difficulty": "Easy",
-    "explanation": "Methods are functions defined as object properties."
+    "explanation": "'querySelector' with a '.' prefix targets elements by class name."
   },
   {
-    "question": "What does the 'slice' method do?\n\n```js\nconst arr = [1, 2, 3, 4];\narr.slice(1, 3);\n```",
+    "question": "How do you get the tag name of a DOM element?",
     "options": [
-      "Returns a shallow copy of a portion",
-      "Removes elements",
-      "Adds elements",
-      "Sorts an array"
+      "element.tagName",
+      "element.nodeName",
+      "element.name",
+      "Both element.tagName and element.nodeName"
     ],
-    "answer": "Returns a shallow copy of a portion",
+    "answer": "Both element.tagName and element.nodeName",
+    "difficulty": "Medium",
+    "explanation": "Both 'tagName' and 'nodeName' return the tag name of an element, in uppercase for HTML."
+  },
+  {
+    "question": "How can you count the number of <div> elements in a document?",
+    "options": [
+      "document.getElementsByTagName('div').length",
+      "document.querySelector('div').count",
+      "document.getElementsByClassName('div').length",
+      "document.querySelectorAll('div').count"
+    ],
+    "answer": "document.getElementsByTagName('div').length",
     "difficulty": "Easy",
-    "explanation": "'slice' returns a new array with elements from start to end indices."
+    "explanation": "'getElementsByTagName' returns a collection, and 'length' gives the count."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3, 4];\nconsole.log(arr.slice(1, 3));\n```",
+    "question": "How do you check if an element has a specific attribute?",
     "options": [
-      "[2, 3]",
-      "[1, 2, 3]",
-      "[3, 4]",
-      "An error"
+      "element.hasAttribute('attr')",
+      "element.getAttribute('attr')",
+      "element.attribute('attr')",
+      "element.checkAttribute('attr')"
     ],
-    "answer": "[2, 3]",
+    "answer": "element.hasAttribute('attr')",
+    "difficulty": "Medium",
+    "explanation": "'hasAttribute' returns true if the element has the specified attribute."
+  },
+  {
+    "question": "How do you get the value of an attribute from an element?",
+    "options": [
+      "element.getAttribute('attr')",
+      "element.attribute('attr')",
+      "element.getProperty('attr')",
+      "element.value('attr')"
+    ],
+    "answer": "element.getAttribute('attr')",
     "difficulty": "Easy",
-    "explanation": "'slice(1, 3)' returns elements from index 1 to 2."
+    "explanation": "'getAttribute' retrieves the value of a specified attribute."
   },
   {
-    "question": "What does the 'splice' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.splice(1, 1, 5);\n```",
+    "question": "How do you add a new div element to the DOM?",
     "options": [
-      "Modifies an array by adding/removing elements",
-      "Creates a shallow copy",
-      "Filters elements",
-      "Maps elements"
+      "document.createElement('div')",
+      "document.newElement('div')",
+      "document.addElement('div')",
+      "document.createNode('div')"
     ],
-    "answer": "Modifies an array by adding/removing elements",
-    "difficulty": "Medium",
-    "explanation": "'splice' changes the original array by adding or removing elements."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\narr.splice(1, 1, 5);\nconsole.log(arr);\n```",
-    "options": [
-      "[1, 5, 3]",
-      "[1, 2, 3]",
-      "[1, 5]",
-      "An error"
-    ],
-    "answer": "[1, 5, 3]",
-    "difficulty": "Medium",
-    "explanation": "'splice(1, 1, 5)' removes 1 element at index 1 and inserts 5."
-  },
-  {
-    "question": "What does 'Object.entries()' do?\n\n```js\nconst obj = { a: 1, b: 2 };\nObject.entries(obj);\n```",
-    "options": [
-      "Returns key-value pair arrays",
-      "Creates a new object",
-      "Deletes properties",
-      "Returns object values"
-    ],
-    "answer": "Returns key-value pair arrays",
-    "difficulty": "Medium",
-    "explanation": "'Object.entries()' returns an array of key-value pair arrays."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.entries(obj));\n```",
-    "options": [
-      "[['a', 1], ['b', 2]]",
-      "{ a: 1, b: 2 }",
-      "['a', 'b']",
-      "[1, 2]"
-    ],
-    "answer": "[['a', 1], ['b', 2]]",
-    "difficulty": "Medium",
-    "explanation": "'Object.entries()' returns an array of key-value pair arrays."
-  },
-  {
-    "question": "What does the 'find' method do?\n\n```js\nconst arr = [1, 2, 3];\narr.find(n => n > 1);\n```",
-    "options": [
-      "Returns the first element passing a test",
-      "Returns all elements passing a test",
-      "Transforms an array",
-      "Sorts an array"
-    ],
-    "answer": "Returns the first element passing a test",
+    "answer": "document.createElement('div')",
     "difficulty": "Easy",
-    "explanation": "'find' returns the first element that satisfies the function."
+    "explanation": "'createElement' creates a new element node with the specified tag name."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nconst arr = [1, 2, 3];\nconst found = arr.find(n => n > 1);\nconsole.log(found);\n```",
+    "question": "How do you insert a new node as a child of an existing element?",
     "options": [
-      "2",
-      "[2, 3]",
+      "parent.appendChild(newNode)",
+      "parent.insertChild(newNode)",
+      "parent.addNode(newNode)",
+      "parent.append(newNode)"
+    ],
+    "answer": "parent.appendChild(newNode)",
+    "difficulty": "Medium",
+    "explanation": "'appendChild' adds a new node as the last child of the parent element."
+  },
+  {
+    "question": "What does the 'insertBefore' method do in the DOM?",
+    "options": [
+      "Inserts a node after a reference node",
+      "Inserts a node before a reference node",
+      "Replaces a node",
+      "Removes a node"
+    ],
+    "answer": "Inserts a node before a reference node",
+    "difficulty": "Medium",
+    "explanation": "'insertBefore' inserts a new node before a specified child node in the parent."
+  },
+  {
+    "question": "What is a common use of comments in JavaScript code?",
+    "options": [
+      "To execute code faster",
+      "To explain or document the code",
+      "To style the webpage",
+      "To create loops"
+    ],
+    "answer": "To explain or document the code",
+    "difficulty": "Easy",
+    "explanation": "Comments are used to add explanations or notes to make code more readable."
+  },
+  {
+    "question": "Which event is triggered when a user presses a key in an input field?",
+    "options": [
+      "onkeypress",
+      "onclick",
+      "onchange",
+      "onfocus"
+    ],
+    "answer": "onkeypress",
+    "difficulty": "Medium",
+    "explanation": "The 'onkeypress' event fires when a key is pressed in an input field."
+  },
+  {
+    "question": "How do you set the innerHTML of an element with id='myDiv' to '<p>Hello</p>'?",
+    "options": [
+      "document.getElementById('myDiv').textContent = '<p>Hello</p>';",
+      "document.getElementById('myDiv').innerHTML = '<p>Hello</p>';",
+      "document.getElementById('myDiv').value = '<p>Hello</p>';",
+      "document.getElementById('myDiv').html = '<p>Hello</p>';"
+    ],
+    "answer": "document.getElementById('myDiv').innerHTML = '<p>Hello</p>';",
+    "difficulty": "Easy",
+    "explanation": "'innerHTML' sets the HTML content of an element, parsing the string as HTML."
+  },
+  {
+    "question": "What happens when you use 'querySelector' with a non-existent selector?",
+    "options": [
+      "Returns null",
+      "Throws an error",
+      "Returns an empty array",
+      "Returns undefined"
+    ],
+    "answer": "Returns null",
+    "difficulty": "Medium",
+    "explanation": "'querySelector' returns null if no element matches the selector."
+  },
+  {
+    "question": "How do you access the parent element of a node in the DOM?",
+    "options": [
+      "node.parentNode",
+      "node.parentElement",
+      "node.getParent()",
+      "Both node.parentNode and node.parentElement"
+    ],
+    "answer": "Both node.parentNode and node.parentElement",
+    "difficulty": "Medium",
+    "explanation": "Both 'parentNode' and 'parentElement' return the parent, but 'parentElement' returns null for non-element parents."
+  },
+  {
+    "question": "Which method removes a child node from the DOM?",
+    "options": [
+      "parent.removeChild(child)",
+      "child.removeNode()",
+      "parent.deleteChild(child)",
+      "child.remove()"
+    ],
+    "answer": "parent.removeChild(child)",
+    "difficulty": "Medium",
+    "explanation": "'removeChild' removes a specified child node from its parent."
+  },
+  {
+    "question": "What does the 'children' property of an element return?",
+    "options": [
+      "All child nodes including text and comments",
+      "Only element child nodes",
+      "All parent nodes",
+      "Only text nodes"
+    ],
+    "answer": "Only element child nodes",
+    "difficulty": "Medium",
+    "explanation": "The 'children' property returns a collection of only element child nodes."
+  },
+  {
+    "question": "How do you set multiple classes to an element?",
+    "options": [
+      "element.className = 'class1 class2';",
+      "element.classList.add('class1', 'class2');",
+      "Both of the above",
+      "element.setClass('class1 class2');"
+    ],
+    "answer": "Both of the above",
+    "difficulty": "Medium",
+    "explanation": "'className' sets all classes as a string, while 'classList.add' adds individual classes."
+  },
+  {
+    "question": "What is the nodeType value for a text node?",
+    "options": [
       "1",
-      "undefined"
+      "3",
+      "8",
+      "9"
     ],
-    "answer": "2",
-    "difficulty": "Easy",
-    "explanation": "'find' returns the first element greater than 1, which is 2."
-  },
-  {
-    "question": "What does 'Object.values()' do?\n\n```js\nconst obj = { a: 1, b: 2 };\nObject.values(obj);\n```",
-    "options": [
-      "Returns an array of object values",
-      "Returns an array of keys",
-      "Creates a new object",
-      "Freezes an object"
-    ],
-    "answer": "Returns an array of object values",
-    "difficulty": "Easy",
-    "explanation": "'Object.values()' returns an array of the object's enumerable values."
-  },
-  {
-    "question": "What is the output of this code?\n\n```js\nconst obj = { a: 1, b: 2 };\nconsole.log(Object.values(obj));\n```",
-    "options": [
-      "[1, 2]",
-      "['a', 'b']",
-      "{ a: 1, b: 2 }",
-      "An error"
-    ],
-    "answer": "[1, 2]",
-    "difficulty": "Easy",
-    "explanation": "'Object.values()' returns the object's values in an array."
-  },
-  {
-    "question": "What is a factory function?\n\n```js\nfunction createPerson(name) {\n  return { name };\n}\n```",
-    "options": [
-      "A function that returns a new object",
-      "A function that creates an array",
-      "A function that modifies global scope",
-      "A function that runs asynchronously"
-    ],
-    "answer": "A function that returns a new object",
+    "answer": "3",
     "difficulty": "Medium",
-    "explanation": "Factory functions create and return objects without 'new'."
+    "explanation": "A 'nodeType' of 3 indicates a text node in the DOM."
   },
   {
-    "question": "What is the output of this code?\n\n```js\nfunction createPerson(name) {\n  return { name };\n}\nconst person = createPerson('Alice');\nconsole.log(person.name);\n```",
+    "question": "How do you check if an element has a specific class?",
     "options": [
-      "Alice",
-      "undefined",
-      "null",
-      "An error"
+      "element.classList.contains('className')",
+      "element.className.includes('className')",
+      "element.hasClass('className')",
+      "element.getClass('className')"
     ],
-    "answer": "Alice",
+    "answer": "element.classList.contains('className')",
+    "difficulty": "Medium",
+    "explanation": "'classList.contains' checks if an element has a specific class."
+  },
+  {
+    "question": "How do you create a text node in the DOM?",
+    "options": [
+      "document.createTextNode('text')",
+      "document.createText('text')",
+      "document.newTextNode('text')",
+      "document.addText('text')"
+    ],
+    "answer": "document.createTextNode('text')",
+    "difficulty": "Medium",
+    "explanation": "'createTextNode' creates a new text node with the specified text."
+  },
+  {
+    "question": "What does the 'getElementsByClassName' method return?",
+    "options": [
+      "A single element",
+      "A NodeList of elements",
+      "An array of elements",
+      "A single class name"
+    ],
+    "answer": "A NodeList of elements",
     "difficulty": "Easy",
-    "explanation": "The factory function returns an object with a 'name' property."
+    "explanation": "'getElementsByClassName' returns a live NodeList of elements with the specified class."
+  },
+  {
+    "question": "How do you toggle a class on an element?",
+    "options": [
+      "element.classList.toggle('className')",
+      "element.className.toggle('className')",
+      "element.toggleClass('className')",
+      "element.switchClass('className')"
+    ],
+    "answer": "element.classList.toggle('className')",
+    "difficulty": "Medium",
+    "explanation": "'classList.toggle' adds a class if absent or removes it if present."
+  },
+  {
+    "question": "What is the purpose of the 'setAttribute' method?",
+    "options": [
+      "To remove an attribute",
+      "To add or update an attribute",
+      "To get an attribute value",
+      "To check if an attribute exists"
+    ],
+    "answer": "To add or update an attribute",
+    "difficulty": "Easy",
+    "explanation": "'setAttribute' sets the value of a specified attribute on an element."
+  },
+  {
+    "question": "How do you replace an existing node with a new node in the DOM?",
+    "options": [
+      "parent.replaceChild(newNode, oldNode)",
+      "parent.swapNode(newNode, oldNode)",
+      "parent.replaceNode(newNode, oldNode)",
+      "parent.changeChild(newNode, oldNode)"
+    ],
+    "answer": "parent.replaceChild(newNode, oldNode)",
+    "difficulty": "Medium",
+    "explanation": "'replaceChild' replaces an existing child node with a new node."
+  },
+  {
+    "question": "What does the 'querySelectorAll' method return?",
+    "options": [
+      "A single element",
+      "A NodeList of elements",
+      "An array of elements",
+      "A single node"
+    ],
+    "answer": "A NodeList of elements",
+    "difficulty": "Easy",
+    "explanation": "'querySelectorAll' returns a static NodeList of all elements matching the selector."
   }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
@@ -1039,5 +1087,6 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
