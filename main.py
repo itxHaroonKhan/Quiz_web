@@ -7,688 +7,1000 @@ import uuid
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz =[
   {
-    "question": "What is the primary purpose of a while loop in JavaScript?",
+    "question": "What is the purpose of a while loop in JavaScript?",
     "options": [
-      "To execute a block of code a fixed number of times",
-      "To execute a block of code as long as a condition is true",
+      "To execute code once",
+      "To repeat code while a condition is true",
       "To define a function",
       "To create an array"
     ],
-    "answer": "To execute a block of code as long as a condition is true",
+    "answer": "To repeat code while a condition is true",
     "difficulty": "Easy",
-    "explanation": "A while loop continues to execute its block of code as long as the specified condition evaluates to true."
+    "explanation": "A while loop repeatedly executes a block of code as long as its condition evaluates to true."
   },
   {
     "question": "What happens if the condition in a while loop is never false?",
     "options": [
-      "The loop runs once",
-      "The loop causes an infinite loop",
-      "The loop skips the code block",
-      "The loop throws an error"
+      "The loop executes once",
+      "The loop becomes infinite",
+      "The loop skips execution",
+      "The code throws an error"
     ],
-    "answer": "The loop causes an infinite loop",
-    "difficulty": "Easy",
-    "explanation": "If the condition in a while loop never becomes false, it will run indefinitely, causing an infinite loop."
+    "answer": "The loop becomes infinite",
+    "difficulty": "Medium",
+    "explanation": "If the condition never becomes false, the while loop runs indefinitely, potentially causing the program to hang."
   },
   {
-    "question": "Which keyword can be used to exit a while loop prematurely?",
+    "question": "Which keyword is used to exit a while loop prematurely?",
     "options": [
-      "continue",
-      "break",
       "return",
+      "break",
+      "continue",
       "exit"
     ],
     "answer": "break",
     "difficulty": "Easy",
-    "explanation": "The 'break' keyword immediately exits a while loop, stopping further iterations."
+    "explanation": "The 'break' statement immediately exits the loop, stopping further iterations."
   },
   {
-    "question": "What is the main difference between a while loop and a do...while loop?",
+    "question": "What does the 'continue' statement do in a while loop?",
     "options": [
-      "A do...while loop runs at least once",
-      "A while loop always runs at least once",
-      "A do...while loop cannot use break",
-      "A while loop is faster"
+      "Stops the loop entirely",
+      "Skips the current iteration and continues with the next",
+      "Restarts the loop",
+      "Throws an error"
     ],
-    "answer": "A do...while loop runs at least once",
+    "answer": "Skips the current iteration and continues with the next",
+    "difficulty": "Medium",
+    "explanation": "The 'continue' statement skips the rest of the current iteration and evaluates the loop's condition again."
+  },
+  {
+    "question": "What is the output of: let i = 0; while (i < 3) { console.log(i); i++; }?",
+    "options": [
+      "0 1 2",
+      "1 2 3",
+      "0 1 2 3",
+      "Nothing is output"
+    ],
+    "answer": "0 1 2",
     "difficulty": "Easy",
+    "explanation": "The loop runs while i < 3, logging 0, 1, and 2, and increments i each iteration."
+  },
+  {
+    "question": "What is the correct syntax for an if statement in JavaScript?",
+    "options": [
+      "if (condition) { code }",
+      "if condition { code }",
+      "if { condition } code",
+      "if: condition { code }"
+    ],
+    "answer": "if (condition) { code }",
+    "difficulty": "Easy",
+    "explanation": "An if statement uses the syntax 'if (condition) { code }' to execute code if the condition is true."
+  },
+  {
+    "question": "Which comparison operator checks for equality without type conversion?",
+    "options": [
+      "==",
+      "===",
+      "!=",
+      "!=="
+    ],
+    "answer": "===",
+    "difficulty": "Easy",
+    "explanation": "The '===' operator checks for strict equality, comparing both value and type."
+  },
+  {
+    "question": "What does the 'else if' statement do?",
+    "options": [
+      "Executes code if the previous condition is true",
+      "Tests a new condition if the previous if condition is false",
+      "Repeats the loop",
+      "Stops the program"
+    ],
+    "answer": "Tests a new condition if the previous if condition is false",
+    "difficulty": "Medium",
+    "explanation": "An 'else if' statement allows testing additional conditions if the previous if or else if conditions are false."
+  },
+  {
+    "question": "How do you combine multiple conditions in an if statement?",
+    "options": [
+      "Using + or -",
+      "Using && or ||",
+      "Using * or /",
+      "Using = or !="
+    ],
+    "answer": "Using && or ||",
+    "difficulty": "Easy",
+    "explanation": "The logical operators '&&' (AND) and '||' (OR) combine multiple conditions in an if statement."
+  },
+  {
+    "question": "What is the purpose of nested if statements?",
+    "options": [
+      "To repeat code multiple times",
+      "To check conditions within conditions",
+      "To define a function",
+      "To create an array"
+    ],
+    "answer": "To check conditions within conditions",
+    "difficulty": "Medium",
+    "explanation": "Nested if statements allow you to evaluate additional conditions inside an if block."
+  },
+  {
+    "question": "How do you create an array in JavaScript?",
+    "options": [
+      "let arr = [];",
+      "let arr = {};",
+      "let arr = ();",
+      "let arr = <>;"
+    ],
+    "answer": "let arr = [];",
+    "difficulty": "Easy",
+    "explanation": "Arrays in JavaScript are created using square brackets '[]' to define a list of elements."
+  },
+  {
+    "question": "Which method adds an element to the end of an array?",
+    "options": [
+      "push()",
+      "pop()",
+      "shift()",
+      "unshift()"
+    ],
+    "answer": "push()",
+    "difficulty": "Easy",
+    "explanation": "The 'push()' method adds one or more elements to the end of an array."
+  },
+  {
+    "question": "How do you remove the first element from an array?",
+    "options": [
+      "pop()",
+      "shift()",
+      "splice()",
+      "slice()"
+    ],
+    "answer": "shift()",
+    "difficulty": "Easy",
+    "explanation": "The 'shift()' method removes and returns the first element of an array."
+  },
+  {
+    "question": "What does the splice() method do?",
+    "options": [
+      "Extracts a portion of an array",
+      "Adds/removes elements at a specific index",
+      "Reverses the array",
+      "Joins array elements into a string"
+    ],
+    "answer": "Adds/removes elements at a specific index",
+    "difficulty": "Medium",
+    "explanation": "The 'splice()' method can add or remove elements at a specified index in an array."
+  },
+  {
+    "question": "What is the syntax for a for loop in JavaScript?",
+    "options": [
+      "for (init; condition; update) { code }",
+      "for { init; condition; update } code",
+      "for (condition) { code }",
+      "for: init; condition; update { code }"
+    ],
+    "answer": "for (init; condition; update) { code }",
+    "difficulty": "Easy",
+    "explanation": "A for loop uses the syntax 'for (initialization; condition; update) { code }' to repeat code."
+  },
+  {
+    "question": "What does the 'break' statement do in a for loop?",
+    "options": [
+      "Skips the current iteration",
+      "Exits the loop entirely",
+      "Restarts the loop",
+      "Pauses the loop"
+    ],
+    "answer": "Exits the loop entirely",
+    "difficulty": "Easy",
+    "explanation": "The 'break' statement terminates the for loop immediately."
+  },
+  {
+    "question": "What is the purpose of a nested for loop?",
+    "options": [
+      "To iterate over multiple arrays or dimensions",
+      "To define a function",
+      "To create an object",
+      "To stop the program"
+    ],
+    "answer": "To iterate over multiple arrays or dimensions",
+    "difficulty": "Medium",
+    "explanation": "Nested for loops are used to iterate over multi-dimensional data, like arrays within arrays."
+  },
+  {
+    "question": "How do you convert a string to uppercase in JavaScript?",
+    "options": [
+      "toUpperCase()",
+      "toLowerCase()",
+      "upperCase()",
+      "toUpper()"
+    ],
+    "answer": "toUpperCase()",
+    "difficulty": "Easy",
+    "explanation": "The 'toUpperCase()' method converts all characters in a string to uppercase."
+  },
+  {
+    "question": "How do you find the length of a string in JavaScript?",
+    "options": [
+      "string.size",
+      "string.length",
+      "string.count",
+      "string.len"
+    ],
+    "answer": "string.length",
+    "difficulty": "Easy",
+    "explanation": "The 'length' property returns the number of characters in a string."
+  },
+  {
+    "question": "Which method finds the first occurrence of a substring in a string?",
+    "options": [
+      "indexOf()",
+      "search()",
+      "find()",
+      "includes()"
+    ],
+    "answer": "indexOf()",
+    "difficulty": "Easy",
+    "explanation": "The 'indexOf()' method returns the index of the first occurrence of a substring or -1 if not found."
+  },
+  {
+    "question": "How do you get the character at a specific index in a string?",
+    "options": [
+      "charAt()",
+      "getChar()",
+      "characterAt()",
+      "char()"
+    ],
+    "answer": "charAt()",
+    "difficulty": "Easy",
+    "explanation": "The 'charAt()' method returns the character at a specified index in a string."
+  },
+  {
+    "question": "Which method replaces the first occurrence of a substring in a string?",
+    "options": [
+      "replace()",
+      "swap()",
+      "change()",
+      "substitute()"
+    ],
+    "answer": "replace()",
+    "difficulty": "Easy",
+    "explanation": "The 'replace()' method replaces the first occurrence of a substring with a new value."
+  },
+  {
+    "question": "How do you round a number to the nearest integer in JavaScript?",
+    "options": [
+      "Math.round()",
+      "Math.floor()",
+      "Math.ceil()",
+      "Math.trunc()"
+    ],
+    "answer": "Math.round()",
+    "difficulty": "Easy",
+    "explanation": "The 'Math.round()' method rounds a number to the nearest integer."
+  },
+  {
+    "question": "How do you generate a random number between 0 and 1 in JavaScript?",
+    "options": [
+      "Math.random()",
+      "Math.rand()",
+      "Random()",
+      "Math.generate()"
+    ],
+    "answer": "Math.random()",
+    "difficulty": "Easy",
+    "explanation": "The 'Math.random()' method returns a random number between 0 (inclusive) and 1 (exclusive)."
+  },
+  {
+    "question": "How do you convert a string to an integer in JavaScript?",
+    "options": [
+      "parseInt()",
+      "parseFloat()",
+      "toString()",
+      "Number()"
+    ],
+    "answer": "parseInt()",
+    "difficulty": "Easy",
+    "explanation": "The 'parseInt()' function converts a string to an integer, parsing until a non-numeric character is encountered."
+  },
+  {
+    "question": "How do you convert a number to a string in JavaScript?",
+    "options": [
+      "toString()",
+      "parseString()",
+      "convertString()",
+      "stringify()"
+    ],
+    "answer": "toString()",
+    "difficulty": "Easy",
+    "explanation": "The 'toString()' method converts a number to a string."
+  },
+  {
+    "question": "How do you limit the number of decimal places in a number?",
+    "options": [
+      "toFixed()",
+      "toPrecision()",
+      "round()",
+      "limit()"
+    ],
+    "answer": "toFixed()",
+    "difficulty": "Easy",
+    "explanation": "The 'toFixed()' method formats a number to a specified number of decimal places and returns it as a string."
+  },
+  {
+    "question": "How do you get the current date and time in JavaScript?",
+    "options": [
+      "new Date()",
+      "Date.now()",
+      "getDate()",
+      "new Time()"
+    ],
+    "answer": "new Date()",
+    "difficulty": "Easy",
+    "explanation": "The 'new Date()' constructor creates a Date object representing the current date and time."
+  },
+  {
+    "question": "How do you extract the year from a Date object?",
+    "options": [
+      "getFullYear()",
+      "getYear()",
+      "getDate()",
+      "getMonth()"
+    ],
+    "answer": "getFullYear()",
+    "difficulty": "Easy",
+    "explanation": "The 'getFullYear()' method returns the four-digit year of a Date object."
+  },
+  {
+    "question": "How do you create a Date object for a specific date?",
+    "options": [
+      "new Date('YYYY-MM-DD')",
+      "new Date('MM-DD-YYYY')",
+      "Date.create('YYYY-MM-DD')",
+      "new Date(YYYY, MM, DD)"
+    ],
+    "answer": "new Date('YYYY-MM-DD')",
+    "difficulty": "Medium",
+    "explanation": "A Date object can be created using a string like 'YYYY-MM-DD' or by passing year, month, and day as arguments."
+  },
+  {
+    "question": "How do you set the year of a Date object?",
+    "options": [
+      "setFullYear()",
+      "setYear()",
+      "changeYear()",
+      "updateYear()"
+    ],
+    "answer": "setFullYear()",
+    "difficulty": "Medium",
+    "explanation": "The 'setFullYear()' method sets the year of a Date object."
+  },
+  {
+    "question": "What is the purpose of a function in JavaScript?",
+    "options": [
+      "To store data",
+      "To repeat code",
+      "To perform a specific task",
+      "To create arrays"
+    ],
+    "answer": "To perform a specific task",
+    "difficulty": "Easy",
+    "explanation": "Functions are reusable blocks of code designed to perform a specific task."
+  },
+  {
+    "question": "How do you pass data to a function?",
+    "options": [
+      "Using parameters",
+      "Using global variables",
+      "Using arrays",
+      "Using objects"
+    ],
+    "answer": "Using parameters",
+    "difficulty": "Easy",
+    "explanation": "Data is passed to functions through parameters defined in the function declaration."
+  },
+  {
+    "question": "How do you return a value from a function?",
+    "options": [
+      "Using return",
+      "Using break",
+      "Using continue",
+      "Using yield"
+    ],
+    "answer": "Using return",
+    "difficulty": "Easy",
+    "explanation": "The 'return' statement sends a value back from a function and ends its execution."
+  },
+  {
+    "question": "What is a local variable in a function?",
+    "options": [
+      "A variable accessible globally",
+      "A variable defined inside a function",
+      "A variable defined outside a function",
+      "A variable passed as a parameter"
+    ],
+    "answer": "A variable defined inside a function",
+    "difficulty": "Medium",
+    "explanation": "Local variables are defined inside a function and are only accessible within that function's scope."
+  },
+  {
+    "question": "How do you start a switch statement in JavaScript?",
+    "options": [
+      "switch (expression) {",
+      "switch { expression }",
+      "case (expression):",
+      "switch: expression {"
+    ],
+    "answer": "switch (expression) {",
+    "difficulty": "Easy",
+    "explanation": "A switch statement starts with 'switch (expression) {' followed by case clauses."
+  },
+  {
+    "question": "What is required to complete a switch statement?",
+    "options": [
+      "A default case",
+      "A break statement",
+      "A case clause",
+      "Both break and default"
+    ],
+    "answer": "Both break and default",
+    "difficulty": "Medium",
+    "explanation": "A switch statement typically includes 'break' to exit cases and a 'default' case for unmatched values."
+  },
+  {
+    "question": "What is the difference between a while and a do...while loop?",
+    "options": [
+      "do...while executes at least once",
+      "while executes at least once",
+      "do...while uses a for loop",
+      "They are identical"
+    ],
+    "answer": "do...while executes at least once",
+    "difficulty": "Medium",
     "explanation": "A do...while loop executes its code block at least once before checking the condition."
   },
   {
-    "question": "What is guaranteed in a do...while loop?",
+    "question": "Where should JavaScript scripts be placed in an HTML file?",
     "options": [
-      "The loop runs indefinitely",
-      "The loop executes at least once",
-      "The loop never runs",
-      "The loop requires a counter"
-    ],
-    "answer": "The loop executes at least once",
-    "difficulty": "Easy",
-    "explanation": "A do...while loop always executes its code block at least once before evaluating the condition."
-  },
-  {
-    "question": "Where is the condition checked in a do...while loop?",
-    "options": [
-      "Before the loop starts",
-      "After the loop executes once",
-      "During the loop execution",
-      "At the end of each iteration"
-    ],
-    "answer": "After the loop executes once",
-    "difficulty": "Medium",
-    "explanation": "The condition in a do...while loop is checked after the code block executes, ensuring at least one run."
-  },
-  {
-    "question": "Where should JavaScript scripts typically be placed in an HTML file for optimal performance?",
-    "options": [
-      "In the <head> section",
-      "At the top of the <body> section",
-      "At the bottom of the <body> section",
+      "Inside the <head> tag",
+      "At the bottom of the <body> tag",
+      "Anywhere in the HTML file",
       "In a separate CSS file"
     ],
-    "answer": "At the bottom of the <body> section",
+    "answer": "At the bottom of the <body> tag",
     "difficulty": "Easy",
-    "explanation": "Placing scripts at the bottom of the <body> allows the HTML content to load before the script runs."
+    "explanation": "Placing scripts at the bottom of <body> ensures the DOM is loaded before execution."
   },
   {
-    "question": "What does the 'defer' attribute do when added to a <script> tag?",
-    "options": [
-      "Executes the script immediately",
-      "Delays script execution until the DOM is fully loaded",
-      "Prevents the script from running",
-      "Loads the script asynchronously without waiting"
-    ],
-    "answer": "Delays script execution until the DOM is fully loaded",
-    "difficulty": "Medium",
-    "explanation": "The 'defer' attribute ensures the script runs after the HTML is fully parsed."
-  },
-  {
-    "question": "Which symbol is used for single-line comments in JavaScript?",
-    "options": [
-      "//",
-      "/* */",
-      "#",
-      "<!-- -->"
-    ],
-    "answer": "//",
-    "difficulty": "Easy",
-    "explanation": "Single-line comments in JavaScript start with '//' and continue until the end of the line."
-  },
-  {
-    "question": "How do you write a multi-line comment in JavaScript?",
+    "question": "How do you write a single-line comment in JavaScript?",
     "options": [
       "// Comment",
       "/* Comment */",
-      "# Comment",
-      "<!-- Comment -->"
+      "<!-- Comment -->",
+      "# Comment"
     ],
-    "answer": "/* Comment */",
+    "answer": "// Comment",
     "difficulty": "Easy",
-    "explanation": "Multi-line comments are enclosed within '/*' and '*/' in JavaScript."
+    "explanation": "Single-line comments in JavaScript start with '//'."
   },
   {
-    "question": "Which event is triggered when a user clicks a link?",
+    "question": "How do you add a click event to a link in JavaScript?",
     "options": [
-      "onmouseover",
-      "onclick",
-      "onchange",
-      "onload"
+      "addEventListener('click', handler)",
+      "onClick(handler)",
+      "attachEvent('click', handler)",
+      "eventClick(handler)"
     ],
-    "answer": "onclick",
-    "difficulty": "Easy",
-    "explanation": "The 'onclick' event fires when a user clicks a link or any element."
-  },
-  {
-    "question": "How can you prevent the default behavior of a link click event?",
-    "options": [
-      "event.stopPropagation()",
-      "event.preventDefault()",
-      "event.cancel()",
-      "event.halt()"
-    ],
-    "answer": "event.preventDefault()",
+    "answer": "addEventListener('click', handler)",
     "difficulty": "Medium",
-    "explanation": "Calling 'event.preventDefault()' stops the default action, such as navigating to a link's href."
+    "explanation": "The 'addEventListener()' method attaches a click event handler to a link."
   },
   {
-    "question": "Which event is triggered when a button is clicked?",
+    "question": "How do you handle a button click event in JavaScript?",
     "options": [
-      "onfocus",
-      "onclick",
-      "onhover",
-      "onsubmit"
+      "button.addEventListener('click', handler)",
+      "button.onClick(handler)",
+      "button.event('click', handler)",
+      "button.click(handler)"
     ],
-    "answer": "onclick",
-    "difficulty": "Easy",
-    "explanation": "The 'onclick' event is triggered when a user clicks a button."
-  },
-  {
-    "question": "What does the 'ondblclick' event do?",
-    "options": [
-      "Triggers on a single click",
-      "Triggers on a double click",
-      "Triggers on mouse hover",
-      "Triggers on form submission"
-    ],
-    "answer": "Triggers on a double click",
+    "answer": "button.addEventListener('click', handler)",
     "difficulty": "Medium",
-    "explanation": "The 'ondblclick' event fires when an element is double-clicked."
+    "explanation": "The 'addEventListener()' method is used to handle button click events."
   },
   {
-    "question": "Which mouse event is triggered when the mouse pointer enters an element?",
+    "question": "Which event is triggered when a mouse hovers over an element?",
     "options": [
-      "onmouseout",
-      "onmouseover",
-      "onmousedown",
-      "onmouseup"
+      "mouseover",
+      "click",
+      "mousemove",
+      "mouseout"
     ],
-    "answer": "onmouseover",
+    "answer": "mouseover",
     "difficulty": "Easy",
-    "explanation": "The 'onmouseover' event occurs when the mouse pointer enters an element."
+    "explanation": "The 'mouseover' event is triggered when the mouse pointer enters an element."
   },
   {
-    "question": "What does the 'onmouseout' event do?",
+    "question": "How do you handle a change event in a form field?",
     "options": [
-      "Triggers when the mouse clicks an element",
-      "Triggers when the mouse leaves an element",
-      "Triggers when the mouse moves over an element",
-      "Triggers when the mouse button is pressed"
+      "addEventListener('change', handler)",
+      "onChange(handler)",
+      "field.change(handler)",
+      "eventChange(handler)"
     ],
-    "answer": "Triggers when the mouse leaves an element",
-    "difficulty": "Easy",
-    "explanation": "The 'onmouseout' event fires when the mouse pointer leaves an element."
-  },
-  {
-    "question": "Which event is triggered when an input field gains focus?",
-    "options": [
-      "onchange",
-      "onblur",
-      "onfocus",
-      "onselect"
-    ],
-    "answer": "onfocus",
-    "difficulty": "Easy",
-    "explanation": "The 'onfocus' event occurs when an input field or element gains focus."
-  },
-  {
-    "question": "What does the 'onchange' event do for form fields?",
-    "options": [
-      "Triggers when the field is clicked",
-      "Triggers when the field's value changes and loses focus",
-      "Triggers when the field gains focus",
-      "Triggers when the form is submitted"
-    ],
-    "answer": "Triggers when the field's value changes and loses focus",
+    "answer": "addEventListener('change', handler)",
     "difficulty": "Medium",
-    "explanation": "The 'onchange' event fires when a field's value changes and it loses focus."
+    "explanation": "The 'change' event is handled using 'addEventListener()' for form fields like inputs."
   },
   {
-    "question": "How do you read the value of an input field with id='myInput'?",
+    "question": "How do you read the value of a text input field?",
     "options": [
-      "document.getElementById('myInput').value",
-      "document.querySelector('myInput').value",
-      "document.getElementById('myInput').text",
-      "document.getElementById('myInput').innerHTML"
+      "input.value",
+      "input.text",
+      "input.content",
+      "input.innerText"
     ],
-    "answer": "document.getElementById('myInput').value",
+    "answer": "input.value",
     "difficulty": "Easy",
-    "explanation": "The 'value' property retrieves the current value of an input field."
+    "explanation": "The 'value' property retrieves the current value of a text input field."
   },
   {
-    "question": "How can you set the value of an input field with id='myInput' to 'Hello'?",
+    "question": "How do you set the value of a text input field?",
     "options": [
-      "document.getElementById('myInput').value = 'Hello';",
-      "document.getElementById('myInput').text = 'Hello';",
-      "document.getElementById('myInput').innerHTML = 'Hello';",
-      "document.querySelector('myInput').value = 'Hello';"
+      "input.value = 'new value'",
+      "input.text = 'new value'",
+      "input.setValue('new value')",
+      "input.innerText = 'new value'"
     ],
-    "answer": "document.getElementById('myInput').value = 'Hello';",
+    "answer": "input.value = 'new value'",
     "difficulty": "Easy",
-    "explanation": "The 'value' property is used to set the value of an input field."
+    "explanation": "The 'value' property is used to set the value of a text input field."
   },
   {
-    "question": "How do you read the text content of a paragraph with id='myPara'?",
+    "question": "How do you set the text content of a paragraph element?",
     "options": [
-      "document.getElementById('myPara').value",
-      "document.getElementById('myPara').innerHTML",
-      "document.getElementById('myPara').textContent",
-      "document.querySelector('myPara').text"
+      "p.textContent = 'text'",
+      "p.value = 'text'",
+      "p.innerHTML = 'text'",
+      "Both p.textContent and p.innerHTML"
     ],
-    "answer": "document.getElementById('myPara').textContent",
-    "difficulty": "Easy",
-    "explanation": "'textContent' retrieves the text content of an element, excluding HTML tags."
-  },
-  {
-    "question": "How do you set the text content of a paragraph with id='myPara' to 'New Text'?",
-    "options": [
-      "document.getElementById('myPara').value = 'New Text';",
-      "document.getElementById('myPara').innerHTML = 'New Text';",
-      "document.getElementById('myPara').textContent = 'New Text';",
-      "document.getElementById('myPara').setText('New Text');"
-    ],
-    "answer": "document.getElementById('myPara').textContent = 'New Text';",
-    "difficulty": "Easy",
-    "explanation": "'textContent' sets the text content of an element without interpreting HTML."
-  },
-  {
-    "question": "How can you change the src attribute of an image with id='myImage'?",
-    "options": [
-      "document.getElementById('myImage').src = 'new.jpg';",
-      "document.getElementById('myImage').image = 'new.jpg';",
-      "document.getElementById('myImage').setSrc('new.jpg');",
-      "document.querySelector('myImage').src = 'new.jpg';"
-    ],
-    "answer": "document.getElementById('myImage').src = 'new.jpg';",
-    "difficulty": "Easy",
-    "explanation": "The 'src' property is used to change the source of an image element."
-  },
-  {
-    "question": "What is a common way to swap images on a mouseover event?",
-    "options": [
-      "Change the image's class",
-      "Change the image's src attribute",
-      "Change the image's textContent",
-      "Change the image's innerHTML"
-    ],
-    "answer": "Change the image's src attribute",
+    "answer": "Both p.textContent and p.innerHTML",
     "difficulty": "Medium",
-    "explanation": "Swapping images typically involves changing the 'src' attribute to a new image URL."
+    "explanation": "Both 'textContent' and 'innerHTML' can set a paragraph's text, but 'innerHTML' allows HTML tags."
   },
   {
-    "question": "How do you swap an image and add a class to it?",
+    "question": "How do you change the source of an image element?",
     "options": [
-      "element.src = 'new.jpg'; element.classList.add('newClass');",
-      "element.src = 'new.jpg'; element.className = 'newClass';",
-      "element.image = 'new.jpg'; element.classList.add('newClass');",
-      "element.src = 'new.jpg'; element.addClass('newClass');"
+      "img.src = 'new.jpg'",
+      "img.source = 'new.jpg'",
+      "img.setSrc('new.jpg')",
+      "img.image = 'new.jpg'"
     ],
-    "answer": "element.src = 'new.jpg'; element.classList.add('newClass');",
-    "difficulty": "Medium",
-    "explanation": "Use 'src' to swap the image and 'classList.add' to apply a class."
-  },
-  {
-    "question": "How do you set the CSS style of an element with id='myElement' to have a red background?",
-    "options": [
-      "document.getElementById('myElement').style.backgroundColor = 'red';",
-      "document.getElementById('myElement').css.background = 'red';",
-      "document.getElementById('myElement').style = 'red';",
-      "document.getElementById('myElement').background = 'red';"
-    ],
-    "answer": "document.getElementById('myElement').style.backgroundColor = 'red';",
+    "answer": "img.src = 'new.jpg'",
     "difficulty": "Easy",
-    "explanation": "The 'style' property is used to set CSS properties, such as 'backgroundColor'."
+    "explanation": "The 'src' property sets the source URL of an image element."
   },
   {
-    "question": "How do you select all <p> elements in a document?",
+    "question": "How do you swap an image by changing its class?",
     "options": [
-      "document.querySelector('p')",
-      "document.getElementsByTagName('p')",
-      "document.getElementById('p')",
-      "document.querySelectorAll('p')"
+      "img.className = 'new-class'",
+      "img.class = 'new-class'",
+      "img.setClass('new-class')",
+      "img.style = 'new-class'"
     ],
-    "answer": "document.querySelectorAll('p')",
-    "difficulty": "Easy",
-    "explanation": "'querySelectorAll' returns a NodeList of all elements matching the tag name."
-  },
-  {
-    "question": "How do you select some <div> elements with a specific class 'myClass'?",
-    "options": [
-      "document.getElementsByClassName('myClass')",
-      "document.querySelector('div.myClass')",
-      "document.getElementsByTagName('div.myClass')",
-      "document.querySelectorAll('div.myClass')"
-    ],
-    "answer": "document.querySelectorAll('div.myClass')",
+    "answer": "img.className = 'new-class'",
     "difficulty": "Medium",
-    "explanation": "'querySelectorAll' selects all <div> elements with the class 'myClass'."
+    "explanation": "The 'className' property changes an element's class, which can swap an image if styled via CSS."
   },
   {
-    "question": "What does the DOM represent in JavaScript?",
+    "question": "How do you set an element's inline style in JavaScript?",
     "options": [
-      "Document Object Model",
-      "Data Object Model",
-      "Dynamic Object Method",
-      "Document Order Model"
+      "element.style.property = 'value'",
+      "element.setStyle('property', 'value')",
+      "element.css('property', 'value')",
+      "element.style = 'property: value'"
     ],
-    "answer": "Document Object Model",
+    "answer": "element.style.property = 'value'",
     "difficulty": "Easy",
-    "explanation": "The DOM is a programming interface for HTML and XML documents, representing their structure."
+    "explanation": "The 'style' property is used to set inline CSS properties, like 'element.style.color = 'red''."
   },
   {
-    "question": "In the DOM, what is a parent element?",
+    "question": "How do you select all elements by tag name?",
     "options": [
-      "An element inside another element",
-      "An element containing other elements",
-      "The first element in the document",
-      "An element with no attributes"
+      "document.getElementsByTagName()",
+      "document.querySelectorAll()",
+      "document.getElementsByClassName()",
+      "document.getElementById()"
     ],
-    "answer": "An element containing other elements",
+    "answer": "document.getElementsByTagName()",
     "difficulty": "Easy",
-    "explanation": "A parent element contains child elements in the DOM hierarchy."
+    "explanation": "'getElementsByTagName()' selects all elements with the specified tag name."
   },
   {
-    "question": "How do you access the first child of an element in the DOM?",
+    "question": "How do you select some elements by tag name using querySelectorAll?",
     "options": [
-      "element.firstChild",
-      "element.childNodes[0]",
-      "element.children[0]",
-      "All of the above"
+      "document.querySelectorAll('tag')",
+      "document.getElementsByTag('tag')",
+      "document.querySelector('tag')",
+      "document.selectTag('tag')"
     ],
-    "answer": "All of the above",
+    "answer": "document.querySelectorAll('tag')",
     "difficulty": "Medium",
-    "explanation": "'firstChild', 'childNodes[0]', and 'children[0]' can all access the first child, though 'children' excludes non-element nodes."
+    "explanation": "'querySelectorAll('tag')' selects all elements with the specified tag name."
   },
   {
-    "question": "What is the purpose of the nodeType property in the DOM?",
+    "question": "What is the DOM in JavaScript?",
     "options": [
-      "To identify the type of a node",
-      "To count the number of nodes",
-      "To set the node’s value",
-      "To change the node’s style"
+      "A programming interface for HTML documents",
+      "A database for storing data",
+      "A JavaScript library",
+      "A type of loop"
     ],
-    "answer": "To identify the type of a node",
-    "difficulty": "Medium",
-    "explanation": "The 'nodeType' property returns a number indicating the type of node, such as 1 for elements or 3 for text."
-  },
-  {
-    "question": "Which nodeType value represents an element node?",
-    "options": [
-      "1",
-      "3",
-      "8",
-      "9"
-    ],
-    "answer": "1",
-    "difficulty": "Medium",
-    "explanation": "A 'nodeType' of 1 indicates an element node in the DOM."
-  },
-  {
-    "question": "How can you target an element by its class name in the DOM?",
-    "options": [
-      "document.getElementById('class')",
-      "document.querySelector('.className')",
-      "document.getElementsByTagName('class')",
-      "document.querySelector('#className')"
-    ],
-    "answer": "document.querySelector('.className')",
+    "answer": "A programming interface for HTML documents",
     "difficulty": "Easy",
-    "explanation": "'querySelector' with a '.' prefix targets elements by class name."
+    "explanation": "The DOM (Document Object Model) is a programming interface for manipulating HTML documents."
+  },
+  {
+    "question": "What is the parentNode property in the DOM?",
+    "options": [
+      "The first child of an element",
+      "The parent element of a node",
+      "The next sibling of an element",
+      "The root of the document"
+    ],
+    "answer": "The parent element of a node",
+    "difficulty": "Medium",
+    "explanation": "The 'parentNode' property returns the parent node of a given DOM element."
+  },
+  {
+    "question": "How do you find the children of a DOM element?",
+    "options": [
+      "element.children",
+      "element.childNodes",
+      "element.getChildren()",
+      "Both element.children and element.childNodes"
+    ],
+    "answer": "Both element.children and element.childNodes",
+    "difficulty": "Medium",
+    "explanation": "'children' returns HTML elements, while 'childNodes' includes all nodes (e.g., text nodes)."
+  },
+  {
+    "question": "What is the nodeType property used for in the DOM?",
+    "options": [
+      "To get the element's ID",
+      "To identify the type of node",
+      "To count child nodes",
+      "To set the node’s style"
+    ],
+    "answer": "To identify the type of node",
+    "difficulty": "Medium",
+    "explanation": "The 'nodeType' property returns a number indicating the type of node (e.g., 1 for elements, 3 for text)."
+  },
+  {
+    "question": "How do you select an element by its class name in the DOM?",
+    "options": [
+      "document.getElementsByClassName()",
+      "document.getElementById()",
+      "document.querySelector('.class')",
+      "Both getElementsByClassName and querySelector"
+    ],
+    "answer": "Both getElementsByClassName and querySelector",
+    "difficulty": "Medium",
+    "explanation": "Both methods can select elements by class; 'querySelector' uses CSS selector syntax."
   },
   {
     "question": "How do you get the tag name of a DOM element?",
     "options": [
       "element.tagName",
-      "element.nodeName",
       "element.name",
-      "Both element.tagName and element.nodeName"
+      "element.type",
+      "element.id"
     ],
-    "answer": "Both element.tagName and element.nodeName",
+    "answer": "element.tagName",
+    "difficulty": "Easy",
+    "explanation": "The 'tagName' property returns the tag name of a DOM element in uppercase."
+  },
+  {
+    "question": "How do you count the number of child elements in a DOM node?",
+    "options": [
+      "element.children.length",
+      "element.childNodes.length",
+      "element.countChildren()",
+      "Both children.length and childNodes.length"
+    ],
+    "answer": "Both children.length and childNodes.length",
     "difficulty": "Medium",
-    "explanation": "Both 'tagName' and 'nodeName' return the tag name of an element, in uppercase for HTML."
+    "explanation": "'children.length' counts HTML elements, while 'childNodes.length' counts all nodes."
   },
   {
-    "question": "How can you count the number of <div> elements in a document?",
+    "question": "How do you get an element’s attribute in the DOM?",
     "options": [
-      "document.getElementsByTagName('div').length",
-      "document.querySelector('div').count",
-      "document.getElementsByClassName('div').length",
-      "document.querySelectorAll('div').count"
+      "element.getAttribute('name')",
+      "element.attribute('name')",
+      "element.getAttr('name')",
+      "element.name"
     ],
-    "answer": "document.getElementsByTagName('div').length",
+    "answer": "element.getAttribute('name')",
     "difficulty": "Easy",
-    "explanation": "'getElementsByTagName' returns a collection, and 'length' gives the count."
+    "explanation": "The 'getAttribute()' method retrieves the value of a specified attribute."
   },
   {
-    "question": "How do you check if an element has a specific attribute?",
+    "question": "How do you add a new node to the DOM?",
     "options": [
-      "element.hasAttribute('attr')",
-      "element.getAttribute('attr')",
-      "element.attribute('attr')",
-      "element.checkAttribute('attr')"
+      "document.createElement()",
+      "document.addNode()",
+      "document.newElement()",
+      "document.append()"
     ],
-    "answer": "element.hasAttribute('attr')",
+    "answer": "document.createElement()",
     "difficulty": "Medium",
-    "explanation": "'hasAttribute' returns true if the element has the specified attribute."
+    "explanation": "'createElement()' creates a new element node, which can then be added to the DOM."
   },
   {
-    "question": "How do you get the value of an attribute from an element?",
+    "question": "How do you insert a node before another in the DOM?",
     "options": [
-      "element.getAttribute('attr')",
-      "element.attribute('attr')",
-      "element.getProperty('attr')",
-      "element.value('attr')"
-    ],
-    "answer": "element.getAttribute('attr')",
-    "difficulty": "Easy",
-    "explanation": "'getAttribute' retrieves the value of a specified attribute."
-  },
-  {
-    "question": "How do you add a new div element to the DOM?",
-    "options": [
-      "document.createElement('div')",
-      "document.newElement('div')",
-      "document.addElement('div')",
-      "document.createNode('div')"
-    ],
-    "answer": "document.createElement('div')",
-    "difficulty": "Easy",
-    "explanation": "'createElement' creates a new element node with the specified tag name."
-  },
-  {
-    "question": "How do you insert a new node as a child of an existing element?",
-    "options": [
+      "parent.insertBefore(newNode, referenceNode)",
       "parent.appendChild(newNode)",
-      "parent.insertChild(newNode)",
-      "parent.addNode(newNode)",
-      "parent.append(newNode)"
+      "parent.replaceChild(newNode)",
+      "parent.addBefore(newNode)"
     ],
-    "answer": "parent.appendChild(newNode)",
+    "answer": "parent.insertBefore(newNode, referenceNode)",
     "difficulty": "Medium",
-    "explanation": "'appendChild' adds a new node as the last child of the parent element."
+    "explanation": "'insertBefore()' inserts a new node before a specified reference node."
   },
   {
-    "question": "What does the 'insertBefore' method do in the DOM?",
+    "question": "What is an object in JavaScript?",
     "options": [
-      "Inserts a node after a reference node",
-      "Inserts a node before a reference node",
-      "Replaces a node",
-      "Removes a node"
+      "A collection of properties",
+      "A type of loop",
+      "A function declaration",
+      "An array of numbers"
     ],
-    "answer": "Inserts a node before a reference node",
-    "difficulty": "Medium",
-    "explanation": "'insertBefore' inserts a new node before a specified child node in the parent."
-  },
-  {
-    "question": "What is a common use of comments in JavaScript code?",
-    "options": [
-      "To execute code faster",
-      "To explain or document the code",
-      "To style the webpage",
-      "To create loops"
-    ],
-    "answer": "To explain or document the code",
+    "answer": "A collection of properties",
     "difficulty": "Easy",
-    "explanation": "Comments are used to add explanations or notes to make code more readable."
+    "explanation": "An object is a data structure that stores key-value pairs, known as properties."
   },
   {
-    "question": "Which event is triggered when a user presses a key in an input field?",
+    "question": "How do you access an object’s property in JavaScript?",
     "options": [
-      "onkeypress",
-      "onclick",
-      "onchange",
-      "onfocus"
+      "object.property or object['property']",
+      "object(property)",
+      "object.getProperty()",
+      "object::property"
     ],
-    "answer": "onkeypress",
-    "difficulty": "Medium",
-    "explanation": "The 'onkeypress' event fires when a key is pressed in an input field."
-  },
-  {
-    "question": "How do you set the innerHTML of an element with id='myDiv' to '<p>Hello</p>'?",
-    "options": [
-      "document.getElementById('myDiv').textContent = '<p>Hello</p>';",
-      "document.getElementById('myDiv').innerHTML = '<p>Hello</p>';",
-      "document.getElementById('myDiv').value = '<p>Hello</p>';",
-      "document.getElementById('myDiv').html = '<p>Hello</p>';"
-    ],
-    "answer": "document.getElementById('myDiv').innerHTML = '<p>Hello</p>';",
+    "answer": "object.property or object['property']",
     "difficulty": "Easy",
-    "explanation": "'innerHTML' sets the HTML content of an element, parsing the string as HTML."
+    "explanation": "Properties can be accessed using dot notation or bracket notation."
   },
   {
-    "question": "What happens when you use 'querySelector' with a non-existent selector?",
+    "question": "What is a method in a JavaScript object?",
     "options": [
-      "Returns null",
-      "Throws an error",
-      "Returns an empty array",
-      "Returns undefined"
+      "A function stored as a property",
+      "A loop inside an object",
+      "A variable inside an object",
+      "A class definition"
     ],
-    "answer": "Returns null",
+    "answer": "A function stored as a property",
     "difficulty": "Medium",
-    "explanation": "'querySelector' returns null if no element matches the selector."
+    "explanation": "A method is a function assigned to an object’s property, allowing the object to perform actions."
   },
   {
-    "question": "How do you access the parent element of a node in the DOM?",
+    "question": "What is an object constructor in JavaScript?",
     "options": [
-      "node.parentNode",
-      "node.parentElement",
-      "node.getParent()",
-      "Both node.parentNode and node.parentElement"
+      "A function used to create objects",
+      "A loop for creating objects",
+      "A property of an object",
+      "An array of objects"
     ],
-    "answer": "Both node.parentNode and node.parentElement",
+    "answer": "A function used to create objects",
     "difficulty": "Medium",
-    "explanation": "Both 'parentNode' and 'parentElement' return the parent, but 'parentElement' returns null for non-element parents."
+    "explanation": "A constructor is a function used with the 'new' keyword to create and initialize objects."
   },
   {
-    "question": "Which method removes a child node from the DOM?",
+    "question": "How do you add a method to an object constructor?",
     "options": [
-      "parent.removeChild(child)",
-      "child.removeNode()",
-      "parent.deleteChild(child)",
-      "child.remove()"
+      "Inside the constructor function",
+      "Using a loop",
+      "Using an array",
+      "Using a prototype"
     ],
-    "answer": "parent.removeChild(child)",
+    "answer": "Both inside the constructor and using a prototype",
     "difficulty": "Medium",
-    "explanation": "'removeChild' removes a specified child node from its parent."
+    "explanation": "Methods can be defined inside the constructor or added to the prototype for shared functionality."
   },
   {
-    "question": "What does the 'children' property of an element return?",
+    "question": "What is the purpose of a prototype in JavaScript?",
     "options": [
-      "All child nodes including text and comments",
-      "Only element child nodes",
-      "All parent nodes",
-      "Only text nodes"
+      "To add shared properties/methods to objects",
+      "To create loops",
+      "To store arrays",
+      "To define variables"
     ],
-    "answer": "Only element child nodes",
+    "answer": "To add shared properties/methods to objects",
     "difficulty": "Medium",
-    "explanation": "The 'children' property returns a collection of only element child nodes."
+    "explanation": "Prototypes allow objects created by a constructor to share properties and methods."
   },
   {
-    "question": "How do you set multiple classes to an element?",
+    "question": "How do you check if a property exists in an object?",
     "options": [
-      "element.className = 'class1 class2';",
-      "element.classList.add('class1', 'class2');",
-      "Both of the above",
-      "element.setClass('class1 class2');"
+      "object.hasOwnProperty('property')",
+      "object.exists('property')",
+      "object.propertyExists('property')",
+      "object.checkProperty('property')"
     ],
-    "answer": "Both of the above",
+    "answer": "object.hasOwnProperty('property')",
     "difficulty": "Medium",
-    "explanation": "'className' sets all classes as a string, while 'classList.add' adds individual classes."
+    "explanation": "'hasOwnProperty()' checks if an object has a specific property as its own, not inherited."
   },
   {
-    "question": "What is the nodeType value for a text node?",
+    "question": "How do you get the current URL of a webpage?",
     "options": [
-      "1",
-      "3",
-      "8",
-      "9"
+      "window.location.href",
+      "document.url",
+      "window.url",
+      "location.getURL()"
     ],
-    "answer": "3",
-    "difficulty": "Medium",
-    "explanation": "A 'nodeType' of 3 indicates a text node in the DOM."
-  },
-  {
-    "question": "How do you check if an element has a specific class?",
-    "options": [
-      "element.classList.contains('className')",
-      "element.className.includes('className')",
-      "element.hasClass('className')",
-      "element.getClass('className')"
-    ],
-    "answer": "element.classList.contains('className')",
-    "difficulty": "Medium",
-    "explanation": "'classList.contains' checks if an element has a specific class."
-  },
-  {
-    "question": "How do you create a text node in the DOM?",
-    "options": [
-      "document.createTextNode('text')",
-      "document.createText('text')",
-      "document.newTextNode('text')",
-      "document.addText('text')"
-    ],
-    "answer": "document.createTextNode('text')",
-    "difficulty": "Medium",
-    "explanation": "'createTextNode' creates a new text node with the specified text."
-  },
-  {
-    "question": "What does the 'getElementsByClassName' method return?",
-    "options": [
-      "A single element",
-      "A NodeList of elements",
-      "An array of elements",
-      "A single class name"
-    ],
-    "answer": "A NodeList of elements",
+    "answer": "window.location.href",
     "difficulty": "Easy",
-    "explanation": "'getElementsByClassName' returns a live NodeList of elements with the specified class."
+    "explanation": "'window.location.href' returns the full URL of the current webpage."
   },
   {
-    "question": "How do you toggle a class on an element?",
+    "question": "How do you set a new URL for the current page?",
     "options": [
-      "element.classList.toggle('className')",
-      "element.className.toggle('className')",
-      "element.toggleClass('className')",
-      "element.switchClass('className')"
+      "window.location.href = 'new-url'",
+      "document.url = 'new-url'",
+      "window.setURL('new-url')",
+      "location.navigate('new-url')"
     ],
-    "answer": "element.classList.toggle('className')",
+    "answer": "window.location.href = 'new-url'",
     "difficulty": "Medium",
-    "explanation": "'classList.toggle' adds a class if absent or removes it if present."
+    "explanation": "Setting 'window.location.href' navigates the browser to a new URL."
   },
   {
-    "question": "What is the purpose of the 'setAttribute' method?",
+    "question": "How do you go back to the previous page in the browser?",
     "options": [
-      "To remove an attribute",
-      "To add or update an attribute",
-      "To get an attribute value",
-      "To check if an attribute exists"
+      "window.history.back()",
+      "window.location.back()",
+      "history.goBack()",
+      "document.back()"
     ],
-    "answer": "To add or update an attribute",
-    "difficulty": "Easy",
-    "explanation": "'setAttribute' sets the value of a specified attribute on an element."
-  },
-  {
-    "question": "How do you replace an existing node with a new node in the DOM?",
-    "options": [
-      "parent.replaceChild(newNode, oldNode)",
-      "parent.swapNode(newNode, oldNode)",
-      "parent.replaceNode(newNode, oldNode)",
-      "parent.changeChild(newNode, oldNode)"
-    ],
-    "answer": "parent.replaceChild(newNode, oldNode)",
+    "answer": "window.history.back()",
     "difficulty": "Medium",
-    "explanation": "'replaceChild' replaces an existing child node with a new node."
+    "explanation": "'window.history.back()' navigates to the previous page in the browser’s history."
   },
   {
-    "question": "What does the 'querySelectorAll' method return?",
+    "question": "How do you make an element fill the browser window?",
     "options": [
-      "A single element",
-      "A NodeList of elements",
-      "An array of elements",
-      "A single node"
+      "element.style.width = '100vw'; element.style.height = '100vh'",
+      "element.style.width = '100%'; element.style.height = '100%'",
+      "element.setSize('full')",
+      "element.style.fullscreen = true"
     ],
-    "answer": "A NodeList of elements",
-    "difficulty": "Easy",
-    "explanation": "'querySelectorAll' returns a static NodeList of all elements matching the selector."
+    "answer": "element.style.width = '100vw'; element.style.height = '100vh'",
+    "difficulty": "Medium",
+    "explanation": "Using '100vw' and '100vh' sets an element’s size to the full viewport width and height."
+  },
+  {
+    "question": "How do you resize the browser window?",
+    "options": [
+      "window.resizeTo(width, height)",
+      "window.setSize(width, height)",
+      "window.resize(width, height)",
+      "document.resize(width, height)"
+    ],
+    "answer": "window.resizeTo(width, height)",
+    "difficulty": "Medium",
+    "explanation": "'window.resizeTo()' sets the browser window to a specific width and height."
+  },
+  {
+    "question": "How do you test for popup blockers in JavaScript?",
+    "options": [
+      "Check if window.open() returns null",
+      "Use window.popupTest()",
+      "Check document.popupBlocked",
+      "Use window.isBlocked()"
+    ],
+    "answer": "Check if window.open() returns null",
+    "difficulty": "Hard",
+    "explanation": "If 'window.open()' returns null, it indicates a popup blocker prevented the window from opening."
+  },
+  {
+    "question": "How do you validate a text field to ensure it’s not empty?",
+    "options": [
+      "if (input.value.trim() === '')",
+      "if (input.text === '')",
+      "if (input.value === null)",
+      "if (input.empty())"
+    ],
+    "answer": "if (input.value.trim() === '')",
+    "difficulty": "Medium",
+    "explanation": "Use 'trim()' to remove whitespace and check if the input’s value is an empty string."
+  },
+  {
+    "question": "How do you validate a dropdown selection?",
+    "options": [
+      "Check if select.value is not empty",
+      "Check if select.selectedIndex >= 0",
+      "Check if select.option is null",
+      "Check if select.text is empty"
+    ],
+    "answer": "Check if select.value is not empty",
+    "difficulty": "Medium",
+    "explanation": "A dropdown’s 'value' property returns the selected option’s value; an empty string indicates no selection."
+  },
+  {
+    "question": "How do you validate a radio button selection?",
+    "options": [
+      "Check if any radio button is checked",
+      "Check if radio.value is not null",
+      "Check if radio.selected is true",
+      "Check if radio.checked is false"
+    ],
+    "answer": "Check if any radio button is checked",
+    "difficulty": "Medium",
+    "explanation": "Use the 'checked' property to verify if at least one radio button in a group is selected."
+  },
+  {
+    "question": "How do you validate a ZIP code format (e.g., 12345)?",
+    "options": [
+      "/^\\d{5}$/.test(input.value)",
+      "/^\\d{5}-\\d{4}$/.test(input.value)",
+      "input.value.length === 5",
+      "isZipCode(input.value)"
+    ],
+    "answer": "/^\\d{5}$/.test(input.value)",
+    "difficulty": "Hard",
+    "explanation": "A regular expression '/^\\d{5}$/' ensures the input is exactly five digits."
+  },
+  {
+    "question": "How do you validate an email address format?",
+    "options": [
+      "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)",
+      "/^\\w+@\\w+\\.com$/.test(email)",
+      "email.includes('@')",
+      "email.validate()"
+    ],
+    "answer": "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)",
+    "difficulty": "Hard",
+    "explanation": "A regular expression checks for a valid email format with a username, '@', domain, and top-level domain."
+  },
+  {
+    "question": "What does a try...catch block do in JavaScript?",
+    "options": [
+      "Handles errors gracefully",
+      "Repeats code",
+      "Defines a function",
+      "Creates an array"
+    ],
+    "answer": "Handles errors gracefully",
+    "difficulty": "Medium",
+    "explanation": "A try...catch block catches and handles exceptions (errors) that occur in the try block."
+  },
+  {
+    "question": "How do you throw a custom error in JavaScript?",
+    "options": [
+      "throw new Error('message')",
+      "throw 'message'",
+      "error('message')",
+      "raise new Error('message')"
+    ],
+    "answer": "throw new Error('message')",
+    "difficulty": "Medium",
+    "explanation": "The 'throw' statement with a new Error object creates a custom error with a message."
+  },
+  {
+    "question": "How do you handle events directly in JavaScript?",
+    "options": [
+      "Using addEventListener()",
+      "Using inline HTML events",
+      "Using event attributes",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "Medium",
+    "explanation": "Events can be handled using 'addEventListener()', inline HTML (e.g., onclick), or event attributes."
   }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
@@ -1087,6 +1399,7 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 
