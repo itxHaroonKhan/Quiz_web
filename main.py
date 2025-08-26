@@ -10,148 +10,244 @@ import uuid
 # Quiz data with 67 questions covering specified JavaScript topics
 quiz =[
   {
-    "question": "What happens if a while loop's condition is initially false?",
+    "question": "What is the output of: let x = 3; while (x <= 9) { console.log(x); x += 3; }?",
     "options": [
-      "The loop executes once",
-      "The loop skips entirely",
-      "The loop throws an error",
-      "The loop runs indefinitely"
+      "3 6 9",
+      "3 6",
+      "9",
+      "3 4 5 6 7 8 9"
     ],
-    "answer": "The loop skips entirely",
+    "answer": "3 6 9",
     "difficulty": "Medium",
-    "explanation": "If the condition in a while loop is false initially, the loop body is not executed."
+    "explanation": "The while loop logs x starting at 3, incrementing by 3 each time until x <= 9 is false, outputting 3, 6, 9."
   },
   {
-    "question": "How do you prevent an infinite while loop?",
+    "question": "How do you use a while loop to find the first number divisible by 7 starting from 20?",
     "options": [
-      "Using a counter or condition update",
-      "Using a return statement",
-      "Using a function declaration",
-      "Using an array"
+      "let n = 20; while (n % 7 !== 0) { n++; } console.log(n);",
+      "let n = 20; while (n % 7 === 0) { n++; } console.log(n);",
+      "let n = 20; while (n <= 7) { n++; } console.log(n);",
+      "let n = 20; while (n / 7) { n++; } console.log(n);"
     ],
-    "answer": "Using a counter or condition update",
+    "answer": "let n = 20; while (n % 7 !== 0) { n++; } console.log(n);",
     "difficulty": "Medium",
-    "explanation": "Updating a counter or condition inside the loop ensures it eventually becomes false."
+    "explanation": "The loop increments n until n % 7 === 0, stopping at 21, the first number divisible by 7."
   },
   {
-    "question": "What is the output of: let i = 5; while (i > 0) { console.log(i); i -= 2; }?",
+    "question": "What does this while loop do: let i = 10; while (i > 0) { if (i % 2 === 0) console.log(i); i--; }?",
     "options": [
-      "5 3 1",
-      "5 4 3 2 1",
-      "4 2 0",
-      "5 3"
+      "Logs even numbers 10, 8, 6, 4, 2",
+      "Logs odd numbers 9, 7, 5, 3, 1",
+      "Logs all numbers 10 to 1",
+      "Logs nothing"
     ],
-    "answer": "5 3 1",
+    "answer": "Logs even numbers 10, 8, 6, 4, 2",
     "difficulty": "Medium",
-    "explanation": "The loop logs i and decrements by 2 until i > 0 is false, outputting 5, 3, 1."
+    "explanation": "The loop logs i when it’s even, decrementing i from 10 to 1, outputting 10, 8, 6, 4, 2."
   },
   {
-    "question": "How do you use a while loop to sum numbers from 1 to 5?",
+    "question": "How can you break a while loop when a condition is met?",
     "options": [
-      "let sum = 0, i = 1; while (i <= 5) { sum += i; i++; }",
-      "let sum = 0; while (i < 5) { sum += i; }",
-      "let sum = 0, i = 1; while (i < 5) { sum += i; }",
-      "let sum = 0, i = 0; while (i <= 5) { sum += i; i++; }"
+      "Use break when the condition is true",
+      "Use return to exit the loop",
+      "Use continue to stop the loop",
+      "Use exit to terminate"
     ],
-    "answer": "let sum = 0, i = 1; while (i <= 5) { sum += i; i++; }",
+    "answer": "Use break when the condition is true",
     "difficulty": "Medium",
-    "explanation": "The loop adds numbers from 1 to 5, incrementing i each time, resulting in sum = 15."
+    "explanation": "The 'break' statement exits the while loop when a specific condition is met."
   },
   {
-    "question": "What does the 'continue' statement do in a while loop?",
+    "question": "What is the output of: let i = 1; while (i <= 5) { if (i === 4) break; console.log(i); i++; }?",
     "options": [
-      "Exits the loop",
-      "Skips to the next iteration",
-      "Restarts the loop",
-      "Pauses execution"
+      "1 2 3",
+      "1 2 3 4",
+      "1 2 3 4 5",
+      "4"
     ],
-    "answer": "Skips to the next iteration",
+    "answer": "1 2 3",
     "difficulty": "Medium",
-    "explanation": "The 'continue' statement skips the rest of the current iteration and checks the condition again."
+    "explanation": "The loop logs i until i === 4, where 'break' exits the loop, outputting 1, 2, 3."
   },
   {
-    "question": "What is the result of: if (5 > 3) { console.log('Yes'); } else { console.log('No'); }?",
+    "question": "What does if (x >= 10) { console.log('High'); } output when x = 10?",
     "options": [
-      "Yes",
-      "No",
-      "Nothing is logged",
+      "High",
+      "Nothing",
+      "undefined",
       "Error"
     ],
-    "answer": "Yes",
+    "answer": "High",
     "difficulty": "Medium",
-    "explanation": "Since 5 > 3 is true, the if block executes, logging 'Yes'."
+    "explanation": "Since x >= 10 is true when x = 10, the if block logs 'High'."
   },
   {
-    "question": "Which comparison operator checks for inequality with type conversion?",
+    "question": "Which operator checks if two values are equal in value and type?",
     "options": [
-      "==",
       "===",
+      "==",
       "!=",
       "!=="
     ],
-    "answer": "!=",
+    "answer": "===",
     "difficulty": "Medium",
-    "explanation": "The '!=' operator checks for inequality, converting types if necessary."
+    "explanation": "The '===' operator checks for strict equality, ensuring both value and type match."
   },
   {
-    "question": "What is the output of: if (false) { console.log('A'); } else if (true) { console.log('B'); } else { console.log('C'); }?",
+    "question": "What is the output of: if (score < 60) { console.log('Fail'); } else if (score < 80) { console.log('Pass'); } else { console.log('Excellent'); } when score = 75?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "Nothing is logged"
+      "Pass",
+      "Fail",
+      "Excellent",
+      "Nothing"
     ],
-    "answer": "B",
+    "answer": "Pass",
     "difficulty": "Medium",
-    "explanation": "The else if (true) block executes because the first condition is false and the second is true."
+    "explanation": "Since 60 <= score < 80 is true for score = 75, the else if block logs 'Pass'."
   },
   {
-    "question": "How do you test multiple conditions using && in an if statement?",
+    "question": "What is the correct way to test if a number is between 1 and 10 inclusive?",
     "options": [
-      "if (a > 0 && b < 10) { code }",
-      "if (a > 0 + b < 10) { code }",
-      "if (a > 0, b < 10) { code }",
-      "if (a > 0 || b < 10) { code }"
+      "if (num >= 1 && num <= 10)",
+      "if (num > 1 && num < 10)",
+      "if (num >= 1 || num <= 10)",
+      "if (num > 1 && num < 11)"
     ],
-    "answer": "if (a > 0 && b < 10) { code }",
+    "answer": "if (num >= 1 && num <= 10)",
     "difficulty": "Medium",
-    "explanation": "The '&&' operator requires both conditions to be true for the if block to execute."
+    "explanation": "The '&&' operator ensures num is both >= 1 and <= 10, covering 1 to 10 inclusive."
   },
   {
-    "question": "What is the output of: if (x > 10) { if (x < 20) { console.log('Range'); } } when x = 15?",
+    "question": "What does this nested if do: if (age > 18) { if (hasLicense) { console.log('Can drive'); } } when age = 20 and hasLicense = true?",
     "options": [
-      "Range",
-      "Nothing is logged",
-      "Error",
-      "undefined"
+      "Logs 'Can drive'",
+      "Logs nothing",
+      "Throws an error",
+      "Logs 'Cannot drive'"
     ],
-    "answer": "Range",
+    "answer": "Logs 'Can drive'",
     "difficulty": "Medium",
-    "explanation": "The nested if checks if x is between 10 and 20; since x = 15, 'Range' is logged."
+    "explanation": "Both conditions are true (age > 18 and hasLicense), so 'Can drive' is logged."
   },
   {
-    "question": "How do you initialize an array with specific values?",
+    "question": "What does let arr = new Array(3) create?",
     "options": [
-      "let arr = [1, 2, 3];",
-      "let arr = {1, 2, 3};",
-      "let arr = (1, 2, 3);",
-      "let arr = <1, 2, 3>;"
+      "An array with 3 undefined elements",
+      "An array with 3 zeros",
+      "An array with 3 empty strings",
+      "An array with 3 nulls"
     ],
-    "answer": "let arr = [1, 2, 3];",
+    "answer": "An array with 3 undefined elements",
     "difficulty": "Medium",
-    "explanation": "Arrays are initialized with square brackets containing comma-separated values."
+    "explanation": "'new Array(3)' creates an array with 3 slots, all initialized to undefined."
   },
   {
-    "question": "What does arr.push(4, 5) do to an array?",
+    "question": "What does arr.unshift('start') do to an array?",
     "options": [
-      "Adds 4 and 5 to the start",
-      "Adds 4 and 5 to the end",
-      "Removes 4 and 5",
-      "Replaces elements with 4 and 5"
+      "Adds 'start' to the beginning",
+      "Adds 'start' to the end",
+      "Removes the first element",
+      "Replaces the first element"
     ],
-    "answer": "Adds 4 and 5 to the end",
+    "answer": "Adds 'start' to the beginning",
     "difficulty": "Medium",
-    "explanation": "The 'push()' method appends multiple elements to the end of an array."
+    "explanation": "'unshift()' adds one or more elements to the start of an array."
+  },
+  {
+    "question": "What does arr.pop() do to an array with elements [1, 2, 3]?",
+    "options": [
+      "Returns 3 and removes it",
+      "Returns 1 and removes it",
+      "Returns 3 and keeps it",
+      "Returns the entire array"
+    ],
+    "answer": "Returns 3 and removes it",
+    "difficulty": "Medium",
+    "explanation": "'pop()' removes and returns the last element, leaving [1, 2]."
+  },
+  {
+    "question": "What does arr.splice(1, 0, 'new') do to [1, 2, 3]?",
+    "options": [
+      "Inserts 'new' at index 1, resulting in [1, 'new', 2, 3]",
+      "Removes element at index 1",
+      "Replaces element at index 1 with 'new'",
+      "Inserts 'new' at the end"
+    ],
+    "answer": "Inserts 'new' at index 1, resulting in [1, 'new', 2, 3]",
+    "difficulty": "Medium",
+    "explanation": "'splice(1, 0, 'new')' inserts 'new' at index 1 without removing anything."
+  },
+  {
+    "question": "What is the output of: for (let i = 1; i <= 4; i++) { console.log(i % 2); }?",
+    "options": [
+      "1 0 1 0",
+      "0 1 0 1",
+      "1 2 3 4",
+      "0 0 1 1"
+    ],
+    "answer": "1 0 1 0",
+    "difficulty": "Medium",
+    "explanation": "The loop logs i % 2 for i = 1 to 4, resulting in 1, 0, 1, 0 (odd/even remainders)."
+  },
+  {
+    "question": "How do you use a boolean flag to stop a for loop early?",
+    "options": [
+      "Set flag to true and use break",
+      "Set flag to false and use continue",
+      "Set flag to true and use return",
+      "Set flag to false and use exit"
+    ],
+    "answer": "Set flag to true and use break",
+    "difficulty": "Medium",
+    "explanation": "A boolean flag can trigger a 'break' to exit the loop when a condition is met."
+  },
+  {
+    "question": "What does this nested loop do: for (let i = 1; i < 3; i++) { for (let j = 1; j < 3; j++) { console.log(i * j); } }?",
+    "options": [
+      "Logs 1, 2, 2, 4",
+      "Logs 1, 1, 2, 2",
+      "Logs 1, 2, 3, 4",
+      "Logs 1, 4"
+    ],
+    "answer": "Logs 1, 2, 2, 4",
+    "difficulty": "Medium",
+    "explanation": "The loop calculates i * j for i = 1,2 and j = 1,2, logging 1*1, 1*2, 2*1, 2*2."
+  },
+  {
+    "question": "What does 'JavaScript'.toUpperCase() return?",
+    "options": [
+      "JAVASCRIPT",
+      "javascript",
+      "JavaScript",
+      "JAVAScript"
+    ],
+    "answer": "JAVASCRIPT",
+    "difficulty": "Medium",
+    "explanation": "'toUpperCase()' converts all characters in the string to uppercase."
+  },
+  {
+    "question": "What does 'coding'.length return?",
+    "options": [
+      "6",
+      "5",
+      "7",
+      "4"
+    ],
+    "answer": "6",
+    "difficulty": "Medium",
+    "explanation": "The 'length' property counts the characters in 'coding', which is 6."
+  },
+  {
+    "question": "What does 'welcome home'.indexOf('home') return?",
+    "options": [
+      "8",
+      "7",
+      "0",
+      "-1"
+    ],
+    "answer": "8",
+    "difficulty": "Medium",
+    "explanation": "'indexOf()' returns the starting index of 'home', which is 8 (after 'welcome ')."
   },
   {
     "question": "What does arr.shift() return?",
@@ -1450,6 +1546,7 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 
