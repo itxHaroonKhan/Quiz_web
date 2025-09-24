@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 import uuid
 
-quiz[
+quiz = [
   {
     "question": "What is the scope of a variable declared with 'var' inside a function?",
     "options": [
@@ -1556,6 +1556,7 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 
