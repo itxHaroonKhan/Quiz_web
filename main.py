@@ -6,227 +6,441 @@ import random
 from datetime import datetime
 import uuid
 
-
-# Quiz data with 67 questions covering specified JavaScript topics
-quiz =[
+quiz[
   {
-    "question": "What is the scope of a variable declared with 'let' inside a block?",
+    "question": "What is the scope of a variable declared with 'var' inside a function?",
     "options": [
-      "Function scope",
-      "Global scope",
-      "Block scope",
-      "Module scope"
+      "Function-scoped",
+      "Block-scoped",
+      "Global-scoped",
+      "Module-scoped"
     ],
-    "answer": "Block scope",
+    "answer": "Function-scoped",
     "difficulty": "Medium",
-    "explanation": "Variables declared with 'let' are limited to the block (e.g., {}) in which they are defined."
+    "explanation": "'var' declarations are function-scoped, meaning they are accessible throughout the function they are defined in."
   },
   {
-    "question": "What happens to a 'var' variable declared inside a function?",
+    "question": "What happens to a 'let' variable declared inside a block?",
     "options": [
-      "It is block-scoped",
-      "It is function-scoped",
-      "It becomes global",
-      "It is module-scoped"
+      "It’s only accessible within that block",
+      "It’s accessible globally",
+      "It’s accessible throughout the function",
+      "It’s undefined outside the function"
     ],
-    "answer": "It is function-scoped",
+    "answer": "It’s only accessible within that block",
     "difficulty": "Medium",
-    "explanation": "'var' variables are scoped to the function they are declared in, not the block."
+    "explanation": "'let' is block-scoped, so it’s only accessible within the block (e.g., inside curly braces) where it’s declared."
   },
   {
-    "question": "What is the output of: { let x = 10; } console.log(typeof x);?",
+    "question": "What is the output of: function test() { var x = 1; if (true) { var x = 2; } return x; }?",
     "options": [
-      "number",
-      "undefined",
-      "ReferenceError",
-      "null"
-    ],
-    "answer": "undefined",
-    "difficulty": "Medium",
-    "explanation": "'let x' is block-scoped, so x is undefined outside the block."
-  },
-  {
-    "question": "What is a closure in JavaScript?",
-    "options": [
-      "A function with its own scope",
-      "A function that retains access to its outer scope’s variables",
-      "A function that runs immediately",
-      "A function with no parameters"
-    ],
-    "answer": "A function that retains access to its outer scope’s variables",
-    "difficulty": "Medium",
-    "explanation": "A closure is a function that remembers its outer variables even after the outer function has finished executing."
-  },
-  {
-    "question": "What does this closure do: function outer() { let x = 5; return function() { return x++; } } let fn = outer(); console.log(fn());?",
-    "options": [
-      "5",
-      "6",
+      "2",
+      "1",
       "undefined",
       "Error"
     ],
-    "answer": "5",
+    "answer": "2",
     "difficulty": "Medium",
-    "explanation": "The inner function retains access to x and returns its value (5) before incrementing it."
+    "explanation": "Since 'var' is function-scoped, the second 'var x = 2' reassigns the same variable, so test() returns 2."
   },
   {
-    "question": "What is the output of: let name = 'Alice'; let str = `Hello, ${name}!`; console.log(str);?",
-    "options": [
-      "Hello, Alice!",
-      "Hello, ${name}!",
-      "Hello, name!",
-      "Error"
-    ],
-    "answer": "Hello, Alice!",
-    "difficulty": "Medium",
-    "explanation": "Template literals use backticks (`) and ${} to embed expressions, evaluating to 'Hello, Alice!'."
-  },
-  {
-    "question": "How do you include a multi-line string using template literals?",
-    "options": [
-      "`Line1\\nLine2`",
-      "`Line1\nLine2`",
-      "'Line1\nLine2'",
-      "`Line1 Line2`"
-    ],
-    "answer": "`Line1\nLine2`",
-    "difficulty": "Medium",
-    "explanation": "Template literals allow multi-line strings without escaping, using \\n for newlines."
-  },
-  {
-    "question": "What does let {a, b} = {a: 1, b: 2}; assign to a and b?",
-    "options": [
-      "a = 1, b = 2",
-      "a = undefined, b = undefined",
-      "a = {a: 1}, b = {b: 2}",
-      "Error"
-    ],
-    "answer": "a = 1, b = 2",
-    "difficulty": "Medium",
-    "explanation": "Destructuring assigns properties a and b to variables of the same name."
-  },
-  {
-    "question": "What is the result of: let [x, y] = [10, 20, 30];?",
-    "options": [
-      "x = 10, y = 20",
-      "x = 10, y = 30",
-      "x = [10, 20], y = 30",
-      "Error"
-    ],
-    "answer": "x = 10, y = 20",
-    "difficulty": "Medium",
-    "explanation": "Array destructuring assigns the first two elements to x and y, ignoring the rest."
-  },
-  {
-    "question": "What is the output of: function greet(name = 'Guest') { return `Hi, ${name}`; } console.log(greet());?",
-    "options": [
-      "Hi, Guest",
-      "Hi, undefined",
-      "Hi, ",
-      "Error"
-    ],
-    "answer": "Hi, Guest",
-    "difficulty": "Medium",
-    "explanation": "Default parameters assign 'Guest' to name when no argument is provided."
-  },
-  {
-    "question": "How do you use the rest parameter in a function?",
-    "options": [
-      "function sum(...numbers) { return numbers.reduce((a, b) => a + b); }",
-      "function sum(numbers...) { return numbers.reduce((a, b) => a + b); }",
-      "function sum(*numbers) { return numbers.reduce((a, b) => a + b); }",
-      "function sum(numbers) { return numbers.reduce((a, b) => a + b); }"
-    ],
-    "answer": "function sum(...numbers) { return numbers.reduce((a, b) => a + b); }",
-    "difficulty": "Medium",
-    "explanation": "The rest parameter (...numbers) collects all arguments into an array."
-  },
-  {
-    "question": "What does the spread operator do in: let arr = [...[1, 2], 3];?",
-    "options": [
-      "Creates [1, 2, 3]",
-      "Creates [1, 2, [3]]",
-      "Creates [[1, 2], 3]",
-      "Throws an error"
-    ],
-    "answer": "Creates [1, 2, 3]",
-    "difficulty": "Medium",
-    "explanation": "The spread operator (...) flattens the array [1, 2] and adds 3, forming [1, 2, 3]."
-  },
-  {
-    "question": "What is the output of: const fn = (x) => x * 2; console.log(fn(5));?",
+    "question": "What does: let x = 10; { let x = 20; } console.log(x); output?",
     "options": [
       "10",
-      "5",
+      "20",
       "undefined",
       "Error"
     ],
     "answer": "10",
     "difficulty": "Medium",
-    "explanation": "Arrow functions provide concise syntax; this one multiplies x by 2, returning 10."
+    "explanation": "The 'let x = 20' is block-scoped and doesn’t affect the outer x, so 10 is logged."
   },
   {
-    "question": "What is the difference between arrow functions and regular functions regarding 'this'?",
+    "question": "What is the scope of a variable declared without 'var', 'let', or 'const' in a function?",
     "options": [
-      "Arrow functions inherit 'this' from their lexical scope",
-      "Arrow functions have their own 'this'",
-      "Arrow functions cannot use 'this'",
-      "No difference"
+      "Global scope",
+      "Function scope",
+      "Block scope",
+      "Module scope"
     ],
-    "answer": "Arrow functions inherit 'this' from their lexical scope",
+    "answer": "Global scope",
     "difficulty": "Medium",
-    "explanation": "Arrow functions do not bind their own 'this' and use the enclosing scope’s 'this'."
+    "explanation": "Variables declared without a keyword in non-strict mode become global, accessible everywhere."
   },
   {
-    "question": "What does this enhanced object literal do: let x = 1; let obj = {x, method() { return this.x; }}; console.log(obj.method());?",
+    "question": "How do you validate a text field to ensure it’s not empty?",
     "options": [
-      "1",
+      "if (input.value.trim() !== '')",
+      "if (input.value === null)",
+      "if (input.text !== '')",
+      "if (input.length > 0)"
+    ],
+    "answer": "if (input.value.trim() !== '')",
+    "difficulty": "Medium",
+    "explanation": "'trim()' removes whitespace, and checking '!== ''' ensures the field isn’t empty."
+  },
+  {
+    "question": "How do you check if a dropdown has a selected option?",
+    "options": [
+      "if (select.selectedIndex > -1)",
+      "if (select.value === null)",
+      "if (select.option !== '')",
+      "if (select.selected === true)"
+    ],
+    "answer": "if (select.selectedIndex > -1)",
+    "difficulty": "Medium",
+    "explanation": "'selectedIndex > -1' confirms an option is selected in a dropdown."
+  },
+  {
+    "question": "How do you validate that a radio button group has a selection?",
+    "options": [
+      "document.querySelector('input[name=group]:checked')",
+      "document.getElementByName('group').checked",
+      "document.querySelector('input.group:checked')",
+      "document.getRadio('group').selected"
+    ],
+    "answer": "document.querySelector('input[name=group]:checked')",
+    "difficulty": "Medium",
+    "explanation": "The selector returns the checked radio button, or null if none is selected."
+  },
+  {
+    "question": "What regex validates a 5-digit ZIP code?",
+    "options": [
+      "/^\\d{5}$/",
+      "/^\\d{5}-\\d{4}$/",
+      "/^\\d{9}$/",
+      "/^\\d{5}(-\\d{4})?$/"
+    ],
+    "answer": "/^\\d{5}$/",
+    "difficulty": "Medium",
+    "explanation": "'/^\\d{5}$/' ensures exactly 5 digits, suitable for a basic ZIP code."
+  },
+  {
+    "question": "What regex validates an email address format?",
+    "options": [
+      "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/",
+      "/^\\w+@\\w+\\.com$/",
+      "/^[^\\s@]+@[^\\s@]+$/",
+      "/^\\w+\\.\\w+@\\w+$/"
+    ],
+    "answer": "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/",
+    "difficulty": "Medium",
+    "explanation": "This regex ensures a valid email format with a username, @, domain, and top-level domain."
+  },
+  {
+    "question": "What does try { let x = y; } catch (e) { console.log(e.name); } log?",
+    "options": [
+      "ReferenceError",
+      "TypeError",
+      "SyntaxError",
+      "undefined"
+    ],
+    "answer": "ReferenceError",
+    "difficulty": "Medium",
+    "explanation": "Accessing an undefined variable 'y' throws a ReferenceError, caught and logged."
+  },
+  {
+    "question": "What does throw new Error('Invalid') do?",
+    "options": [
+      "Throws a custom error",
+      "Logs 'Invalid'",
+      "Stops the function",
+      "Returns 'Invalid'"
+    ],
+    "answer": "Throws a custom error",
+    "difficulty": "Medium",
+    "explanation": "'throw new Error()' creates and throws a custom error with the specified message."
+  },
+  {
+    "question": "How do you handle a click event on a button?",
+    "options": [
+      "button.addEventListener('click', handler)",
+      "button.onClick(handler)",
+      "button.event('click', handler)",
+      "button.click(handler)"
+    ],
+    "answer": "button.addEventListener('click', handler)",
+    "difficulty": "Medium",
+    "explanation": "'addEventListener()' attaches a handler function to the button’s click event."
+  },
+  {
+    "question": "What does node.nodeType === 1 indicate?",
+    "options": [
+      "Element node",
+      "Text node",
+      "Comment node",
+      "Document node"
+    ],
+    "answer": "Element node",
+    "difficulty": "Medium",
+    "explanation": "A 'nodeType' of 1 indicates an HTML element node in the DOM."
+  },
+  {
+    "question": "How do you select elements with class 'test' using querySelectorAll?",
+    "options": [
+      "document.querySelectorAll('.test')",
+      "document.getElementsByClassName('test')",
+      "document.querySelector('.test')",
+      "Both querySelectorAll and getElementsByClassName"
+    ],
+    "answer": "Both querySelectorAll and getElementsByClassName",
+    "difficulty": "Medium",
+    "explanation": "Both methods select elements with the class 'test'; querySelectorAll uses CSS selectors."
+  },
+  {
+    "question": "What does element.tagName return for a <p> element?",
+    "options": [
+      "P",
+      "p",
+      "Paragraph",
+      "undefined"
+    ],
+    "answer": "P",
+    "difficulty": "Medium",
+    "explanation": "'tagName' returns the tag name in uppercase, so 'P' for a <p> element."
+  },
+  {
+    "question": "How do you count the number of child elements in a node?",
+    "options": [
+      "element.children.length",
+      "element.childNodes.length",
+      "element.countChildren()",
+      "element.getNodes()"
+    ],
+    "answer": "element.children.length",
+    "difficulty": "Medium",
+    "explanation": "'children.length' counts only HTML element children, excluding text or comments."
+  },
+  {
+    "question": "How do you get an element’s attribute value?",
+    "options": [
+      "element.getAttribute('name')",
+      "element.attribute('name')",
+      "element.name",
+      "element.getAttr('name')"
+    ],
+    "answer": "element.getAttribute('name')",
+    "difficulty": "Medium",
+    "explanation": "'getAttribute()' retrieves the value of the specified attribute."
+  },
+  {
+    "question": "How do you set an attribute on an element?",
+    "options": [
+      "element.setAttribute('name', 'value')",
+      "element.attribute = 'value'",
+      "element.name = 'value'",
+      "element.setAttr('name', 'value')"
+    ],
+    "answer": "element.setAttribute('name', 'value')",
+    "difficulty": "Medium",
+    "explanation": "'setAttribute()' sets the value of a specified attribute on an element."
+  },
+  {
+    "question": "How do you create a new <span> element?",
+    "options": [
+      "document.createElement('span')",
+      "document.newElement('span')",
+      "document.create('span')",
+      "document.addElement('span')"
+    ],
+    "answer": "document.createElement('span')",
+    "difficulty": "Medium",
+    "explanation": "'createElement('span')' creates a new <span> element node."
+  },
+  {
+    "question": "How do you insert a node before an existing node?",
+    "options": [
+      "parent.insertBefore(newNode, referenceNode)",
+      "parent.appendChild(newNode)",
+      "parent.insertAfter(newNode)",
+      "parent.addNode(newNode)"
+    ],
+    "answer": "parent.insertBefore(newNode, referenceNode)",
+    "difficulty": "Medium",
+    "explanation": "'insertBefore()' inserts a new node before the specified reference node."
+  },
+  {
+    "question": "What is a JavaScript object?",
+    "options": [
+      "A collection of key-value pairs",
+      "A type of array",
+      "A function declaration",
+      "A loop structure"
+    ],
+    "answer": "A collection of key-value pairs",
+    "difficulty": "Medium",
+    "explanation": "An object in JavaScript stores data as key-value pairs, also called properties."
+  },
+  {
+    "question": "How do you access an object’s property?",
+    "options": [
+      "object.property or object['property']",
+      "object.getProperty('property')",
+      "object(property)",
+      "object::property"
+    ],
+    "answer": "object.property or object['property']",
+    "difficulty": "Medium",
+    "explanation": "Properties are accessed using dot notation or bracket notation."
+  },
+  {
+    "question": "What is an object method in JavaScript?",
+    "options": [
+      "A function stored as a property",
+      "A variable inside an object",
+      "A loop inside an object",
+      "A class definition"
+    ],
+    "answer": "A function stored as a property",
+    "difficulty": "Medium",
+    "explanation": "A method is a function assigned to an object’s property, enabling behavior."
+  },
+  {
+    "question": "What does this constructor do: function Car(model) { this.model = model; }?",
+    "options": [
+      "Creates objects with a model property",
+      "Creates an array of models",
+      "Defines a loop",
+      "Throws an error"
+    ],
+    "answer": "Creates objects with a model property",
+    "difficulty": "Medium",
+    "explanation": "The constructor creates objects with a 'model' property when called with 'new'."
+  },
+  {
+    "question": "How do you add a method to a constructor’s prototype?",
+    "options": [
+      "Constructor.prototype.method = function() {}",
+      "Constructor.method = function() {}",
+      "Constructor.addMethod(function() {})",
+      "Constructor.setMethod(function() {})"
+    ],
+    "answer": "Constructor.prototype.method = function() {}",
+    "difficulty": "Medium",
+    "explanation": "Adding a method to the prototype makes it available to all instances."
+  },
+  {
+    "question": "What is the purpose of an object’s prototype?",
+    "options": [
+      "To share properties and methods across instances",
+      "To store private data",
+      "To create loops",
+      "To validate forms"
+    ],
+    "answer": "To share properties and methods across instances",
+    "difficulty": "Medium",
+    "explanation": "Prototypes allow instances of a constructor to share properties and methods."
+  },
+  {
+    "question": "How do you check if an object has a specific property?",
+    "options": [
+      "object.hasOwnProperty('prop')",
+      "object.exists('prop')",
+      "object.checkProperty('prop')",
+      "object.get('prop')"
+    ],
+    "answer": "object.hasOwnProperty('prop')",
+    "difficulty": "Medium",
+    "explanation": "'hasOwnProperty()' checks if a property exists directly on the object."
+  },
+  {
+    "question": "What does window.location.href return?",
+    "options": [
+      "The full URL of the current page",
+      "The page title",
+      "The domain name only",
+      "The query string"
+    ],
+    "answer": "The full URL of the current page",
+    "difficulty": "Medium",
+    "explanation": "'window.location.href' returns the complete URL of the current webpage."
+  },
+  {
+    "question": "What does window.location.assign('new-url') do?",
+    "options": [
+      "Navigates to a new URL",
+      "Reloads the current page",
+      "Opens a new tab",
+      "Changes the page title"
+    ],
+    "answer": "Navigates to a new URL",
+    "difficulty": "Medium",
+    "explanation": "'location.assign()' loads a new URL in the current window."
+  },
+  {
+    "question": "What does window.history.back() do?",
+    "options": [
+      "Navigates to the previous page",
+      "Navigates to the next page",
+      "Reloads the current page",
+      "Opens a new window"
+    ],
+    "answer": "Navigates to the previous page",
+    "difficulty": "Medium",
+    "explanation": "'history.back()' moves to the previous page in the browser’s history."
+  },
+  {
+    "question": "How do you make an element fill the entire viewport?",
+    "options": [
+      "element.style.width = '100vw'; element.style.height = '100vh'",
+      "element.style.width = '100%'; element.style.height = '100%'",
+      "element.setSize('full')",
+      "element.style.fullscreen = true"
+    ],
+    "answer": "element.style.width = '100vw'; element.style.height = '100vh'",
+    "difficulty": "Medium",
+    "explanation": "'100vw' and '100vh' set the element to the full viewport width and height."
+  },
+  {
+    "question": "What does window.resizeTo(800, 600) do?",
+    "options": [
+      "Resizes the window to 800x600 pixels",
+      "Moves the window to (800, 600)",
+      "Scrolls the window",
+      "Sets the viewport size"
+    ],
+    "answer": "Resizes the window to 800x600 pixels",
+    "difficulty": "Medium",
+    "explanation": "'window.resizeTo()' sets the browser window’s dimensions to the specified width and height."
+  },
+  {
+    "question": "How do you test for a popup blocker?",
+    "options": [
+      "if (!window.open('url'))",
+      "if (window.isBlocked())",
+      "if (window.popup === null)",
+      "if (document.popupBlocked)"
+    ],
+    "answer": "if (!window.open('url'))",
+    "difficulty": "Medium",
+    "explanation": "'window.open()' returns null if a popup blocker prevents the window from opening."
+  },
+  {
+    "question": "How do you validate a text field for a minimum length of 5 characters?",
+    "options": [
+      "if (input.value.length >= 5)",
+      "if (input.text.length >= 5)",
+      "if (input.value >= 5)",
+      "if (input.length >= 5)"
+    ],
+    "answer": "if (input.value.length >= 5)",
+    "difficulty": "Medium",
+    "explanation": "Checking 'input.value.length >= 5' ensures the text field has at least 5 characters."
+  },
+  {
+    "question": "What happens if you access a variable declared later with 'let'?",
+    "options": [
+      "ReferenceError due to temporal dead zone",
       "undefined",
-      "method",
-      "Error"
+      "null",
+      "The variable’s value"
     ],
-    "answer": "1",
+    "answer": "ReferenceError due to temporal dead zone",
     "difficulty": "Medium",
-    "explanation": "Enhanced object literals allow shorthand property (x) and method syntax, returning x = 1."
+    "explanation": "'let' variables are in a temporal dead zone until their declaration, causing a ReferenceError."
   },
   {
-    "question": "What is the purpose of a for..of loop?",
-    "options": [
-      "To iterate over iterable objects like arrays",
-      "To iterate over object properties",
-      "To create a function",
-      "To loop over numbers"
-    ],
-    "answer": "To iterate over iterable objects like arrays",
-    "difficulty": "Medium",
-    "explanation": "The for..of loop iterates over values of iterable objects like arrays or strings."
-  },
-  {
-    "question": "What does this for..of loop do: let arr = [1, 2, 3]; for (let x of arr) { console.log(x); }?",
-    "options": [
-      "Logs 1, 2, 3",
-      "Logs 0, 1, 2",
-      "Logs [1, 2, 3]",
-      "Logs nothing"
-    ],
-    "answer": "Logs 1, 2, 3",
-    "difficulty": "Medium",
-    "explanation": "The for..of loop iterates over each element in the array, logging 1, 2, 3."
-  },
-  {
-    "question": "What is a generator function in JavaScript?",
-    "options": [
-      "A function that can pause and resume execution",
-      "A function that runs once",
-      "A function with no return value",
-      "A function that creates arrays"
-    ],
-    "answer": "A function that can pause and resume execution",
-    "difficulty": "Medium",
-    "explanation": "Generator functions use 'function*' and 'yield' to pause and resume, returning an iterator."
-  },
-  {
-    "question": "What does this generator do: function* gen() { yield 1; yield 2; } let g = gen(); console.log(g.next().value);?",
+    "question": "What is the output of: function test() { let x = 1; { let x = 2; } return x; }?",
     "options": [
       "1",
       "2",
@@ -235,202 +449,466 @@ quiz =[
     ],
     "answer": "1",
     "difficulty": "Medium",
-    "explanation": "The generator yields 1 first; calling g.next().value returns 1."
+    "explanation": "The inner 'let x = 2' is block-scoped, so the outer x remains 1."
   },
   {
-    "question": "How do you export a function in a JavaScript module?",
+    "question": "What does 'use strict' do to undeclared variables?",
     "options": [
-      "export function myFunc() {}",
-      "module.export = myFunc()",
-      "export.myFunc = function() {}",
-      "function export myFunc() {}"
+      "Prevents them, throwing ReferenceError",
+      "Makes them global",
+      "Assigns them null",
+      "Ignores them"
     ],
-    "answer": "export function myFunc() {}",
+    "answer": "Prevents them, throwing ReferenceError",
     "difficulty": "Medium",
-    "explanation": "The 'export' keyword makes a function available for import in other modules."
+    "explanation": "In strict mode, assigning to an undeclared variable throws a ReferenceError."
   },
   {
-    "question": "How do you import a named function from a module?",
+    "question": "How do you validate a dropdown’s selected value isn’t the default placeholder?",
     "options": [
-      "import { myFunc } from './module.js';",
-      "import myFunc from './module.js';",
-      "require('./module.js').myFunc;",
-      "import * as myFunc from './module.js';"
+      "if (select.value !== '')",
+      "if (select.value === null)",
+      "if (select.selectedIndex === 0)",
+      "if (select.option === '')"
     ],
-    "answer": "import { myFunc } from './module.js';",
+    "answer": "if (select.value !== '')",
     "difficulty": "Medium",
-    "explanation": "Named imports use curly braces to specify the function name from the module."
+    "explanation": "Checking 'value !== ''' ensures a non-empty, non-placeholder option is selected."
   },
   {
-    "question": "What does new Map([[1, 'one'], [2, 'two']]).get(1) return?",
+    "question": "How do you get the value of a selected radio button?",
     "options": [
-      "'one'",
-      "1",
-      "'two'",
+      "document.querySelector('input[name=group]:checked').value",
+      "document.getElementByName('group').value",
+      "document.querySelector('input.group').value",
+      "document.getRadio('group').value"
+    ],
+    "answer": "document.querySelector('input[name=group]:checked').value",
+    "difficulty": "Medium",
+    "explanation": "The selector retrieves the checked radio button’s value."
+  },
+  {
+    "question": "What regex allows a ZIP code like 12345 or 12345-6789?",
+    "options": [
+      "/^\\d{5}(-\\d{4})?$/",
+      "/^\\d{5}$/",
+      "/^\\d{5}-\\d{4}$/",
+      "/^\\d{9}$/"
+    ],
+    "answer": "/^\\d{5}(-\\d{4})?$/",
+    "difficulty": "Medium",
+    "explanation": "The regex matches 5 digits with an optional hyphen and 4 digits."
+  },
+  {
+    "question": "What does try { JSON.parse('invalid') } catch (e) { console.log(e.name); } log?",
+    "options": [
+      "SyntaxError",
+      "ReferenceError",
+      "TypeError",
       "undefined"
     ],
-    "answer": "'one'",
+    "answer": "SyntaxError",
     "difficulty": "Medium",
-    "explanation": "The Map object stores key-value pairs; get(1) retrieves the value 'one'."
+    "explanation": "Invalid JSON in 'JSON.parse()' throws a SyntaxError, caught and logged."
   },
   {
-    "question": "How do you add a key-value pair to a Map?",
+    "question": "What does throw 'Custom error' do?",
     "options": [
-      "map.set(key, value)",
-      "map.add(key, value)",
-      "map.put(key, value)",
-      "map[key] = value"
+      "Throws a string as an error",
+      "Logs the string",
+      "Returns the string",
+      "Stops execution without error"
     ],
-    "answer": "map.set(key, value)",
+    "answer": "Throws a string as an error",
     "difficulty": "Medium",
-    "explanation": "The 'set()' method adds or updates a key-value pair in a Map."
+    "explanation": "'throw' can throw any value, like a string, but 'new Error' is preferred for errors."
   },
   {
-    "question": "What does [1, 2, 3].map(x => x * 2) return?",
+    "question": "How do you handle a mouseover event on an element?",
     "options": [
-      "[2, 4, 6]",
-      "[1, 2, 3]",
-      "[1, 4, 9]",
-      "Error"
+      "element.addEventListener('mouseover', handler)",
+      "element.onMouseover(handler)",
+      "element.event('mouseover', handler)",
+      "element.mouseover(handler)"
     ],
-    "answer": "[2, 4, 6]",
+    "answer": "element.addEventListener('mouseover', handler)",
     "difficulty": "Medium",
-    "explanation": "The 'map()' method applies the function to each element, doubling the values."
+    "explanation": "'addEventListener()' attaches a handler to the 'mouseover' event."
   },
   {
-    "question": "What does [1, 2, 3, 4].filter(x => x % 2 === 0) return?",
+    "question": "What does node.nodeType === 8 indicate?",
     "options": [
-      "[2, 4]",
-      "[1, 3]",
-      "[1, 2, 3, 4]",
-      "[]"
+      "Comment node",
+      "Element node",
+      "Text node",
+      "Document node"
     ],
-    "answer": "[2, 4]",
+    "answer": "Comment node",
     "difficulty": "Medium",
-    "explanation": "'filter()' returns a new array with elements that pass the test (even numbers)."
+    "explanation": "A 'nodeType' of 8 indicates a comment node (e.g., <!-- comment -->) in the DOM."
   },
   {
-    "question": "What is a higher-order function?",
+    "question": "How do you select elements with data-test attribute?",
     "options": [
-      "A function that takes or returns a function",
-      "A function with no parameters",
-      "A function that runs once",
-      "A function with multiple returns"
+      "document.querySelectorAll('[data-test]')",
+      "document.getElementsByAttribute('data-test')",
+      "document.querySelector('data-test')",
+      "document.getDataTest()"
     ],
-    "answer": "A function that takes or returns a function",
+    "answer": "document.querySelectorAll('[data-test]')",
     "difficulty": "Medium",
-    "explanation": "Higher-order functions either accept functions as arguments or return functions."
+    "explanation": "'querySelectorAll()' uses CSS selector syntax to select elements with the data-test attribute."
   },
   {
-    "question": "What does this higher-order function do: function apply(fn, x) { return fn(x); } console.log(apply(x => x * 2, 5));?",
+    "question": "What does element.tagName return for a <div> element?",
     "options": [
-      "10",
-      "5",
+      "DIV",
+      "div",
+      "Div",
+      "undefined"
+    ],
+    "answer": "DIV",
+    "difficulty": "Medium",
+    "explanation": "'tagName' returns the tag name in uppercase, so 'DIV' for a <div> element."
+  },
+  {
+    "question": "How do you count all child nodes, including text and comments?",
+    "options": [
+      "element.childNodes.length",
+      "element.children.length",
+      "element.countNodes()",
+      "element.getChildren()"
+    ],
+    "answer": "element.childNodes.length",
+    "difficulty": "Medium",
+    "explanation": "'childNodes.length' counts all nodes, including text and comment nodes."
+  },
+  {
+    "question": "How do you check if an element has a specific attribute?",
+    "options": [
+      "element.hasAttribute('name')",
+      "element.getAttribute('name')",
+      "element.attribute('name')",
+      "element.checkAttribute('name')"
+    ],
+    "answer": "element.hasAttribute('name')",
+    "difficulty": "Medium",
+    "explanation": "'hasAttribute()' returns true if the element has the specified attribute."
+  },
+  {
+    "question": "How do you remove an attribute from an element?",
+    "options": [
+      "element.removeAttribute('name')",
+      "element.deleteAttribute('name')",
+      "element.setAttribute('name', null)",
+      "element.attribute = null"
+    ],
+    "answer": "element.removeAttribute('name')",
+    "difficulty": "Medium",
+    "explanation": "'removeAttribute()' removes the specified attribute from an element."
+  },
+  {
+    "question": "How do you append a new node to an element?",
+    "options": [
+      "parent.appendChild(newNode)",
+      "parent.insertChild(newNode)",
+      "parent.addNode(newNode)",
+      "parent.append(newNode)"
+    ],
+    "answer": "parent.appendChild(newNode)",
+    "difficulty": "Medium",
+    "explanation": "'appendChild()' adds a new node as the last child of the parent element."
+  },
+  {
+    "question": "How do you insert a node after an existing node?",
+    "options": [
+      "parent.insertBefore(newNode, referenceNode.nextSibling)",
+      "parent.appendChild(newNode)",
+      "parent.insertAfter(newNode)",
+      "parent.addNode(newNode)"
+    ],
+    "answer": "parent.insertBefore(newNode, referenceNode.nextSibling)",
+    "difficulty": "Medium",
+    "explanation": "'insertBefore()' with 'nextSibling' inserts a node after the reference node."
+  },
+  {
+    "question": "What does let obj = { a: 1, b: 2 }; console.log(obj.a); output?",
+    "options": [
+      "1",
       "undefined",
+      "a",
       "Error"
     ],
-    "answer": "10",
+    "answer": "1",
     "difficulty": "Medium",
-    "explanation": "The function applies the provided function (x => x * 2) to x = 5, returning 10."
+    "explanation": "The property 'a' is accessed using dot notation, logging its value, 1."
   },
   {
-    "question": "What is a callback function?",
+    "question": "How do you add a new property to an object?",
     "options": [
-      "A function passed as an argument to another function",
-      "A function that returns a value",
-      "A function that runs immediately",
-      "A function with no scope"
+      "obj.newProp = 'value'",
+      "obj.addProp('value')",
+      "obj.set('newProp', 'value')",
+      "obj.createProp('value')"
     ],
-    "answer": "A function passed as an argument to another function",
+    "answer": "obj.newProp = 'value'",
     "difficulty": "Medium",
-    "explanation": "Callbacks are functions passed to another function to be executed later."
+    "explanation": "Properties are added using dot notation or bracket notation, e.g., obj['newProp'] = 'value'."
   },
   {
-    "question": "What does setTimeout(() => console.log('Hi'), 1000) do?",
+    "question": "What does this do: let obj = { say() { return 'Hi'; } }; console.log(obj.say());?",
     "options": [
-      "Logs 'Hi' after 1 second",
-      "Logs 'Hi' immediately",
-      "Logs 'Hi' every second",
+      "Logs 'Hi'",
+      "Logs undefined",
+      "Logs say",
       "Throws an error"
     ],
-    "answer": "Logs 'Hi' after 1 second",
+    "answer": "Logs 'Hi'",
     "difficulty": "Medium",
-    "explanation": "'setTimeout' executes the callback after a 1000ms delay."
+    "explanation": "'say' is a method that returns 'Hi' when called."
   },
   {
-    "question": "What is the output of: let p = new Promise((resolve) => resolve('Done')); p.then(console.log);?",
+    "question": "What is the output of: function User(name) { this.name = name; } let u = new User('Bob'); console.log(u.name);?",
     "options": [
-      "Done",
+      "Bob",
+      "User",
       "undefined",
-      "Promise",
       "Error"
     ],
-    "answer": "Done",
+    "answer": "Bob",
     "difficulty": "Medium",
-    "explanation": "The Promise resolves with 'Done', and the then() method logs it."
+    "explanation": "The constructor sets the 'name' property, accessed as u.name."
   },
   {
-    "question": "What happens if a Promise rejects without a catch?",
+    "question": "How do you define a method in a constructor?",
     "options": [
-      "An uncaught error is thrown",
-      "The Promise resolves",
-      "Nothing happens",
-      "The Promise retries"
+      "this.method = function() {}",
+      "method: function() {}",
+      "function method() {}",
+      "method = function() {}"
     ],
-    "answer": "An uncaught error is thrown",
+    "answer": "this.method = function() {}",
     "difficulty": "Medium",
-    "explanation": "Unhandled Promise rejections trigger an error in the console."
+    "explanation": "Methods are defined in a constructor using 'this' to attach them to instances."
   },
   {
-    "question": "What does 2 ** 3 evaluate to?",
+    "question": "What does Object.prototype.hasOwnProperty.call(obj, 'prop') do?",
     "options": [
-      "8",
-      "6",
-      "9",
-      "Error"
+      "Checks if 'prop' exists on obj",
+      "Adds 'prop' to obj",
+      "Calls the 'prop' method",
+      "Removes 'prop' from obj"
     ],
-    "answer": "8",
+    "answer": "Checks if 'prop' exists on obj",
     "difficulty": "Medium",
-    "explanation": "The exponentiation operator (**) raises 2 to the power of 3, resulting in 8."
+    "explanation": "This safely checks if 'prop' is a direct property, avoiding issues with overridden methods."
   },
   {
-    "question": "What is the output of: class MyClass { constructor(x) { this.x = x; } } let obj = new MyClass(5); console.log(obj.x);?",
+    "question": "What does window.location.search return?",
     "options": [
-      "5",
-      "undefined",
-      "MyClass",
-      "Error"
+      "The query string of the URL",
+      "The full URL",
+      "The domain name",
+      "The path of the URL"
     ],
-    "answer": "5",
+    "answer": "The query string of the URL",
     "difficulty": "Medium",
-    "explanation": "The class constructor sets the x property, which is accessed as obj.x."
+    "explanation": "'window.location.search' returns the query string, starting with '?'."
   },
   {
-    "question": "What does let x = true ? 'Yes' : 'No'; assign to x?",
+    "question": "What does window.history.forward() do?",
     "options": [
-      "Yes",
-      "No",
-      "true",
-      "Error"
+      "Navigates to the next page in history",
+      "Goes back one page",
+      "Reloads the page",
+      "Opens a new tab"
     ],
-    "answer": "Yes",
+    "answer": "Navigates to the next page in history",
     "difficulty": "Medium",
-    "explanation": "The ternary operator evaluates true, assigning 'Yes' to x."
+    "explanation": "'history.forward()' moves to the next page in the browser’s history."
   },
   {
-    "question": "What does obj?.prop return if obj is undefined?",
+    "question": "How do you set an element to full viewport width?",
     "options": [
-      "undefined",
-      "null",
-      "Error",
-      "prop"
+      "element.style.width = '100vw'",
+      "element.style.width = '100%'",
+      "element.setWidth('full')",
+      "element.style.width = '100vh'"
     ],
-    "answer": "undefined",
+    "answer": "element.style.width = '100vw'",
     "difficulty": "Medium",
-    "explanation": "Optional chaining (?.) returns undefined if obj is undefined, avoiding an error."
+    "explanation": "'100vw' sets the element’s width to the full viewport width."
   },
   {
-    "question": "What is the output of: let x = 10; function test() { let x = 20; console.log(x); } test();?",
+    "question": "What does window.moveTo(200, 200) do?",
+    "options": [
+      "Moves the window to coordinates (200, 200)",
+      "Resizes the window",
+      "Scrolls the window",
+      "Opens a new window"
+    ],
+    "answer": "Moves the window to coordinates (200, 200)",
+    "difficulty": "Medium",
+    "explanation": "'window.moveTo()' repositions the browser window to the specified coordinates."
+  },
+  {
+    "question": "How do you validate a text field for only alphabetic characters?",
+    "options": [
+      "/^[a-zA-Z]+$/.test(input.value)",
+      "/^\\d+$/.test(input.value)",
+      "/^[a-zA-Z0-9]+$/.test(input.value)",
+      "/^\\w+$/.test(input.value)"
+    ],
+    "answer": "/^[a-zA-Z]+$/.test(input.value)",
+    "difficulty": "Medium",
+    "explanation": "The regex '/^[a-zA-Z]+$/' ensures the input contains only letters."
+  },
+  {
+    "question": "What is the output of: let x = 5; function test() { let x = 10; return x; } console.log(test(), x);?",
+    "options": [
+      "10, 5",
+      "5, 10",
+      "10, 10",
+      "5, 5"
+    ],
+    "answer": "10, 5",
+    "difficulty": "Medium",
+    "explanation": "The inner 'let x = 10' is function-scoped, so test() returns 10; the outer x remains 5."
+  },
+  {
+    "question": "How do you validate a dropdown to ensure a specific value is selected?",
+    "options": [
+      "if (select.value === 'specific')",
+      "if (select.selectedIndex === 'specific')",
+      "if (select.option === 'specific')",
+      "if (select.value === null)"
+    ],
+    "answer": "if (select.value === 'specific')",
+    "difficulty": "Medium",
+    "explanation": "Checking 'select.value' ensures the dropdown’s selected option matches 'specific'."
+  },
+  {
+    "question": "How do you get all radio buttons in a group?",
+    "options": [
+      "document.querySelectorAll('input[name=group]')",
+      "document.getElementsByName('group').checked",
+      "document.querySelector('input.group')",
+      "document.getRadios('group')"
+    ],
+    "answer": "document.querySelectorAll('input[name=group]')",
+    "difficulty": "Medium",
+    "explanation": "'querySelectorAll()' selects all radio buttons with the same 'name' attribute."
+  },
+  {
+    "question": "What regex validates a 9-digit ZIP code?",
+    "options": [
+      "/^\\d{9}$/",
+      "/^\\d{5}$/",
+      "/^\\d{5}-\\d{4}$/",
+      "/^\\d{5}(-\\d{4})?$/"
+    ],
+    "answer": "/^\\d{9}$/",
+    "difficulty": "Medium",
+    "explanation": "'/^\\d{9}$/' matches exactly 9 digits for a ZIP+4 code without a hyphen."
+  },
+  {
+    "question": "What does try { null.a; } catch (e) { console.log(e.name); } log?",
+    "options": [
+      "TypeError",
+      "ReferenceError",
+      "SyntaxError",
+      "undefined"
+    ],
+    "answer": "TypeError",
+    "difficulty": "Medium",
+    "explanation": "Accessing a property on null throws a TypeError, caught and logged."
+  },
+  {
+    "question": "How do you throw a custom error with additional data?",
+    "options": [
+      "throw new Error('Message', { data: value })",
+      "throw 'Message' + data",
+      "throw new Error('Message')",
+      "throw { message: 'Message', data: value }"
+    ],
+    "answer": "throw { message: 'Message', data: value }",
+    "difficulty": "Medium",
+    "explanation": "Throwing an object allows attaching custom data, caught as the error object."
+  },
+  {
+    "question": "How do you handle a double-click event?",
+    "options": [
+      "element.addEventListener('dblclick', handler)",
+      "element.onDoubleClick(handler)",
+      "element.event('dblclick', handler)",
+      "element.doubleClick(handler)"
+    ],
+    "answer": "element.addEventListener('dblclick', handler)",
+    "difficulty": "Medium",
+    "explanation": "'addEventListener()' attaches a handler to the 'dblclick' event."
+  },
+  {
+    "question": "What does node.nodeType === 3 indicate?",
+    "options": [
+      "Text node",
+      "Element node",
+      "Comment node",
+      "Document node"
+    ],
+    "answer": "Text node",
+    "difficulty": "Medium",
+    "explanation": "A 'nodeType' of 3 indicates a text node in the DOM."
+  },
+  {
+    "question": "How do you select the first element with a specific class?",
+    "options": [
+      "document.querySelector('.class')",
+      "document.querySelectorAll('.class')[0]",
+      "document.getElementsByClassName('class')[0]",
+      "Both querySelector and getElementsByClassName"
+    ],
+    "answer": "Both querySelector and getElementsByClassName",
+    "difficulty": "Medium",
+    "explanation": "Both methods can select the first element with a class; querySelector uses CSS syntax."
+  },
+  {
+    "question": "How do you get the attribute names of an element?",
+    "options": [
+      "Array.from(element.attributes).map(attr => attr.name)",
+      "element.getAttributes()",
+      "element.attributeNames()",
+      "element.listAttributes()"
+    ],
+    "answer": "Array.from(element.attributes).map(attr => attr.name)",
+    "difficulty": "Medium",
+    "explanation": "'element.attributes' is a NamedNodeMap; convert to array and map to names."
+  },
+  {
+    "question": "How do you replace a node in the DOM?",
+    "options": [
+      "parent.replaceChild(newNode, oldNode)",
+      "parent.swapNode(newNode, oldNode)",
+      "parent.replace(newNode, oldNode)",
+      "parent.changeNode(newNode)"
+    ],
+    "answer": "parent.replaceChild(newNode, oldNode)",
+    "difficulty": "Medium",
+    "explanation": "'replaceChild()' replaces an existing child node with a new one."
+  },
+  {
+    "question": "What does delete obj.prop do?",
+    "options": [
+      "Removes the 'prop' property from obj",
+      "Sets 'prop' to null",
+      "Sets 'prop' to undefined",
+      "Throws an error"
+    ],
+    "answer": "Removes the 'prop' property from obj",
+    "difficulty": "Medium",
+    "explanation": "The 'delete' operator removes a property from an object."
+  },
+  {
+    "question": "What is the output of: let obj = { x: 10 }; obj.x = 20; console.log(obj.x);?",
     "options": [
       "20",
       "10",
@@ -439,250 +917,34 @@ quiz =[
     ],
     "answer": "20",
     "difficulty": "Medium",
-    "explanation": "The 'let x' inside the function creates a new block-scoped variable, shadowing the outer x."
+    "explanation": "Assigning to obj.x updates the property value to 20."
   },
   {
-    "question": "What does this closure return: function makeCounter() { let count = 0; return () => count++; } let counter = makeCounter(); console.log(counter());?",
+    "question": "What does window.location.pathname return?",
     "options": [
-      "0",
-      "1",
-      "undefined",
-      "Error"
+      "The path of the URL",
+      "The full URL",
+      "The query string",
+      "The domain name"
     ],
-    "answer": "0",
+    "answer": "The path of the URL",
     "difficulty": "Medium",
-    "explanation": "The closure returns the current count (0) and then increments it."
+    "explanation": "'window.location.pathname' returns the path portion of the URL, e.g., '/page'."
   },
   {
-    "question": "What is the output of: let x = 2; console.log(`Square: ${x * x}`);?",
+    "question": "How do you validate a text field for a maximum length of 10 characters?",
     "options": [
-      "Square: 4",
-      "Square: 2",
-      "Square: ${x * x}",
-      "Error"
+      "if (input.value.length <= 10)",
+      "if (input.text.length <= 10)",
+      "if (input.value <= 10)",
+      "if (input.length <= 10)"
     ],
-    "answer": "Square: 4",
+    "answer": "if (input.value.length <= 10)",
     "difficulty": "Medium",
-    "explanation": "Template literals evaluate ${x * x} as 4, resulting in 'Square: 4'."
+    "explanation": "Checking 'input.value.length <= 10' ensures the text field has 10 or fewer characters."
   },
   {
-    "question": "What does let [a, ...rest] = [1, 2, 3, 4]; assign to rest?",
-    "options": [
-      "[2, 3, 4]",
-      "[1, 2, 3]",
-      "[3, 4]",
-      "Error"
-    ],
-    "answer": "[2, 3, 4]",
-    "difficulty": "Medium",
-    "explanation": "The rest parameter in destructuring collects remaining elements into an array."
-  },
-  {
-    "question": "What does function add(a, b = 10) { return a + b; } return when called as add(5);?",
-    "options": [
-      "15",
-      "5",
-      "10",
-      "Error"
-    ],
-    "answer": "15",
-    "difficulty": "Medium",
-    "explanation": "The default parameter b = 10 is used, so add(5) returns 5 + 10 = 15."
-  },
-  {
-    "question": "What does function collect(...args) { return args.length; } return when called as collect(1, 2, 3);?",
-    "options": [
-      "3",
-      "1",
-      "[1, 2, 3]",
-      "Error"
-    ],
-    "answer": "3",
-    "difficulty": "Medium",
-    "explanation": "The rest parameter collects all arguments into an array, and length returns 3."
-  },
-  {
-    "question": "What does let obj = { ...{a: 1}, b: 2 }; create?",
-    "options": [
-      "{a: 1, b: 2}",
-      "{a: 1}",
-      "{b: 2}",
-      "Error"
-    ],
-    "answer": "{a: 1, b: 2}",
-    "difficulty": "Medium",
-    "explanation": "The spread operator copies properties from one object and adds b: 2."
-  },
-  {
-    "question": "What does const fn = () => 'Hello'; console.log(fn()); return?",
-    "options": [
-      "Hello",
-      "undefined",
-      "fn",
-      "Error"
-    ],
-    "answer": "Hello",
-    "difficulty": "Medium",
-    "explanation": "The arrow function returns 'Hello' when called."
-  },
-  {
-    "question": "What is the output of: let obj = { [key]: value } where key = 'x' and value = 10?",
-    "options": [
-      "{x: 10}",
-      "{key: value}",
-      "undefined",
-      "Error"
-    ],
-    "answer": "{x: 10}",
-    "difficulty": "Medium",
-    "explanation": "Computed property names in enhanced object literals evaluate [key] to x."
-  },
-  {
-    "question": "What does for (let c of 'abc') { console.log(c); } output?",
-    "options": [
-      "a, b, c",
-      "abc",
-      "0, 1, 2",
-      "Error"
-    ],
-    "answer": "a, b, c",
-    "difficulty": "Medium",
-    "explanation": "The for..of loop iterates over each character in the string 'abc'."
-  },
-  {
-    "question": "What does function* range() { for (let i = 0; i < 3; i++) yield i; } let r = range(); console.log(r.next().value); return?",
-    "options": [
-      "0",
-      "1",
-      "undefined",
-      "Error"
-    ],
-    "answer": "0",
-    "difficulty": "Medium",
-    "explanation": "The generator yields 0 first; next().value retrieves it."
-  },
-  {
-    "question": "What does export default function myFunc() {} allow?",
-    "options": [
-      "Importing without curly braces",
-      "Importing with curly braces",
-      "Multiple default exports",
-      "No imports"
-    ],
-    "answer": "Importing without curly braces",
-    "difficulty": "Medium",
-    "explanation": "Default exports allow importing the function without specifying a name in curly braces."
-  },
-  {
-    "question": "What does new Map().set('key', 'value').get('key') return?",
-    "options": [
-      "value",
-      "key",
-      "undefined",
-      "Error"
-    ],
-    "answer": "value",
-    "difficulty": "Medium",
-    "explanation": "'set()' adds the key-value pair, and 'get()' retrieves 'value' for 'key'."
-  },
-  {
-    "question": "What does [1, 2, 3].reduce((a, b) => a + b, 0) return?",
-    "options": [
-      "6",
-      "3",
-      "[1, 2, 3]",
-      "Error"
-    ],
-    "answer": "6",
-    "difficulty": "Medium",
-    "explanation": "'reduce()' sums the array elements starting with initial value 0, resulting in 6."
-  },
-  {
-    "question": "What does function higher(fn) { return fn(10); } console.log(higher(x => x + 5)); return?",
-    "options": [
-      "15",
-      "10",
-      "5",
-      "Error"
-    ],
-    "answer": "15",
-    "difficulty": "Medium",
-    "explanation": "The higher-order function calls the provided function with 10, returning 10 + 5 = 15."
-  },
-  {
-    "question": "What does [1, 2, 3].forEach(x => console.log(x)) do?",
-    "options": [
-      "Logs 1, 2, 3",
-      "Returns [1, 2, 3]",
-      "Logs nothing",
-      "Throws an error"
-    ],
-    "answer": "Logs 1, 2, 3",
-    "difficulty": "Medium",
-    "explanation": "'forEach()' executes the callback for each element, logging 1, 2, 3."
-  },
-  {
-    "question": "What does Promise.resolve(42).then(x => x * 2) return?",
-    "options": [
-      "A Promise resolving to 84",
-      "84",
-      "42",
-      "Error"
-    ],
-    "answer": "A Promise resolving to 84",
-    "difficulty": "Medium",
-    "explanation": "'then()' chains a transformation, returning a new Promise that resolves to 42 * 2."
-  },
-  {
-    "question": "What is the output of: console.log(5 ** 2);?",
-    "options": [
-      "25",
-      "10",
-      "5",
-      "Error"
-    ],
-    "answer": "25",
-    "difficulty": "Medium",
-    "explanation": "The exponentiation operator (**) computes 5 raised to the power of 2, yielding 25."
-  },
-  {
-    "question": "What does class Point { constructor(x, y) { this.x = x; this.y = y; } } let p = new Point(3, 4); console.log(p.x); return?",
-    "options": [
-      "3",
-      "4",
-      "undefined",
-      "Error"
-    ],
-    "answer": "3",
-    "difficulty": "Medium",
-    "explanation": "The constructor sets x to 3, which is accessed as p.x."
-  },
-  {
-    "question": "What does let x = 10 > 5 ? 'Big' : 'Small'; assign to x?",
-    "options": [
-      "Big",
-      "Small",
-      "true",
-      "Error"
-    ],
-    "answer": "Big",
-    "difficulty": "Medium",
-    "explanation": "The ternary operator evaluates 10 > 5 as true, assigning 'Big' to x."
-  },
-  {
-    "question": "What does obj?.method?.() return if obj is null?",
-    "options": [
-      "undefined",
-      "null",
-      "Error",
-      "method"
-    ],
-    "answer": "undefined",
-    "difficulty": "Medium",
-    "explanation": "Optional chaining (?.) stops evaluation at null, returning undefined."
-  },
-  {
-    "question": "What is the output of: function outer() { let x = 1; function inner() { x++; return x; } return inner; } let fn = outer(); console.log(fn());?",
+    "question": "What is the output of: function test() { var x = 1; { var x = 2; } return x; }?",
     "options": [
       "2",
       "1",
@@ -691,475 +953,211 @@ quiz =[
     ],
     "answer": "2",
     "difficulty": "Medium",
-    "explanation": "The closure increments x from 1 to 2 and returns it."
+    "explanation": "'var' is function-scoped, so the inner 'var x = 2' reassigns the same variable."
   },
   {
-    "question": "What does `Sum: ${2 + 3}` evaluate to?",
+    "question": "How do you validate a dropdown’s selected option has a specific attribute?",
     "options": [
-      "Sum: 5",
-      "Sum: 2 + 3",
-      "5",
-      "Error"
+      "if (select.options[select.selectedIndex].hasAttribute('data-valid'))",
+      "if (select.value.hasAttribute('data-valid'))",
+      "if (select.option.getAttribute('data-valid'))",
+      "if (select.selected.hasAttribute('data-valid'))"
     ],
-    "answer": "Sum: 5",
+    "answer": "if (select.options[select.selectedIndex].hasAttribute('data-valid'))",
     "difficulty": "Medium",
-    "explanation": "Template literals evaluate the expression ${2 + 3} to 5."
+    "explanation": "'options[selectedIndex]' accesses the selected option to check for attributes."
   },
   {
-    "question": "What does let {x: a, y: b} = {x: 10, y: 20}; assign to a and b?",
+    "question": "How do you check if no radio button is selected in a group?",
     "options": [
-      "a = 10, b = 20",
-      "a = undefined, b = undefined",
-      "a = x, b = y",
-      "Error"
+      "if (!document.querySelector('input[name=group]:checked'))",
+      "if (document.querySelector('input[name=group]').checked === false)",
+      "if (document.getElementByName('group').value === null)",
+      "if (document.querySelector('input.group') === null)"
     ],
-    "answer": "a = 10, b = 20",
+    "answer": "if (!document.querySelector('input[name=group]:checked'))",
     "difficulty": "Medium",
-    "explanation": "Destructuring renames properties x and y to variables a and b."
+    "explanation": "If no radio button is checked, the selector returns null, so '!selector' is true."
   },
   {
-    "question": "What does function multiply(a, b = 2) { return a * b; } return when called as multiply(3);?",
+    "question": "What does try { undefined.b; } catch (e) { console.log(e.name); } log?",
     "options": [
-      "6",
-      "3",
-      "2",
-      "Error"
+      "TypeError",
+      "ReferenceError",
+      "SyntaxError",
+      "undefined"
     ],
-    "answer": "6",
+    "answer": "TypeError",
     "difficulty": "Medium",
-    "explanation": "The default parameter b = 2 is used, so multiply(3) returns 3 * 2 = 6."
+    "explanation": "Accessing a property on undefined throws a TypeError, caught and logged."
   },
   {
-    "question": "What does function args(...values) { return values[0]; } return when called as args(1, 2, 3);?",
+    "question": "How do you handle a keypress event on an input?",
+    "options": [
+      "input.addEventListener('keypress', handler)",
+      "input.onKeypress(handler)",
+      "input.event('keypress', handler)",
+      "input.keypress(handler)"
+    ],
+    "answer": "input.addEventListener('keypress', handler)",
+    "difficulty": "Medium",
+    "explanation": "'addEventListener()' attaches a handler to the 'keypress' event."
+  },
+  {
+    "question": "How do you get the value of a custom attribute?",
+    "options": [
+      "element.getAttribute('data-custom')",
+      "element.data.custom",
+      "element.getData('custom')",
+      "element.customAttribute"
+    ],
+    "answer": "element.getAttribute('data-custom')",
+    "difficulty": "Medium",
+    "explanation": "'getAttribute()' retrieves the value of a custom attribute like 'data-custom'."
+  },
+  {
+    "question": "What does document.createElement('div').appendChild(document.createTextNode('text')) do?",
+    "options": [
+      "Creates a div with a text node 'text'",
+      "Creates a div with a child div",
+      "Creates a text node only",
+      "Throws an error"
+    ],
+    "answer": "Creates a div with a text node 'text'",
+    "difficulty": "Medium",
+    "explanation": "'createElement()' and 'createTextNode()' create a div containing the text 'text'."
+  },
+  {
+    "question": "What does 'in' operator do with objects?",
+    "options": [
+      "Checks if a property exists in an object or its prototype",
+      "Checks if a property is undefined",
+      "Adds a property to an object",
+      "Removes a property from an object"
+    ],
+    "answer": "Checks if a property exists in an object or its prototype",
+    "difficulty": "Medium",
+    "explanation": "The 'in' operator returns true if the property exists on the object or its prototype chain."
+  },
+  {
+    "question": "What does window.location.reload() do?",
+    "options": [
+      "Reloads the current page",
+      "Navigates to a new URL",
+      "Opens a new window",
+      "Goes back one page"
+    ],
+    "answer": "Reloads the current page",
+    "difficulty": "Medium",
+    "explanation": "'location.reload()' refreshes the current page."
+  },
+  {
+    "question": "How do you validate a text field for only numbers?",
+    "options": [
+      "/^\\d+$/.test(input.value)",
+      "/^[a-zA-Z]+$/.test(input.value)",
+      "/^\\w+$/.test(input.value)",
+      "/^[0-9a-zA-Z]+$/.test(input.value)"
+    ],
+    "answer": "/^\\d+$/.test(input.value)",
+    "difficulty": "Medium",
+    "explanation": "The regex '/^\\d+$/' ensures the input contains only digits."
+  },
+  {
+    "question": "What is the output of: let x = 1; { let x = 2; { let x = 3; } } console.log(x);?",
     "options": [
       "1",
+      "2",
       "3",
-      "[1, 2, 3]",
       "Error"
     ],
     "answer": "1",
     "difficulty": "Medium",
-    "explanation": "The rest parameter collects arguments into an array; values[0] returns 1."
+    "explanation": "Each 'let x' is block-scoped; the outermost x remains 1 and is logged."
   },
   {
-    "question": "What does let arr = [1, ...[2, 3], 4]; create?",
+    "question": "How do you validate a dropdown for multiple selections?",
     "options": [
-      "[1, 2, 3, 4]",
-      "[1, [2, 3], 4]",
-      "[2, 3, 4]",
-      "Error"
+      "if (select.selectedOptions.length > 0)",
+      "if (select.value.length > 0)",
+      "if (select.options.length > 0)",
+      "if (select.multiple === true)"
     ],
-    "answer": "[1, 2, 3, 4]",
+    "answer": "if (select.selectedOptions.length > 0)",
     "difficulty": "Medium",
-    "explanation": "The spread operator flattens [2, 3] into the new array."
+    "explanation": "'selectedOptions.length' checks the number of selected options in a multiple select."
   },
   {
-    "question": "What does const fn = x => x + 1; console.log(fn(9)); return?",
+    "question": "How do you set a radio button as checked?",
     "options": [
-      "10",
-      "9",
-      "undefined",
-      "Error"
+      "radio.checked = true",
+      "radio.value = true",
+      "radio.setChecked(true)",
+      "radio.select = true"
     ],
-    "answer": "10",
+    "answer": "radio.checked = true",
     "difficulty": "Medium",
-    "explanation": "The arrow function adds 1 to x, returning 10 for x = 9."
+    "explanation": "Setting 'checked = true' selects the radio button programmatically."
   },
   {
-    "question": "What does let obj = { prop: 'value', getProp() { return this.prop; } }; console.log(obj.getProp()); return?",
+    "question": "What does try { throw new Error('Test'); } catch (e) { console.log(e.message); } log?",
     "options": [
-      "value",
-      "prop",
-      "undefined",
-      "Error"
-    ],
-    "answer": "value",
-    "difficulty": "Medium",
-    "explanation": "The enhanced object literal method getProp returns the prop value."
-  },
-  {
-    "question": "What does for (let x of new Set([1, 1, 2])) { console.log(x); } output?",
-    "options": [
-      "1, 2",
-      "1, 1, 2",
-      "1",
-      "Error"
-    ],
-    "answer": "1, 2",
-    "difficulty": "Medium",
-    "explanation": "The for..of loop iterates over unique values in the Set, logging 1, 2."
-  },
-  {
-    "question": "What does function* gen() { yield* [1, 2]; } let g = gen(); console.log(g.next().value); return?",
-    "options": [
-      "1",
-      "2",
-      "undefined",
-      "Error"
-    ],
-    "answer": "1",
-    "difficulty": "Medium",
-    "explanation": "'yield*' delegates to the iterable, yielding 1 first."
-  },
-  {
-    "question": "What does import * as mod from './module.js'; do?",
-    "options": [
-      "Imports all exports as an object",
-      "Imports only the default export",
-      "Imports nothing",
-      "Throws an error"
-    ],
-    "answer": "Imports all exports as an object",
-    "difficulty": "Medium",
-    "explanation": "The * as mod syntax imports all exports into an object named mod."
-  },
-  {
-    "question": "What does new Map().has('key') return if no key is set?",
-    "options": [
-      "false",
-      "true",
-      "undefined",
-      "Error"
-    ],
-    "answer": "false",
-    "difficulty": "Medium",
-    "explanation": "'has()' returns false if the key does not exist in the Map."
-  },
-  {
-    "question": "What does [1, 2, 3].every(x => x > 0) return?",
-    "options": [
-      "true",
-      "false",
-      "[1, 2, 3]",
-      "Error"
-    ],
-    "answer": "true",
-    "difficulty": "Medium",
-    "explanation": "'every()' returns true if all elements pass the test (x > 0)."
-  },
-  {
-    "question": "What does function compose(f, g) { return x => f(g(x)); } do?",
-    "options": [
-      "Combines two functions",
-      "Adds two functions",
-      "Returns a single function",
-      "Throws an error"
-    ],
-    "answer": "Combines two functions",
-    "difficulty": "Medium",
-    "explanation": "The higher-order function composes f and g, applying g then f to x."
-  },
-  {
-    "question": "What does setInterval(() => console.log('Tick'), 1000) do?",
-    "options": [
-      "Logs 'Tick' every second",
-      "Logs 'Tick' once",
-      "Logs 'Tick' after 1 second",
-      "Throws an error"
-    ],
-    "answer": "Logs 'Tick' every second",
-    "difficulty": "Medium",
-    "explanation": "'setInterval' repeatedly calls the callback every 1000ms."
-  },
-  {
-    "question": "What does Promise.reject('Error').catch(err => console.log(err)); do?",
-    "options": [
-      "Logs 'Error'",
-      "Logs undefined",
-      "Throws an error",
-      "Logs nothing"
-    ],
-    "answer": "Logs 'Error'",
-    "difficulty": "Medium",
-    "explanation": "The catch() method handles the rejected Promise, logging 'Error'."
-  },
-  {
-    "question": "What does 4 ** 0.5 evaluate to?",
-    "options": [
-      "2",
-      "4",
-      "1",
-      "Error"
-    ],
-    "answer": "2",
-    "difficulty": "Medium",
-    "explanation": "The exponentiation operator computes the square root (4 ** 0.5 = 2)."
-  },
-  {
-    "question": "What does class Animal { speak() { return 'Sound'; } } let a = new Animal(); console.log(a.speak()); return?",
-    "options": [
-      "Sound",
-      "undefined",
-      "Animal",
-      "Error"
-    ],
-    "answer": "Sound",
-    "difficulty": "Medium",
-    "explanation": "The speak method returns 'Sound' for the Animal instance."
-  },
-  {
-    "question": "What does let x = null ?? 'default'; assign to x?",
-    "options": [
-      "default",
-      "null",
-      "undefined",
-      "Error"
-    ],
-    "answer": "default",
-    "difficulty": "Medium",
-    "explanation": "The nullish coalescing operator (??) assigns 'default' if x is null or undefined."
-  },
-  {
-    "question": "What does arr?.[0] return if arr is undefined?",
-    "options": [
-      "undefined",
-      "null",
+      "Test",
       "Error",
-      "0"
-    ],
-    "answer": "undefined",
-    "difficulty": "Medium",
-    "explanation": "Optional chaining (?.) returns undefined if arr is undefined."
-  },
-  {
-    "question": "What is the output of: function outer() { let x = 10; return function() { return x; } } let fn = outer(); console.log(fn());?",
-    "options": [
-      "10",
       "undefined",
-      "Error",
-      "null"
+      "TypeError"
     ],
-    "answer": "10",
+    "answer": "Test",
     "difficulty": "Medium",
-    "explanation": "The closure retains access to x, returning its value (10)."
+    "explanation": "The thrown error’s message, 'Test', is caught and logged."
   },
   {
-    "question": "What does `Result: ${10 > 5 ? 'Yes' : 'No'}` evaluate to?",
+    "question": "How do you handle a form’s submit event?",
     "options": [
-      "Result: Yes",
-      "Result: No",
-      "Result: true",
-      "Error"
+      "form.addEventListener('submit', handler)",
+      "form.onSubmit(handler)",
+      "form.event('submit', handler)",
+      "form.submit(handler)"
     ],
-    "answer": "Result: Yes",
+    "answer": "form.addEventListener('submit', handler)",
     "difficulty": "Medium",
-    "explanation": "The ternary operator in the template literal evaluates to 'Yes' since 10 > 5."
+    "explanation": "'addEventListener()' attaches a handler to the form’s 'submit' event."
   },
   {
-    "question": "What does let [first, , third] = [1, 2, 3]; assign to first and third?",
+    "question": "How do you remove a node from the DOM?",
     "options": [
-      "first = 1, third = 3",
-      "first = 1, third = 2",
-      "first = undefined, third = undefined",
-      "Error"
+      "parent.removeChild(node)",
+      "node.delete()",
+      "node.removeNode()",
+      "parent.deleteChild(node)"
     ],
-    "answer": "first = 1, third = 3",
+    "answer": "parent.removeChild(node)",
     "difficulty": "Medium",
-    "explanation": "Destructuring skips the second element, assigning 1 to first and 3 to third."
+    "explanation": "'removeChild()' removes a specified child node from its parent."
   },
   {
-    "question": "What does function greet({name = 'User'} = {}) { return name; } return when called as greet();?",
+    "question": "What does Object.keys(obj).length return?",
     "options": [
-      "User",
-      "undefined",
-      "null",
-      "Error"
+      "The number of own properties in obj",
+      "The number of prototype properties",
+      "The number of methods in obj",
+      "The total number of keys in obj"
     ],
-    "answer": "User",
+    "answer": "The number of own properties in obj",
     "difficulty": "Medium",
-    "explanation": "The default parameter provides an empty object with name = 'User' if no argument is passed."
+    "explanation": "'Object.keys()' returns an array of an object’s own property names, and 'length' counts them."
   },
   {
-    "question": "What does function sum(...nums) { return nums.reduce((a, b) => a + b, 0); } return for sum(1, 2, 3);?",
+    "question": "What does window.location.replace('new-url') do?",
     "options": [
-      "6",
-      "1",
-      "[1, 2, 3]",
-      "Error"
+      "Navigates to a new URL without adding to history",
+      "Adds the URL to history",
+      "Reloads the current page",
+      "Opens a new tab"
     ],
-    "answer": "6",
+    "answer": "Navigates to a new URL without adding to history",
     "difficulty": "Medium",
-    "explanation": "The rest parameter collects arguments into an array, and reduce sums them to 6."
-  },
-  {
-    "question": "What does let obj = {...{x: 1, y: 2}, z: 3}; create?",
-    "options": [
-      "{x: 1, y: 2, z: 3}",
-      "{x: 1, y: 2}",
-      "{z: 3}",
-      "Error"
-    ],
-    "answer": "{x: 1, y: 2, z: 3}",
-    "difficulty": "Medium",
-    "explanation": "The spread operator copies x and y, and z: 3 is added to the new object."
-  },
-  {
-    "question": "What does const double = x => x * 2; console.log(double(3)); return?",
-    "options": [
-      "6",
-      "3",
-      "undefined",
-      "Error"
-    ],
-    "answer": "6",
-    "difficulty": "Medium",
-    "explanation": "The arrow function multiplies x by 2, returning 6 for x = 3."
-  },
-  {
-    "question": "What does let obj = { ['prop' + 1]: 'value' }; console.log(obj.prop1); return?",
-    "options": [
-      "value",
-      "undefined",
-      "prop1",
-      "Error"
-    ],
-    "answer": "value",
-    "difficulty": "Medium",
-    "explanation": "Computed property names evaluate 'prop' + 1 to prop1, assigning 'value'."
-  },
-  {
-    "question": "What does for (let x of new Map([[1, 'a'], [2, 'b']])) { console.log(x); } output?",
-    "options": [
-      "[1, 'a'], [2, 'b']",
-      "1, 2",
-      "'a', 'b'",
-      "Error"
-    ],
-    "answer": "[1, 'a'], [2, 'b']",
-    "difficulty": "Medium",
-    "explanation": "The for..of loop iterates over Map entries, logging key-value pairs as arrays."
-  },
-  {
-    "question": "What does function* gen() { yield 1; return 2; } let g = gen(); console.log(g.next().value); return?",
-    "options": [
-      "1",
-      "2",
-      "undefined",
-      "Error"
-    ],
-    "answer": "1",
-    "difficulty": "Medium",
-    "explanation": "The generator yields 1 first; next().value retrieves it."
-  },
-  {
-    "question": "What does export { x, y } from './module.js'; do?",
-    "options": [
-      "Re-exports x and y from another module",
-      "Imports x and y",
-      "Defines x and y",
-      "Throws an error"
-    ],
-    "answer": "Re-exports x and y from another module",
-    "difficulty": "Medium",
-    "explanation": "The syntax re-exports named exports from another module."
-  },
-  {
-    "question": "What does new Map([['a', 1]]).size return?",
-    "options": [
-      "1",
-      "0",
-      "undefined",
-      "Error"
-    ],
-    "answer": "1",
-    "difficulty": "Medium",
-    "explanation": "The 'size' property returns the number of key-value pairs in the Map."
-  },
-  {
-    "question": "What does [1, 2, 3].some(x => x > 2) return?",
-    "options": [
-      "true",
-      "false",
-      "[1, 2, 3]",
-      "Error"
-    ],
-    "answer": "true",
-    "difficulty": "Medium",
-    "explanation": "'some()' returns true if at least one element (3) passes the test."
-  },
-  {
-    "question": "What does function wrap(fn) { return (...args) => fn(args); } console.log(wrap(x => x.length)(1, 2, 3)); return?",
-    "options": [
-      "3",
-      "1",
-      "[1, 2, 3]",
-      "Error"
-    ],
-    "answer": "3",
-    "difficulty": "Medium",
-    "explanation": "The higher-order function wraps fn, passing args as an array, returning its length."
-  },
-  {
-    "question": "What does [1, 2].forEach((x, i) => console.log(i, x)); output?",
-    "options": [
-      "0 1, 1 2",
-      "1 2, 2 1",
-      "1, 2",
-      "Error"
-    ],
-    "answer": "0 1, 1 2",
-    "difficulty": "Medium",
-    "explanation": "'forEach()' passes the index and element to the callback, logging pairs."
-  },
-  {
-    "question": "What does Promise.all([Promise.resolve(1), Promise.resolve(2)]).then(console.log); do?",
-    "options": [
-      "Logs [1, 2]",
-      "Logs 1, 2",
-      "Logs nothing",
-      "Throws an error"
-    ],
-    "answer": "Logs [1, 2]",
-    "difficulty": "Medium",
-    "explanation": "Promise.all resolves with an array of resolved values, logging [1, 2]."
-  },
-  {
-    "question": "What does 3 ** 3 evaluate to?",
-    "options": [
-      "27",
-      "9",
-      "6",
-      "Error"
-    ],
-    "answer": "27",
-    "difficulty": "Medium",
-    "explanation": "The exponentiation operator computes 3 raised to the power of 3, yielding 27."
-  },
-  {
-    "question": "What does class MyClass { static x = 5; } console.log(MyClass.x); return?",
-    "options": [
-      "5",
-      "undefined",
-      "MyClass",
-      "Error"
-    ],
-    "answer": "5",
-    "difficulty": "Medium",
-    "explanation": "Static properties are accessed directly on the class, returning 5."
-  },
-  {
-    "question": "What does let x = false ? 'On' : 'Off'; assign to x?",
-    "options": [
-      "Off",
-      "On",
-      "false",
-      "Error"
-    ],
-    "answer": "Off",
-    "difficulty": "Medium",
-    "explanation": "The ternary operator evaluates false, assigning 'Off' to x."
-  },
-  {
-    "question": "What does obj?.nested?.prop return if nested is undefined?",
-    "options": [
-      "undefined",
-      "null",
-      "Error",
-      "prop"
-    ],
-    "answer": "undefined",
-    "difficulty": "Medium",
-    "explanation": "Optional chaining stops at undefined, returning undefined."
+    "explanation": "'location.replace()' navigates to a new URL without creating a new history entry."
   }
 ]
 # Cache shuffled quiz (removed for testing, re-add if needed)
@@ -1558,6 +1556,7 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 
