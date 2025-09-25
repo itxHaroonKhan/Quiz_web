@@ -2,7 +2,7 @@ import streamlit as st
 import random
 from datetime import datetime
 import uuid
-[
+quiz = [
   {
     "question": "What is the scope of a variable declared with 'var' inside a function?",
     "options": [
@@ -1548,4 +1548,5 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {str(e)}. Please try refreshing or running locally.")
     st.markdown("To run locally, save this code as `quiz_app.py` and run `streamlit run quiz_app.py`.")
+
 
