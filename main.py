@@ -1,10 +1,13 @@
 
-
-
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
+
+
+
+
+
 
 quiz = [
   {
@@ -944,7 +947,9 @@ quiz = [
     "explanation": "The regex validates the email, and jQuery toggles the 'valid' class."
   }
 ]
-# Cache shuffled quiz (removed for testing, re-add if needed)
+
+# Cache shuffled quiz
+@st.cache_data
 def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
     for q in shuffled:
@@ -957,21 +962,24 @@ def shuffle_quiz(_quiz):
 # Initialize session state
 if "quiz_data" not in st.session_state:
     if not quiz:
-        st.error("Quiz list is empty!")
+        st.error("Quiz list is empty! Please check the quiz data.")
+        st.stop()
     st.session_state.update({
-        "quiz_data": shuffle_quiz(quiz) if quiz else [],
+        "quiz_data": shuffle_quiz(quiz),
         "score": 0,
         "current_q": 0,
-        "start_time": datetime.now(),
-        "answers": [None] * len(quiz) if quiz else [],
+        "start_time": None,  # Set when quiz starts
+        "answers": [None] * len(quiz),
         "show_results": False,
         "selected_option": None,
         "feedback": None,
         "time_left": 3600,  # 60 minutes
         "theme": "dark",
         "streak": 0,
+        "max_streak": 0,
         "started": False,
-        "max_streak": 0
+        "paused": False,
+        "pause_time": None
     })
     st.write(f"Initialized quiz with {len(st.session_state.quiz_data)} questions")
 
@@ -981,11 +989,24 @@ def toggle_theme():
 
 # Timer logic
 def update_timer():
-    elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-    st.session_state.time_left = max(3600 - elapsed, 0)  # 60 minutes
-    if st.session_state.time_left <= 0:
-        st.session_state.show_results = True
-        st.rerun()
+    if not st.session_state.paused and st.session_state.start_time:
+        elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
+        st.session_state.time_left = max(3600 - elapsed, 0)
+        if st.session_state.time_left <= 0:
+            st.session_state.show_results = True
+
+# Pause/Resume quiz
+def toggle_pause():
+    if st.session_state.paused:
+        # Resume: adjust start_time to account for pause duration
+        pause_duration = (datetime.now() - st.session_state.pause_time).total_seconds()
+        st.session_state.start_time += pause_duration
+        st.session_state.paused = False
+    else:
+        # Pause
+        st.session_state.paused = True
+        st.session_state.pause_time = datetime.now()
+    st.rerun()
 
 # Reset quiz
 def reset_quiz():
@@ -993,19 +1014,20 @@ def reset_quiz():
         "quiz_data": shuffle_quiz(quiz),
         "score": 0,
         "current_q": 0,
-        "start_time": datetime.now(),
+        "start_time": None,
         "answers": [None] * len(quiz),
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 3600,  # 60 minutes
+        "time_left": 3600,
         "streak": 0,
         "max_streak": 0,
-        "started": False
+        "started": False,
+        "paused": False,
+        "pause_time": None
     })
-    st.rerun()
 
-# CSS for enhanced UI
+# CSS for enhanced UI (added ARIA attributes and improved code block styling)
 st.markdown("""
 <style>
 body {
@@ -1054,7 +1076,7 @@ body {
     transition: all 0.3s ease;
     transform: scale(1);
 }
-.stButton>button:hover {
+.stButton>button:hover:not(:disabled) {
     background: var(--button-hover);
     transform: scale(1.05);
     box-shadow: 0 4px 12px var(--shadow);
@@ -1063,6 +1085,9 @@ body {
     background: #6b7280;
     cursor: not-allowed;
     transform: scale(1);
+}
+.stButton>button:focus {
+    outline: 2px solid #a855f7;
 }
 .selected-correct {
     background: #34c759 !important;
@@ -1137,7 +1162,7 @@ body {
     color: #b0b0d0;
     margin-bottom: 10px;
 }
-.stCodeBlock {
+.stCodeBlock, .stCodeBlock pre, .stCodeBlock code {
     background-color: var(--code-bg) !important;
     border-radius: 8px;
     padding: 15px;
@@ -1145,8 +1170,6 @@ body {
     font-size: 14px;
     line-height: 1.5;
     border: 1px solid #4b4b6b;
-}
-.stCodeBlock pre, .stCodeBlock code {
     color: var(--text-color);
 }
 @keyframes fadeIn {
@@ -1171,7 +1194,7 @@ body {
 """, unsafe_allow_html=True)
 
 # Main UI
-st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">', unsafe_allow_html=True)
+st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}" role="main">', unsafe_allow_html=True)
 st.markdown('<h1 class="title">🚀 JavaScript Mastery Quiz</h1>', unsafe_allow_html=True)
 st.markdown('<p class="caption">Challenge Your JavaScript Expertise!</p>', unsafe_allow_html=True)
 
@@ -1195,22 +1218,28 @@ if not st.session_state.started:
         st.rerun()
 else:
     # Timer
-    if not st.session_state.show_results:
+    if not st.session_state.show_results and not st.session_state.paused:
         update_timer()
         minutes = int(st.session_state.time_left // 60)
         seconds = int(st.session_state.time_left % 60)
-        st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="timer" role="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+
+    # Pause/Resume button
+    pause_label = "Pause Quiz" if not st.session_state.paused else "Resume Quiz"
+    if st.button(pause_label, key="pause_quiz"):
+        toggle_pause()
 
     if not st.session_state.quiz_data:
         st.error("No quiz questions available.")
+        st.stop()
     else:
         # Progress bar
         progress = st.session_state.current_q / len(st.session_state.quiz_data)
-        progress_percentage = int(progress * 100)
+        progress_percentage = progress * 100  # Keep as float for precision
         st.markdown(f"""
-        <div class="progress-bar">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{progress_percentage}" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-fill" style="width: {progress_percentage}%"></div>
-            <div class="progress-text">{progress_percentage}%</div>
+            <div class="progress-text">{progress_percentage:.1f}%</div>
         </div>
         <div style="color: var(--text-color); font-size: 13px; text-align: center;">
             Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
@@ -1219,15 +1248,15 @@ else:
 
         if not st.session_state.show_results:
             with st.container():
-                st.markdown('<div class="question-container">', unsafe_allow_html=True)
+                st.markdown('<div class="question-container" role="region" aria-label="Question">', unsafe_allow_html=True)
                 q = st.session_state.quiz_data[st.session_state.current_q]
 
                 # Display difficulty and streak
                 st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
                 # Split question into text and code
-                if "```javascript
-                    question_parts = q["question"].split("```javascript\n")
+                if "```javascript" in q["question"]:
+                    question_parts = q["question"].split("```javascript
                     question_text = question_parts[0].strip()
                     code_snippet = question_parts[1].split("```")[0].strip()
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
@@ -1242,10 +1271,12 @@ else:
                     button_class = ""
                     if st.session_state.selected_option == option:
                         button_class = "selected-correct" if option == q["labeled_answer"] else "selected-wrong"
+                    button_key = f"q_{q['id']}_{i}"  # Unique key using question ID
                     if st.button(
                         option,
-                        key=f"q{i}_{st.session_state.current_q}",
-                        disabled=st.session_state.selected_option is not None
+                        key=button_key,
+                        disabled=st.session_state.selected_option is not None or st.session_state.paused,
+                        help=f"Select option {i + 1}"
                     ):
                         is_correct = option == q["labeled_answer"]
                         st.session_state.selected_option = option
@@ -1291,10 +1322,10 @@ else:
 
         else:
             # Results
-            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 3600)  # 60 minutes
+            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 3600) if st.session_state.start_time else 3600
             total_possible_score = len(quiz) * 2
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
-            st.markdown('<div class="question-container">', unsafe_allow_html=True)
+            st.markdown('<div class="question-container" role="region" aria-label="Results">', unsafe_allow_html=True)
             st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
             st.markdown(f"""
             <h3>📊 Results</h3>
@@ -1311,11 +1342,13 @@ else:
             if accuracy > 80:
                 st.markdown("""
                 <script>
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    }
                 </script>
                 """, unsafe_allow_html=True)
 
@@ -1336,6 +1369,7 @@ else:
             # Play Again button
             if st.button("🔄 Play Again", key="play_again"):
                 reset_quiz()
+                st.rerun()
 
             st.markdown("</div>", unsafe_allow_html=True)
 
