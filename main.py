@@ -1,1242 +1,1238 @@
+
+
+
 import streamlit as st
 import random
 from datetime import datetime
 import uuid
 
-quiz =[
+quiz = [
   {
-    "question": "What is the output of: `function test() { var x = 1; if (true) { var x = 2; } return x; } console.log(test());`?",
+    "question": "What is the output of this code: `function scopeTest() { var x = 1; if (true) { var x = 2; } return x; } console.log(scopeTest());`?",
     "options": [
       "2",
-      "1"
+      "1",
+      "undefined",
+      "ReferenceError"
     ],
     "answer": "2",
     "difficulty": "Medium",
-    "explanation": "'var' is function-scoped, so the inner 'var x = 2' reassigns the same variable, returning 2."
+    "explanation": "'var' is function-scoped, so the inner 'var x = 2' reassigns the same variable, resulting in 2 being returned."
   },
   {
-    "question": "What does: `let x = 10; { let x = 20; } console.log(x);` output?",
+    "question": "What does this jQuery code do: `$(function() { let x = 10; $('.btn').click(function() { let x = 20; console.log(x); }); });` when the button is clicked?",
     "options": [
+      "Logs 20",
+      "Logs 10",
+      "Logs undefined",
+      "Throws an error"
+    ],
+    "answer": "Logs 20",
+    "difficulty": "Medium",
+    "explanation": "'let x = 20' inside the click handler is block-scoped, so it logs 20, not the outer x (10)."
+  },
+  {
+    "question": "What is the output of: `function test() { let x = 5; { let x = 10; } return x; } console.log(test());`?",
+    "options": [
+      "5",
       "10",
-      "20"
-    ],
-    "answer": "10",
-    "difficulty": "Medium",
-    "explanation": "'let' is block-scoped, so the inner 'let x = 20' doesn’t affect the outer x, logging 10."
-  },
-  {
-    "question": "What is the output of: `function scope() { let x = 5; x = 10; return x; } console.log(scope());`?",
-    "options": [
-      "10",
-      "5"
-    ],
-    "answer": "10",
-    "difficulty": "Medium",
-    "explanation": "The variable x is reassigned to 10 within the function scope, returning 10."
-  },
-  {
-    "question": "What happens in: `function run() { 'use strict'; x = 1; } run();`?",
-    "options": [
-      "Throws ReferenceError",
-      "Sets global x to 1"
-    ],
-    "answer": "Throws ReferenceError",
-    "difficulty": "Medium",
-    "explanation": "In strict mode, assigning to an undeclared variable throws a ReferenceError."
-  },
-  {
-    "question": "What is the output of: `var x = 1; function test() { console.log(x); var x = 2; } test();`?",
-    "options": [
       "undefined",
-      "1"
+      "Error"
     ],
-    "answer": "undefined",
+    "answer": "5",
     "difficulty": "Medium",
-    "explanation": "Due to hoisting, 'var x = 2' is declared but undefined when logged, shadowing the global x."
+    "explanation": "The inner 'let x = 10' is block-scoped and doesn’t affect the outer 'let x = 5', so 5 is returned."
   },
   {
-    "question": "Which validates a non-empty text field: `let input = document.querySelector('#text');`?",
+    "question": "What does this jQuery code do: `$('#input').val().length >= 3 ? $('#input').addClass('valid') : $('#input').removeClass('valid');`?",
     "options": [
-      "if (input.value.trim() !== '')",
-      "if (input.value === null)"
+      "Adds or removes 'valid' class based on input length",
+      "Sets the input value to 'valid'",
+      "Checks if the input is empty",
+      "Triggers an event"
     ],
-    "answer": "if (input.value.trim() !== '')",
+    "answer": "Adds or removes 'valid' class based on input length",
     "difficulty": "Medium",
-    "explanation": "'trim()' removes whitespace, and checking '!== ''' ensures the field isn’t empty."
+    "explanation": "The ternary operator checks if the input’s value length is >= 3, adding or removing the 'valid' class accordingly."
   },
   {
-    "question": "What does: `let input = document.querySelector('#text'); if (input.value.length >= 5) console.log('Valid');` do?",
+    "question": "How do you validate a text field for non-empty input using JavaScript?",
     "options": [
-      "Logs 'Valid' if input has 5+ characters",
-      "Sets input value to 'Valid'"
+      "if (document.getElementById('input').value.trim() !== '')",
+      "if (document.getElementById('input').value === null)",
+      "if (document.getElementById('input').length > 0)",
+      "if (document.getElementById('input').text !== '')"
     ],
-    "answer": "Logs 'Valid' if input has 5+ characters",
+    "answer": "if (document.getElementById('input').value.trim() !== '')",
     "difficulty": "Medium",
-    "explanation": "The code checks if the input’s value length is >= 5, logging 'Valid'."
+    "explanation": "'trim()' removes whitespace, and checking '!== ''' ensures the input isn’t empty."
   },
   {
-    "question": "What does: `let select = document.querySelector('#dropdown'); if (select.selectedIndex > -1) console.log('Selected');` do?",
+    "question": "What does this jQuery code do: `$('select#dropdown').val() !== '' ? console.log('Selected') : console.log('Not selected');`?",
     "options": [
-      "Logs 'Selected' if dropdown has a selection",
-      "Sets dropdown value"
+      "Logs 'Selected' if dropdown has a value, else 'Not selected'",
+      "Sets the dropdown value",
+      "Triggers a change event",
+      "Checks if dropdown is visible"
     ],
-    "answer": "Logs 'Selected' if dropdown has a selection",
+    "answer": "Logs 'Selected' if dropdown has a value, else 'Not selected'",
     "difficulty": "Medium",
-    "explanation": "'selectedIndex > -1' confirms a dropdown option is selected, logging 'Selected'."
+    "explanation": "'val()' gets the dropdown’s value; the ternary operator logs based on whether it’s non-empty."
   },
   {
-    "question": "What does: `let radio = document.querySelector('input[name=group]:checked'); if (radio) console.log(radio.value);` do?",
+    "question": "How do you check if a radio button is selected using JavaScript?",
     "options": [
-      "Logs value of selected radio button",
-      "Checks all radio buttons"
+      "if (document.querySelector('input[name=group]:checked'))",
+      "if (document.getElementsByName('group').checked)",
+      "if (document.querySelector('input.group').value)",
+      "if (document.getRadio('group').selected)"
     ],
-    "answer": "Logs value of selected radio button",
+    "answer": "if (document.querySelector('input[name=group]:checked'))",
     "difficulty": "Medium",
-    "explanation": "The code logs the value of the checked radio button, or nothing if none is selected."
+    "explanation": "'querySelector' with ':checked' returns the selected radio button or null if none is selected."
   },
   {
-    "question": "Which regex validates a 5-digit ZIP code: `let input = document.querySelector('#zip'); if (regex.test(input.value)) console.log('Valid');`?",
+    "question": "What is the output of: `$('input[name=group]:checked').length > 0 ? console.log('Checked') : console.log('Not checked');`?",
     "options": [
+      "Logs 'Checked' if a radio button is selected, else 'Not checked'",
+      "Logs the value of the radio button",
+      "Triggers a click event",
+      "Throws an error if no radio is selected"
+    ],
+    "answer": "Logs 'Checked' if a radio button is selected, else 'Not checked'",
+    "difficulty": "Medium",
+    "explanation": "jQuery’s 'length' checks if a radio button is selected, logging accordingly."
+  },
+  {
+    "question": "What regex validates a ZIP code like 12345 or 12345-6789 in JavaScript?",
+    "options": [
+      "/^\\d{5}(-\\d{4})?$/",
       "/^\\d{5}$/",
-      "/^\\d{5}-\\d{4}$/"
+      "/^\\d{5}-\\d{4}$/",
+      "/^\\d{9}$/"
     ],
-    "answer": "/^\\d{5}$/",
+    "answer": "/^\\d{5}(-\\d{4})?$/",
     "difficulty": "Medium",
-    "explanation": "'/^\\d{5}$/' matches exactly 5 digits, validating a basic ZIP code."
+    "explanation": "The regex matches 5 digits with an optional hyphen and 4 digits."
   },
   {
-    "question": "What does: `let input = document.querySelector('#email'); if (/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(input.value)) console.log('Valid');` do?",
+    "question": "What does this jQuery code do: `$('#email').val().match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/) ? $('#email').addClass('valid') : $('#email').removeClass('valid');`?",
     "options": [
-      "Logs 'Valid' for correct email format",
-      "Sets email value"
+      "Validates email and toggles 'valid' class",
+      "Sets email field value",
+      "Triggers email field event",
+      "Clears email field"
     ],
-    "answer": "Logs 'Valid' for correct email format",
+    "answer": "Validates email and toggles 'valid' class",
     "difficulty": "Medium",
-    "explanation": "The regex validates an email format, logging 'Valid' if it matches."
+    "explanation": "The regex checks for a valid email format, adding or removing the 'valid' class."
   },
   {
     "question": "What is the output of: `try { let x = undefined.x; } catch (e) { console.log(e.name); }`?",
     "options": [
       "TypeError",
-      "ReferenceError"
+      "ReferenceError",
+      "SyntaxError",
+      "undefined"
     ],
     "answer": "TypeError",
     "difficulty": "Medium",
-    "explanation": "Accessing a property on undefined throws a TypeError, caught and logged."
+    "explanation": "Accessing a property on undefined throws a TypeError, caught and logged as 'TypeError'."
   },
   {
-    "question": "What does: `try { throw new Error('Invalid'); } catch (e) { console.log(e.message); }` output?",
+    "question": "What does this code do: `try { throw new Error('Invalid input'); } catch (e) { console.log(e.message); }`?",
     "options": [
-      "Invalid",
-      "Error"
+      "Logs 'Invalid input'",
+      "Logs 'Error'",
+      "Throws an error",
+      "Logs undefined"
     ],
-    "answer": "Invalid",
+    "answer": "Logs 'Invalid input'",
     "difficulty": "Medium",
-    "explanation": "The thrown error’s message 'Invalid' is caught and logged."
+    "explanation": "The thrown error’s message is caught and logged as 'Invalid input'."
   },
   {
-    "question": "What does: `document.querySelector('.btn').addEventListener('click', () => console.log('Clicked'));` do?",
+    "question": "What does this jQuery code do: `$('.btn').on('click', function() { alert('Button clicked'); });`?",
     "options": [
-      "Logs 'Clicked' on button click",
-      "Changes button text"
+      "Shows an alert on button click",
+      "Changes button text",
+      "Disables the button",
+      "Redirects the page"
     ],
-    "answer": "Logs 'Clicked' on button click",
+    "answer": "Shows an alert on button click",
     "difficulty": "Medium",
-    "explanation": "'addEventListener()' binds a click handler that logs 'Clicked'."
+    "explanation": "jQuery’s 'on' method binds a click event handler to show an alert."
   },
   {
-    "question": "What is the output of: `let node = document.createElement('div'); console.log(node.nodeType);`?",
+    "question": "What is the output of: `let node = document.createTextNode('test'); console.log(node.nodeType);`?",
     "options": [
+      "3",
       "1",
-      "3"
+      "8",
+      "9"
     ],
-    "answer": "1",
+    "answer": "3",
     "difficulty": "Medium",
-    "explanation": "An element node like a div has a 'nodeType' of 1."
+    "explanation": "A text node has a 'nodeType' of 3 in the DOM."
   },
   {
-    "question": "What does: `let elements = document.querySelectorAll('.test'); console.log(elements.length);` do?",
+    "question": "What does this jQuery code do: `$('.test').first().text('New text');`?",
     "options": [
-      "Logs number of elements with class 'test'",
-      "Selects first element"
+      "Sets the first element with class 'test' to 'New text'",
+      "Sets all elements with class 'test' to 'New text'",
+      "Appends 'New text' to the first element",
+      "Removes the first element"
     ],
-    "answer": "Logs number of elements with class 'test'",
+    "answer": "Sets the first element with class 'test' to 'New text'",
     "difficulty": "Medium",
-    "explanation": "'querySelectorAll()' returns a NodeList, and 'length' counts matching elements."
+    "explanation": "jQuery’s 'first()' selects the first matching element, and 'text()' sets its text content."
   },
   {
-    "question": "What is the output of: `let elem = document.querySelector('p'); console.log(elem.tagName);` for a <p> element?",
+    "question": "What does `document.querySelector('div').tagName` return for a <div> element?",
     "options": [
-      "P",
-      "p"
+      "DIV",
+      "div",
+      "Div",
+      "undefined"
     ],
-    "answer": "P",
+    "answer": "DIV",
     "difficulty": "Medium",
-    "explanation": "'tagName' returns the tag name in uppercase, so 'P'."
+    "explanation": "'tagName' returns the tag name in uppercase, so 'DIV' for a <div> element."
   },
   {
     "question": "What is the output of: `let div = document.createElement('div'); div.innerHTML = '<p>1</p><p>2</p>'; console.log(div.children.length);`?",
     "options": [
       "2",
-      "1"
+      "1",
+      "0",
+      "undefined"
     ],
     "answer": "2",
     "difficulty": "Medium",
-    "explanation": "'children.length' counts the two <p> elements."
+    "explanation": "'children.length' counts the two <p> elements as child elements, excluding text nodes."
   },
   {
-    "question": "What does: `let elem = document.querySelector('#box'); elem.setAttribute('data-value', 'test'); console.log(elem.getAttribute('data-value'));` output?",
+    "question": "What does this jQuery code do: `$('#box').attr('data-value', 'test');`?",
     "options": [
-      "test",
-      "undefined"
+      "Sets the 'data-value' attribute of #box to 'test'",
+      "Gets the 'data-value' attribute",
+      "Removes the 'data-value' attribute",
+      "Adds a class 'test' to #box"
     ],
-    "answer": "test",
+    "answer": "Sets the 'data-value' attribute of #box to 'test'",
     "difficulty": "Medium",
-    "explanation": "'setAttribute()' sets the attribute, and 'getAttribute()' retrieves it, logging 'test'."
+    "explanation": "jQuery’s 'attr()' sets the specified attribute to the given value."
   },
   {
-    "question": "What does: `let elem = document.querySelector('#box'); console.log(elem.attributes.length);` do?",
+    "question": "What is the output of: `let elem = document.createElement('img'); elem.setAttribute('src', 'image.jpg'); console.log(elem.getAttribute('src'));`?",
     "options": [
-      "Logs number of attributes on #box",
-      "Logs attribute values"
+      "image.jpg",
+      "undefined",
+      "img",
+      "Error"
     ],
-    "answer": "Logs number of attributes on #box",
+    "answer": "image.jpg",
     "difficulty": "Medium",
-    "explanation": "'attributes.length' counts the number of attributes on the element."
+    "explanation": "'setAttribute()' sets the 'src' attribute, and 'getAttribute()' retrieves it."
   },
   {
-    "question": "What does: `let div = document.createElement('div'); document.body.appendChild(div);` do?",
+    "question": "What does this jQuery code do: `$('<div>Hello</div>').appendTo('#container');`?",
     "options": [
-      "Appends new div to body",
-      "Replaces body"
+      "Appends a new div with 'Hello' to #container",
+      "Replaces #container with a new div",
+      "Prepends a div to #container",
+      "Removes #container"
     ],
-    "answer": "Appends new div to body",
+    "answer": "Appends a new div with 'Hello' to #container",
     "difficulty": "Medium",
-    "explanation": "'appendChild()' adds the div as the last child of the body."
+    "explanation": "jQuery’s 'appendTo()' adds the new div as the last child of #container."
   },
   {
-    "question": "What does: `let p = document.createElement('p'); document.querySelector('#target').parentNode.insertBefore(p, document.querySelector('#target'));` do?",
+    "question": "What does this code do: `let newNode = document.createElement('p'); document.querySelector('#target').parentNode.insertBefore(newNode, document.querySelector('#target'));`?",
     "options": [
-      "Inserts new <p> before #target",
-      "Inserts new <p> after #target"
+      "Inserts a new <p> before #target",
+      "Inserts a new <p> after #target",
+      "Replaces #target with a <p>",
+      "Appends a <p> to #target"
     ],
-    "answer": "Inserts new <p> before #target",
+    "answer": "Inserts a new <p> before #target",
     "difficulty": "Medium",
-    "explanation": "'insertBefore()' adds the <p> before the specified target."
+    "explanation": "'insertBefore()' adds the new node before the specified reference node."
   },
   {
-    "question": "What is the output of: `let obj = { x: 10 }; console.log(obj.x);`?",
-    "options": [
-      "10",
-      "undefined"
-    ],
-    "answer": "10",
-    "difficulty": "Medium",
-    "explanation": "The 'x' property is accessed using dot notation, logging 10."
-  },
-  {
-    "question": "What does: `let obj = {}; obj.newProp = 42; console.log(obj.newProp);` output?",
-    "options": [
-      "42",
-      "undefined"
-    ],
-    "answer": "42",
-    "difficulty": "Medium",
-    "explanation": "Adding 'newProp' to the object and accessing it logs 42."
-  },
-  {
-    "question": "What is the output of: `let obj = { calc: function() { return 5; } }; console.log(obj.calc());`?",
+    "question": "What is the output of: `let obj = { x: 5 }; console.log(obj.x);`?",
     "options": [
       "5",
-      "undefined"
+      "undefined",
+      "x",
+      "Error"
     ],
     "answer": "5",
     "difficulty": "Medium",
-    "explanation": "The 'calc' method returns 5 when called."
+    "explanation": "The 'x' property is accessed using dot notation, logging its value, 5."
   },
   {
-    "question": "What is the output of: `function User(name) { this.name = name; } let u = new User('Bob'); console.log(u.name);`?",
+    "question": "What does this jQuery code do: `let obj = { name: 'Test' }; $('#output').text(obj.name);`?",
     "options": [
-      "Bob",
-      "undefined"
+      "Sets #output’s text to 'Test'",
+      "Sets #output’s value to 'Test'",
+      "Appends 'Test' to #output",
+      "Removes #output"
     ],
-    "answer": "Bob",
+    "answer": "Sets #output’s text to 'Test'",
     "difficulty": "Medium",
-    "explanation": "The constructor sets 'name' to 'Bob', accessed as u.name."
+    "explanation": "jQuery’s 'text()' sets the text content of #output to the object’s 'name' property."
   },
   {
-    "question": "What does: `function Car() { this.drive = function() { return 'Driving'; }; } let c = new Car(); console.log(c.drive());` output?",
+    "question": "What is the output of: `let obj = { greet() { return 'Hello'; } }; console.log(obj.greet());`?",
     "options": [
-      "Driving",
-      "undefined"
+      "Hello",
+      "undefined",
+      "greet",
+      "Error"
     ],
-    "answer": "Driving",
+    "answer": "Hello",
     "difficulty": "Medium",
-    "explanation": "The constructor defines the 'drive' method, which returns 'Driving'."
+    "explanation": "'greet' is a method that returns 'Hello' when called."
   },
   {
-    "question": "What is the output of: `function Animal() { } Animal.prototype.speak = function() { return 'Bark'; }; let a = new Animal(); console.log(a.speak());`?",
+    "question": "What does this code do: `function Person(name) { this.name = name; } let p = new Person('Alice'); console.log(p.name);`?",
     "options": [
-      "Bark",
-      "undefined"
+      "Logs 'Alice'",
+      "Logs 'Person'",
+      "Logs undefined",
+      "Throws an error"
     ],
-    "answer": "Bark",
+    "answer": "Logs 'Alice'",
     "difficulty": "Medium",
-    "explanation": "The 'speak' method on the prototype returns 'Bark'."
+    "explanation": "The constructor sets the 'name' property, accessed as p.name."
+  },
+  {
+    "question": "What does this code do: `function Car() { } Car.prototype.drive = function() { return 'Driving'; }; let c = new Car(); console.log(c.drive());`?",
+    "options": [
+      "Logs 'Driving'",
+      "Logs undefined",
+      "Logs 'Car'",
+      "Throws an error"
+    ],
+    "answer": "Logs 'Driving'",
+    "difficulty": "Medium",
+    "explanation": "The 'drive' method is added to the prototype, so c.drive() returns 'Driving'."
   },
   {
     "question": "What is the output of: `let obj = { x: 1 }; console.log(obj.hasOwnProperty('x'));`?",
     "options": [
       "true",
-      "false"
+      "false",
+      "undefined",
+      "Error"
     ],
     "answer": "true",
     "difficulty": "Medium",
     "explanation": "'hasOwnProperty()' returns true if 'x' is a direct property of the object."
   },
   {
-    "question": "What does: `console.log(window.location.href);` do?",
+    "question": "What does this jQuery code do: `$('#link').attr('href', 'new-url');`?",
     "options": [
-      "Logs the current URL",
-      "Navigates to a new URL"
+      "Sets the href of #link to 'new-url'",
+      "Gets the href of #link",
+      "Removes the href attribute",
+      "Triggers a click on #link"
     ],
-    "answer": "Logs the current URL",
+    "answer": "Sets the href of #link to 'new-url'",
     "difficulty": "Medium",
-    "explanation": "'window.location.href' returns the full URL of the current page."
+    "explanation": "jQuery’s 'attr()' sets the href attribute to 'new-url'."
   },
   {
-    "question": "What does: `window.location.assign('https://example.com');` do?",
+    "question": "What does this code do: `window.location.assign('https://example.com');`?",
     "options": [
       "Navigates to https://example.com",
-      "Reloads the page"
+      "Reloads the current page",
+      "Opens a new tab",
+      "Changes the page title"
     ],
     "answer": "Navigates to https://example.com",
     "difficulty": "Medium",
     "explanation": "'location.assign()' loads a new URL in the current window."
   },
   {
-    "question": "What does: `window.history.back();` do?",
+    "question": "What does this jQuery code do: `$(window).on('popstate', function() { console.log('Navigated'); });`?",
     "options": [
-      "Navigates to previous page",
-      "Navigates to next page"
+      "Logs 'Navigated' on history navigation",
+      "Reloads the page",
+      "Triggers a popstate event",
+      "Opens a new window"
     ],
-    "answer": "Navigates to previous page",
+    "answer": "Logs 'Navigated' on history navigation",
     "difficulty": "Medium",
-    "explanation": "'history.back()' moves to the previous page in the browser’s history."
+    "explanation": "The 'popstate' event fires on forward/back navigation, logging 'Navigated'."
   },
   {
-    "question": "What does: `document.body.style.height = '100vh';` do?",
+    "question": "What does this code do: `document.body.style.height = '100vh';`?",
     "options": [
-      "Sets body height to full viewport",
-      "Sets body width to full viewport"
+      "Sets body height to full viewport height",
+      "Sets body width to full viewport",
+      "Hides the body",
+      "Scrolls the body"
     ],
-    "answer": "Sets body height to full viewport",
+    "answer": "Sets body height to full viewport height",
     "difficulty": "Medium",
     "explanation": "'100vh' sets the body’s height to the full viewport height."
   },
   {
-    "question": "What does: `window.resizeTo(800, 600);` do?",
+    "question": "What does this jQuery code do: `$(window).resize(function() { $('#box').css('width', '50vw'); });`?",
     "options": [
-      "Resizes window to 800x600 pixels",
-      "Moves window to (800, 600)"
+      "Sets #box width to 50% of viewport on window resize",
+      "Resizes the window",
+      "Sets #box height to 50vw",
+      "Triggers a resize event"
     ],
-    "answer": "Resizes window to 800x600 pixels",
+    "answer": "Sets #box width to 50% of viewport on window resize",
     "difficulty": "Medium",
-    "explanation": "'window.resizeTo()' sets the browser window’s dimensions."
+    "explanation": "jQuery’s 'resize' event handler sets #box’s width to '50vw' when the window resizes."
   },
   {
-    "question": "What does: `let win = window.open(''); if (!win) console.log('Blocked');` do?",
+    "question": "What is the output of: `let popup = window.open(''); if (!popup) console.log('Blocked');`?",
     "options": [
       "Logs 'Blocked' if popup is blocked",
-      "Opens a new window"
+      "Opens a new window",
+      "Logs 'Blocked' always",
+      "Throws an error"
     ],
     "answer": "Logs 'Blocked' if popup is blocked",
     "difficulty": "Medium",
-    "explanation": "'window.open()' returns null if a popup blocker prevents the window."
+    "explanation": "'window.open()' returns null if a popup blocker prevents the window, triggering the log."
   },
   {
-    "question": "What does: `let input = document.querySelector('#text'); if (/^[a-zA-Z]+$/.test(input.value)) console.log('Valid');` do?",
+    "question": "What does this jQuery code do: `$('#input').on('input', function() { $(this).val().length >= 5 ? $(this).addClass('valid') : $(this).removeClass('valid'); });`?",
     "options": [
-      "Logs 'Valid' if input is alphabetic",
-      "Sets input value"
+      "Toggles 'valid' class based on input length >= 5",
+      "Sets input value to 'valid'",
+      "Clears the input",
+      "Triggers a keypress event"
     ],
-    "answer": "Logs 'Valid' if input is alphabetic",
+    "answer": "Toggles 'valid' class based on input length >= 5",
     "difficulty": "Medium",
-    "explanation": "The regex '/^[a-zA-Z]+$/' checks if the input contains only letters."
+    "explanation": "The 'input' event checks the input’s length, adding/removing 'valid' accordingly."
   },
   {
-    "question": "What is the output of: `function test() { let x = 1; { let x = 2; } return x; } console.log(test());`?",
+    "question": "What is the output of: `function test() { let x = 1; if (true) { x = 2; } return x; } console.log(test());`?",
     "options": [
+      "2",
       "1",
-      "2"
+      "undefined",
+      "Error"
     ],
-    "answer": "1",
+    "answer": "2",
     "difficulty": "Medium",
-    "explanation": "The inner 'let x = 2' is block-scoped, so the outer x remains 1."
+    "explanation": "Since there’s no new 'let' in the if block, 'x = 2' reassigns the outer x, returning 2."
   },
   {
-    "question": "What does: `let select = document.querySelector('#dropdown'); if (select.value !== '') console.log('Valid');` do?",
+    "question": "What does this jQuery code do: `$('select#dropdown').change(function() { $(this).val() !== 'default' ? console.log('Valid') : console.log('Invalid'); });`?",
     "options": [
-      "Logs 'Valid' if dropdown has non-empty value",
-      "Sets dropdown value"
+      "Logs 'Valid' or 'Invalid' based on dropdown selection",
+      "Sets dropdown value to 'Valid'",
+      "Triggers a change event",
+      "Hides the dropdown"
     ],
-    "answer": "Logs 'Valid' if dropdown has non-empty value",
+    "answer": "Logs 'Valid' or 'Invalid' based on dropdown selection",
     "difficulty": "Medium",
-    "explanation": "Checking 'value !== ''' ensures a non-empty dropdown selection."
+    "explanation": "The 'change' event checks if the dropdown’s value isn’t 'default', logging accordingly."
   },
   {
-    "question": "What does: `let radios = document.querySelectorAll('input[name=group]'); radios.forEach(r => r.checked = false);` do?",
+    "question": "What does this code do: `let radios = document.querySelectorAll('input[name=group]'); radios.forEach(r => r.checked = false);`?",
     "options": [
-      "Unchecks all radio buttons",
-      "Checks all radio buttons"
+      "Unchecks all radio buttons in the group",
+      "Checks all radio buttons",
+      "Gets the values of radio buttons",
+      "Removes radio buttons"
     ],
-    "answer": "Unchecks all radio buttons",
+    "answer": "Unchecks all radio buttons in the group",
     "difficulty": "Medium",
-    "explanation": "The code sets 'checked' to false for all radio buttons."
+    "explanation": "The code loops through radio buttons and sets 'checked' to false, unchecking them."
   },
   {
-    "question": "What does: `let input = document.querySelector('#zip'); if (/^\\d{5}(-\\d{4})?$/.test(input.value)) console.log('Valid');` do?",
+    "question": "What does this jQuery code do: `$('input[name=zip]').val().match(/^\\d{5}$/) ? $('#zip').addClass('valid') : $('#zip').removeClass('valid');`?",
     "options": [
-      "Logs 'Valid' for 5- or 9-digit ZIP",
-      "Sets ZIP code value"
+      "Validates a 5-digit ZIP code and toggles 'valid' class",
+      "Sets ZIP code value",
+      "Triggers a keypress event",
+      "Clears the ZIP field"
     ],
-    "answer": "Logs 'Valid' for 5- or 9-digit ZIP",
+    "answer": "Validates a 5-digit ZIP code and toggles 'valid' class",
     "difficulty": "Medium",
-    "explanation": "The regex matches 5 digits or 5 digits plus a hyphen and 4 digits."
+    "explanation": "The regex checks for a 5-digit ZIP, adding/removing the 'valid' class."
   },
   {
     "question": "What is the output of: `try { JSON.parse('invalid'); } catch (e) { console.log(e.name); }`?",
     "options": [
       "SyntaxError",
-      "TypeError"
+      "TypeError",
+      "ReferenceError",
+      "undefined"
     ],
     "answer": "SyntaxError",
     "difficulty": "Medium",
     "explanation": "Invalid JSON in 'JSON.parse()' throws a SyntaxError, caught and logged."
   },
   {
-    "question": "What does: `try { throw new Error('Fail'); } catch (e) { console.log(e.message); }` output?",
+    "question": "What does this jQuery code do: `try { throw new Error('Fail'); } catch (e) { $('#error').text(e.message); }`?",
     "options": [
-      "Fail",
-      "Error"
+      "Sets #error’s text to 'Fail'",
+      "Logs 'Fail' to console",
+      "Throws an error",
+      "Clears #error"
     ],
-    "answer": "Fail",
+    "answer": "Sets #error’s text to 'Fail'",
     "difficulty": "Medium",
-    "explanation": "The thrown error’s message 'Fail' is caught and logged."
+    "explanation": "The thrown error’s message is caught and set as the text of #error using jQuery."
   },
   {
-    "question": "What does: `document.querySelector('#input').addEventListener('input', () => console.log('Typing'));` do?",
+    "question": "What does this code do: `document.querySelector('.btn').addEventListener('mouseover', () => console.log('Hovered'));`?",
     "options": [
-      "Logs 'Typing' when input changes",
-      "Changes input value"
+      "Logs 'Hovered' when the button is moused over",
+      "Logs 'Hovered' on click",
+      "Changes button text",
+      "Hides the button"
     ],
-    "answer": "Logs 'Typing' when input changes",
+    "answer": "Logs 'Hovered' when the button is moused over",
     "difficulty": "Medium",
-    "explanation": "The 'input' event fires on value changes, logging 'Typing'."
+    "explanation": "'addEventListener()' binds a handler to the 'mouseover' event."
   },
   {
-    "question": "What is the output of: `let text = document.createTextNode('test'); console.log(text.nodeType);`?",
+    "question": "What is the output of: `let comment = document.createComment('test'); console.log(comment.nodeType);`?",
     "options": [
+      "8",
+      "1",
       "3",
-      "1"
+      "9"
     ],
-    "answer": "3",
+    "answer": "8",
     "difficulty": "Medium",
-    "explanation": "A text node has a 'nodeType' of 3."
+    "explanation": "A comment node has a 'nodeType' of 8 in the DOM."
   },
   {
-    "question": "What does: `let elements = document.getElementsByClassName('test'); console.log(elements.length);` do?",
+    "question": "What does this jQuery code do: `$('[data-test]').first().addClass('active');`?",
     "options": [
-      "Logs number of elements with class 'test'",
-      "Selects first element"
+      "Adds 'active' class to the first element with data-test attribute",
+      "Adds 'active' to all elements with data-test",
+      "Sets data-test to 'active'",
+      "Removes the first element"
     ],
-    "answer": "Logs number of elements with class 'test'",
+    "answer": "Adds 'active' class to the first element with data-test attribute",
     "difficulty": "Medium",
-    "explanation": "'getElementsByClassName()' returns a collection, and 'length' counts matches."
+    "explanation": "jQuery’s 'first()' selects the first matching element, and 'addClass()' applies 'active'."
   },
   {
-    "question": "What is the output of: `let img = document.createElement('img'); console.log(img.tagName);`?",
+    "question": "What is the output of: `let p = document.createElement('p'); console.log(p.tagName);`?",
     "options": [
-      "IMG",
-      "img"
-    ],
-    "answer": "IMG",
-    "difficulty": "Medium",
-    "explanation": "'tagName' returns the tag name in uppercase, so 'IMG'."
-  },
-  {
-    "question": "What does: `let div = document.querySelector('#box'); console.log(div.childNodes.length);` do?",
-    "options": [
-      "Logs number of all child nodes",
-      "Logs number of element children"
-    ],
-    "answer": "Logs number of all child nodes",
-    "difficulty": "Medium",
-    "explanation": "'childNodes.length' counts all nodes, including text and comments."
-  },
-  {
-    "question": "What does: `let elem = document.querySelector('#box'); if (elem.hasAttribute('data-test')) console.log('Has attribute');` do?",
-    "options": [
-      "Logs 'Has attribute' if data-test exists",
-      "Sets data-test attribute"
-    ],
-    "answer": "Logs 'Has attribute' if data-test exists",
-    "difficulty": "Medium",
-    "explanation": "'hasAttribute()' checks if the element has the specified attribute."
-  },
-  {
-    "question": "What does: `let elem = document.querySelector('#box'); elem.removeAttribute('data-test');` do?",
-    "options": [
-      "Removes data-test attribute",
-      "Sets data-test to null"
-    ],
-    "answer": "Removes data-test attribute",
-    "difficulty": "Medium",
-    "explanation": "'removeAttribute()' removes the specified attribute."
-  },
-  {
-    "question": "What does: `let span = document.createElement('span'); document.querySelector('#container').appendChild(span);` do?",
-    "options": [
-      "Appends new span to #container",
-      "Replaces #container"
-    ],
-    "answer": "Appends new span to #container",
-    "difficulty": "Medium",
-    "explanation": "'appendChild()' adds the span as the last child of #container."
-  },
-  {
-    "question": "What does: `let p = document.createElement('p'); document.querySelector('#target').parentNode.insertBefore(p, document.querySelector('#target').nextSibling);` do?",
-    "options": [
-      "Inserts new <p> after #target",
-      "Inserts new <p> before #target"
-    ],
-    "answer": "Inserts new <p> after #target",
-    "difficulty": "Medium",
-    "explanation": "Using 'nextSibling' with 'insertBefore()' places the <p> after #target."
-  },
-  {
-    "question": "What is the output of: `let obj = { y: 20 }; console.log(obj['y']);`?",
-    "options": [
-      "20",
+      "P",
+      "p",
+      "Paragraph",
       "undefined"
     ],
-    "answer": "20",
+    "answer": "P",
     "difficulty": "Medium",
-    "explanation": "Bracket notation accesses the 'y' property, logging 20."
+    "explanation": "'tagName' returns the tag name in uppercase, so 'P' for a <p> element."
   },
   {
-    "question": "What does: `let obj = { x: 1 }; obj.x = 2; console.log(obj.x);` output?",
+    "question": "What does this jQuery code do: `$('#container').children().length > 0 ? $('#container').addClass('has-content') : $('#container').removeClass('has-content');`?",
     "options": [
-      "2",
-      "1"
+      "Toggles 'has-content' class based on child elements",
+      "Counts all nodes in #container",
+      "Adds content to #container",
+      "Removes #container"
     ],
-    "answer": "2",
+    "answer": "Toggles 'has-content' class based on child elements",
     "difficulty": "Medium",
-    "explanation": "Reassigning obj.x updates the property, logging 2."
+    "explanation": "jQuery’s 'children()' counts HTML child elements, toggling the class accordingly."
   },
   {
-    "question": "What is the output of: `let obj = { say: () => 'Hello' }; console.log(obj.say());`?",
+    "question": "What does this code do: `let img = document.createElement('img'); img.setAttribute('alt', 'desc'); console.log(img.getAttribute('alt'));`?",
     "options": [
-      "Hello",
-      "undefined"
+      "Logs 'desc'",
+      "Logs 'img'",
+      "Logs undefined",
+      "Throws an error"
     ],
-    "answer": "Hello",
+    "answer": "Logs 'desc'",
     "difficulty": "Medium",
-    "explanation": "The 'say' method returns 'Hello' when called."
+    "explanation": "'setAttribute()' sets the 'alt' attribute, and 'getAttribute()' retrieves it."
   },
   {
-    "question": "What does: `function Person() { this.name = 'Alice'; } let p = new Person(); console.log(p.name);` output?",
+    "question": "What does this jQuery code do: `$('#box').removeAttr('data-value');`?",
     "options": [
-      "Alice",
-      "undefined"
+      "Removes the 'data-value' attribute from #box",
+      "Sets 'data-value' to null",
+      "Gets 'data-value'",
+      "Adds 'data-value' class"
     ],
-    "answer": "Alice",
+    "answer": "Removes the 'data-value' attribute from #box",
     "difficulty": "Medium",
-    "explanation": "The constructor sets 'name' to 'Alice', accessed as p.name."
+    "explanation": "jQuery’s 'removeAttr()' removes the specified attribute."
   },
   {
-    "question": "What does: `function Dog() { this.bark = function() { return 'Woof'; }; } let d = new Dog(); console.log(d.bark());` output?",
+    "question": "What does this code do: `let div = document.createElement('div'); document.body.appendChild(div);`?",
     "options": [
-      "Woof",
-      "undefined"
+      "Appends a new div to the body",
+      "Replaces the body with a div",
+      "Creates a div without adding it",
+      "Throws an error"
     ],
-    "answer": "Woof",
+    "answer": "Appends a new div to the body",
     "difficulty": "Medium",
-    "explanation": "The constructor defines the 'bark' method, which returns 'Woof'."
+    "explanation": "'appendChild()' adds the new div as the last child of the body."
   },
   {
-    "question": "What is the output of: `function Cat() { } Cat.prototype.meow = function() { return 'Meow'; }; let c = new Cat(); console.log(c.meow());`?",
+    "question": "What does this jQuery code do: `$('<p>New</p>').insertAfter('#target');`?",
     "options": [
-      "Meow",
-      "undefined"
+      "Inserts a new <p> after #target",
+      "Inserts a new <p> before #target",
+      "Replaces #target with a <p>",
+      "Appends a <p> to #target"
     ],
-    "answer": "Meow",
+    "answer": "Inserts a new <p> after #target",
     "difficulty": "Medium",
-    "explanation": "The 'meow' method on the prototype returns 'Meow'."
+    "explanation": "jQuery’s 'insertAfter()' places the new <p> after the #target element."
   },
   {
-    "question": "What does: `let obj = { x: 1 }; console.log('x' in obj);` output?",
+    "question": "What does this code do: `let obj = {}; obj.newProp = 42; console.log(obj.newProp);`?",
     "options": [
-      "true",
-      "false"
+      "Logs 42",
+      "Logs undefined",
+      "Logs 'newProp'",
+      "Throws an error"
     ],
-    "answer": "true",
+    "answer": "Logs 42",
     "difficulty": "Medium",
-    "explanation": "The 'in' operator returns true if 'x' exists in the object or its prototype."
+    "explanation": "Adding 'newProp' to the object and accessing it logs its value, 42."
   },
   {
-    "question": "What does: `window.location.search = '?q=test';` do?",
+    "question": "What does this jQuery code do: `let obj = { value: 10 }; $('#output').data('value', obj.value);`?",
     "options": [
-      "Sets query string to '?q=test'",
-      "Navigates to a new URL"
+      "Sets #output’s data-value to 10",
+      "Sets #output’s text to 10",
+      "Appends 10 to #output",
+      "Removes #output"
     ],
-    "answer": "Sets query string to '?q=test'",
+    "answer": "Sets #output’s data-value to 10",
     "difficulty": "Medium",
-    "explanation": "Setting 'location.search' updates the URL’s query string."
+    "explanation": "jQuery’s 'data()' sets a data attribute, storing the object’s value."
   },
   {
-    "question": "What does: `window.history.forward();` do?",
+    "question": "What does this code do: `let obj = { calc: function() { return 2 * 2; } }; console.log(obj.calc());`?",
     "options": [
-      "Navigates to next page",
-      "Navigates to previous page"
+      "Logs 4",
+      "Logs undefined",
+      "Logs 'calc'",
+      "Throws an error"
     ],
-    "answer": "Navigates to next page",
+    "answer": "Logs 4",
     "difficulty": "Medium",
-    "explanation": "'history.forward()' moves to the next page in the browser’s history."
+    "explanation": "The 'calc' method returns the result of 2 * 2, which is 4."
   },
   {
-    "question": "What does: `document.documentElement.style.width = '100vw';` do?",
+    "question": "What does this jQuery code do: `function User(name) { this.name = name; } let u = new User('Bob'); $('#name').text(u.name);`?",
     "options": [
-      "Sets html width to full viewport",
-      "Sets html height to full viewport"
+      "Sets #name’s text to 'Bob'",
+      "Sets #name’s value to 'Bob'",
+      "Appends 'Bob' to #name",
+      "Throws an error"
     ],
-    "answer": "Sets html width to full viewport",
+    "answer": "Sets #name’s text to 'Bob'",
+    "difficulty": "Medium",
+    "explanation": "The constructor sets 'name', and jQuery’s 'text()' sets #name’s text to 'Bob'."
+  },
+  {
+    "question": "What does this code do: `function Animal() { } Animal.prototype.speak = function() { return 'Sound'; }; let a = new Animal(); console.log(a.speak());`?",
+    "options": [
+      "Logs 'Sound'",
+      "Logs undefined",
+      "Logs 'Animal'",
+      "Throws an error"
+    ],
+    "answer": "Logs 'Sound'",
+    "difficulty": "Medium",
+    "explanation": "The 'speak' method on the prototype returns 'Sound' for the instance."
+  },
+  {
+    "question": "What does this jQuery code do: `let obj = { x: 1 }; if ('x' in obj) { $('#output').text('Has x'); }`?",
+    "options": [
+      "Sets #output’s text to 'Has x'",
+      "Sets #output’s value to 'x'",
+      "Logs 'Has x' to console",
+      "Throws an error"
+    ],
+    "answer": "Sets #output’s text to 'Has x'",
+    "difficulty": "Medium",
+    "explanation": "The 'in' operator checks for 'x', and jQuery’s 'text()' sets #output’s text."
+  },
+  {
+    "question": "What does this code do: `window.location.href = 'https://example.com';`?",
+    "options": [
+      "Navigates to https://example.com",
+      "Reloads the current page",
+      "Opens a new tab",
+      "Changes the page title"
+    ],
+    "answer": "Navigates to https://example.com",
+    "difficulty": "Medium",
+    "explanation": "Setting 'location.href' navigates to the specified URL."
+  },
+  {
+    "question": "What does this jQuery code do: `$(window).on('popstate', () => $('#status').text('Navigated'));`?",
+    "options": [
+      "Sets #status text to 'Navigated' on history navigation",
+      "Reloads the page",
+      "Triggers a popstate event",
+      "Opens a new window"
+    ],
+    "answer": "Sets #status text to 'Navigated' on history navigation",
+    "difficulty": "Medium",
+    "explanation": "jQuery’s 'on' binds a handler to 'popstate', updating #status on navigation."
+  },
+  {
+    "question": "What does this code do: `document.documentElement.style.width = '100vw';`?",
+    "options": [
+      "Sets html element width to full viewport",
+      "Sets html element height to full viewport",
+      "Hides the html element",
+      "Scrolls the page"
+    ],
+    "answer": "Sets html element width to full viewport",
     "difficulty": "Medium",
     "explanation": "'100vw' sets the html element’s width to the full viewport width."
   },
   {
-    "question": "What does: `window.moveTo(100, 100);` do?",
+    "question": "What does this jQuery code do: `$(window).on('resize', () => $('#box').css('height', '50vh'));`?",
     "options": [
-      "Moves window to (100, 100)",
-      "Resizes window"
+      "Sets #box height to 50% of viewport on resize",
+      "Resizes the window",
+      "Sets #box width to 50vh",
+      "Triggers a resize event"
     ],
-    "answer": "Moves window to (100, 100)",
+    "answer": "Sets #box height to 50% of viewport on resize",
     "difficulty": "Medium",
-    "explanation": "'window.moveTo()' repositions the browser window."
+    "explanation": "jQuery’s 'resize' event sets #box’s height to '50vh' when the window resizes."
   },
   {
-    "question": "What does: `let input = document.querySelector('#text'); if (/^\\d+$/.test(input.value)) console.log('Valid');` do?",
+    "question": "What does this code do: `let win = window.open(''); if (!win) $('#status').text('Popup blocked');`?",
     "options": [
-      "Logs 'Valid' if input is numeric",
-      "Sets input value"
+      "Sets #status text to 'Popup blocked' if popup fails",
+      "Opens a new window",
+      "Logs 'Popup blocked' to console",
+      "Throws an error"
     ],
-    "answer": "Logs 'Valid' if input is numeric",
+    "answer": "Sets #status text to 'Popup blocked' if popup fails",
     "difficulty": "Medium",
-    "explanation": "The regex '/^\\d+$/' checks if the input contains only digits."
+    "explanation": "'window.open()' returns null if blocked, and jQuery sets #status text."
   },
   {
-    "question": "What is the output of: `let x = 5; function test() { let x = 10; return x; } console.log(test(), x);`?",
+    "question": "What does this jQuery code do: `$('#input').on('input', function() { /^[a-zA-Z]+$/.test($(this).val()) ? $(this).addClass('valid') : $(this).removeClass('valid'); });`?",
     "options": [
-      "10, 5",
-      "5, 10"
+      "Toggles 'valid' class if input is alphabetic",
+      "Sets input value to alphabetic",
+      "Clears the input",
+      "Triggers a keypress event"
     ],
-    "answer": "10, 5",
+    "answer": "Toggles 'valid' class if input is alphabetic",
     "difficulty": "Medium",
-    "explanation": "The inner 'let x = 10' is function-scoped, so test() returns 10; outer x is 5."
+    "explanation": "The regex checks for letters, and jQuery toggles the 'valid' class."
   },
   {
-    "question": "What does: `let select = document.querySelector('#dropdown'); if (select.options[select.selectedIndex].value === 'valid') console.log('Valid');` do?",
+    "question": "What is the output of: `function test() { var x = 10; { var x = 20; } return x; } console.log(test());`?",
     "options": [
-      "Logs 'Valid' if dropdown value is 'valid'",
-      "Sets dropdown value"
+      "20",
+      "10",
+      "undefined",
+      "Error"
     ],
-    "answer": "Logs 'Valid' if dropdown value is 'valid'",
+    "answer": "20",
     "difficulty": "Medium",
-    "explanation": "The code checks if the selected option’s value is 'valid', logging 'Valid'."
+    "explanation": "'var' is function-scoped, so the inner 'var x = 20' reassigns the variable, returning 20."
   },
   {
-    "question": "What does: `let radio = document.querySelector('input[name=group]:checked'); if (radio) radio.value = 'selected';` do?",
+    "question": "What does this jQuery code do: `$('select').on('change', function() { $(this).val() !== '' ? $('#status').text('Selected') : $('#status').text('Empty'); });`?",
     "options": [
-      "Sets selected radio value to 'selected'",
-      "Checks all radio buttons"
+      "Sets #status text based on dropdown selection",
+      "Sets dropdown value",
+      "Triggers a change event",
+      "Hides the dropdown"
     ],
-    "answer": "Sets selected radio value to 'selected'",
+    "answer": "Sets #status text based on dropdown selection",
     "difficulty": "Medium",
-    "explanation": "The code sets the value of the checked radio button to 'selected'."
+    "explanation": "jQuery checks the dropdown’s value and updates #status text."
   },
   {
-    "question": "What does: `let input = document.querySelector('#zip'); if (/^\\d{9}$/.test(input.value)) console.log('Valid');` do?",
+    "question": "What does this code do: `document.querySelector('input[name=group]:checked') ? console.log('Selected') : console.log('Not selected');`?",
     "options": [
-      "Logs 'Valid' for 9-digit ZIP",
-      "Sets ZIP code value"
+      "Logs 'Selected' or 'Not selected' based on radio button",
+      "Checks all radio buttons",
+      "Sets radio button value",
+      "Removes radio buttons"
     ],
-    "answer": "Logs 'Valid' for 9-digit ZIP",
+    "answer": "Logs 'Selected' or 'Not selected' based on radio button",
     "difficulty": "Medium",
-    "explanation": "The regex '/^\\d{9}$/' matches exactly 9 digits."
+    "explanation": "'querySelector' checks for a selected radio button, logging accordingly."
+  },
+  {
+    "question": "What does this jQuery code do: `$('#zip').on('input', function() { $(this).val().match(/^\\d{9}$/) ? $(this).addClass('valid') : $(this).removeClass('valid'); });`?",
+    "options": [
+      "Validates a 9-digit ZIP code and toggles 'valid' class",
+      "Sets ZIP code value",
+      "Triggers a keypress event",
+      "Clears the ZIP field"
+    ],
+    "answer": "Validates a 9-digit ZIP code and toggles 'valid' class",
+    "difficulty": "Medium",
+    "explanation": "The regex checks for 9 digits, and jQuery toggles the 'valid' class."
   },
   {
     "question": "What is the output of: `try { null.x; } catch (e) { console.log(e.name); }`?",
     "options": [
       "TypeError",
-      "ReferenceError"
+      "ReferenceError",
+      "SyntaxError",
+      "undefined"
     ],
     "answer": "TypeError",
     "difficulty": "Medium",
     "explanation": "Accessing a property on null throws a TypeError, caught and logged."
   },
   {
-    "question": "What does: `try { throw 'Custom error'; } catch (e) { console.log(e); }` output?",
+    "question": "What does this jQuery code do: `try { throw new Error('Error'); } catch (e) { $('#error').text(e.message); }`?",
     "options": [
-      "Custom error",
-      "Error"
+      "Sets #error’s text to 'Error'",
+      "Logs 'Error' to console",
+      "Throws an error",
+      "Clears #error"
     ],
-    "answer": "Custom error",
+    "answer": "Sets #error’s text to 'Error'",
     "difficulty": "Medium",
-    "explanation": "The thrown string 'Custom error' is caught and logged."
+    "explanation": "The thrown error’s message is caught and set as #error’s text."
   },
   {
-    "question": "What does: `document.querySelector('#form').addEventListener('submit', (e) => { e.preventDefault(); console.log('Submitted'); });` do?",
+    "question": "What does this jQuery code do: `$('.box').on('dblclick', function() { $(this).toggleClass('active'); });`?",
     "options": [
-      "Logs 'Submitted' and prevents form submission",
-      "Submits the form"
+      "Toggles 'active' class on double-click",
+      "Adds 'active' class on click",
+      "Removes 'active' class",
+      "Triggers a click event"
     ],
-    "answer": "Logs 'Submitted' and prevents form submission",
+    "answer": "Toggles 'active' class on double-click",
     "difficulty": "Medium",
-    "explanation": "'preventDefault()' stops form submission, and 'Submitted' is logged."
+    "explanation": "jQuery’s 'toggleClass()' adds or removes 'active' on double-click."
   },
   {
-    "question": "What is the output of: `let comment = document.createComment('test'); console.log(comment.nodeType);`?",
-    "options": [
-      "8",
-      "1"
-    ],
-    "answer": "8",
-    "difficulty": "Medium",
-    "explanation": "A comment node has a 'nodeType' of 8."
-  },
-  {
-    "question": "What does: `let elements = document.querySelectorAll('[data-test]'); console.log(elements.length);` do?",
-    "options": [
-      "Logs number of elements with data-test",
-      "Sets data-test attribute"
-    ],
-    "answer": "Logs number of elements with data-test",
-    "difficulty": "Medium",
-    "explanation": "'querySelectorAll()' selects elements with data-test, and 'length' counts them."
-  },
-  {
-    "question": "What does: `let div = document.querySelector('#box'); console.log(div.tagName);` output for a <div>?",
-    "options": [
-      "DIV",
-      "div"
-    ],
-    "answer": "DIV",
-    "difficulty": "Medium",
-    "explanation": "'tagName' returns the tag name in uppercase, so 'DIV'."
-  },
-  {
-    "question": "What does: `let div = document.querySelector('#box'); div.innerHTML = '<span>1</span>'; console.log(div.children.length);` output?",
+    "question": "What is the output of: `let div = document.createElement('div'); console.log(div.nodeType);`?",
     "options": [
       "1",
-      "0"
+      "3",
+      "8",
+      "9"
     ],
     "answer": "1",
     "difficulty": "Medium",
-    "explanation": "'children.length' counts the single <span> element."
+    "explanation": "An element node like a div has a 'nodeType' of 1."
   },
   {
-    "question": "What does: `let elem = document.querySelector('#box'); elem.setAttribute('title', 'Tooltip'); console.log(elem.getAttribute('title'));` output?",
+    "question": "What does this jQuery code do: `$('.test[data-value="1"]').addClass('selected');`?",
     "options": [
-      "Tooltip",
-      "undefined"
+      "Adds 'selected' class to elements with data-value='1'",
+      "Sets data-value to 'selected'",
+      "Removes elements with data-value='1'",
+      "Triggers an event"
     ],
-    "answer": "Tooltip",
+    "answer": "Adds 'selected' class to elements with data-value='1'",
     "difficulty": "Medium",
-    "explanation": "'setAttribute()' sets the title, and 'getAttribute()' retrieves it."
+    "explanation": "jQuery selects elements with the specified data attribute and adds 'selected'."
   },
   {
-    "question": "What does: `let elem = document.querySelector('#box'); console.log(Array.from(elem.attributes).map(attr => attr.name));` output?",
+    "question": "What does this code do: `let elem = document.querySelector('#box'); elem.parentNode.removeChild(elem);`?",
     "options": [
-      "Array of attribute names",
-      "Array of attribute values"
+      "Removes #box from the DOM",
+      "Hides #box",
+      "Replaces #box",
+      "Appends #box"
     ],
-    "answer": "Array of attribute names",
+    "answer": "Removes #box from the DOM",
     "difficulty": "Medium",
-    "explanation": "'attributes' is a NamedNodeMap; mapping 'name' gives an array of attribute names."
+    "explanation": "'removeChild()' removes the specified element from its parent."
   },
   {
-    "question": "What does: `let div = document.createElement('div'); div.textContent = 'Hello'; document.body.appendChild(div);` do?",
+    "question": "What does this jQuery code do: `$('#box').attr('title') ? $('#box').removeAttr('title') : $('#box').attr('title', 'Tooltip');`?",
     "options": [
-      "Appends div with 'Hello' to body",
-      "Replaces body content"
+      "Toggles the 'title' attribute on #box",
+      "Sets 'title' to 'Tooltip' always",
+      "Removes #box",
+      "Gets the 'title' value"
     ],
-    "answer": "Appends div with 'Hello' to body",
+    "answer": "Toggles the 'title' attribute on #box",
     "difficulty": "Medium",
-    "explanation": "'appendChild()' adds the div with 'Hello' to the body."
+    "explanation": "If 'title' exists, it’s removed; otherwise, it’s set to 'Tooltip'."
   },
   {
-    "question": "What does: `let span = document.createElement('span'); document.querySelector('#target').parentNode.replaceChild(span, document.querySelector('#target'));` do?",
+    "question": "What does this code do: `let obj = { x: 1 }; delete obj.x; console.log(obj.x);`?",
     "options": [
-      "Replaces #target with new span",
-      "Inserts span before #target"
+      "Logs undefined",
+      "Logs 1",
+      "Throws an error",
+      "Logs 'x'"
     ],
-    "answer": "Replaces #target with new span",
+    "answer": "Logs undefined",
     "difficulty": "Medium",
-    "explanation": "'replaceChild()' swaps #target with the new span."
+    "explanation": "'delete' removes the 'x' property, so accessing obj.x returns undefined."
   },
   {
-    "question": "What does: `let obj = { x: 1 }; delete obj.x; console.log(obj.x);` output?",
+    "question": "What does this jQuery code do: `let obj = { count: 5 }; $('#count').text(obj.count);`?",
     "options": [
-      "undefined",
-      "1"
+      "Sets #count’s text to 5",
+      "Sets #count’s value to 5",
+      "Appends 5 to #count",
+      "Removes #count"
     ],
-    "answer": "undefined",
+    "answer": "Sets #count’s text to 5",
     "difficulty": "Medium",
-    "explanation": "'delete' removes the 'x' property, so obj.x is undefined."
+    "explanation": "jQuery’s 'text()' sets #count’s text to the object’s 'count' property."
   },
   {
-    "question": "What does: `let obj = { count: 5 }; console.log(obj['count']);` output?",
+    "question": "What does this code do: `window.history.back();`?",
     "options": [
-      "5",
-      "undefined"
+      "Navigates to the previous page",
+      "Navigates to the next page",
+      "Reloads the page",
+      "Opens a new tab"
     ],
-    "answer": "5",
+    "answer": "Navigates to the previous page",
     "difficulty": "Medium",
-    "explanation": "Bracket notation accesses the 'count' property, logging 5."
+    "explanation": "'history.back()' moves to the previous page in the browser’s history."
   },
   {
-    "question": "What does: `let obj = { add: function(a, b) { return a + b; } }; console.log(obj.add(2, 3));` output?",
+    "question": "What does this jQuery code do: `$('#form').on('submit', function(e) { e.preventDefault(); $('#status').text('Submitted'); });`?",
     "options": [
-      "5",
-      "undefined"
+      "Prevents form submission and sets #status to 'Submitted'",
+      "Submits the form",
+      "Clears the form",
+      "Triggers a click event"
     ],
-    "answer": "5",
+    "answer": "Prevents form submission and sets #status to 'Submitted'",
     "difficulty": "Medium",
-    "explanation": "The 'add' method returns the sum of 2 and 3, which is 5."
+    "explanation": "'preventDefault()' stops the form submission, and 'text()' updates #status."
   },
   {
-    "question": "What does: `function Book(title) { this.title = title; } let b = new Book('JS'); console.log(b.title);` output?",
+    "question": "What does this code do: `document.querySelector('#input').value = 'test'; console.log(document.querySelector('#input').value);`?",
     "options": [
-      "JS",
-      "undefined"
+      "Logs 'test'",
+      "Logs undefined",
+      "Logs 'input'",
+      "Throws an error"
     ],
-    "answer": "JS",
+    "answer": "Logs 'test'",
     "difficulty": "Medium",
-    "explanation": "The constructor sets 'title' to 'JS', accessed as b.title."
+    "explanation": "The code sets the input’s value to 'test' and logs it."
   },
   {
-    "question": "What does: `function Vehicle() { this.move = () => 'Moving'; } let v = new Vehicle(); console.log(v.move());` output?",
+    "question": "What does this jQuery code do: `$('input[name=email]').on('input', function() { $(this).val().match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/) ? $(this).addClass('valid') : $(this).removeClass('valid'); });`?",
     "options": [
-      "Moving",
-      "undefined"
+      "Validates email and toggles 'valid' class",
+      "Sets email value",
+      "Triggers a keypress event",
+      "Clears the email field"
     ],
-    "answer": "Moving",
+    "answer": "Validates email and toggles 'valid' class",
     "difficulty": "Medium",
-    "explanation": "The constructor defines the 'move' method, which returns 'Moving'."
-  },
-  {
-    "question": "What is the output of: `function Bird() { } Bird.prototype.fly = function() { return 'Flying'; }; let b = new Bird(); console.log(b.fly());`?",
-    "options": [
-      "Flying",
-      "undefined"
-    ],
-    "answer": "Flying",
-    "difficulty": "Medium",
-    "explanation": "The 'fly' method on the prototype returns 'Flying'."
-  },
-  {
-    "question": "What does: `let obj = { y: 2 }; console.log(Object.keys(obj).length);` output?",
-    "options": [
-      "1",
-      "0"
-    ],
-    "answer": "1",
-    "difficulty": "Medium",
-    "explanation": "'Object.keys()' returns an array of property names, with length 1."
-  },
-  {
-    "question": "What does: `window.location.replace('https://example.com');` do?",
-    "options": [
-      "Navigates to https://example.com without history",
-      "Adds to history"
-    ],
-    "answer": "Navigates to https://example.com without history",
-    "difficulty": "Medium",
-    "explanation": "'location.replace()' navigates without creating a new history entry."
-  },
-  {
-    "question": "What does: `let input = document.querySelector('#text'); if (input.value.length <= 10) console.log('Valid');` do?",
-    "options": [
-      "Logs 'Valid' if input has ≤10 characters",
-      "Sets input value"
-    ],
-    "answer": "Logs 'Valid' if input has ≤10 characters",
-    "difficulty": "Medium",
-    "explanation": "The code checks if the input’s length is <= 10, logging 'Valid'."
-  },
-  {
-    "question": "What does: `let select = document.querySelector('#dropdown'); if (select.selectedOptions.length > 0) console.log('Valid');` do?",
-    "options": [
-      "Logs 'Valid' if dropdown has selection",
-      "Sets dropdown value"
-    ],
-    "answer": "Logs 'Valid' if dropdown has selection",
-    "difficulty": "Medium",
-    "explanation": "'selectedOptions.length' checks if an option is selected."
-  },
-  {
-    "question": "What does: `let radio = document.querySelector('input[name=group]'); radio.checked = true;` do?",
-    "options": [
-      "Checks first radio button",
-      "Unchecks radio button"
-    ],
-    "answer": "Checks first radio button",
-    "difficulty": "Medium",
-    "explanation": "Setting 'checked = true' selects the first radio button."
-  },
-  {
-    "question": "What does: `let input = document.querySelector('#email'); if (/^\\w+@\\w+\\.\\w+$/.test(input.value)) console.log('Valid');` do?",
-    "options": [
-      "Logs 'Valid' for basic email format",
-      "Sets email value"
-    ],
-    "answer": "Logs 'Valid' for basic email format",
-    "difficulty": "Medium",
-    "explanation": "The regex '/^\\w+@\\w+\\.\\w+$/' validates a simple email format."
-  },
-  {
-    "question": "What does: `try { let x = y; } catch (e) { console.log(e.name); }` output?",
-    "options": [
-      "ReferenceError",
-      "TypeError"
-    ],
-    "answer": "ReferenceError",
-    "difficulty": "Medium",
-    "explanation": "Accessing an undefined variable 'y' throws a ReferenceError."
-  },
-  {
-    "question": "What does: `document.querySelector('#box').addEventListener('mouseover', () => console.log('Hovered'));` do?",
-    "options": [
-      "Logs 'Hovered' on mouseover",
-      "Changes box content"
-    ],
-    "answer": "Logs 'Hovered' on mouseover",
-    "difficulty": "Medium",
-    "explanation": "The 'mouseover' event triggers the handler, logging 'Hovered'."
-  },
-  {
-    "question": "What does: `let div = document.querySelector('#box'); div.innerHTML = '<!-- comment -->'; console.log(div.childNodes[0].nodeType);` output?",
-    "options": [
-      "8",
-      "1"
-    ],
-    "answer": "8",
-    "difficulty": "Medium",
-    "explanation": "The first child is a comment node, with 'nodeType' 8."
-  },
-  {
-    "question": "What does: `let elements = document.getElementsByTagName('p'); console.log(elements.length);` do?",
-    "options": [
-      "Logs number of <p> elements",
-      "Selects first <p>"
-    ],
-    "answer": "Logs number of <p> elements",
-    "difficulty": "Medium",
-    "explanation": "'getElementsByTagName()' returns a collection of <p> elements, and 'length' counts them."
+    "explanation": "The regex validates the email, and jQuery toggles the 'valid' class."
   }
 ]
-
-# Cache shuffled quiz with a fixed key
-@st.cache_data
-def shuffle_quiz(_quiz, seed=42):
-    random.seed(seed)  # Ensure consistent shuffling for caching
+# Cache shuffled quiz (removed for testing, re-add if needed)
+def shuffle_quiz(_quiz):
     shuffled = random.sample(_quiz, len(_quiz))
     for q in shuffled:
         q["id"] = str(uuid.uuid4())
         q["display_options"] = q["options"].copy()
-        random.seed(seed + int(q["id"].replace("-", ""), 16))  # Unique seed per question
         random.shuffle(q["display_options"])
         q["labeled_answer"] = q["answer"]
     return shuffled
 
-# Initialize session state with minimal data
-if "initialized" not in st.session_state:
+# Initialize session state
+if "quiz_data" not in st.session_state:
     if not quiz:
-        st.error("Quiz list is empty! Please check the quiz data.")
-        st.stop()
+        st.error("Quiz list is empty!")
     st.session_state.update({
-        "initialized": True,
-        "quiz_data": shuffle_quiz(quiz),
+        "quiz_data": shuffle_quiz(quiz) if quiz else [],
         "score": 0,
         "current_q": 0,
-        "start_time": None,
-        "answers": [None] * len(quiz),
+        "start_time": datetime.now(),
+        "answers": [None] * len(quiz) if quiz else [],
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 30 * len(quiz),  # 30 seconds per question
+        "time_left": 3600,  # 60 minutes
         "theme": "dark",
         "streak": 0,
-        "max_streak": 0,
         "started": False,
-        "paused": False,
-        "pause_time": None
+        "max_streak": 0
     })
+    st.write(f"Initialized quiz with {len(st.session_state.quiz_data)} questions")
 
 # Theme toggle
 def toggle_theme():
     st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
-    st.rerun()
 
 # Timer logic
 def update_timer():
-    if not st.session_state.paused and st.session_state.start_time:
-        elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-        st.session_state.time_left = max(30 * len(quiz) - elapsed, 0)
-        if st.session_state.time_left <= 0:
-            st.session_state.show_results = True
-            st.rerun()
-
-# Pause/Resume quiz
-def toggle_pause():
-    if st.session_state.paused:
-        pause_duration = (datetime.now() - st.session_state.pause_time).total_seconds()
-        st.session_state.start_time += pause_duration
-        st.session_state.paused = False
-    else:
-        st.session_state.paused = True
-        st.session_state.pause_time = datetime.now()
-    st.rerun()
+    elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
+    st.session_state.time_left = max(3600 - elapsed, 0)  # 60 minutes
+    if st.session_state.time_left <= 0:
+        st.session_state.show_results = True
+        st.rerun()
 
 # Reset quiz
 def reset_quiz():
     st.session_state.update({
-        "initialized": True,
         "quiz_data": shuffle_quiz(quiz),
         "score": 0,
         "current_q": 0,
-        "start_time": None,
+        "start_time": datetime.now(),
         "answers": [None] * len(quiz),
         "show_results": False,
         "selected_option": None,
         "feedback": None,
-        "time_left": 30 * len(quiz),
+        "time_left": 3600,  # 60 minutes
         "streak": 0,
         "max_streak": 0,
-        "started": False,
-        "paused": False,
-        "pause_time": None
+        "started": False
     })
     st.rerun()
 
-# CSS for UI (minimized for performance)
+# CSS for enhanced UI
 st.markdown("""
 <style>
+body {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    font-family: 'Inter', 'Arial', sans-serif;
+    transition: all 0.3s ease;
+}
 :root {
+    --bg-gradient: linear-gradient(180deg, #1a1a3b, #2c2c54);
     --bg-container: #2c2c54;
     --text-color: #ffffff;
-    --button-bg: #6b21a8;
-    --button-hover: #8b5cf6;
+    --button-bg: linear-gradient(45deg, #6b21a8, #a855f7);
+    --button-hover: linear-gradient(45deg, #8b5cf6, #c084fc);
     --code-bg: #1e1e1e;
     --shadow: rgba(0,0,0,0.3);
 }
 [data-theme="light"] {
+    --bg-gradient: linear-gradient(180deg, #e0e7ff, #f3e8ff);
     --bg-container: #ffffff;
     --text-color: #1f2937;
-    --button-bg: #4f46e5;
-    --button-hover: #6366f1;
+    --button-bg: linear-gradient(45deg, #4f46e5, #7c3aed);
+    --button-hover: linear-gradient(45deg, #6366f1, #a78bfa);
     --code-bg: #f1f5f9;
     --shadow: rgba(0,0,0,0.1);
 }
 .main-container {
     background: var(--bg-container);
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px var(--shadow);
-    max-width: 700px;
-    margin: 10px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow);
+    max-width: 900px;
+    margin: 20px auto;
 }
 .stButton>button {
     background: var(--button-bg);
     color: var(--text-color);
     border: none;
-    border-radius: 6px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 12px;
     width: 100%;
-    font-size: 13px;
-    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 6px 0;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    transform: scale(1);
 }
-.stButton>button:hover:not(:disabled) {
+.stButton>button:hover {
     background: var(--button-hover);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 .stButton>button:disabled {
     background: #6b7280;
     cursor: not-allowed;
-}
-.stButton>button:focus {
-    outline: 2px solid #a855f7;
+    transform: scale(1);
 }
 .selected-correct {
     background: #34c759 !important;
+    transform: scale(1.05);
 }
 .selected-wrong {
     background: #ff3b30 !important;
+    transform: scale(1.05);
 }
 .question-container {
-    padding: 10px;
-    border-radius: 6px;
+    background: var(--bg-container);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 15px;
 }
 .feedback-correct {
     color: #34c759;
     font-weight: 600;
-    font-size: 14px;
-    margin: 8px 0;
+    font-size: 18px;
+    margin: 15px 0;
+    animation: fadeIn 0.5s ease;
 }
 .feedback-wrong {
     color: #ff3b30;
     font-weight: 600;
-    font-size: 14px;
-    margin: 8px 0;
+    font-size: 18px;
+    margin: 15px 0;
+    animation: fadeIn 0.5s ease;
 }
 .progress-bar {
     background: #4b4b6b;
-    border-radius: 6px;
-    height: 8px;
-    margin: 6px 0;
+    border-radius: 10px;
+    height: 12px;
+    margin: 10px 0;
     position: relative;
 }
 .progress-fill {
     background: var(--button-bg);
     height: 100%;
-    border-radius: 6px;
+    border-radius: 10px;
+    transition: width 0.5s ease;
 }
 .progress-text {
     position: absolute;
-    top: -16px;
+    top: -20px;
     right: 0;
     color: var(--text-color);
-    font-size: 10px;
+    font-size: 12px;
 }
 .title {
-    font-size: 24px;
+    font-size: 36px;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: var(--text-color);
 }
 .caption {
     text-align: center;
     color: #b0b0d0;
-    font-size: 12px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 .timer {
-    font-size: 12px;
+    font-size: 16px;
     color: #ff6b6b;
     font-weight: 600;
     text-align: center;
-    margin-top: 6px;
+    margin-top: 10px;
 }
 .difficulty {
-    font-size: 11px;
+    font-size: 14px;
     color: #b0b0d0;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
-.stCodeBlock, .stCodeBlock pre, .stCodeBlock code {
+.stCodeBlock {
     background-color: var(--code-bg) !important;
-    border-radius: 5px;
-    padding: 8px;
-    font-family: 'Consolas', monospace;
-    font-size: 12px;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
     border: 1px solid #4b4b6b;
+}
+.stCodeBlock pre, .stCodeBlock code {
     color: var(--text-color);
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 @media (max-width: 600px) {
     .main-container {
-        padding: 10px;
-        margin: 5px;
+        padding: 15px;
+        margin: 10px;
     }
     .title {
-        font-size: 20px;
+        font-size: 28px;
     }
     .stButton>button {
-        font-size: 12px;
-        padding: 6px;
+        font-size: 14px;
+        padding: 8px;
     }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 """, unsafe_allow_html=True)
 
 # Main UI
-try:
-    st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}" role="main">', unsafe_allow_html=True)
-    st.markdown('<h1 class="title">🚀 JavaScript Quiz</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="caption">Test Your JavaScript Skills!</p>', unsafe_allow_html=True)
+st.markdown(f'<div class="main-container" data-theme="{st.session_state.theme}">', unsafe_allow_html=True)
+st.markdown('<h1 class="title">🚀 JavaScript Mastery Quiz</h1>', unsafe_allow_html=True)
+st.markdown('<p class="caption">Challenge Your JavaScript Expertise!</p>', unsafe_allow_html=True)
 
-    # Theme toggle
-    if st.button("🌙 Toggle Theme", key="theme_toggle"):
-        toggle_theme()
+# Theme toggle button
+if st.button("🌙 Toggle Theme", key="theme_toggle"):
+    toggle_theme()
+    st.rerun()
 
-    # Welcome screen
-    if not st.session_state.started:
-        st.markdown(f"""
-        <div style="text-align: center;">
-            <p style="color: var(--text-color); font-size: 14px;">Challenge yourself with {len(quiz)} JavaScript questions!</p>
-            <p style="color: #b0b0d0;">{int(30 * len(quiz) / 60)} minutes, 2 points per correct answer.</p>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("Start Quiz", key="start_quiz"):
-            st.session_state.started = True
-            st.session_state.start_time = datetime.now()
-            st.rerun()
+# Welcome screen
+if not st.session_state.started:
+    st.markdown("""
+    <div style="text-align: center;">
+        <p style="color: var(--text-color); font-size: 18px;">Test your JavaScript skills with 67 comprehensive questions!</p>
+        <p style="color: #b0b0d0;">60 minutes, 2 points per correct answer. Ready?</p>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Start Quiz", key="start_quiz"):
+        st.session_state.started = True
+        st.session_state.start_time = datetime.now()
+        st.write(f"Quiz started with {len(st.session_state.quiz_data)} questions")
+        st.rerun()
+else:
+    # Timer
+    if not st.session_state.show_results:
+        update_timer()
+        minutes = int(st.session_state.time_left // 60)
+        seconds = int(st.session_state.time_left % 60)
+        st.markdown(f'<div class="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+
+    if not st.session_state.quiz_data:
+        st.error("No quiz questions available.")
     else:
-        # Timer
-        if not st.session_state.show_results and not st.session_state.paused:
-            update_timer()
-            minutes = int(st.session_state.time_left // 60)
-            seconds = int(st.session_state.time_left % 60)
-            st.markdown(f'<div class="timer" role="timer">⏰ Time Left: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
-
-        # Pause/Resume
-        pause_label = "Pause Quiz" if not st.session_state.paused else "Resume Quiz"
-        if st.button(pause_label, key="pause_quiz"):
-            toggle_pause()
-
-        if not st.session_state.quiz_data:
-            st.error("No quiz questions available.")
-            st.stop()
-
         # Progress bar
         progress = st.session_state.current_q / len(st.session_state.quiz_data)
-        progress_percentage = progress * 100
+        progress_percentage = int(progress * 100)
         st.markdown(f"""
-        <div class="progress-bar" role="progressbar" aria-valuenow="{progress_percentage:.1f}" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar">
             <div class="progress-fill" style="width: {progress_percentage}%"></div>
-            <div class="progress-text">{progress_percentage:.1f}%</div>
+            <div class="progress-text">{progress_percentage}%</div>
         </div>
-        <div style="color: var(--text-color); font-size: 11px; text-align: center;">
+        <div style="color: var(--text-color); font-size: 13px; text-align: center;">
             Question {st.session_state.current_q + 1} of {len(st.session_state.quiz_data)}
         </div>
         """, unsafe_allow_html=True)
 
         if not st.session_state.show_results:
             with st.container():
-                st.markdown('<div class="question-container" role="region" aria-label="Question">', unsafe_allow_html=True)
+                st.markdown('<div class="question-container">', unsafe_allow_html=True)
                 q = st.session_state.quiz_data[st.session_state.current_q]
 
                 # Display difficulty and streak
                 st.markdown(f'<div class="difficulty">Difficulty: {q["difficulty"]} | Streak: 🔥 {st.session_state.streak}</div>', unsafe_allow_html=True)
 
                 # Split question into text and code
-                if "`" in q["question"]:
-                    question_parts = q["question"].split("`")
+                if "```javascript
+                    question_parts = q["question"].split("```javascript\n")
                     question_text = question_parts[0].strip()
-                    code_snippet = question_parts[1].strip() if len(question_parts) > 1 else ""
+                    code_snippet = question_parts[1].split("```")[0].strip()
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{question_text}**")
-                    if code_snippet:
-                        st.code(code_snippet, language="javascript")
+                    st.code(code_snippet, language="javascript")
                 else:
                     st.markdown(f"### Question {st.session_state.current_q + 1}")
                     st.markdown(f"**{q['question']}**")
@@ -1246,12 +1242,10 @@ try:
                     button_class = ""
                     if st.session_state.selected_option == option:
                         button_class = "selected-correct" if option == q["labeled_answer"] else "selected-wrong"
-                    button_key = f"q_{q['id']}_{i}"
                     if st.button(
                         option,
-                        key=button_key,
-                        disabled=st.session_state.selected_option is not None or st.session_state.paused,
-                        help=f"Select option {i + 1}"
+                        key=f"q{i}_{st.session_state.current_q}",
+                        disabled=st.session_state.selected_option is not None
                     ):
                         is_correct = option == q["labeled_answer"]
                         st.session_state.selected_option = option
@@ -1272,8 +1266,11 @@ try:
                             st.session_state.streak += 1
                             if st.session_state.streak > st.session_state.max_streak:
                                 st.session_state.max_streak = st.session_state.streak
+                            if st.session_state.streak >= 3:
+                                st.session_state.score += 0.5
                         else:
                             st.session_state.streak = 0
+                        # Move to next question or show results
                         if st.session_state.current_q < len(st.session_state.quiz_data) - 1:
                             st.session_state.current_q += 1
                             st.session_state.selected_option = None
@@ -1288,20 +1285,20 @@ try:
                         st.markdown('<div class="feedback-correct">✅ Correct!</div>', unsafe_allow_html=True)
                     else:
                         st.markdown(f'<div class="feedback-wrong">❌ Wrong: {st.session_state.feedback["correct_answer"]}</div>', unsafe_allow_html=True)
-                        st.markdown(f'<div style="color: var(--text-color); font-size: 12px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div style="color: var(--text-color); font-size: 14px;">Explanation: {st.session_state.feedback["explanation"]}</div>', unsafe_allow_html=True)
 
                 st.markdown("</div>", unsafe_allow_html=True)
 
         else:
             # Results
-            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 30 * len(quiz)) if st.session_state.start_time else 30 * len(quiz)
+            time_taken = min((datetime.now() - st.session_state.start_time).total_seconds(), 3600)  # 60 minutes
             total_possible_score = len(quiz) * 2
             accuracy = (st.session_state.score / total_possible_score) * 100 if total_possible_score > 0 else 0
-            st.markdown('<div class="question-container" role="region" aria-label="Results">', unsafe_allow_html=True)
+            st.markdown('<div class="question-container">', unsafe_allow_html=True)
             st.markdown(f'<h2 style="color: #34c759; text-align: center;">🏆 Score: {st.session_state.score}/{total_possible_score}</h2>', unsafe_allow_html=True)
             st.markdown(f"""
             <h3>📊 Results</h3>
-            <div style="color: var(--text-color); font-size: 13px;">
+            <div style="color: var(--text-color); font-size: 15px;">
                 - ⏱️ Time: {int(time_taken) // 60}m {int(time_taken) % 60}s<br>
                 - 🎯 Accuracy: {accuracy:.1f}%<br>
                 - ✅ Correct: {sum(1 for ans in st.session_state.answers if ans and ans["is_correct"])}<br>
@@ -1310,13 +1307,25 @@ try:
             </div>
             """, unsafe_allow_html=True)
 
+            # Confetti for high score
+            if accuracy > 80:
+                st.markdown("""
+                <script>
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                </script>
+                """, unsafe_allow_html=True)
+
             # Review Answers
             st.markdown('<h3>📝 Review Your Answers</h3>', unsafe_allow_html=True)
             for i, ans in enumerate(st.session_state.answers):
                 if ans:
                     status = "✅ Correct" if ans["is_correct"] else f"❌ Wrong (Correct: {ans['correct_answer']})"
                     st.markdown(f"""
-                    <div style="color: var(--text-color); margin-bottom: 6px;">
+                    <div style="color: var(--text-color); margin-bottom: 10px;">
                         Question {i+1}: {ans["question"]}<br>
                         Your Answer: {ans["user_answer"]}<br>
                         {status}<br>
@@ -1324,19 +1333,10 @@ try:
                     </div>
                     """, unsafe_allow_html=True)
 
-            # Play Again
+            # Play Again button
             if st.button("🔄 Play Again", key="play_again"):
                 reset_quiz()
 
             st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
-
-except Exception as e:
-    st.error(f"An error occurred: {str(e)}. Please try refreshing or running locally.")
-    st.markdown("To run locally, save this code as `quiz_app.py` and run `streamlit run quiz_app.py`.")
-
-
-
-
-
+st.markdown("</div>", unsafe_allow_html=True)
