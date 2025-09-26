@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 import uuid
 
-quiz = [
+quiz =[
   {
     "question": "What is the output of this code: `function scopeTest() { var x = 1; if (true) { var x = 2; } return x; } console.log(scopeTest());`?",
     "options": [
@@ -833,7 +833,7 @@ quiz = [
     "explanation": "An element node like a div has a 'nodeType' of 1."
   },
   {
-    "question": "What does this jQuery code do: `$('.test[data-value="1"]').addClass('selected');`?",
+    "question": "What does this jQuery code do: `$('.test[data-value=\"1\"]').addClass('selected');`?",
     "options": [
       "Adds 'selected' class to elements with data-value='1'",
       "Sets data-value to 'selected'",
@@ -1331,6 +1331,7 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {str(e)}. Please try refreshing or running locally.")
     st.markdown("To run locally, save this code as `quiz_app.py` and run `streamlit run quiz_app.py`.")
+
 
 
 
