@@ -5,13 +5,7 @@ import uuid
 
 # Quiz data (unchanged, assuming it's correct)
 quiz = [
-    {
-        "question": "What is the output of: ```javascript\nfunction test() { var x = 1; if (true) { var x = 2; } return x; }\nconsole.log(test());```",
-        "options": ["2", "1", "undefined", "ReferenceError"],
-        "answer": "2",
-        "difficulty": "Medium",
-        "explanation": "The 'var' keyword is function-scoped, so the inner 'var x = 2' reassigns the same variable, returning 2."
-    },
+   
     # ... (other quiz questions unchanged for brevity; ensure all questions are included)
 ]
 
@@ -438,3 +432,4 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
