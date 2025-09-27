@@ -9,9 +9,9 @@ import uuid
 
 
 
-quiz = [
+quiz =[
   {
-    "question": "What is the output of: `function test() { var x = 1; if (true) { var x = 2; } return x; } console.log(test());`?",
+    "question": "What is the output of: function test() { var x = 1; if (true) { var x = 2; } return x; } console.log(test());",
     "options": [
       "2",
       "1",
@@ -20,10 +20,10 @@ quiz = [
     ],
     "answer": "2",
     "difficulty": "Medium",
-    "explanation": "'var' is function-scoped, so the inner 'var x = 2' reassigns the same variable, returning 2."
+    "explanation": "The 'var' keyword is function-scoped, so the inner 'var x = 2' reassigns the same variable, returning 2."
   },
   {
-    "question": "What does this code output: `let x = 10; { let x = 20; } console.log(x);`?",
+    "question": "What does this code output: let x = 10; { let x = 20; } console.log(x);",
     "options": [
       "10",
       "20",
@@ -32,10 +32,10 @@ quiz = [
     ],
     "answer": "10",
     "difficulty": "Medium",
-    "explanation": "'let' is block-scoped, so the inner 'let x = 20' doesn’t affect the outer x, logging 10."
+    "explanation": "The 'let' keyword is block-scoped, so the inner 'let x = 20' does not affect the outer x, logging 10."
   },
   {
-    "question": "What is the output of: `function scope() { let x = 5; if (true) { x = 15; } return x; } console.log(scope());`?",
+    "question": "What is the output of: function scope() { let x = 5; if (true) { x = 15; } return x; } console.log(scope());",
     "options": [
       "15",
       "5",
@@ -47,7 +47,7 @@ quiz = [
     "explanation": "Without a new 'let' in the if block, 'x = 15' reassigns the outer x, returning 15."
   },
   {
-    "question": "What happens in: `function test() { console.log(x); var x = 1; } test();`?",
+    "question": "What happens in: function test() { console.log(x); var x = 1; } test();",
     "options": [
       "Logs undefined",
       "Logs 1",
@@ -56,10 +56,10 @@ quiz = [
     ],
     "answer": "Logs undefined",
     "difficulty": "Medium",
-    "explanation": "Due to hoisting, 'var x' is declared but not initialized when logged, so it’s undefined."
+    "explanation": "Due to hoisting, 'var x' is declared but not initialized when logged, so it outputs undefined."
   },
   {
-    "question": "What is the output of: `const x = 10; { const x = 20; } console.log(x);`?",
+    "question": "What is the output of: const x = 10; { const x = 20; } console.log(x);",
     "options": [
       "10",
       "20",
@@ -68,10 +68,10 @@ quiz = [
     ],
     "answer": "10",
     "difficulty": "Medium",
-    "explanation": "'const' is block-scoped, so the inner 'const x = 20' doesn’t affect the outer x."
+    "explanation": "The 'const' keyword is block-scoped, so the inner 'const x = 20' does not affect the outer x."
   },
   {
-    "question": "How do you validate a text field for non-empty input?",
+    "question": "How do you validate a text field to ensure it is not empty?",
     "options": [
       "if (document.getElementById('input').value.trim() !== '')",
       "if (document.getElementById('input').value === null)",
@@ -80,17 +80,17 @@ quiz = [
     ],
     "answer": "if (document.getElementById('input').value.trim() !== '')",
     "difficulty": "Medium",
-    "explanation": "'trim()' removes whitespace, and checking '!== ''' ensures the field isn’t empty."
+    "explanation": "The 'trim()' method removes whitespace, and checking '!== ''' ensures the field is not empty."
   },
   {
-    "question": "What does this code do: `let input = document.getElementById('text'); if (input.value.length >= 5) console.log('Valid');`?",
+    "question": "What does this code do: let input = document.getElementById('text'); if (input.value.length >= 5) console.log('Valid');",
     "options": [
-      "Logs 'Valid' if text input has 5+ characters",
+      "Logs 'Valid' if text input has 5 or more characters",
       "Logs 'Valid' if input is empty",
       "Throws an error",
       "Logs the input value"
     ],
-    "answer": "Logs 'Valid' if text input has 5+ characters",
+    "answer": "Logs 'Valid' if text input has 5 or more characters",
     "difficulty": "Medium",
     "explanation": "Checks if the input’s value length is at least 5, logging 'Valid' if true."
   },
@@ -104,10 +104,10 @@ quiz = [
     ],
     "answer": "if (document.getElementById('dropdown').selectedIndex > -1)",
     "difficulty": "Medium",
-    "explanation": "'selectedIndex > -1' confirms an option is selected in the dropdown."
+    "explanation": "The 'selectedIndex > -1' condition confirms an option is selected in the dropdown."
   },
   {
-    "question": "What does this code do: `let select = document.getElementById('dropdown'); if (select.value !== '') console.log('Selected');`?",
+    "question": "What does this code do: let select = document.getElementById('dropdown'); if (select.value !== '') console.log('Selected');",
     "options": [
       "Logs 'Selected' if dropdown has a non-empty value",
       "Logs the dropdown’s value",
@@ -131,7 +131,7 @@ quiz = [
     "explanation": "The selector returns the checked radio button or null if none is selected."
   },
   {
-    "question": "What does this code do: `let radio = document.querySelector('input[name=group]:checked'); console.log(radio ? radio.value : 'None');`?",
+    "question": "What does this code do: let radio = document.querySelector('input[name=group]:checked'); console.log(radio ? radio.value : 'None');",
     "options": [
       "Logs the checked radio’s value or 'None'",
       "Logs 'None' always",
@@ -152,10 +152,10 @@ quiz = [
     ],
     "answer": "/^\\d{5}$/",
     "difficulty": "Medium",
-    "explanation": "'/^\\d{5}$/' ensures exactly 5 digits, suitable for a basic ZIP code."
+    "explanation": "The regex '/^\\d{5}$/' ensures exactly 5 digits, suitable for a basic ZIP code."
   },
   {
-    "question": "What does this code do: `let zip = document.getElementById('zip').value; if (/^\\d{5}$/.test(zip)) console.log('Valid ZIP');`?",
+    "question": "What does this code do: let zip = document.getElementById('zip').value; if (/^\\d{5}$/.test(zip)) console.log('Valid ZIP');",
     "options": [
       "Logs 'Valid ZIP' for a 5-digit ZIP code",
       "Logs the ZIP code value",
@@ -179,7 +179,7 @@ quiz = [
     "explanation": "This regex ensures a valid email format with username, @, domain, and top-level domain."
   },
   {
-    "question": "What does this code do: `let email = document.getElementById('email').value; if (/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) console.log('Valid');`?",
+    "question": "What does this code do: let email = document.getElementById('email').value; if (/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) console.log('Valid');",
     "options": [
       "Logs 'Valid' for a valid email format",
       "Logs the email value",
@@ -191,7 +191,7 @@ quiz = [
     "explanation": "The regex validates the email format, logging 'Valid' if it matches."
   },
   {
-    "question": "What is the output of: `try { let x = undefined.x; } catch (e) { console.log(e.name); }`?",
+    "question": "What is the output of: try { let x = undefined.x; } catch (e) { console.log(e.name); }",
     "options": [
       "TypeError",
       "ReferenceError",
@@ -200,10 +200,10 @@ quiz = [
     ],
     "answer": "TypeError",
     "difficulty": "Medium",
-    "explanation": "Accessing a property on undefined throws a TypeError, caught and logged."
+    "explanation": "Accessing a property on undefined throws a TypeError, caught and logged as 'TypeError'."
   },
   {
-    "question": "What does this code do: `try { throw new Error('Invalid'); } catch (e) { console.log(e.message); }`?",
+    "question": "What does this code do: try { throw new Error('Invalid'); } catch (e) { console.log(e.message); }",
     "options": [
       "Logs 'Invalid'",
       "Logs 'Error'",
@@ -215,7 +215,7 @@ quiz = [
     "explanation": "The thrown error’s message is caught and logged as 'Invalid'."
   },
   {
-    "question": "What does this code do: `document.getElementById('btn').addEventListener('click', () => console.log('Clicked'));`?",
+    "question": "What does this code do: document.getElementById('btn').addEventListener('click', () => console.log('Clicked'));",
     "options": [
       "Logs 'Clicked' on button click",
       "Changes button text",
@@ -224,10 +224,10 @@ quiz = [
     ],
     "answer": "Logs 'Clicked' on button click",
     "difficulty": "Medium",
-    "explanation": "'addEventListener()' binds a handler to the button’s click event."
+    "explanation": "The 'addEventListener()' method binds a handler to the button’s click event."
   },
   {
-    "question": "What is the output of: `let node = document.createTextNode('test'); console.log(node.nodeType);`?",
+    "question": "What is the output of: let node = document.createTextNode('test'); console.log(node.nodeType);",
     "options": [
       "3",
       "1",
@@ -248,10 +248,10 @@ quiz = [
     ],
     "answer": "document.querySelectorAll('.test')",
     "difficulty": "Medium",
-    "explanation": "'querySelectorAll()' uses CSS selector syntax to select all elements with class 'test'."
+    "explanation": "The 'querySelectorAll()' method uses CSS selector syntax to select all elements with class 'test'."
   },
   {
-    "question": "What is the output of: `let div = document.createElement('div'); console.log(div.tagName);`?",
+    "question": "What is the output of: let div = document.createElement('div'); console.log(div.tagName);",
     "options": [
       "DIV",
       "div",
@@ -260,10 +260,10 @@ quiz = [
     ],
     "answer": "DIV",
     "difficulty": "Medium",
-    "explanation": "'tagName' returns the tag name in uppercase, so 'DIV' for a <div> element."
+    "explanation": "The 'tagName' property returns the tag name in uppercase, so 'DIV' for a <div> element."
   },
   {
-    "question": "What does this code do: `let div = document.createElement('div'); div.innerHTML = '<p>1</p><p>2</p>'; console.log(div.children.length);`?",
+    "question": "What does this code do: let div = document.createElement('div'); div.innerHTML = '<p>1</p><p>2</p>'; console.log(div.children.length);",
     "options": [
       "Logs 2",
       "Logs 1",
@@ -272,10 +272,10 @@ quiz = [
     ],
     "answer": "Logs 2",
     "difficulty": "Medium",
-    "explanation": "'children.length' counts the two <p> elements, excluding text nodes."
+    "explanation": "The 'children.length' property counts the two <p> elements, excluding text nodes."
   },
   {
-    "question": "What does this code do: `let img = document.createElement('img'); img.setAttribute('src', 'image.jpg'); console.log(img.getAttribute('src'));`?",
+    "question": "What does this code do: let img = document.createElement('img'); img.setAttribute('src', 'image.jpg'); console.log(img.getAttribute('src'));",
     "options": [
       "Logs 'image.jpg'",
       "Logs undefined",
@@ -284,7 +284,7 @@ quiz = [
     ],
     "answer": "Logs 'image.jpg'",
     "difficulty": "Medium",
-    "explanation": "'setAttribute()' sets the 'src', and 'getAttribute()' retrieves it."
+    "explanation": "The 'setAttribute()' method sets the 'src', and 'getAttribute()' retrieves it."
   },
   {
     "question": "How do you check if an element has an attribute?",
@@ -296,10 +296,10 @@ quiz = [
     ],
     "answer": "element.hasAttribute('name')",
     "difficulty": "Medium",
-    "explanation": "'hasAttribute()' returns true if the element has the specified attribute."
+    "explanation": "The 'hasAttribute()' method returns true if the element has the specified attribute."
   },
   {
-    "question": "What does this code do: `let elem = document.createElement('span'); document.body.appendChild(elem);`?",
+    "question": "What does this code do: let elem = document.createElement('span'); document.body.appendChild(elem);",
     "options": [
       "Appends a new span to the body",
       "Replaces the body with a span",
@@ -308,10 +308,10 @@ quiz = [
     ],
     "answer": "Appends a new span to the body",
     "difficulty": "Medium",
-    "explanation": "'appendChild()' adds the new span as the last child of the body."
+    "explanation": "The 'appendChild()' method adds the new span as the last child of the body."
   },
   {
-    "question": "What does this code do: `let p = document.createElement('p'); document.querySelector('#target').parentNode.insertBefore(p, document.querySelector('#target'));`?",
+    "question": "What does this code do: let p = document.createElement('p'); document.querySelector('#target').parentNode.insertBefore(p, document.querySelector('#target'));",
     "options": [
       "Inserts a new <p> before #target",
       "Inserts a new <p> after #target",
@@ -320,10 +320,10 @@ quiz = [
     ],
     "answer": "Inserts a new <p> before #target",
     "difficulty": "Medium",
-    "explanation": "'insertBefore()' adds the new node before the specified reference node."
+    "explanation": "The 'insertBefore()' method adds the new node before the specified reference node."
   },
   {
-    "question": "What is the output of: `let obj = { x: 5 }; console.log(obj.x);`?",
+    "question": "What is the output of: let obj = { x: 5 }; console.log(obj.x);",
     "options": [
       "5",
       "undefined",
@@ -335,7 +335,7 @@ quiz = [
     "explanation": "The 'x' property is accessed using dot notation, logging its value, 5."
   },
   {
-    "question": "What does this code do: `let obj = {}; obj.newProp = 42; console.log(obj.newProp);`?",
+    "question": "What does this code do: let obj = {}; obj.newProp = 42; console.log(obj.newProp);",
     "options": [
       "Logs 42",
       "Logs undefined",
@@ -347,7 +347,7 @@ quiz = [
     "explanation": "Adding 'newProp' to the object and accessing it logs its value, 42."
   },
   {
-    "question": "What is the output of: `let obj = { calc: function() { return 2 * 2; } }; console.log(obj.calc());`?",
+    "question": "What is the output of: let obj = { calc: function() { return 2 * 2; } }; console.log(obj.calc());",
     "options": [
       "4",
       "undefined",
@@ -359,7 +359,7 @@ quiz = [
     "explanation": "The 'calc' method returns the result of 2 * 2, which is 4."
   },
   {
-    "question": "What does this code do: `function Person(name) { this.name = name; } let p = new Person('Alice'); console.log(p.name);`?",
+    "question": "What does this code do: function Person(name) { this.name = name; } let p = new Person('Alice'); console.log(p.name);",
     "options": [
       "Logs 'Alice'",
       "Logs 'Person'",
@@ -371,7 +371,7 @@ quiz = [
     "explanation": "The constructor sets the 'name' property, accessed as p.name."
   },
   {
-    "question": "What does this code do: `function Car() { } Car.prototype.drive = function() { return 'Driving'; }; let c = new Car(); console.log(c.drive());`?",
+    "question": "What does this code do: function Car() { } Car.prototype.drive = function() { return 'Driving'; }; let c = new Car(); console.log(c.drive());",
     "options": [
       "Logs 'Driving'",
       "Logs undefined",
@@ -383,7 +383,7 @@ quiz = [
     "explanation": "The 'drive' method on the prototype returns 'Driving' for the instance."
   },
   {
-    "question": "What is the output of: `let obj = { x: 1 }; console.log(obj.hasOwnProperty('x'));`?",
+    "question": "What is the output of: let obj = { x: 1 }; console.log(obj.hasOwnProperty('x'));",
     "options": [
       "true",
       "false",
@@ -392,10 +392,10 @@ quiz = [
     ],
     "answer": "true",
     "difficulty": "Medium",
-    "explanation": "'hasOwnProperty()' returns true if 'x' is a direct property of the object."
+    "explanation": "The 'hasOwnProperty()' method returns true if 'x' is a direct property of the object."
   },
   {
-    "question": "What does this code do: `window.location.href = 'https://example.com';`?",
+    "question": "What does this code do: window.location.href = 'https://example.com';",
     "options": [
       "Navigates to https://example.com",
       "Reloads the current page",
@@ -407,7 +407,7 @@ quiz = [
     "explanation": "Setting 'location.href' navigates to the specified URL."
   },
   {
-    "question": "What does this code do: `window.location.assign('https://example.com');`?",
+    "question": "What does this code do: window.location.assign('https://example.com');",
     "options": [
       "Navigates to https://example.com",
       "Reloads the current page",
@@ -416,10 +416,10 @@ quiz = [
     ],
     "answer": "Navigates to https://example.com",
     "difficulty": "Medium",
-    "explanation": "'location.assign()' loads a new URL in the current window."
+    "explanation": "The 'location.assign()' method loads a new URL in the current window."
   },
   {
-    "question": "What does this code do: `window.history.back();`?",
+    "question": "What does this code do: window.history.back();",
     "options": [
       "Navigates to the previous page",
       "Navigates to the next page",
@@ -428,10 +428,10 @@ quiz = [
     ],
     "answer": "Navigates to the previous page",
     "difficulty": "Medium",
-    "explanation": "'history.back()' moves to the previous page in the browser’s history."
+    "explanation": "The 'history.back()' method moves to the previous page in the browser’s history."
   },
   {
-    "question": "What does this code do: `document.body.style.height = '100vh';`?",
+    "question": "What does this code do: document.body.style.height = '100vh';",
     "options": [
       "Sets body height to full viewport height",
       "Sets body width to full viewport",
@@ -440,10 +440,10 @@ quiz = [
     ],
     "answer": "Sets body height to full viewport height",
     "difficulty": "Medium",
-    "explanation": "'100vh' sets the body’s height to the full viewport height."
+    "explanation": "Setting '100vh' sets the body’s height to the full viewport height."
   },
   {
-    "question": "What does this code do: `window.resizeTo(800, 600);`?",
+    "question": "What does this code do: window.resizeTo(800, 600);",
     "options": [
       "Resizes the window to 800x600 pixels",
       "Moves the window to (800, 600)",
@@ -452,10 +452,10 @@ quiz = [
     ],
     "answer": "Resizes the window to 800x600 pixels",
     "difficulty": "Medium",
-    "explanation": "'window.resizeTo()' sets the browser window’s dimensions."
+    "explanation": "The 'window.resizeTo()' method sets the browser window’s dimensions."
   },
   {
-    "question": "What does this code do: `let win = window.open(''); if (!win) console.log('Blocked');`?",
+    "question": "What does this code do: let win = window.open(''); if (!win) console.log('Blocked');",
     "options": [
       "Logs 'Blocked' if popup is blocked",
       "Opens a new window",
@@ -464,10 +464,10 @@ quiz = [
     ],
     "answer": "Logs 'Blocked' if popup is blocked",
     "difficulty": "Medium",
-    "explanation": "'window.open()' returns null if a popup blocker prevents the window."
+    "explanation": "The 'window.open()' method returns null if a popup blocker prevents the window."
   },
   {
-    "question": "What does this code do: `let input = document.getElementById('text'); if (/^[a-zA-Z]+$/.test(input.value)) console.log('Alphabetic');`?",
+    "question": "What does this code do: let input = document.getElementById('text'); if (/^[a-zA-Z]+$/.test(input.value)) console.log('Alphabetic');",
     "options": [
       "Logs 'Alphabetic' if input is letters only",
       "Logs the input value",
@@ -479,7 +479,7 @@ quiz = [
     "explanation": "The regex '/^[a-zA-Z]+$/' checks for alphabetic characters, logging if matched."
   },
   {
-    "question": "What is the output of: `function test() { console.log(x); let x = 1; } test();`?",
+    "question": "What is the output of: function test() { console.log(x); let x = 1; } test();",
     "options": [
       "ReferenceError",
       "undefined",
@@ -488,10 +488,10 @@ quiz = [
     ],
     "answer": "ReferenceError",
     "difficulty": "Medium",
-    "explanation": "'let x' is in the temporal dead zone until declared, causing a ReferenceError."
+    "explanation": "The 'let x' variable is in the temporal dead zone until declared, causing a ReferenceError."
   },
   {
-    "question": "What does this code do: `let select = document.getElementById('dropdown'); if (select.options[select.selectedIndex].value !== 'default') console.log('Valid');`?",
+    "question": "What does this code do: let select = document.getElementById('dropdown'); if (select.options[select.selectedIndex].value !== 'default') console.log('Valid');",
     "options": [
       "Logs 'Valid' if dropdown value isn’t 'default'",
       "Sets dropdown value",
@@ -503,7 +503,7 @@ quiz = [
     "explanation": "Checks if the selected option’s value isn’t 'default', logging 'Valid'."
   },
   {
-    "question": "What does this code do: `let radios = document.querySelectorAll('input[name=group]'); radios.forEach(r => r.checked = false);`?",
+    "question": "What does this code do: let radios = document.querySelectorAll('input[name=group]'); radios.forEach(r => r.checked = false);",
     "options": [
       "Unchecks all radio buttons in the group",
       "Checks all radio buttons",
@@ -515,7 +515,7 @@ quiz = [
     "explanation": "Loops through radio buttons, setting 'checked' to false."
   },
   {
-    "question": "What does this code do: `let zip = document.getElementById('zip').value; if (/^\\d{5}(-\\d{4})?$/.test(zip)) console.log('Valid');`?",
+    "question": "What does this code do: let zip = document.getElementById('zip').value; if (/^\\d{5}(-\\d{4})?$/.test(zip)) console.log('Valid');",
     "options": [
       "Logs 'Valid' for 5-digit or 5+4 ZIP code",
       "Logs the ZIP value",
@@ -527,7 +527,7 @@ quiz = [
     "explanation": "The regex matches 5 digits or 5+4 digits with a hyphen, logging 'Valid'."
   },
   {
-    "question": "What is the output of: `try { JSON.parse('invalid'); } catch (e) { console.log(e.name); }`?",
+    "question": "What is the output of: try { JSON.parse('invalid'); } catch (e) { console.log(e.name); }",
     "options": [
       "SyntaxError",
       "TypeError",
@@ -539,7 +539,7 @@ quiz = [
     "explanation": "Invalid JSON in 'JSON.parse()' throws a SyntaxError, caught and logged."
   },
   {
-    "question": "What does this code do: `try { throw 'Custom error'; } catch (e) { console.log(e); }`?",
+    "question": "What does this code do: try { throw 'Custom error'; } catch (e) { console.log(e); }",
     "options": [
       "Logs 'Custom error'",
       "Logs undefined",
@@ -548,10 +548,10 @@ quiz = [
     ],
     "answer": "Logs 'Custom error'",
     "difficulty": "Medium",
-    "explanation": "'throw' throws a string, which is caught and logged."
+    "explanation": "The 'throw' statement throws a string, which is caught and logged."
   },
   {
-    "question": "What does this code do: `document.getElementById('input').addEventListener('keypress', () => console.log('Key pressed'));`?",
+    "question": "What does this code do: document.getElementById('input').addEventListener('keypress', () => console.log('Key pressed'));",
     "options": [
       "Logs 'Key pressed' on keypress",
       "Logs the key value",
@@ -560,10 +560,10 @@ quiz = [
     ],
     "answer": "Logs 'Key pressed' on keypress",
     "difficulty": "Medium",
-    "explanation": "'addEventListener()' binds a handler to the 'keypress' event."
+    "explanation": "The 'addEventListener()' method binds a handler to the 'keypress' event."
   },
   {
-    "question": "What is the output of: `let comment = document.createComment('test'); console.log(comment.nodeType);`?",
+    "question": "What is the output of: let comment = document.createComment('test'); console.log(comment.nodeType);",
     "options": [
       "8",
       "1",
@@ -575,7 +575,7 @@ quiz = [
     "explanation": "A comment node has a 'nodeType' of 8 in the DOM."
   },
   {
-    "question": "What does this code do: `let elements = document.querySelectorAll('[data-test]'); console.log(elements.length);`?",
+    "question": "What does this code do: let elements = document.querySelectorAll('[data-test]'); console.log(elements.length);",
     "options": [
       "Logs the number of elements with data-test attribute",
       "Logs the data-test values",
@@ -584,10 +584,10 @@ quiz = [
     ],
     "answer": "Logs the number of elements with data-test attribute",
     "difficulty": "Medium",
-    "explanation": "'querySelectorAll()' selects elements with 'data-test', and 'length' counts them."
+    "explanation": "The 'querySelectorAll()' method selects elements with 'data-test', and 'length' counts them."
   },
   {
-    "question": "What does this code do: `let p = document.createElement('p'); console.log(p.tagName);`?",
+    "question": "What does this code do: let p = document.createElement('p'); console.log(p.tagName);",
     "options": [
       "Logs 'P'",
       "Logs 'p'",
@@ -596,10 +596,10 @@ quiz = [
     ],
     "answer": "Logs 'P'",
     "difficulty": "Medium",
-    "explanation": "'tagName' returns the tag name in uppercase, so 'P' for a <p> element."
+    "explanation": "The 'tagName' property returns the tag name in uppercase, so 'P' for a <p> element."
   },
   {
-    "question": "What does this code do: `let div = document.createElement('div'); div.innerHTML = 'Text'; console.log(div.childNodes.length);`?",
+    "question": "What does this code do: let div = document.createElement('div'); div.innerHTML = 'Text'; console.log(div.childNodes.length);",
     "options": [
       "Logs 1",
       "Logs 0",
@@ -608,10 +608,10 @@ quiz = [
     ],
     "answer": "Logs 1",
     "difficulty": "Medium",
-    "explanation": "'childNodes.length' counts the text node created by 'Text'."
+    "explanation": "The 'childNodes.length' property counts the text node created by 'Text'."
   },
   {
-    "question": "What does this code do: `let elem = document.createElement('div'); elem.setAttribute('id', 'box'); console.log(elem.id);`?",
+    "question": "What does this code do: let elem = document.createElement('div'); elem.setAttribute('id', 'box'); console.log(elem.id);",
     "options": [
       "Logs 'box'",
       "Logs undefined",
@@ -620,10 +620,10 @@ quiz = [
     ],
     "answer": "Logs 'box'",
     "difficulty": "Medium",
-    "explanation": "'setAttribute()' sets the 'id', and the 'id' property retrieves it."
+    "explanation": "The 'setAttribute()' method sets the 'id', and the 'id' property retrieves it."
   },
   {
-    "question": "What does this code do: `let elem = document.createElement('img'); elem.removeAttribute('src'); console.log(elem.hasAttribute('src'));`?",
+    "question": "What does this code do: let elem = document.createElement('img'); elem.removeAttribute('src'); console.log(elem.hasAttribute('src'));",
     "options": [
       "Logs false",
       "Logs true",
@@ -632,10 +632,10 @@ quiz = [
     ],
     "answer": "Logs false",
     "difficulty": "Medium",
-    "explanation": "'removeAttribute()' removes the 'src', so 'hasAttribute()' returns false."
+    "explanation": "The 'removeAttribute()' method removes the 'src', so 'hasAttribute()' returns false."
   },
   {
-    "question": "What does this code do: `let div = document.createElement('div'); div.textContent = 'Hello'; document.body.appendChild(div);`?",
+    "question": "What does this code do: let div = document.createElement('div'); div.textContent = 'Hello'; document.body.appendChild(div);",
     "options": [
       "Appends a div with 'Hello' to the body",
       "Replaces the body",
@@ -644,10 +644,10 @@ quiz = [
     ],
     "answer": "Appends a div with 'Hello' to the body",
     "difficulty": "Medium",
-    "explanation": "'textContent' sets the text, and 'appendChild()' adds the div."
+    "explanation": "The 'textContent' property sets the text, and 'appendChild()' adds the div."
   },
   {
-    "question": "What does this code do: `let p = document.createElement('p'); let target = document.querySelector('#target'); target.parentNode.insertBefore(p, target.nextSibling);`?",
+    "question": "What does this code do: let p = document.createElement('p'); let target = document.querySelector('#target'); target.parentNode.insertBefore(p, target.nextSibling);",
     "options": [
       "Inserts a new <p> after #target",
       "Inserts a new <p> before #target",
@@ -656,10 +656,10 @@ quiz = [
     ],
     "answer": "Inserts a new <p> after #target",
     "difficulty": "Medium",
-    "explanation": "'insertBefore()' with 'nextSibling' inserts the <p> after #target."
+    "explanation": "The 'insertBefore()' method with 'nextSibling' inserts the <p> after #target."
   },
   {
-    "question": "What does this code do: `let obj = { a: 1, b: 2 }; console.log(obj['b']);`?",
+    "question": "What does this code do: let obj = { a: 1, b: 2 }; console.log(obj['b']);",
     "options": [
       "Logs 2",
       "Logs 'b'",
@@ -671,7 +671,7 @@ quiz = [
     "explanation": "Bracket notation accesses the 'b' property, logging its value, 2."
   },
   {
-    "question": "What does this code do: `let obj = { x: 10 }; obj.x = 20; console.log(obj.x);`?",
+    "question": "What does this code do: let obj = { x: 10 }; obj.x = 20; console.log(obj.x);",
     "options": [
       "Logs 20",
       "Logs 10",
@@ -683,7 +683,7 @@ quiz = [
     "explanation": "Reassigning 'obj.x' updates the property, logging 20."
   },
   {
-    "question": "What does this code do: `let obj = { greet() { return 'Hi'; } }; console.log(obj.greet());`?",
+    "question": "What does this code do: let obj = { greet() { return 'Hi'; } }; console.log(obj.greet());",
     "options": [
       "Logs 'Hi'",
       "Logs undefined",
@@ -695,7 +695,7 @@ quiz = [
     "explanation": "The 'greet' method returns 'Hi' when called."
   },
   {
-    "question": "What does this code do: `function User(name) { this.name = name; } let u = new User('Bob'); console.log(u.name);`?",
+    "question": "What does this code do: function User(name) { this.name = name; } let u = new User('Bob'); console.log(u.name);",
     "options": [
       "Logs 'Bob'",
       "Logs 'User'",
@@ -707,7 +707,7 @@ quiz = [
     "explanation": "The constructor sets 'name', accessed as u.name."
   },
   {
-    "question": "What does this code do: `function Animal() { } Animal.prototype.speak = function() { return 'Woof'; }; let a = new Animal(); console.log(a.speak());`?",
+    "question": "What does this code do: function Animal() { } Animal.prototype.speak = function() { return 'Woof'; }; let a = new Animal(); console.log(a.speak());",
     "options": [
       "Logs 'Woof'",
       "Logs undefined",
@@ -719,7 +719,7 @@ quiz = [
     "explanation": "The 'speak' method on the prototype returns 'Woof'."
   },
   {
-    "question": "What does this code do: `let obj = { x: 1 }; console.log('x' in obj);`?",
+    "question": "What does this code do: let obj = { x: 1 }; console.log('x' in obj);",
     "options": [
       "Logs true",
       "Logs false",
@@ -731,7 +731,7 @@ quiz = [
     "explanation": "The 'in' operator returns true if 'x' exists in the object."
   },
   {
-    "question": "What does this code do: `console.log(window.location.search);`?",
+    "question": "What does this code do: console.log(window.location.search);",
     "options": [
       "Logs the URL’s query string",
       "Logs the full URL",
@@ -740,10 +740,10 @@ quiz = [
     ],
     "answer": "Logs the URL’s query string",
     "difficulty": "Medium",
-    "explanation": "'location.search' returns the query string, starting with '?'."
+    "explanation": "The 'location.search' property returns the query string, starting with '?'."
   },
   {
-    "question": "What does this code do: `window.location.replace('https://example.com');`?",
+    "question": "What does this code do: window.location.replace('https://example.com');",
     "options": [
       "Navigates to https://example.com without history",
       "Adds to history",
@@ -752,10 +752,10 @@ quiz = [
     ],
     "answer": "Navigates to https://example.com without history",
     "difficulty": "Medium",
-    "explanation": "'location.replace()' navigates without adding to browser history."
+    "explanation": "The 'location.replace()' method navigates without adding to browser history."
   },
   {
-    "question": "What does this code do: `window.history.forward();`?",
+    "question": "What does this code do: window.history.forward();",
     "options": [
       "Navigates to the next page",
       "Navigates to the previous page",
@@ -764,10 +764,10 @@ quiz = [
     ],
     "answer": "Navigates to the next page",
     "difficulty": "Medium",
-    "explanation": "'history.forward()' moves to the next page in the browser’s history."
+    "explanation": "The 'history.forward()' method moves to the next page in the browser’s history."
   },
   {
-    "question": "What does this code do: `document.documentElement.style.width = '100vw';`?",
+    "question": "What does this code do: document.documentElement.style.width = '100vw';",
     "options": [
       "Sets html element width to full viewport",
       "Sets height to full viewport",
@@ -776,10 +776,10 @@ quiz = [
     ],
     "answer": "Sets html element width to full viewport",
     "difficulty": "Medium",
-    "explanation": "'100vw' sets the html element’s width to the full viewport."
+    "explanation": "Setting '100vw' sets the html element’s width to the full viewport."
   },
   {
-    "question": "What does this code do: `window.moveTo(100, 100);`?",
+    "question": "What does this code do: window.moveTo(100, 100);",
     "options": [
       "Moves the window to (100, 100)",
       "Resizes the window",
@@ -788,10 +788,10 @@ quiz = [
     ],
     "answer": "Moves the window to (100, 100)",
     "difficulty": "Medium",
-    "explanation": "'window.moveTo()' repositions the browser window to the coordinates."
+    "explanation": "The 'window.moveTo()' method repositions the browser window to the coordinates."
   },
   {
-    "question": "What does this code do: `let input = document.getElementById('text'); if (input.value.length <= 10) console.log('Valid length');`?",
+    "question": "What does this code do: let input = document.getElementById('text'); if (input.value.length <= 10) console.log('Valid length');",
     "options": [
       "Logs 'Valid length' if input is 10 or fewer characters",
       "Logs the input value",
@@ -803,7 +803,7 @@ quiz = [
     "explanation": "Checks if the input’s length is <= 10, logging 'Valid length'."
   },
   {
-    "question": "What is the output of: `function test() { let x = 1; { let x = 2; { let x = 3; } } return x; } console.log(test());`?",
+    "question": "What is the output of: function test() { let x = 1; { let x = 2; { let x = 3; } } return x; } console.log(test());",
     "options": [
       "1",
       "2",
@@ -815,7 +815,7 @@ quiz = [
     "explanation": "Each 'let x' is block-scoped; the outermost x remains 1."
   },
   {
-    "question": "What does this code do: `let select = document.getElementById('dropdown'); if (select.selectedOptions.length > 0) console.log('Selected');`?",
+    "question": "What does this code do: let select = document.getElementById('dropdown'); if (select.selectedOptions.length > 0) console.log('Selected');",
     "options": [
       "Logs 'Selected' if an option is chosen",
       "Logs the number of options",
@@ -824,10 +824,10 @@ quiz = [
     ],
     "answer": "Logs 'Selected' if an option is chosen",
     "difficulty": "Medium",
-    "explanation": "'selectedOptions.length' checks if any options are selected."
+    "explanation": "The 'selectedOptions.length' property checks if any options are selected."
   },
   {
-    "question": "What does this code do: `let radio = document.querySelector('input[name=group]:checked'); radio ? radio.checked = true : console.log('None');`?",
+    "question": "What does this code do: let radio = document.querySelector('input[name=group]:checked'); radio ? radio.checked = true : console.log('None');",
     "options": [
       "Logs 'None' if no radio is checked",
       "Checks all radio buttons",
@@ -839,7 +839,7 @@ quiz = [
     "explanation": "If no radio is checked, 'radio' is null, logging 'None'."
   },
   {
-    "question": "What does this code do: `let zip = document.getElementById('zip').value; if (/^\\d{9}$/.test(zip)) console.log('Valid 9-digit ZIP');`?",
+    "question": "What does this code do: let zip = document.getElementById('zip').value; if (/^\\d{9}$/.test(zip)) console.log('Valid 9-digit ZIP');",
     "options": [
       "Logs 'Valid 9-digit ZIP' for 9 digits",
       "Logs the ZIP value",
@@ -851,7 +851,7 @@ quiz = [
     "explanation": "The regex '/^\\d{9}$/' matches exactly 9 digits."
   },
   {
-    "question": "What is the output of: `try { null.x; } catch (e) { console.log(e.name); }`?",
+    "question": "What is the output of: try { null.x; } catch (e) { console.log(e.name); }",
     "options": [
       "TypeError",
       "ReferenceError",
@@ -863,7 +863,7 @@ quiz = [
     "explanation": "Accessing a property on null throws a TypeError, caught and logged."
   },
   {
-    "question": "What does this code do: `try { throw { message: 'Custom' }; } catch (e) { console.log(e.message); }`?",
+    "question": "What does this code do: try { throw { message: 'Custom' }; } catch (e) { console.log(e.message); }",
     "options": [
       "Logs 'Custom'",
       "Logs undefined",
@@ -875,7 +875,7 @@ quiz = [
     "explanation": "The thrown object’s 'message' property is caught and logged."
   },
   {
-    "question": "What does this code do: `document.getElementById('input').addEventListener('submit', e => e.preventDefault());`?",
+    "question": "What does this code do: document.getElementById('input').addEventListener('submit', e => e.preventDefault());",
     "options": [
       "Prevents form submission",
       "Submits the form",
@@ -884,10 +884,10 @@ quiz = [
     ],
     "answer": "Prevents form submission",
     "difficulty": "Medium",
-    "explanation": "'preventDefault()' stops the form’s default submission behavior."
+    "explanation": "The 'preventDefault()' method stops the form’s default submission behavior."
   },
   {
-    "question": "What does this code do: `let div = document.createElement('div'); console.log(div.nodeType);`?",
+    "question": "What does this code do: let div = document.createElement('div'); console.log(div.nodeType);",
     "options": [
       "Logs 1",
       "Logs 3",
@@ -899,7 +899,7 @@ quiz = [
     "explanation": "An element node like a div has a 'nodeType' of 1."
   },
   {
-    "question": "What does this code do: `let elements = document.getElementsByTagName('p'); console.log(elements.length);`?",
+    "question": "What does this code do: let elements = document.getElementsByTagName('p'); console.log(elements.length);",
     "options": [
       "Logs the number of <p> elements",
       "Logs the first <p> element",
@@ -908,10 +908,10 @@ quiz = [
     ],
     "answer": "Logs the number of <p> elements",
     "difficulty": "Medium",
-    "explanation": "'getElementsByTagName()' returns a collection of <p> elements, and 'length' counts them."
+    "explanation": "The 'getElementsByTagName()' method returns a collection of <p> elements, and 'length' counts them."
   },
   {
-    "question": "What does this code do: `let elem = document.querySelector('#box'); console.log(elem.getAttribute('data-value'));`?",
+    "question": "What does this code do: let elem = document.querySelector('#box'); console.log(elem.getAttribute('data-value'));",
     "options": [
       "Logs the value of data-value attribute",
       "Logs undefined if no attribute",
@@ -920,10 +920,10 @@ quiz = [
     ],
     "answer": "Logs the value of data-value attribute",
     "difficulty": "Medium",
-    "explanation": "'getAttribute()' returns the 'data-value' or null if it doesn’t exist."
+    "explanation": "The 'getAttribute()' method returns the 'data-value' or null if it doesn’t exist."
   },
   {
-    "question": "What does this code do: `let div = document.createElement('div'); document.body.appendChild(div); div.textContent = 'Test';`?",
+    "question": "What does this code do: let div = document.createElement('div'); document.body.appendChild(div); div.textContent = 'Test';",
     "options": [
       "Appends a div with 'Test' to the body",
       "Replaces the body",
@@ -932,10 +932,10 @@ quiz = [
     ],
     "answer": "Appends a div with 'Test' to the body",
     "difficulty": "Medium",
-    "explanation": "'appendChild()' adds the div, and 'textContent' sets its text."
+    "explanation": "The 'appendChild()' method adds the div, and 'textContent' sets its text."
   },
   {
-    "question": "What does this code do: `let obj = { x: 1 }; delete obj.x; console.log(obj.x);`?",
+    "question": "What does this code do: let obj = { x: 1 }; delete obj.x; console.log(obj.x);",
     "options": [
       "Logs undefined",
       "Logs 1",
@@ -944,10 +944,10 @@ quiz = [
     ],
     "answer": "Logs undefined",
     "difficulty": "Medium",
-    "explanation": "'delete' removes the 'x' property, so accessing obj.x returns undefined."
+    "explanation": "The 'delete' operator removes the 'x' property, so accessing obj.x returns undefined."
   },
   {
-    "question": "What does this code do: `let obj = { x: 10 }; obj.y = 20; console.log(obj.y);`?",
+    "question": "What does this code do: let obj = { x: 10 }; obj.y = 20; console.log(obj.y);",
     "options": [
       "Logs 20",
       "Logs 10",
@@ -959,7 +959,7 @@ quiz = [
     "explanation": "Adding 'y' to the object and accessing it logs 20."
   },
   {
-    "question": "What does this code do: `window.location.pathname = '/new';`?",
+    "question": "What does this code do: window.location.pathname = '/new';",
     "options": [
       "Navigates to /new on the current domain",
       "Reloads the page",
@@ -971,7 +971,7 @@ quiz = [
     "explanation": "Setting 'location.pathname' navigates to the new path."
   },
   {
-    "question": "What does this code do: `let input = document.getElementById('text'); if (/^\\d+$/.test(input.value)) console.log('Numbers');`?",
+    "question": "What does this code do: let input = document.getElementById('text'); if (/^\\d+$/.test(input.value)) console.log('Numbers');",
     "options": [
       "Logs 'Numbers' if input is digits only",
       "Logs the input value",
@@ -1409,4 +1409,5 @@ else:
             st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
