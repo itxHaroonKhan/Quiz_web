@@ -6,620 +6,364 @@ import uuid
 # Quiz data - Enhanced with more questions
 quiz =[
     {
-        "question": "What is the output of: ```javascript\nfunction test() { var x = 1; if (true) { var x = 2; } console.log(x); }\ntest();```",
-        "options": ["1", "2", "undefined", "ReferenceError"],
-        "answer": "2",
-        "difficulty": "Medium",
-        "explanation": "'var' is function-scoped, so the inner 'var x = 2' reassigns the same variable, logging 2.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What is the output of: ```javascript\nlet x = 10; { let x = 20; } console.log(x);```",
-        "options": ["10", "20", "undefined", "Error"],
-        "answer": "10",
-        "difficulty": "Medium",
-        "explanation": "'let' is block-scoped, so the inner 'let x = 20' creates a new variable, and the outer x remains 10.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What happens when a variable is declared with 'const' in a block?",
-        "options": ["Global scope", "Block scope", "Function scope", "Causes an error"],
-        "answer": "Block scope",
+        "question": "What is Vite used for in a JavaScript project?",
+        "options": ["A build tool for fast development", "A linter for code quality", "A testing framework", "A package manager"],
+        "answer": "A build tool for fast development",
         "difficulty": "Easy",
-        "explanation": "'const' is block-scoped, so the variable is only accessible within the block.",
-        "category": "Variable Scoping"
+        "explanation": "Vite is a modern build tool that provides fast development with hot module replacement and optimized production builds.",
+        "category": "CLI Tool: Vite"
     },
     {
-        "question": "What is the output of: ```javascript\nfunction example() { console.log(x); var x = 5; }\nexample();```",
-        "options": ["5", "undefined", "ReferenceError", "null"],
-        "answer": "undefined",
+        "question": "Which command initializes a new Vite project with React?",
+        "options": ["npm create vite@latest my-app --template react", "npm init vite my-app", "vite create my-app --react", "npm vite init my-app"],
+        "answer": "npm create vite@latest my-app --template react",
         "difficulty": "Medium",
-        "explanation": "Due to hoisting, 'var x' is declared but not initialized, so it logs 'undefined'.",
-        "category": "Variable Scoping"
+        "explanation": "The command uses 'create vite' with the '--template react' flag to set up a React project.",
+        "category": "CLI Tool: Vite"
     },
     {
-        "question": "What is the scope of a variable declared without a keyword in a function?",
-        "options": ["Block scope", "Function scope", "Global scope", "Module scope"],
-        "answer": "Global scope",
+        "question": "What is a key advantage of Vite over Create React App?",
+        "options": ["Faster dev server startup", "Better TypeScript support", "Built-in testing", "Automatic code splitting"],
+        "answer": "Faster dev server startup",
         "difficulty": "Medium",
-        "explanation": "Without 'var', 'let', or 'const', a variable is implicitly global.",
-        "category": "Variable Scoping"
+        "explanation": "Vite uses native ES modules for faster development server startup compared to Create React App.",
+        "category": "CLI Tool: Vite"
     },
     {
-        "question": "What is the output of: ```javascript\n{ var x = 1; } console.log(x);``` in non-strict mode?",
-        "options": ["1", "undefined", "ReferenceError", "null"],
-        "answer": "1",
-        "difficulty": "Medium",
-        "explanation": "In non-strict mode, 'var' declarations in a block are hoisted to the global or function scope.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What is the output of: ```javascript\nfunction foo() { if (false) { let x = 1; } console.log(x); }\nfoo();```",
-        "options": ["1", "undefined", "ReferenceError", "null"],
-        "answer": "ReferenceError",
-        "difficulty": "Medium",
-        "explanation": "'let' is block-scoped, so 'x' is not accessible outside the 'if' block, causing a ReferenceError.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What is the output of: ```javascript\nvar x = 10; function test() { var x = 20; console.log(x); }\ntest(); console.log(x);```",
-        "options": ["20, 10", "10, 20", "20, 20", "ReferenceError"],
-        "answer": "20, 10",
-        "difficulty": "Medium",
-        "explanation": "The inner 'var x' is function-scoped, so 'test' logs 20, while the outer 'x' remains 10.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What is the output of: ```javascript\nlet x = 5; function test() { console.log(x); let x = 10; }\ntest();```",
-        "options": ["5", "10", "undefined", "ReferenceError"],
-        "answer": "ReferenceError",
-        "difficulty": "Hard",
-        "explanation": "'let' declarations are hoisted but not initialized, causing a temporal dead zone error.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "What is the output of: ```javascript\nconst x = 1; { const x = 2; console.log(x); } console.log(x);```",
-        "options": ["2, 1", "1, 2", "2, 2", "ReferenceError"],
-        "answer": "2, 1",
-        "difficulty": "Medium",
-        "explanation": "'const' is block-scoped, so the inner 'x' is separate from the outer 'x'.",
-        "category": "Variable Scoping"
-    },
-    {
-        "question": "How do you validate a drop-down menu has a selected option?",
-        "options": ["select.value !== ''", "select.selectedIndex !== -1", "select.options === null", "select.text !== undefined"],
-        "answer": "select.selectedIndex !== -1",
+        "question": "How do you start a Vite development server?",
+        "options": ["npm run dev", "npm start", "vite start", "npm run vite"],
+        "answer": "npm run dev",
         "difficulty": "Easy",
-        "explanation": "'selectedIndex' is -1 when no option is selected, making it a reliable check.",
-        "category": "Form validation: drop-downs"
+        "explanation": "The 'dev' script in Vite projects, defined in package.json, starts the development server.",
+        "category": "CLI Tool: Vite"
     },
     {
-        "question": "What does select.options[select.selectedIndex].value return?",
-        "options": ["Selected option’s text", "Selected option’s value", "Selected index", "Entire select element"],
-        "answer": "Selected option’s value",
+        "question": "What does Vite use for bundling in production?",
+        "options": ["Rollup", "Webpack", "Esbuild", "Parcel"],
+        "answer": "Rollup",
         "difficulty": "Medium",
-        "explanation": "It retrieves the 'value' attribute of the selected option.",
-        "category": "Form validation: drop-downs"
+        "explanation": "Vite uses Rollup for optimized production builds, while Esbuild powers its dev server.",
+        "category": "CLI Tool: Vite"
     },
     {
-        "question": "How do you get the text of a selected drop-down option?",
-        "options": ["select.options[select.selectedIndex].text", "select.value.text", "select.text", "select.options.text"],
-        "answer": "select.options[select.selectedIndex].text",
-        "difficulty": "Medium",
-        "explanation": "The 'text' property of the selected option returns its visible text.",
-        "category": "Form validation: drop-downs"
-    },
-    {
-        "question": "How do you ensure a drop-down has a valid selection?",
-        "options": ["Check select.value.length > 0", "Check select.selectedIndex > 0", "Check select.options.length", "Check select.value !== 'default'"],
-        "answer": "Check select.value !== 'default'",
-        "difficulty": "Medium",
-        "explanation": "A common approach is to set a 'default' value for the first option and check against it.",
-        "category": "Form validation: drop-downs"
-    },
-    {
-        "question": "What happens if select.selectedIndex is -1?",
-        "options": ["No option is selected", "First option is selected", "Last option is selected", "Error occurs"],
-        "answer": "No option is selected",
+        "question": "What is the purpose of Create React App (CRA)?",
+        "options": ["Set up a React project with zero configuration", "Manage dependencies", "Run unit tests", "Optimize images"],
+        "answer": "Set up a React project with zero configuration",
         "difficulty": "Easy",
-        "explanation": "'selectedIndex' is -1 when no option is selected in a drop-down.",
-        "category": "Form validation: drop-downs"
+        "explanation": "CRA provides a pre-configured setup for React projects, including Webpack and Babel.",
+        "category": "CLI Tool: Create React App"
     },
     {
-        "question": "How do you check if a radio button group has a selection?",
-        "options": ["document.querySelector('input[name=group]:checked')", "document.getElementById('group').checked", "document.getElementsByName('group').value", "document.querySelector('input[type=radio]').value"],
-        "answer": "document.querySelector('input[name=group]:checked')",
-        "difficulty": "Medium",
-        "explanation": "Using ':checked' selects the checked radio button in the group, or null if none is selected.",
-        "category": "Form validation: radio buttons"
-    },
-    {
-        "question": "How do you get the value of a selected radio button?",
-        "options": ["document.querySelector('input[type=radio]:checked').value", "document.getElementById('radio').value", "document.getElementsByName('radio').value", "document.querySelector('input[type=radio]').value"],
-        "answer": "document.querySelector('input[type=radio]:checked').value",
-        "difficulty": "Medium",
-        "explanation": "':checked' selects the radio button that is currently selected, and '.value' gets its value.",
-        "category": "Form validation: radio buttons"
-    },
-    {
-        "question": "What happens if no radio button is selected in a group?",
-        "options": ["First radio’s value is returned", "null is returned", "undefined is returned", "An error occurs"],
-        "answer": "null is returned",
-        "difficulty": "Medium",
-        "explanation": "If no radio button is checked, 'querySelector(':checked')' returns null.",
-        "category": "Form validation: radio buttons"
-    },
-    {
-        "question": "How do you loop through radio buttons to check for a selection?",
-        "options": ["Use document.getElementsByName('group') and check .checked", "Use document.querySelectorAll('input') and check .value", "Use document.getElementsByClassName('radio')", "Use document.getElementById('group')"],
-        "answer": "Use document.getElementsByName('group') and check .checked",
-        "difficulty": "Medium",
-        "explanation": "Radio buttons with the same 'name' are grouped, and '.checked' indicates selection.",
-        "category": "Form validation: radio buttons"
-    },
-    {
-        "question": "What does document.getElementsByName('group')[0].checked return?",
-        "options": ["true if first radio is checked", "The value of the first radio", "The name of the group", "null"],
-        "answer": "true if first radio is checked",
+        "question": "Which command creates a new CRA project?",
+        "options": ["npx create-react-app my-app", "npm init react my-app", "npx cra my-app", "npm create react-app my-app"],
+        "answer": "npx create-react-app my-app",
         "difficulty": "Easy",
-        "explanation": "'.checked' returns true if the radio button is selected, false otherwise.",
-        "category": "Form validation: radio buttons"
+        "explanation": "'npx create-react-app' initializes a new React project with all necessary configurations.",
+        "category": "CLI Tool: Create React App"
     },
     {
-        "question": "Which regex validates a US ZIP code (5 digits or 5+4)?",
-        "options": ["/^\\d{5}(-\\d{4})?$/", "/^\\d{5}$/", "/^\\d{5}-\\d{4}$/", "/^[0-9]{5,9}$/"],
-        "answer": "/^\\d{5}(-\\d{4})?$/",
+        "question": "What is a limitation of Create React App?",
+        "options": ["No TypeScript support", "Limited configuration options", "No CSS support", "No hot module replacement"],
+        "answer": "Limited configuration options",
         "difficulty": "Medium",
-        "explanation": "This pattern allows 5 digits optionally followed by a hyphen and 4 digits.",
-        "category": "Form validation: ZIP codes"
+        "explanation": "CRA abstracts Webpack configuration, requiring ejection for custom setups.",
+        "category": "CLI Tool: Create React App"
     },
     {
-        "question": "What does the regex /^\\d{5}$/ validate?",
-        "options": ["5-digit ZIP code", "5 or 9-digit ZIP code", "Any numeric string", "ZIP with letters"],
-        "answer": "5-digit ZIP code",
+        "question": "How do you start a CRA development server?",
+        "options": ["npm start", "npm run dev", "cra start", "npm run cra"],
+        "answer": "npm start",
         "difficulty": "Easy",
-        "explanation": "The pattern matches exactly 5 digits, suitable for basic US ZIP codes.",
-        "category": "Form validation: ZIP codes"
+        "explanation": "The 'start' script in CRA’s package.json runs the development server.",
+        "category": "CLI Tool: Create React App"
     },
     {
-        "question": "What does the regex /^\\d{5}-\\d{4}$/ validate?",
-        "options": ["5-digit ZIP code", "9-digit ZIP code", "5 or 9-digit ZIP code", "Any ZIP code"],
-        "answer": "9-digit ZIP code",
+        "question": "What does 'eject' do in a CRA project?",
+        "options": ["Removes dependencies", "Exposes configuration files", "Builds for production", "Clears the build folder"],
+        "answer": "Exposes configuration files",
         "difficulty": "Medium",
-        "explanation": "This pattern requires 5 digits, a hyphen, and 4 digits, matching ZIP+4 format.",
-        "category": "Form validation: ZIP codes"
+        "explanation": "'npm run eject' exposes Webpack and other config files for customization.",
+        "category": "CLI Tool: Create React App"
     },
     {
-        "question": "How do you test if a ZIP code input matches a regex?",
-        "options": ["regex.test(input.value)", "input.match(regex)", "regex.exec(input)", "input.validate(regex)"],
-        "answer": "regex.test(input.value)",
-        "difficulty": "Medium",
-        "explanation": "'regex.test()' returns true if the input string matches the regex pattern.",
-        "category": "Form validation: ZIP codes"
-    },
-    {
-        "question": "What does /^\\d{5}(-\\d{4})?$/ allow in a ZIP code?",
-        "options": ["5 digits or 5+4 digits", "Only 5 digits", "Only 9 digits", "Any digits"],
-        "answer": "5 digits or 5+4 digits",
-        "difficulty": "Medium",
-        "explanation": "The optional '(-\\d{4})?' allows either a 5-digit or 5+4-digit ZIP code.",
-        "category": "Form validation: ZIP codes"
-    },
-    {
-        "question": "Which regex is best for validating an email address?",
-        "options": ["/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/", "/^\\w+@\\w+\\.\\w+$/", "/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2}$/", "/^.*@.*\\..*$/"],
-        "answer": "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/",
-        "difficulty": "Hard",
-        "explanation": "This regex supports common email formats with a valid domain and TLD.",
-        "category": "Form validation: email"
-    },
-    {
-        "question": "What happens if an email input fails custom regex validation?",
-        "options": ["Form submission stops", "Browser shows an error", "Nothing, unless handled", "Input is cleared"],
-        "answer": "Nothing, unless handled",
-        "difficulty": "Medium",
-        "explanation": "Custom regex validation requires JavaScript to handle invalid input explicitly.",
-        "category": "Form validation: email"
-    },
-    {
-        "question": "How do you validate an email using HTML5?",
-        "options": ["<input type='email'>", "<input type='text' pattern='email'>", "<input type='email' regex='...'>", "<input type='text' validate='email'>"],
-        "answer": "<input type='email'>",
+        "question": "What is the purpose of the 'src' folder in a React project?",
+        "options": ["Stores source code and components", "Holds build output", "Contains configuration files", "Stores dependencies"],
+        "answer": "Stores source code and components",
         "difficulty": "Easy",
-        "explanation": "The 'email' input type triggers browser-native email validation.",
-        "category": "Form validation: email"
+        "explanation": "The 'src' folder contains the application’s source code, including React components and logic.",
+        "category": "Folder Structure"
     },
     {
-        "question": "What does input.checkValidity() do for an email input?",
-        "options": ["Checks if the input matches email format", "Clears the input", "Submits the form", "Returns the input’s value"],
-        "answer": "Checks if the input matches email format",
+        "question": "What is typically found in the 'public' folder of a React project?",
+        "options": ["index.html and static assets", "React components", "Webpack config", "Test files"],
+        "answer": "index.html and static assets",
+        "difficulty": "Easy",
+        "explanation": "The 'public' folder holds static files like 'index.html' and assets like images or favicon.",
+        "category": "Folder Structure"
+    },
+    {
+        "question": "Where are node modules stored in a React project?",
+        "options": ["node_modules folder", "src folder", "public folder", "build folder"],
+        "answer": "node_modules folder",
+        "difficulty": "Easy",
+        "explanation": "The 'node_modules' folder stores all project dependencies installed via npm or yarn.",
+        "category": "Folder Structure"
+    },
+    {
+        "question": "What is the purpose of the 'package.json' file in a React project?",
+        "options": ["Defines dependencies and scripts", "Configures Webpack", "Stores component logic", "Holds test results"],
+        "answer": "Defines dependencies and scripts",
+        "difficulty": "Easy",
+        "explanation": "'package.json' lists project dependencies, scripts, and metadata.",
+        "category": "Folder Structure"
+    },
+    {
+        "question": "What is the role of the 'build' folder in a React project?",
+        "options": ["Holds production-ready files", "Stores source code", "Contains test scripts", "Manages dependencies"],
+        "answer": "Holds production-ready files",
+        "difficulty": "Easy",
+        "explanation": "The 'build' folder contains optimized files generated by the build process for deployment.",
+        "category": "Folder Structure"
+    },
+    {
+        "question": "What is JSX in React?",
+        "options": ["A syntax extension for JavaScript", "A CSS preprocessor", "A testing library", "A state management tool"],
+        "answer": "A syntax extension for JavaScript",
+        "difficulty": "Easy",
+        "explanation": "JSX allows writing HTML-like code in JavaScript, which React compiles into JavaScript.",
+        "category": "Components: JSX"
+    },
+    {
+        "question": "What does the following JSX return: ```jsx\n<div>Hello, {name}</div>```",
+        "options": ["A div with dynamic content", "A JavaScript object", "A string", "An error"],
+        "answer": "A div with dynamic content",
+        "difficulty": "Easy",
+        "explanation": "JSX expressions like {name} render dynamic values within HTML-like elements.",
+        "category": "Components: JSX"
+    },
+    {
+        "question": "How do you write a comment in JSX?",
+        "options": ["{/* Comment */}", "// Comment", "<!-- Comment -->", "# Comment"],
+        "answer": "{/* Comment */}",
         "difficulty": "Medium",
-        "explanation": "'checkValidity()' returns true if the input meets HTML5 validation rules.",
-        "category": "Form validation: email"
+        "explanation": "JSX uses JavaScript-style comments wrapped in curly braces for dynamic content.",
+        "category": "Components: JSX"
     },
     {
-        "question": "What does /^\\w+@\\w+\\.\\w+$/ miss in email validation?",
-        "options": ["Special characters like ._%+-", "Multiple domain levels", "TLD length validation", "All of the above"],
-        "answer": "All of the above",
-        "difficulty": "Hard",
-        "explanation": "This simple regex misses special characters, subdomains, and longer TLDs.",
-        "category": "Form validation: email"
-    },
-    {
-        "question": "What does a 'try...catch' block do?",
-        "options": ["Declares variables", "Handles errors", "Loops through arrays", "Defines functions"],
-        "answer": "Handles errors",
+        "question": "What is the output of: ```jsx\n<div>{2 + 2}</div>```",
+        "options": ["4", "2 + 2", "Error", "undefined"],
+        "answer": "4",
         "difficulty": "Easy",
-        "explanation": "'try...catch' catches exceptions thrown in the 'try' block and handles them in 'catch'.",
-        "category": "Exceptions: try and catch"
+        "explanation": "JSX evaluates JavaScript expressions inside curly braces, rendering the result.",
+        "category": "Components: JSX"
     },
     {
-        "question": "What is logged in: ```javascript\ntry { throw new Error('Oops'); } catch (e) { console.log(e.message); }```",
-        "options": ["Oops", "Error", "undefined", "null"],
-        "answer": "Oops",
+        "question": "Which of the following is valid JSX?",
+        "options": ["<div className='box'>Content</div>", "<div class='box'>Content</div>", "<div id='box'>Content</div>", "<div name='box'>Content</div>"],
+        "answer": "<div className='box'>Content</div>",
         "difficulty": "Medium",
-        "explanation": "The error’s message 'Oops' is caught and logged in the 'catch' block.",
-        "category": "Exceptions: try and catch"
+        "explanation": "JSX uses 'className' instead of 'class' for CSS classes due to JavaScript reserved words.",
+        "category": "Components: JSX"
     },
     {
-        "question": "What happens if no error is thrown in a 'try' block?",
-        "options": ["Catch block is skipped", "Catch block runs", "Error occurs", "Try block loops"],
-        "answer": "Catch block is skipped",
+        "question": "What are props in React?",
+        "options": ["Data passed to components", "Component state", "Event handlers", "DOM elements"],
+        "answer": "Data passed to components",
         "difficulty": "Easy",
-        "explanation": "If no exception occurs, the 'catch' block is not executed.",
-        "category": "Exceptions: try and catch"
+        "explanation": "Props are read-only data passed from a parent to a child component.",
+        "category": "Components: Props"
     },
     {
-        "question": "What does 'finally' do in a try...catch...finally block?",
-        "options": ["Runs after try or catch", "Catches errors", "Throws errors", "Loops the try block"],
-        "answer": "Runs after try or catch",
-        "difficulty": "Medium",
-        "explanation": "The 'finally' block executes regardless of whether an error was thrown or caught.",
-        "category": "Exceptions: try and catch"
-    },
-    {
-        "question": "What does the 'throw' statement do?",
-        "options": ["Exits a function", "Throws an exception", "Logs a message", "Declares a variable"],
-        "answer": "Throws an exception",
+        "question": "How do you pass a prop to a component?",
+        "options": ["<Component name='value' />", "<Component prop='value' />", "<Component setProp='value' />", "<Component value='name' />"],
+        "answer": "<Component name='value' />",
         "difficulty": "Easy",
-        "explanation": "'throw' creates and throws a custom exception for error handling.",
-        "category": "Exceptions: throw"
+        "explanation": "Props are passed as attributes in JSX, like 'name='value''.",
+        "category": "Components: Props"
     },
     {
-        "question": "What is thrown in: ```javascript\nthrow 'CustomError';```?",
-        "options": ["A string", "An Error object", "A function", "A variable"],
-        "answer": "A string",
-        "difficulty": "Medium",
-        "explanation": "'throw' can throw any value, like a string, which is caught in a 'catch' block.",
-        "category": "Exceptions: throw"
-    },
-    {
-        "question": "What is the output of: ```javascript\ntry { throw 42; } catch (e) { console.log(e); }```",
-        "options": ["42", "Error", "undefined", "null"],
-        "answer": "42",
-        "difficulty": "Medium",
-        "explanation": "'throw 42' throws the number 42, which is caught and logged.",
-        "category": "Exceptions: throw"
-    },
-    {
-        "question": "How do you add a click event listener to a button?",
-        "options": ["button.addEventListener('click', handler)", "button.onClick(handler)", "button.attachEvent('click', handler)", "button.event('click', handler)"],
-        "answer": "button.addEventListener('click', handler)",
-        "difficulty": "Easy",
-        "explanation": "'addEventListener' attaches an event handler for the specified event.",
-        "category": "Handling events within JavaScript"
-    },
-    {
-        "question": "What does 'event.preventDefault()' do?",
-        "options": ["Stops event propagation", "Prevents default action", "Removes event listener", "Logs the event"],
-        "answer": "Prevents default action",
-        "difficulty": "Medium",
-        "explanation": "'preventDefault()' stops the browser’s default action, like form submission.",
-        "category": "Handling events within JavaScript"
-    },
-    {
-        "question": "What does 'event.stopPropagation()' do?",
-        "options": ["Prevents default action", "Stops event bubbling", "Removes the event", "Triggers the event"],
-        "answer": "Stops event bubbling",
-        "difficulty": "Medium",
-        "explanation": "'stopPropagation()' prevents the event from bubbling up to parent elements.",
-        "category": "Handling events within JavaScript"
-    },
-    {
-        "question": "What is the nodeType of a comment in the DOM?",
-        "options": ["1", "3", "8", "9"],
-        "answer": "8",
-        "difficulty": "Medium",
-        "explanation": "Comment nodes have a nodeType of 8, while elements are 1 and text nodes are 3.",
-        "category": "The DOM: Junk artifacts and nodeType"
-    },
-    {
-        "question": "What is a 'junk artifact' in the DOM?",
-        "options": ["A text node", "A comment node", "An element node", "A script node"],
-        "answer": "A comment node",
-        "difficulty": "Medium",
-        "explanation": "Comment nodes (nodeType 8) are considered junk artifacts as they don’t affect rendering.",
-        "category": "The DOM: Junk artifacts and nodeType"
-    },
-    {
-        "question": "What is the nodeType of a text node?",
-        "options": ["1", "3", "8", "9"],
-        "answer": "3",
-        "difficulty": "Easy",
-        "explanation": "Text nodes have a nodeType of 3 in the DOM.",
-        "category": "The DOM: Junk artifacts and nodeType"
-    },
-    {
-        "question": "How do you select an element by ID?",
-        "options": ["document.querySelector('#id')", "document.getElementById('id')", "document.getElementsByClassName('id')", "Both A and B"],
-        "answer": "Both A and B",
-        "difficulty": "Easy",
-        "explanation": "Both 'getElementById' and 'querySelector' can select an element by ID.",
-        "category": "The DOM: More ways to target elements"
-    },
-    {
-        "question": "How do you select all elements with class 'example'?",
-        "options": ["document.querySelectorAll('.example')", "document.getElementsByClassName('example')", "document.getElementsByTagName('example')", "Both A and B"],
-        "answer": "Both A and B",
-        "difficulty": "Medium",
-        "explanation": "Both methods return collections of elements with the specified class.",
-        "category": "The DOM: More ways to target elements"
-    },
-    {
-        "question": "What does element.tagName return for a <p> element?",
-        "options": ["p", "P", "<p>", "null"],
-        "answer": "P",
-        "difficulty": "Easy",
-        "explanation": "'tagName' returns the tag name in uppercase, like 'P' for a <p> element.",
-        "category": "The DOM: Getting a target's name"
-    },
-    {
-        "question": "What is the difference between element.tagName and element.nodeName?",
-        "options": ["They are identical", "tagName is lowercase", "nodeName includes text nodes", "tagName is for attributes"],
-        "answer": "They are identical",
-        "difficulty": "Medium",
-        "explanation": "For elements, 'tagName' and 'nodeName' both return the uppercase tag name.",
-        "category": "The DOM: Getting a target's name"
-    },
-    {
-        "question": "How do you count all <div> elements in a document?",
-        "options": ["document.getElementsByTagName('div').length", "document.querySelector('div').count", "document.getElementsByClassName('div').length", "document.querySelectorAll('div').count"],
-        "answer": "document.getElementsByTagName('div').length",
-        "difficulty": "Easy",
-        "explanation": "'getElementsByTagName' returns an HTMLCollection, and '.length' counts the elements.",
-        "category": "The DOM: Counting elements"
-    },
-    {
-        "question": "What does document.querySelectorAll('p').length return?",
-        "options": ["Number of <p> elements", "Number of all elements", "Number of classes", "Number of attributes"],
-        "answer": "Number of <p> elements",
-        "difficulty": "Easy",
-        "explanation": "'querySelectorAll('p')' returns a NodeList, and '.length' counts the <p> elements.",
-        "category": "The DOM: Counting elements"
-    },
-    {
-        "question": "How do you check if an element has an attribute?",
-        "options": ["element.hasAttribute('attr')", "element.getAttribute('attr')", "element.attribute('attr')", "element.checkAttribute('attr')"],
-        "answer": "element.hasAttribute('attr')",
-        "difficulty": "Easy",
-        "explanation": "'hasAttribute' returns true if the element has the specified attribute.",
-        "category": "The DOM: Attributes"
-    },
-    {
-        "question": "How do you set an attribute on an element?",
-        "options": ["element.setAttribute('name', 'value')", "element.attribute('name', 'value')", "element.name = 'value'", "element.addAttribute('name', 'value')"],
-        "answer": "element.setAttribute('name', 'value')",
-        "difficulty": "Easy",
-        "explanation": "'setAttribute' sets or updates an attribute’s value on an element.",
-        "category": "The DOM: Attributes"
-    },
-    {
-        "question": "How do you get all attribute names of an element?",
-        "options": ["element.getAttributeNames()", "element.attributes.map(attr => attr.name)", "Array.from(element.attributes).map(attr => attr.name)", "Both A and C"],
-        "answer": "Both A and C",
-        "difficulty": "Medium",
-        "explanation": "'getAttributeNames()' or mapping 'element.attributes' returns an array of attribute names.",
-        "category": "The DOM: Attribute names and values"
-    },
-    {
-        "question": "What does element.getAttribute('id') return if no ID exists?",
-        "options": ["''", "null", "undefined", "Error"],
-        "answer": "null",
-        "difficulty": "Medium",
-        "explanation": "'getAttribute' returns null if the specified attribute doesn’t exist.",
-        "category": "The DOM: Attribute names and values"
-    },
-    {
-        "question": "How do you create a new DOM element?",
-        "options": ["document.createElement('tag')", "document.newElement('tag')", "document.createNode('tag')", "document.addElement('tag')"],
-        "answer": "document.createElement('tag')",
-        "difficulty": "Easy",
-        "explanation": "'createElement' creates a new DOM element with the specified tag.",
-        "category": "The DOM: Adding nodes"
-    },
-    {
-        "question": "What does document.createElement('span') return?",
-        "options": ["A new span element", "A text node", "A comment node", "An attribute"],
-        "answer": "A new span element",
-        "difficulty": "Easy",
-        "explanation": "'createElement('span')' returns a new <span> element, not yet in the DOM.",
-        "category": "The DOM: Adding nodes"
-    },
-    {
-        "question": "How do you append a node to an element’s children?",
-        "options": ["element.appendChild(node)", "element.addChild(node)", "element.insertChild(node)", "element.append(node)"],
-        "answer": "element.appendChild(node)",
-        "difficulty": "Easy",
-        "explanation": "'appendChild' adds a node as the last child of the element.",
-        "category": "The DOM: Inserting nodes"
-    },
-    {
-        "question": "How do you insert a node before an existing child?",
-        "options": ["parent.insertBefore(newNode, existingNode)", "parent.insertChild(newNode, existingNode)", "parent.addBefore(newNode, existingNode)", "parent.prepend(newNode)"],
-        "answer": "parent.insertBefore(newNode, existingNode)",
-        "difficulty": "Medium",
-        "explanation": "'insertBefore' inserts a new node before the specified existing child.",
-        "category": "The DOM: Inserting nodes"
-    },
-    {
-        "question": "What is a JavaScript object?",
-        "options": ["A collection of properties", "A function", "A variable", "A DOM element"],
-        "answer": "A collection of properties",
-        "difficulty": "Easy",
-        "explanation": "Objects are collections of key-value pairs, where values can be data or functions.",
-        "category": "Objects"
-    },
-    {
-        "question": "How do you access an object’s property?",
-        "options": ["object.property or object['property']", "object.getProperty()", "object(property)", "object->property"],
-        "answer": "object.property or object['property']",
-        "difficulty": "Easy",
-        "explanation": "Properties are accessed using dot or bracket notation.",
-        "category": "Objects: Properties"
-    },
-    {
-        "question": "How do you add a method to an object?",
-        "options": ["object.method = function() {}", "object.addMethod(function)", "object.method(function)", "object.setMethod()"],
-        "answer": "object.method = function() {}",
-        "difficulty": "Easy",
-        "explanation": "A method is added by assigning a function to an object property.",
-        "category": "Objects: Methods"
-    },
-    {
-        "question": "What is a constructor in JavaScript?",
-        "options": ["A function to create objects", "A loop", "An event handler", "A variable"],
-        "answer": "A function to create objects",
-        "difficulty": "Medium",
-        "explanation": "Constructors are functions used with 'new' to create and initialize objects.",
-        "category": "Objects: Constructors"
-    },
-    {
-        "question": "What is the output of: ```javascript\nfunction Person(name) { this.name = name; }\nlet p = new Person('Alice');\nconsole.log(p.name);```",
-        "options": ["Alice", "Person", "undefined", "null"],
+        "question": "What is the output of: ```jsx\nfunction Comp({name}) { return <div>{name}</div>; }\n<Comp name='Alice' />```",
+        "options": ["Alice", "name", "undefined", "Error"],
         "answer": "Alice",
         "difficulty": "Medium",
-        "explanation": "The constructor sets the 'name' property, and 'new' creates an object with it.",
-        "category": "Objects: Constructors"
+        "explanation": "The 'name' prop is destructured and rendered in the component.",
+        "category": "Components: Props"
     },
     {
-        "question": "How do you add a method to a constructor’s prototype?",
-        "options": ["Constructor.prototype.method = function() {}", "Constructor.method = function() {}", "Constructor.addMethod()", "Constructor.setMethod()"],
-        "answer": "Constructor.prototype.method = function() {}",
+        "question": "Can props be modified inside a component?",
+        "options": ["No, they are read-only", "Yes, using setProps", "Yes, using useState", "Yes, by reassigning"],
+        "answer": "No, they are read-only",
         "difficulty": "Medium",
-        "explanation": "Prototype methods are shared by all instances of the constructor.",
-        "category": "Objects: Constructors for methods"
+        "explanation": "Props are immutable within a component to ensure predictable data flow.",
+        "category": "Components: Props"
     },
     {
-        "question": "What is a prototype in JavaScript?",
-        "options": ["An object for inheritance", "A function", "A variable", "A DOM node"],
-        "answer": "An object for inheritance",
+        "question": "How do you set default props for a component?",
+        "options": ["Component.defaultProps = {}", "Component.props = {}", "Component.setDefaults({})", "useDefaultProps({})"],
+        "answer": "Component.defaultProps = {}",
         "difficulty": "Medium",
-        "explanation": "Prototypes allow objects to inherit properties and methods from another object.",
-        "category": "Objects: Prototypes"
+        "explanation": "'defaultProps' defines fallback values for undefined props.",
+        "category": "Components: Props"
     },
     {
-        "question": "How do you check if an object has a property?",
-        "options": ["'property' in object", "object.hasProperty('property')", "object.propertyExists('property')", "object.getProperty('property')"],
-        "answer": "'property' in object",
-        "difficulty": "Medium",
-        "explanation": "The 'in' operator checks for a property in an object or its prototype chain.",
-        "category": "Objects: Checking for properties and methods"
-    },
-    {
-        "question": "How do you check if a property is directly on an object?",
-        "options": ["object.hasOwnProperty('property')", "object.owns('property')", "object.property('property')", "'property' in object"],
-        "answer": "object.hasOwnProperty('property')",
-        "difficulty": "Medium",
-        "explanation": "'hasOwnProperty' checks for properties directly on the object, not inherited.",
-        "category": "Objects: Checking for properties and methods"
-    },
-    {
-        "question": "How do you get the current URL of a page?",
-        "options": ["window.location.href", "document.url", "window.url", "document.location"],
-        "answer": "window.location.href",
+        "question": "What is the useState hook used for?",
+        "options": ["Managing component state", "Fetching data", "Handling events", "Rendering JSX"],
+        "answer": "Managing component state",
         "difficulty": "Easy",
-        "explanation": "'window.location.href' returns the full URL of the current page.",
-        "category": "Browser control: Getting and setting the URL"
+        "explanation": "'useState' allows functional components to manage state with a value and setter.",
+        "category": "Components: States (useState)"
     },
     {
-        "question": "How do you navigate to a new URL?",
-        "options": ["window.location.href = 'new-url'", "window.url = 'new-url'", "document.location('new-url')", "window.setUrl('new-url')"],
-        "answer": "window.location.href = 'new-url'",
+        "question": "What does useState return?",
+        "options": ["[state, setState]", "[state, updateState]", "[value, setValue]", "[state, dispatch]"],
+        "answer": "[state, setState]",
         "difficulty": "Easy",
-        "explanation": "Assigning to 'window.location.href' navigates to the new URL.",
-        "category": "Browser control: Getting and setting the URL"
+        "explanation": "'useState' returns an array with the current state and a function to update it.",
+        "category": "Components: States (useState)"
     },
     {
-        "question": "What does window.location.assign('new-url') do?",
-        "options": ["Navigates to a new URL", "Reloads the page", "Clears the URL", "Opens a popup"],
-        "answer": "Navigates to a new URL",
+        "question": "What is the output of: ```jsx\nconst [count, setCount] = useState(0); setCount(1); console.log(count);```",
+        "options": ["0", "1", "undefined", "Error"],
+        "answer": "0",
         "difficulty": "Medium",
-        "explanation": "'assign' navigates to a new URL, similar to setting 'href'.",
-        "category": "Browser control: Getting and setting the URL another way"
+        "explanation": "'setCount' is asynchronous, so 'count' doesn’t immediately reflect the new value.",
+        "category": "Components: States (useState)"
     },
     {
-        "question": "How do you go back in browser history?",
-        "options": ["window.history.back()", "window.back()", "window.history.prev()", "window.location.back()"],
-        "answer": "window.history.back()",
+        "question": "How do you update state based on the previous state?",
+        "options": ["setState(prev => prev + 1)", "setState(state + 1)", "state = state + 1", "updateState(state + 1)"],
+        "answer": "setState(prev => prev + 1)",
+        "difficulty": "Medium",
+        "explanation": "Using a callback with the previous state ensures correct updates in asynchronous scenarios.",
+        "category": "Components: States (useState)"
+    },
+    {
+        "question": "Can useState be used outside a component?",
+        "options": ["No, only in functional components", "Yes, in any function", "Yes, in class components", "Yes, in event handlers"],
+        "answer": "No, only in functional components",
+        "difficulty": "Medium",
+        "explanation": "'useState' is a React hook and must be called within a functional component.",
+        "category": "Components: States (useState)"
+    },
+    {
+        "question": "What is the data flow model in React?",
+        "options": ["Unidirectional from parent to child", "Bidirectional between components", "Random flow", "No data flow"],
+        "answer": "Unidirectional from parent to child",
         "difficulty": "Easy",
-        "explanation": "'window.history.back()' navigates to the previous page in history.",
-        "category": "Browser control: Forward and reverse"
+        "explanation": "React uses a unidirectional data flow, passing data via props from parent to child.",
+        "category": "Components: Data Flow"
     },
     {
-        "question": "How do you go forward in browser history?",
-        "options": ["window.history.forward()", "window.forward()", "window.history.next()", "window.location.forward()"],
-        "answer": "window.history.forward()",
+        "question": "How do child components communicate with parents in React?",
+        "options": ["Via callback props", "Via direct state updates", "Via global variables", "Via useState"],
+        "answer": "Via callback props",
+        "difficulty": "Medium",
+        "explanation": "Child components call parent-provided callback functions to send data upward.",
+        "category": "Components: Data Flow"
+    },
+    {
+        "question": "What happens if a child component tries to modify a prop directly?",
+        "options": ["It causes an error", "It works but is discouraged", "It updates the parent", "It has no effect"],
+        "answer": "It has no effect",
+        "difficulty": "Medium",
+        "explanation": "Props are read-only, so modifying them in a child has no effect and may cause warnings.",
+        "category": "Components: Data Flow"
+    },
+    {
+        "question": "How can a parent component update a child’s state?",
+        "options": ["By passing new props", "By calling setState directly", "By modifying child state", "By using useEffect"],
+        "answer": "By passing new props",
+        "difficulty": "Medium",
+        "explanation": "Parents update child state indirectly by passing updated props, triggering a re-render.",
+        "category": "Components: Data Flow"
+    },
+    {
+        "question": "What is an example of lifting state up in React?",
+        "options": ["Moving state to a common parent", "Moving state to a child", "Using global state", "Avoiding state"],
+        "answer": "Moving state to a common parent",
+        "difficulty": "Medium",
+        "explanation": "Lifting state up involves moving shared state to a parent component for coordination.",
+        "category": "Components: Data Flow"
+    },
+    {
+        "question": "What are React hooks?",
+        "options": ["Functions for state and lifecycle in functional components", "Classes for state management", "Event listeners", "JSX extensions"],
+        "answer": "Functions for state and lifecycle in functional components",
         "difficulty": "Easy",
-        "explanation": "'window.history.forward()' navigates to the next page in history.",
-        "category": "Browser control: Forward and reverse"
+        "explanation": "Hooks like useState and useEffect add state and lifecycle features to functional components.",
+        "category": "Hooks"
     },
     {
-        "question": "How do you set the entire page content?",
-        "options": ["document.body.innerHTML = 'content'", "window.content = 'content'", "document.write('content')", "Both A and C"],
-        "answer": "Both A and C",
-        "difficulty": "Medium",
-        "explanation": "Both 'innerHTML' and 'document.write' can set the page’s content.",
-        "category": "Browser control: Filling the window with content"
-    },
-    {
-        "question": "How do you resize a browser window?",
-        "options": ["window.resizeTo(width, height)", "window.setSize(width, height)", "window.size(width, height)", "document.resize(width, height)"],
-        "answer": "window.resizeTo(width, height)",
-        "difficulty": "Medium",
-        "explanation": "'window.resizeTo' resizes the browser window to specified dimensions.",
-        "category": "Browser control: Controlling the window's size and location"
-    },
-    {
-        "question": "How do you move a window to a position?",
-        "options": ["window.moveTo(x, y)", "window.setPosition(x, y)", "window.location(x, y)", "window.move(x, y)"],
-        "answer": "window.moveTo(x, y)",
-        "difficulty": "Medium",
-        "explanation": "'window.moveTo' moves the browser window to the specified coordinates.",
-        "category": "Browser control: Controlling the window's size and location"
-    },
-    {
-        "question": "How do you detect a popup blocker?",
-        "options": ["Check if window.open() returns null", "Check window.popupBlocked", "Check document.popup", "Check window.isBlocked"],
-        "answer": "Check if window.open() returns null",
-        "difficulty": "Medium",
-        "explanation": "If 'window.open()' returns null, the popup was blocked.",
-        "category": "Browser control: Testing for popup blockers"
-    },
-    {
-        "question": "How do you validate a text field is not empty?",
-        "options": ["input.value.trim() !== ''", "input.text !== ''", "input.value.length > 0", "Both A and C"],
-        "answer": "Both A and C",
+        "question": "Which hook handles side effects in React?",
+        "options": ["useEffect", "useState", "useReducer", "useContext"],
+        "answer": "useEffect",
         "difficulty": "Easy",
-        "explanation": "Both checks validate a non-empty field, with 'trim()' handling whitespace.",
-        "category": "Form validation: text fields"
+        "explanation": "'useEffect' runs side effects like data fetching or DOM manipulation after rendering.",
+        "category": "Hooks"
     },
     {
-        "question": "What does input.value.trim() do?",
-        "options": ["Removes whitespace from both ends", "Converts to lowercase", "Removes special characters", "Checks for numbers"],
-        "answer": "Removes whitespace from both ends",
-        "difficulty": "Easy",
-        "explanation": "'trim()' removes leading and trailing whitespace from a string.",
-        "category": "Form validation: text fields"
+        "question": "What is the purpose of the dependency array in useEffect?",
+        "options": ["Controls when the effect runs", "Stores state values", "Handles props", "Defines cleanup functions"],
+        "answer": "Controls when the effect runs",
+        "difficulty": "Medium",
+        "explanation": "The dependency array determines when 'useEffect' re-runs based on value changes.",
+        "category": "Hooks"
+    },
+    {
+        "question": "What does useEffect(() => {}, []) do?",
+        "options": ["Runs once on mount", "Runs on every render", "Runs on unmount", "Never runs"],
+        "answer": "Runs once on mount",
+        "difficulty": "Medium",
+        "explanation": "An empty dependency array means the effect runs only once when the component mounts.",
+        "category": "Hooks"
+    },
+    {
+        "question": "What is the useReducer hook used for?",
+        "options": ["Managing complex state logic", "Fetching data", "Handling events", "Rendering components"],
+        "answer": "Managing complex state logic",
+        "difficulty": "Medium",
+        "explanation": "'useReducer' is an alternative to useState for complex state transitions.",
+        "category": "Hooks"
+    },
+    {
+        "question": "How do you access context in a functional component?",
+        "options": ["useContext", "useState", "useEffect", "useReducer"],
+        "answer": "useContext",
+        "difficulty": "Medium",
+        "explanation": "'useContext' accesses the value of a React context in a functional component.",
+        "category": "Hooks"
+    },
+    {
+        "question": "What does useMemo do?",
+        "options": ["Caches a computed value", "Manages state", "Handles side effects", "Fetches data"],
+        "answer": "Caches a computed value",
+        "difficulty": "Medium",
+        "explanation": "'useMemo' memoizes expensive calculations to prevent unnecessary re-computation.",
+        "category": "Hooks"
+    },
+    {
+        "question": "What is the purpose of useCallback?",
+        "options": ["Memoizes a function", "Manages state", "Handles events", "Fetches data"],
+        "answer": "Memoizes a function",
+        "difficulty": "Medium",
+        "explanation": "'useCallback' returns a memoized function to prevent re-creation on renders.",
+        "category": "Hooks"
+    },
+    {
+        "question": "What does useRef do?",
+        "options": ["Holds a mutable reference", "Manages state", "Handles side effects", "Fetches data"],
+        "answer": "Holds a mutable reference",
+        "difficulty": "Medium",
+        "explanation": "'useRef' creates a mutable object that persists across renders, often used for DOM access.",
+        "category": "Hooks"
+    },
+    {
+        "question": "How do you create a custom hook?",
+        "options": ["Define a function starting with 'use'", "Define a class", "Use a regular function", "Extend useState"],
+        "answer": "Define a function starting with 'use'",
+        "difficulty": "Medium",
+        "explanation": "Custom hooks are functions starting with 'use' that encapsulate reusable logic.",
+        "category": "Hooks"
     }
 ]
 
@@ -1094,3 +838,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
