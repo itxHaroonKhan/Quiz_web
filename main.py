@@ -6,364 +6,484 @@ import uuid
 # Quiz data - Enhanced with more questions
 quiz =[
     {
-        "question": "What is Vite used for in a JavaScript project?",
-        "options": ["A build tool for fast development", "A linter for code quality", "A testing framework", "A package manager"],
-        "answer": "A build tool for fast development",
+        "question": "What is the output of: ```typescript\nlet x: number = 5; console.log(x);```",
+        "options": ["5", "undefined", "Error", "null"],
+        "answer": "5",
         "difficulty": "Easy",
-        "explanation": "Vite is a modern build tool that provides fast development with hot module replacement and optimized production builds.",
-        "category": "CLI Tool: Vite"
+        "explanation": "TypeScript's type annotation ensures 'x' is a number, and it logs 5 as expected.",
+        "category": "TypeScript"
     },
     {
-        "question": "Which command initializes a new Vite project with React?",
-        "options": ["npm create vite@latest my-app --template react", "npm init vite my-app", "vite create my-app --react", "npm vite init my-app"],
-        "answer": "npm create vite@latest my-app --template react",
+        "question": "What does the TypeScript compiler (tsc) do?",
+        "options": ["Compiles TypeScript to JavaScript", "Runs TypeScript code directly", "Minifies JavaScript", "Bundles modules"],
+        "answer": "Compiles TypeScript to JavaScript",
+        "difficulty": "Easy",
+        "explanation": "The 'tsc' compiler transpiles TypeScript code to JavaScript for browser or Node.js execution.",
+        "category": "TS Compiler"
+    },
+    {
+        "question": "Which command compiles a TypeScript file?",
+        "options": ["tsc file.ts", "ts file.ts", "typescript file.ts", "compile file.ts"],
+        "answer": "tsc file.ts",
+        "difficulty": "Easy",
+        "explanation": "'tsc file.ts' compiles a TypeScript file to JavaScript based on tsconfig.json settings.",
+        "category": "TS Compiler"
+    },
+    {
+        "question": "What is the purpose of 'noEmitOnError' in tsconfig.json?",
+        "options": ["Prevents output if errors occur", "Disables type checking", "Enables strict mode", "Minifies output"],
+        "answer": "Prevents output if errors occur",
         "difficulty": "Medium",
-        "explanation": "The command uses 'create vite' with the '--template react' flag to set up a React project.",
-        "category": "CLI Tool: Vite"
+        "explanation": "'noEmitOnError: true' stops the compiler from generating JavaScript if type errors are found.",
+        "category": "TS Compiler"
     },
     {
-        "question": "What is a key advantage of Vite over Create React App?",
-        "options": ["Faster dev server startup", "Better TypeScript support", "Built-in testing", "Automatic code splitting"],
-        "answer": "Faster dev server startup",
+        "question": "What happens if you run: ```typescript\ntsc --strict app.ts``` and app.ts has type errors?",
+        "options": ["Compiles with warnings", "Fails to compile", "Ignores errors", "Generates minified JS"],
+        "answer": "Fails to compile",
         "difficulty": "Medium",
-        "explanation": "Vite uses native ES modules for faster development server startup compared to Create React App.",
-        "category": "CLI Tool: Vite"
+        "explanation": "The '--strict' flag enables strict type-checking, and compilation fails if errors are detected.",
+        "category": "TS Compiler"
     },
     {
-        "question": "How do you start a Vite development server?",
-        "options": ["npm run dev", "npm start", "vite start", "npm run vite"],
-        "answer": "npm run dev",
+        "question": "What is the correct type annotation for a string variable?",
+        "options": ["let x: string", "let x: String", "let x: text", "let x = string"],
+        "answer": "let x: string",
         "difficulty": "Easy",
-        "explanation": "The 'dev' script in Vite projects, defined in package.json, starts the development server.",
-        "category": "CLI Tool: Vite"
+        "explanation": "TypeScript uses lowercase 'string' for primitive string types, not the 'String' object.",
+        "category": "Type Annotations"
     },
     {
-        "question": "What does Vite use for bundling in production?",
-        "options": ["Rollup", "Webpack", "Esbuild", "Parcel"],
-        "answer": "Rollup",
+        "question": "What is the output of: ```typescript\nlet x: number | string = 10; x = 'hello'; console.log(x);```",
+        "options": ["10", "hello", "Error", "undefined"],
+        "answer": "hello",
         "difficulty": "Medium",
-        "explanation": "Vite uses Rollup for optimized production builds, while Esbuild powers its dev server.",
-        "category": "CLI Tool: Vite"
+        "explanation": "The union type 'number | string' allows 'x' to be reassigned to a string, logging 'hello'.",
+        "category": "Type Annotations"
     },
     {
-        "question": "What is the purpose of Create React App (CRA)?",
-        "options": ["Set up a React project with zero configuration", "Manage dependencies", "Run unit tests", "Optimize images"],
-        "answer": "Set up a React project with zero configuration",
+        "question": "How do you annotate a function that returns nothing?",
+        "options": ["function fn(): void", "function fn(): null", "function fn(): undefined", "function fn(): any"],
+        "answer": "function fn(): void",
         "difficulty": "Easy",
-        "explanation": "CRA provides a pre-configured setup for React projects, including Webpack and Babel.",
-        "category": "CLI Tool: Create React App"
+        "explanation": "'void' is used to indicate a function returns nothing.",
+        "category": "Type Annotations"
     },
     {
-        "question": "Which command creates a new CRA project?",
-        "options": ["npx create-react-app my-app", "npm init react my-app", "npx cra my-app", "npm create react-app my-app"],
-        "answer": "npx create-react-app my-app",
+        "question": "What is wrong with: ```typescript\nlet x: number = 'text';```",
+        "options": ["Type mismatch", "Syntax error", "No error", "Missing declaration"],
+        "answer": "Type mismatch",
         "difficulty": "Easy",
-        "explanation": "'npx create-react-app' initializes a new React project with all necessary configurations.",
-        "category": "CLI Tool: Create React App"
+        "explanation": "Assigning a string to a number-typed variable causes a type error.",
+        "category": "Type Annotations"
     },
     {
-        "question": "What is a limitation of Create React App?",
-        "options": ["No TypeScript support", "Limited configuration options", "No CSS support", "No hot module replacement"],
-        "answer": "Limited configuration options",
+        "question": "How do you annotate an array of numbers?",
+        "options": ["let arr: number[]", "let arr: Array<number>", "let arr: [number]", "Both A and B"],
+        "answer": "Both A and B",
         "difficulty": "Medium",
-        "explanation": "CRA abstracts Webpack configuration, requiring ejection for custom setups.",
-        "category": "CLI Tool: Create React App"
+        "explanation": "TypeScript supports both 'number[]' and 'Array<number>' for number arrays.",
+        "category": "Type Annotations"
     },
     {
-        "question": "How do you start a CRA development server?",
-        "options": ["npm start", "npm run dev", "cra start", "npm run cra"],
-        "answer": "npm start",
+        "question": "What is the purpose of an interface in TypeScript?",
+        "options": ["Defines object shape", "Creates a class", "Declares variables", "Compiles code"],
+        "answer": "Defines object shape",
         "difficulty": "Easy",
-        "explanation": "The 'start' script in CRA’s package.json runs the development server.",
-        "category": "CLI Tool: Create React App"
+        "explanation": "Interfaces define the structure of objects, specifying properties and their types.",
+        "category": "Interfaces"
     },
     {
-        "question": "What does 'eject' do in a CRA project?",
-        "options": ["Removes dependencies", "Exposes configuration files", "Builds for production", "Clears the build folder"],
-        "answer": "Exposes configuration files",
-        "difficulty": "Medium",
-        "explanation": "'npm run eject' exposes Webpack and other config files for customization.",
-        "category": "CLI Tool: Create React App"
-    },
-    {
-        "question": "What is the purpose of the 'src' folder in a React project?",
-        "options": ["Stores source code and components", "Holds build output", "Contains configuration files", "Stores dependencies"],
-        "answer": "Stores source code and components",
-        "difficulty": "Easy",
-        "explanation": "The 'src' folder contains the application’s source code, including React components and logic.",
-        "category": "Folder Structure"
-    },
-    {
-        "question": "What is typically found in the 'public' folder of a React project?",
-        "options": ["index.html and static assets", "React components", "Webpack config", "Test files"],
-        "answer": "index.html and static assets",
-        "difficulty": "Easy",
-        "explanation": "The 'public' folder holds static files like 'index.html' and assets like images or favicon.",
-        "category": "Folder Structure"
-    },
-    {
-        "question": "Where are node modules stored in a React project?",
-        "options": ["node_modules folder", "src folder", "public folder", "build folder"],
-        "answer": "node_modules folder",
-        "difficulty": "Easy",
-        "explanation": "The 'node_modules' folder stores all project dependencies installed via npm or yarn.",
-        "category": "Folder Structure"
-    },
-    {
-        "question": "What is the purpose of the 'package.json' file in a React project?",
-        "options": ["Defines dependencies and scripts", "Configures Webpack", "Stores component logic", "Holds test results"],
-        "answer": "Defines dependencies and scripts",
-        "difficulty": "Easy",
-        "explanation": "'package.json' lists project dependencies, scripts, and metadata.",
-        "category": "Folder Structure"
-    },
-    {
-        "question": "What is the role of the 'build' folder in a React project?",
-        "options": ["Holds production-ready files", "Stores source code", "Contains test scripts", "Manages dependencies"],
-        "answer": "Holds production-ready files",
-        "difficulty": "Easy",
-        "explanation": "The 'build' folder contains optimized files generated by the build process for deployment.",
-        "category": "Folder Structure"
-    },
-    {
-        "question": "What is JSX in React?",
-        "options": ["A syntax extension for JavaScript", "A CSS preprocessor", "A testing library", "A state management tool"],
-        "answer": "A syntax extension for JavaScript",
-        "difficulty": "Easy",
-        "explanation": "JSX allows writing HTML-like code in JavaScript, which React compiles into JavaScript.",
-        "category": "Components: JSX"
-    },
-    {
-        "question": "What does the following JSX return: ```jsx\n<div>Hello, {name}</div>```",
-        "options": ["A div with dynamic content", "A JavaScript object", "A string", "An error"],
-        "answer": "A div with dynamic content",
-        "difficulty": "Easy",
-        "explanation": "JSX expressions like {name} render dynamic values within HTML-like elements.",
-        "category": "Components: JSX"
-    },
-    {
-        "question": "How do you write a comment in JSX?",
-        "options": ["{/* Comment */}", "// Comment", "<!-- Comment -->", "# Comment"],
-        "answer": "{/* Comment */}",
-        "difficulty": "Medium",
-        "explanation": "JSX uses JavaScript-style comments wrapped in curly braces for dynamic content.",
-        "category": "Components: JSX"
-    },
-    {
-        "question": "What is the output of: ```jsx\n<div>{2 + 2}</div>```",
-        "options": ["4", "2 + 2", "Error", "undefined"],
-        "answer": "4",
-        "difficulty": "Easy",
-        "explanation": "JSX evaluates JavaScript expressions inside curly braces, rendering the result.",
-        "category": "Components: JSX"
-    },
-    {
-        "question": "Which of the following is valid JSX?",
-        "options": ["<div className='box'>Content</div>", "<div class='box'>Content</div>", "<div id='box'>Content</div>", "<div name='box'>Content</div>"],
-        "answer": "<div className='box'>Content</div>",
-        "difficulty": "Medium",
-        "explanation": "JSX uses 'className' instead of 'class' for CSS classes due to JavaScript reserved words.",
-        "category": "Components: JSX"
-    },
-    {
-        "question": "What are props in React?",
-        "options": ["Data passed to components", "Component state", "Event handlers", "DOM elements"],
-        "answer": "Data passed to components",
-        "difficulty": "Easy",
-        "explanation": "Props are read-only data passed from a parent to a child component.",
-        "category": "Components: Props"
-    },
-    {
-        "question": "How do you pass a prop to a component?",
-        "options": ["<Component name='value' />", "<Component prop='value' />", "<Component setProp='value' />", "<Component value='name' />"],
-        "answer": "<Component name='value' />",
-        "difficulty": "Easy",
-        "explanation": "Props are passed as attributes in JSX, like 'name='value''.",
-        "category": "Components: Props"
-    },
-    {
-        "question": "What is the output of: ```jsx\nfunction Comp({name}) { return <div>{name}</div>; }\n<Comp name='Alice' />```",
-        "options": ["Alice", "name", "undefined", "Error"],
+        "question": "What is the output of: ```typescript\ninterface User { name: string; } let user: User = { name: 'Alice' }; console.log(user.name);```",
+        "options": ["Alice", "undefined", "Error", "null"],
         "answer": "Alice",
-        "difficulty": "Medium",
-        "explanation": "The 'name' prop is destructured and rendered in the component.",
-        "category": "Components: Props"
-    },
-    {
-        "question": "Can props be modified inside a component?",
-        "options": ["No, they are read-only", "Yes, using setProps", "Yes, using useState", "Yes, by reassigning"],
-        "answer": "No, they are read-only",
-        "difficulty": "Medium",
-        "explanation": "Props are immutable within a component to ensure predictable data flow.",
-        "category": "Components: Props"
-    },
-    {
-        "question": "How do you set default props for a component?",
-        "options": ["Component.defaultProps = {}", "Component.props = {}", "Component.setDefaults({})", "useDefaultProps({})"],
-        "answer": "Component.defaultProps = {}",
-        "difficulty": "Medium",
-        "explanation": "'defaultProps' defines fallback values for undefined props.",
-        "category": "Components: Props"
-    },
-    {
-        "question": "What is the useState hook used for?",
-        "options": ["Managing component state", "Fetching data", "Handling events", "Rendering JSX"],
-        "answer": "Managing component state",
         "difficulty": "Easy",
-        "explanation": "'useState' allows functional components to manage state with a value and setter.",
-        "category": "Components: States (useState)"
+        "explanation": "The interface ensures 'user' has a 'name' property, logging 'Alice'.",
+        "category": "Interfaces"
     },
     {
-        "question": "What does useState return?",
-        "options": ["[state, setState]", "[state, updateState]", "[value, setValue]", "[state, dispatch]"],
-        "answer": "[state, setState]",
+        "question": "Can an interface include optional properties?",
+        "options": ["Yes, using ?", "No", "Only with !", "Only with readonly"],
+        "answer": "Yes, using ?",
+        "difficulty": "Medium",
+        "explanation": "Optional properties are marked with '?' in an interface, e.g., 'age?: number'.",
+        "category": "Interfaces"
+    },
+    {
+        "question": "What is wrong with: ```typescript\ninterface Point { x: number; } let p: Point = { x: 1, y: 2 };```",
+        "options": ["Extra property 'y'", "Missing property 'x'", "Type mismatch", "No error"],
+        "answer": "Extra property 'y'",
+        "difficulty": "Medium",
+        "explanation": "TypeScript flags extra properties not defined in the interface as errors in strict mode.",
+        "category": "Interfaces"
+    },
+    {
+        "question": "How do you extend an interface?",
+        "options": ["interface B extends A {}", "interface B : A {}", "interface B implements A {}", "interface B = A {}"],
+        "answer": "interface B extends A {}",
+        "difficulty": "Medium",
+        "explanation": "The 'extends' keyword allows an interface to inherit properties from another.",
+        "category": "Interfaces"
+    },
+    {
+        "question": "What is the output of: ```typescript\nclass Person { name: string = 'John'; } let p = new Person(); console.log(p.name);```",
+        "options": ["John", "undefined", "Error", "null"],
+        "answer": "John",
         "difficulty": "Easy",
-        "explanation": "'useState' returns an array with the current state and a function to update it.",
-        "category": "Components: States (useState)"
+        "explanation": "The class initializes 'name' to 'John', which is logged.",
+        "category": "Classes"
     },
     {
-        "question": "What is the output of: ```jsx\nconst [count, setCount] = useState(0); setCount(1); console.log(count);```",
-        "options": ["0", "1", "undefined", "Error"],
-        "answer": "0",
+        "question": "How do you define a private property in a class?",
+        "options": ["private x: number", "#x: number", "protected x: number", "Both A and B"],
+        "answer": "Both A and B",
         "difficulty": "Medium",
-        "explanation": "'setCount' is asynchronous, so 'count' doesn’t immediately reflect the new value.",
-        "category": "Components: States (useState)"
+        "explanation": "TypeScript supports 'private' keyword and '#x' for private fields (ES private fields).",
+        "category": "Classes"
     },
     {
-        "question": "How do you update state based on the previous state?",
-        "options": ["setState(prev => prev + 1)", "setState(state + 1)", "state = state + 1", "updateState(state + 1)"],
-        "answer": "setState(prev => prev + 1)",
-        "difficulty": "Medium",
-        "explanation": "Using a callback with the previous state ensures correct updates in asynchronous scenarios.",
-        "category": "Components: States (useState)"
-    },
-    {
-        "question": "Can useState be used outside a component?",
-        "options": ["No, only in functional components", "Yes, in any function", "Yes, in class components", "Yes, in event handlers"],
-        "answer": "No, only in functional components",
-        "difficulty": "Medium",
-        "explanation": "'useState' is a React hook and must be called within a functional component.",
-        "category": "Components: States (useState)"
-    },
-    {
-        "question": "What is the data flow model in React?",
-        "options": ["Unidirectional from parent to child", "Bidirectional between components", "Random flow", "No data flow"],
-        "answer": "Unidirectional from parent to child",
+        "question": "What does 'extends' do in a class declaration?",
+        "options": ["Inherits from another class", "Implements an interface", "Declares a method", "Creates an instance"],
+        "answer": "Inherits from another class",
         "difficulty": "Easy",
-        "explanation": "React uses a unidirectional data flow, passing data via props from parent to child.",
-        "category": "Components: Data Flow"
+        "explanation": "'extends' allows a class to inherit properties and methods from a parent class.",
+        "category": "Classes"
     },
     {
-        "question": "How do child components communicate with parents in React?",
-        "options": ["Via callback props", "Via direct state updates", "Via global variables", "Via useState"],
-        "answer": "Via callback props",
+        "question": "What is the output of: ```typescript\nclass A { x = 1; } class B extends A { x = 2; } let b = new B(); console.log(b.x);```",
+        "options": ["1", "2", "Error", "undefined"],
+        "answer": "2",
         "difficulty": "Medium",
-        "explanation": "Child components call parent-provided callback functions to send data upward.",
-        "category": "Components: Data Flow"
+        "explanation": "The subclass 'B' overrides the 'x' property, so 'b.x' is 2.",
+        "category": "Classes"
     },
     {
-        "question": "What happens if a child component tries to modify a prop directly?",
-        "options": ["It causes an error", "It works but is discouraged", "It updates the parent", "It has no effect"],
-        "answer": "It has no effect",
+        "question": "What does 'implements' do in a class?",
+        "options": ["Ensures interface compliance", "Inherits a class", "Declares a method", "Creates a constructor"],
+        "answer": "Ensures interface compliance",
         "difficulty": "Medium",
-        "explanation": "Props are read-only, so modifying them in a child has no effect and may cause warnings.",
-        "category": "Components: Data Flow"
+        "explanation": "'implements' ensures a class adheres to an interface’s structure.",
+        "category": "Classes"
     },
     {
-        "question": "How can a parent component update a child’s state?",
-        "options": ["By passing new props", "By calling setState directly", "By modifying child state", "By using useEffect"],
-        "answer": "By passing new props",
-        "difficulty": "Medium",
-        "explanation": "Parents update child state indirectly by passing updated props, triggering a re-render.",
-        "category": "Components: Data Flow"
-    },
-    {
-        "question": "What is an example of lifting state up in React?",
-        "options": ["Moving state to a common parent", "Moving state to a child", "Using global state", "Avoiding state"],
-        "answer": "Moving state to a common parent",
-        "difficulty": "Medium",
-        "explanation": "Lifting state up involves moving shared state to a parent component for coordination.",
-        "category": "Components: Data Flow"
-    },
-    {
-        "question": "What are React hooks?",
-        "options": ["Functions for state and lifecycle in functional components", "Classes for state management", "Event listeners", "JSX extensions"],
-        "answer": "Functions for state and lifecycle in functional components",
+        "question": "What is a generic in TypeScript?",
+        "options": ["A type that works with any data type", "A fixed type", "A class method", "An interface property"],
+        "answer": "A type that works with any data type",
         "difficulty": "Easy",
-        "explanation": "Hooks like useState and useEffect add state and lifecycle features to functional components.",
-        "category": "Hooks"
+        "explanation": "Generics allow reusable code that works with different types while maintaining type safety.",
+        "category": "Generics"
     },
     {
-        "question": "Which hook handles side effects in React?",
-        "options": ["useEffect", "useState", "useReducer", "useContext"],
-        "answer": "useEffect",
+        "question": "What is the output of: ```typescript\nfunction identity<T>(arg: T): T { return arg; }\nconsole.log(identity<number>(42));```",
+        "options": ["42", "undefined", "Error", "null"],
+        "answer": "42",
+        "difficulty": "Medium",
+        "explanation": "The generic function 'identity' returns the input value, typed as 'number', so it logs 42.",
+        "category": "Generics"
+    },
+    {
+        "question": "How do you constrain a generic type?",
+        "options": ["extends", "implements", "restrict", "typeof"],
+        "answer": "extends",
+        "difficulty": "Medium",
+        "explanation": "'extends' constrains a generic type to a specific type or interface, e.g., 'T extends string'.",
+        "category": "Generics"
+    },
+    {
+        "question": "What is wrong with: ```typescript\nfunction fn<T>(x: T): T { return x.length; }```",
+        "options": ["'length' is not guaranteed on T", "Syntax error", "No error", "Missing return type"],
+        "answer": "'length' is not guaranteed on T",
+        "difficulty": "Hard",
+        "explanation": "Without a constraint like 'T extends { length: number }', 'length' is not guaranteed.",
+        "category": "Generics"
+    },
+    {
+        "question": "What is the output of: ```typescript\nfunction merge<T, U>(a: T, b: U) { return { ...a, ...b }; }\nconsole.log(merge({ x: 1 }, { y: 2 }).y);```",
+        "options": ["2", "undefined", "Error", "1"],
+        "answer": "2",
+        "difficulty": "Medium",
+        "explanation": "The generic function merges two objects, and the resulting object has property 'y' with value 2.",
+        "category": "Generics"
+    },
+    {
+        "question": "What is an enum in TypeScript?",
+        "options": ["A set of named constants", "A class", "A function", "A variable"],
+        "answer": "A set of named constants",
         "difficulty": "Easy",
-        "explanation": "'useEffect' runs side effects like data fetching or DOM manipulation after rendering.",
-        "category": "Hooks"
+        "explanation": "Enums define a set of named constants, often used for fixed values like states or categories.",
+        "category": "Enums"
     },
     {
-        "question": "What is the purpose of the dependency array in useEffect?",
-        "options": ["Controls when the effect runs", "Stores state values", "Handles props", "Defines cleanup functions"],
-        "answer": "Controls when the effect runs",
+        "question": "What is the output of: ```typescript\nenum Color { Red, Green, Blue }\nconsole.log(Color.Green);```",
+        "options": ["1", "Green", "Error", "undefined"],
+        "answer": "1",
         "difficulty": "Medium",
-        "explanation": "The dependency array determines when 'useEffect' re-runs based on value changes.",
-        "category": "Hooks"
+        "explanation": "By default, enum values are numeric, starting at 0, so 'Green' is 1.",
+        "category": "Enums"
     },
     {
-        "question": "What does useEffect(() => {}, []) do?",
-        "options": ["Runs once on mount", "Runs on every render", "Runs on unmount", "Never runs"],
-        "answer": "Runs once on mount",
+        "question": "How do you create a string enum?",
+        "options": ["enum E { A = 'a' }", "enum E { A: 'a' }", "enum E { A = string }", "enum E = 'a'"],
+        "answer": "enum E { A = 'a' }",
         "difficulty": "Medium",
-        "explanation": "An empty dependency array means the effect runs only once when the component mounts.",
-        "category": "Hooks"
+        "explanation": "String enums assign string values to enum members, e.g., 'A = 'a''. ",
+        "category": "Enums"
     },
     {
-        "question": "What is the useReducer hook used for?",
-        "options": ["Managing complex state logic", "Fetching data", "Handling events", "Rendering components"],
-        "answer": "Managing complex state logic",
+        "question": "What is the output of: ```typescript\nenum Status { Active = 1, Inactive }\nconsole.log(Status.Inactive);```",
+        "options": ["2", "1", "Inactive", "Error"],
+        "answer": "2",
         "difficulty": "Medium",
-        "explanation": "'useReducer' is an alternative to useState for complex state transitions.",
-        "category": "Hooks"
+        "explanation": "Enums increment numeric values, so 'Inactive' is 2 after 'Active = 1'.",
+        "category": "Enums"
     },
     {
-        "question": "How do you access context in a functional component?",
-        "options": ["useContext", "useState", "useEffect", "useReducer"],
-        "answer": "useContext",
+        "question": "How do you access an enum’s value by its name?",
+        "options": ["Enum['name']", "Enum.get('name')", "Enum.name", "Enum.value('name')"],
+        "answer": "Enum['name']",
         "difficulty": "Medium",
-        "explanation": "'useContext' accesses the value of a React context in a functional component.",
-        "category": "Hooks"
+        "explanation": "Enums are objects at runtime, so 'Enum['name']' accesses the value by name.",
+        "category": "Enums"
     },
     {
-        "question": "What does useMemo do?",
-        "options": ["Caches a computed value", "Manages state", "Handles side effects", "Fetches data"],
-        "answer": "Caches a computed value",
-        "difficulty": "Medium",
-        "explanation": "'useMemo' memoizes expensive calculations to prevent unnecessary re-computation.",
-        "category": "Hooks"
+        "question": "What does TypeScript’s type inference do?",
+        "options": ["Automatically assigns types", "Compiles code", "Removes types", "Generates classes"],
+        "answer": "Automatically assigns types",
+        "difficulty": "Easy",
+        "explanation": "Type inference assigns types to variables based on their initial values when no type is specified.",
+        "category": "Type Inference"
     },
     {
-        "question": "What is the purpose of useCallback?",
-        "options": ["Memoizes a function", "Manages state", "Handles events", "Fetches data"],
-        "answer": "Memoizes a function",
-        "difficulty": "Medium",
-        "explanation": "'useCallback' returns a memoized function to prevent re-creation on renders.",
-        "category": "Hooks"
+        "question": "What type is inferred for: ```typescript\nlet x = 42;```",
+        "options": ["number", "any", "string", "undefined"],
+        "answer": "number",
+        "difficulty": "Easy",
+        "explanation": "TypeScript infers 'number' based on the value 42.",
+        "category": "Type Inference"
     },
     {
-        "question": "What does useRef do?",
-        "options": ["Holds a mutable reference", "Manages state", "Handles side effects", "Fetches data"],
-        "answer": "Holds a mutable reference",
+        "question": "What is inferred for: ```typescript\nconst x = [1, 2, 3];```",
+        "options": ["number[]", "any[]", "Array<number>", "Both A and C"],
+        "answer": "Both A and C",
         "difficulty": "Medium",
-        "explanation": "'useRef' creates a mutable object that persists across renders, often used for DOM access.",
-        "category": "Hooks"
+        "explanation": "TypeScript infers 'number[]' or 'Array<number>' for an array of numbers.",
+        "category": "Type Inference"
     },
     {
-        "question": "How do you create a custom hook?",
-        "options": ["Define a function starting with 'use'", "Define a class", "Use a regular function", "Extend useState"],
-        "answer": "Define a function starting with 'use'",
+        "question": "What happens if you assign a string to: ```typescript\nlet x = 42; x = 'text';```",
+        "options": ["Type error", "No error", "Converts to string", "undefined"],
+        "answer": "Type error",
         "difficulty": "Medium",
-        "explanation": "Custom hooks are functions starting with 'use' that encapsulate reusable logic.",
-        "category": "Hooks"
+        "explanation": "TypeScript infers 'x' as 'number', so assigning a string causes a type error.",
+        "category": "Type Inference"
+    },
+    {
+        "question": "What is inferred for: ```typescript\nfunction fn(x) { return x; }```",
+        "options": ["any", "void", "unknown", "number"],
+        "answer": "any",
+        "difficulty": "Medium",
+        "explanation": "Without type annotations, TypeScript infers 'any' for untyped parameters and return types.",
+        "category": "Type Inference"
+    },
+    {
+        "question": "What is a union type in TypeScript?",
+        "options": ["A type that can be one of multiple types", "A type combining all properties", "A fixed type", "A class type"],
+        "answer": "A type that can be one of multiple types",
+        "difficulty": "Easy",
+        "explanation": "Union types, e.g., 'string | number', allow a value to be one of several types.",
+        "category": "Union and Intersection Types"
+    },
+    {
+        "question": "What is the output of: ```typescript\nlet x: string | number = 10; x = 'test'; console.log(x);```",
+        "options": ["test", "10", "Error", "undefined"],
+        "answer": "test",
+        "difficulty": "Medium",
+        "explanation": "The union type allows 'x' to be a string or number, so it logs 'test'.",
+        "category": "Union and Intersection Types"
+    },
+    {
+        "question": "What is an intersection type?",
+        "options": ["Combines multiple types into one", "Selects one type", "Excludes types", "Creates a union"],
+        "answer": "Combines multiple types into one",
+        "difficulty": "Medium",
+        "explanation": "Intersection types, e.g., 'A & B', combine properties of multiple types.",
+        "category": "Union and Intersection Types"
+    },
+    {
+        "question": "What is wrong with: ```typescript\ntype A = { x: number }; type B = { y: string }; let obj: A & B = { x: 1 };```",
+        "options": ["Missing 'y' property", "Type mismatch", "No error", "Invalid syntax"],
+        "answer": "Missing 'y' property",
+        "difficulty": "Medium",
+        "explanation": "An intersection type 'A & B' requires all properties from both types.",
+        "category": "Union and Intersection Types"
+    },
+    {
+        "question": "What does this log: ```typescript\ntype A = { x: number }; type B = { y: string }; let obj: A | B = { x: 1 }; console.log(obj.x);```",
+        "options": ["1", "undefined", "Error", "null"],
+        "answer": "Error",
+        "difficulty": "Hard",
+        "explanation": "With a union type 'A | B', 'x' is not guaranteed, requiring a type guard to access it safely.",
+        "category": "Union and Intersection Types"
+    },
+    {
+        "question": "What is a type guard in TypeScript?",
+        "options": ["Narrows a type within a scope", "Declares a type", "Compiles code", "Creates an interface"],
+        "answer": "Narrows a type within a scope",
+        "difficulty": "Easy",
+        "explanation": "Type guards, like 'typeof' or 'instanceof', narrow types for safe access.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What does this log: ```typescript\nfunction fn(x: string | number) { if (typeof x === 'string') { console.log(x.length); } } fn('test');```",
+        "options": ["4", "undefined", "Error", "null"],
+        "answer": "4",
+        "difficulty": "Medium",
+        "explanation": "The 'typeof' type guard narrows 'x' to 'string', allowing safe access to 'length'.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What is a user-defined type guard?",
+        "options": ["A function returning 'x is Type'", "A type annotation", "A class method", "An enum"],
+        "answer": "A function returning 'x is Type'",
+        "difficulty": "Medium",
+        "explanation": "User-defined type guards use a return type like 'x is Type' to narrow types.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What is wrong with: ```typescript\nfunction isString(x: any): x is string { return x.length !== undefined; }```",
+        "options": ["Incorrect type check", "No error", "Syntax error", "Missing return type"],
+        "answer": "Incorrect type check",
+        "difficulty": "Hard",
+        "explanation": "Checking 'length' is not a reliable way to confirm a string, as other types have 'length'.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What does this log: ```typescript\nclass A { x = 1; } function isA(obj: any): obj is A { return obj instanceof A; } let a = new A(); console.log(isA(a));```",
+        "options": ["true", "false", "Error", "undefined"],
+        "answer": "true",
+        "difficulty": "Medium",
+        "explanation": "The 'instanceof' type guard confirms 'a' is an instance of 'A', logging 'true'.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What is a decorator in TypeScript?",
+        "options": ["A function that modifies class behavior", "A type annotation", "A variable", "An interface"],
+        "answer": "A function that modifies class behavior",
+        "difficulty": "Easy",
+        "explanation": "Decorators are functions that can modify classes, methods, or properties at declaration time.",
+        "category": "Decorators"
+    },
+    {
+        "question": "What is required to use decorators in TypeScript?",
+        "options": ["'experimentalDecorators' in tsconfig.json", "'useDecorators' in tsconfig.json", "'strict' mode", "No special configuration"],
+        "answer": "'experimentalDecorators' in tsconfig.json",
+        "difficulty": "Medium",
+        "explanation": "Decorators require 'experimentalDecorators: true' in tsconfig.json to be enabled.",
+        "category": "Decorators"
+    },
+    {
+        "question": "What does this log: ```typescript\nfunction log(target: any, key: string) { console.log(key); } class C { @log x = 1; } new C();```",
+        "options": ["x", "undefined", "Error", "null"],
+        "answer": "x",
+        "difficulty": "Medium",
+        "explanation": "The decorator 'log' is applied to the 'x' property, logging its key 'x' during class initialization.",
+        "category": "Decorators"
+    },
+    {
+        "question": "What is a method decorator used for?",
+        "options": ["Modifies method behavior", "Declares a type", "Creates a class", "Defines a variable"],
+        "answer": "Modifies method behavior",
+        "difficulty": "Medium",
+        "explanation": "Method decorators can wrap or modify the behavior of class methods.",
+        "category": "Decorators"
+    },
+    {
+        "question": "What is wrong with: ```typescript\n@decorator class C {}``` without 'experimentalDecorators'?",
+        "options": ["Compilation error", "No error", "Runtime error", "Syntax error"],
+        "answer": "Compilation error",
+        "difficulty": "Medium",
+        "explanation": "Decorators require 'experimentalDecorators: true' in tsconfig.json, or the compiler fails.",
+        "category": "Decorators"
+    },
+    {
+        "question": "What is the output of: ```typescript\nlet x: any = 42; console.log(x);```",
+        "options": ["42", "undefined", "Error", "null"],
+        "answer": "42",
+        "difficulty": "Easy",
+        "explanation": "The 'any' type allows any value, so 'x' logs 42 without type errors.",
+        "category": "TypeScript"
+    },
+    {
+        "question": "What is the 'target' in tsconfig.json?",
+        "options": ["Output JavaScript version", "Input file path", "Module type", "Compiler mode"],
+        "answer": "Output JavaScript version",
+        "difficulty": "Medium",
+        "explanation": "'target' specifies the JavaScript version (e.g., 'ES2020') for compiled output.",
+        "category": "TS Compiler"
+    },
+    {
+        "question": "How do you annotate a function parameter as optional?",
+        "options": ["param?: type", "param: type?", "param: ?type", "param = type"],
+        "answer": "param?: type",
+        "difficulty": "Medium",
+        "explanation": "Optional parameters are marked with '?' in function declarations.",
+        "category": "Type Annotations"
+    },
+    {
+        "question": "What does this log: ```typescript\ninterface A { x: number; } let a: A = { x: 1 }; console.log(a.x);```",
+        "options": ["1", "undefined", "Error", "null"],
+        "answer": "1",
+        "difficulty": "Easy",
+        "explanation": "The interface ensures 'x' is a number, so 'a.x' logs 1.",
+        "category": "Interfaces"
+    },
+    {
+        "question": "What is the output of: ```typescript\nclass A { constructor(public x: number) {} } let a = new A(5); console.log(a.x);```",
+        "options": ["5", "undefined", "Error", "null"],
+        "answer": "5",
+        "difficulty": "Medium",
+        "explanation": "The 'public' parameter property automatically assigns 'x' to the instance, logging 5.",
+        "category": "Classes"
+    },
+    {
+        "question": "What does this log: ```typescript\nfunction fn<T extends { length: number }>(x: T) { console.log(x.length); } fn('test');```",
+        "options": ["4", "undefined", "Error", "null"],
+        "answer": "4",
+        "difficulty": "Medium",
+        "explanation": "The generic constraint ensures 'x' has a 'length' property, so 'test' logs 4.",
+        "category": "Generics"
+    },
+    {
+        "question": "What is the output of: ```typescript\nenum E { A = 'a' } console.log(E.A);```",
+        "options": ["a", "0", "Error", "undefined"],
+        "answer": "a",
+        "difficulty": "Medium",
+        "explanation": "String enums assign string values, so 'E.A' is 'a'.",
+        "category": "Enums"
+    },
+    {
+        "question": "What is inferred for: ```typescript\nlet x = 'hello';```",
+        "options": ["string", "any", "text", "undefined"],
+        "answer": "string",
+        "difficulty": "Easy",
+        "explanation": "TypeScript infers 'string' based on the value 'hello'.",
+        "category": "Type Inference"
+    },
+    {
+        "question": "What does this log: ```typescript\nfunction fn(x: string | number) { if (typeof x === 'number') { console.log(x + 1); } } fn(10);```",
+        "options": ["11", "undefined", "Error", "null"],
+        "answer": "11",
+        "difficulty": "Medium",
+        "explanation": "The type guard narrows 'x' to 'number', so 'x + 1' logs 11.",
+        "category": "Type Guards"
+    },
+    {
+        "question": "What does this log: ```typescript\nfunction log(target: any, key: string, descriptor: PropertyDescriptor) { console.log(key); } class C { @log method() {} } new C();```",
+        "options": ["method", "undefined", "Error", "null"],
+        "answer": "method",
+        "difficulty": "Medium",
+        "explanation": "The method decorator logs the method name 'method' during class initialization.",
+        "category": "Decorators"
     }
 ]
 
@@ -838,4 +958,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
