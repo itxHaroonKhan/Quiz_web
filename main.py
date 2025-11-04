@@ -5,8 +5,8 @@ import uuid
 
 # ==================== 100 PRO QUESTIONS (Hindi + Code) ====================
 quiz_100 = [
-    # 1-10: TS Compiler
-    {"q": "tsc kya karta hai?", "o": ["TS → JS", "JS → TS", "Run karta hai", "Delete karta hai"], "a": "TS → JS", "e": "TypeScript Compiler", "cat": "Compiler"},
+    # 1-10: Compiler
+    {"q": "tsc kya karta hai?", "o": ["TS → JS", "JS → TS", "Run karta hai", "Delete karta hai"], "a": "TS → JS", "e": "`tsc file.ts` → file.js", "cat": "Compiler"},
     {"q": "tsconfig.json ka kaam?", "o": ["Settings", "Package list", "HTML file", "CSS"], "a": "Settings", "e": "target, strict, module set karta hai", "cat": "Compiler"},
     {"q": "`strict: true` kya enable karta hai?", "o": ["Sab strict checks", "Sirf null check", "No check", "Fast compile"], "a": "Sab strict checks", "e": "noImplicitAny, strictNullChecks, etc.", "cat": "Compiler"},
     {"q": "Fast compile ke liye?", "o": ["--transpileOnly", "--noEmit", "--watch", "--build"], "a": "--transpileOnly", "e": "No type check, sirf JS banata hai", "cat": "Compiler"},
@@ -17,7 +17,7 @@ quiz_100 = [
     {"q": "module: 'CommonJS' → output?", "o": ["require()", "import/export", "global", "AMD"], "a": "require()", "e": "Node.js style", "cat": "Compiler"},
     {"q": "emitDecoratorMetadata ke liye?", "o": ["reflect-metadata", "tslib", "core-js", "zone.js"], "a": "reflect-metadata", "e": "Decorator me data save karta hai", "cat": "Compiler"},
 
-    # 11-25: Type Annotations
+    # 11-25: Annotations
     {"q": "Number annotate kaise?", "o": [": number", ": num", ":: number", "<number>"], "a": ": number", "e": "let age: number = 25;", "cat": "Annotations"},
     {"q": "String array?", "o": ["string[]", "Array<string>", "Both", "Str[]"], "a": "Both", "e": "Dono syntax valid", "cat": "Annotations"},
     {"q": "Function return type?", "o": ["(): string", "=> string", "-> string", ": string"], "a": "(): string", "e": "function greet(): string", "cat": "Annotations"},
@@ -72,17 +72,12 @@ quiz_100 = [
     {"q": "Computed enum?", "o": ["Haan, function se", "Nahi", "Sirf string", "Sirf number"], "a": "Haan, function se", "e": "Size = 'abc'.length", "cat": "Enums"},
     {"q": "Enum reverse mapping?", "o": ["Numeric only", "String only", "Both", "None"], "a": "Numeric only", "e": "Color[0] = 'Red'", "cat": "Enums"},
 
-    # 91-95: Type Inference
+    # 91-100: Advanced
     {"q": "`let x = 'hi'` → x is?", "o": ["string", "any", "unknown", "let"], "a": "string", "e": "Auto detect", "cat": "Inference"},
     {"q": "Contextual typing?", "o": ["Event handler me", "let variable", "function param", "interface"], "a": "Event handler me", "e": "e: MouseEvent", "cat": "Inference"},
-    {"q": "Best common type?", "o": ["Sabse common type", "any", "unknown", "never"], "a": "Sabse common type", "e": "[1, 'a'] → (number|string)[]", "cat": "Inference"},
-
-    # 96-100: Union, Intersection, Guards, Decorators
     {"q": "Discriminated union?", "o": ["kind property", "id property", "name property", "type property"], "a": "kind property", "e": "type Shape = Circle | Square", "cat": "Union"},
     {"q": "User-defined type guard?", "o": ["x is string", "x: string", "x == string", "x === string"], "a": "x is string", "e": "Narrow in if", "cat": "Guards"},
-    {"q": "in operator guard?", "o": ["'name' in obj", "obj.name", "obj['name']", "obj has name"], "a": "'name' in obj", "e": "Property check", "cat": "Guards"},
     {"q": "Decorator factory?", "o": ["@log('msg')", "@log", "@log()", "@log[]"], "a": "@log('msg')", "e": "Parameterized decorator", "cat": "Decorators"},
-    {"q": "reflect-metadata use?", "o": ["@Reflect.metadata", "@meta", "@data", "@info"], "a": "@Reflect.metadata", "e": "Runtime type info", "cat": "Decorators"},
 ]
 
 # Convert to standard format
