@@ -1,426 +1,1012 @@
 import streamlit as st
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 import uuid
 
-# === 100 QUESTÕES TYPESCRIPT ===
-quiz = [
-    # 1-10: TS Compiler
-    {"question": "What does `tsc` do?", "options": ["Compiles TS to JS", "Runs TS", "Bundles code", "Deletes files"], "answer": "Compiles TS to JS", "difficulty": "Easy", "explanation": "`tsc file.ts` → file.js", "category": "Compiler"},
-    {"question": "What is the purpose of `tsconfig.json`?", "options": ["Compiler settings", "Package list", "HTML file", "CSS file"], "answer": "Compiler settings", "difficulty": "Easy", "explanation": "Controls target, module, strict mode, etc.", "category": "Compiler"},
-    {"question": "What does `strict: true` enable?", "options": ["All strict checks", "Only null checks", "No checks", "Faster compile"], "answer": "All strict checks", "difficulty": "Medium", "explanation": "noImplicitAny, strictNullChecks, etc.", "category": "Compiler"},
-    {"question": "Which flag enables fast compile without type checking?", "options": ["--transpileOnly", "--noEmit", "--watch", "--build"], "answer": "--transpileOnly", "difficulty": "Medium", "explanation": "Uses esbuild/swc for speed", "category": "Compiler"},
-    {"question": "How to generate `.d.ts` declaration files?", "options": ["declaration: true", "emit: true", "types: true", "export: true"], "answer": "declaration: true", "difficulty": "Medium", "explanation": "For publishing libraries", "category": "Compiler"},
-    {"question": "Command for auto-recompile on save?", "options": ["tsc -w", "tsc --watch", "Both", "tsc --live"], "answer": "Both", "difficulty": "Easy", "explanation": "Watch mode", "category": "Compiler"},
-    {"question": "What does `target: 'ES2020'` mean?", "options": ["Output ES2020 JS", "Module system", "Output folder", "File name"], "answer": "Output ES2020 JS", "difficulty": "Easy", "explanation": "Allows modern JS features", "category": "Compiler"},
-    {"question": "What does `noEmitOnError` do?", "options": ["No JS if error", "Ignores errors", "Always emits JS", "Deletes files"], "answer": "No JS if error", "difficulty": "Medium", "explanation": "Safer builds", "category": "Compiler"},
-    {"question": "What does `module: 'CommonJS'` output?", "options": ["require()", "import/export", "global variables", "AMD"], "answer": "require()", "difficulty": "Medium", "explanation": "Node.js style modules", "category": "Compiler"},
-    {"question": "Which package enables decorator metadata?", "options": ["reflect-metadata", "tslib", "core-js", "zone.js"], "answer": "reflect-metadata", "difficulty": "Hard", "explanation": "Stores metadata at runtime", "category": "Compiler"},
-    # 11-25: Type Annotations
-    {"question": "How to annotate a number?", "options": [": number", ": num", ":: number", "<number>"], "answer": ": number", "difficulty": "Easy", "explanation": "let age: number = 25;", "category": "Annotations"},
-    {"question": "How to type an array of strings?", "options": ["string[]", "Array<string>", "Both", "Str[]"], "answer": "Both", "difficulty": "Easy", "explanation": "Both syntaxes are valid", "category": "Annotations"},
-    {"question": "How to specify function return type?", "options": ["(): string", "=> string", "-> string", ": string"], "answer": "(): string", "difficulty": "Easy", "explanation": "function greet(): string", "category": "Annotations"},
-    {"question": "How to type a Promise<string>?", "options": ["Promise<string>", "Future<string>", "async string", "Thenable<string>"], "answer": "Promise<string>", "difficulty": "Medium", "explanation": "async function fetch(): Promise<string>", "category": "Annotations"},
-    {"question": "How to define a tuple?", "options": ["[string, number]", "(string, number)", "string | number", "string & number"], "answer": "[string, number]", "difficulty": "Medium", "explanation": "let user: [string, number] = ['Ram', 25]", "category": "Annotations"},
-    {"question": "When should you use `any`?", "options": ["When type is unknown", "Never", "Only for numbers", "Only for strings"], "answer": "When type is unknown", "difficulty": "Easy", "explanation": "For dynamic or legacy code", "category": "Annotations"},
-    {"question": "`never` type is used for?", "options": ["Functions that never return", "All functions", "Error functions only", "Both A & C"], "answer": "Both A & C", "difficulty": "Hard", "explanation": "throw error or infinite loop", "category": "Annotations"},
-    {"question": "Why is `unknown` safer than `any`?", "options": ["Requires type checking", "Allows anything", "Faster", "Smaller"], "answer": "Requires type checking", "difficulty": "Medium", "explanation": "You must narrow before use", "category": "Annotations"},
-    {"question": "What does `void` return type mean?", "options": ["Returns nothing", "Returns null", "Returns undefined", "Empty object"], "answer": "Returns nothing", "difficulty": "Easy", "explanation": "function log(): void", "category": "Annotations"},
-    {"question": "What is a literal type?", "options": ["'left' | 'right'", "string", "any", "boolean"], "answer": "'left' | 'right'", "difficulty": "Medium", "explanation": "Exact string/number values", "category": "Annotations"},
-    # 26-45: Interfaces
-    {"question": "What does an interface define?", "options": ["Object shape", "Class behavior", "Function signature", "Variable type"], "answer": "Object shape", "difficulty": "Easy", "explanation": "Structure of an object", "category": "Interfaces"},
-    {"question": "How to make a property optional?", "options": ["age?: number", "age!: number", "age*: number", "age~: number"], "answer": "age?: number", "difficulty": "Easy", "explanation": "May or may not exist", "category": "Interfaces"},
-    {"question": "How to extend an interface?", "options": ["extends", "implements", "inherits", "uses"], "answer": "extends", "difficulty": "Easy", "explanation": "interface Admin extends User", "category": "Interfaces"},
-    {"question": "How to make a property readonly?", "options": ["readonly id: number", "const id: number", "fixed id", "immutable id"], "answer": "readonly id: number", "difficulty": "Easy", "explanation": "Cannot be reassigned", "category": "Interfaces"},
-    {"question": "What is an index signature?", "options": ["[key: string]: string", "[key]: string", "keyof string", "{key: string}"], "answer": "[key: string]: string", "difficulty": "Hard", "explanation": "For dynamic property names", "category": "Interfaces"},
-    {"question": "Can an interface have a function?", "options": ["greet(): void", "greet: () => void", "Both", "None"], "answer": "Both", "difficulty": "Medium", "explanation": "Call signature allowed", "category": "Interfaces"},
-    {"question": "What is a hybrid type?", "options": ["Function + Object", "Only function", "Only object", "Array"], "answer": "Function + Object", "difficulty": "Hard", "explanation": "Like jQuery: callable + properties", "category": "Interfaces"},
-    {"question": "Do interfaces merge?", "options": ["Yes, same name", "No", "Only classes", "Only types"], "answer": "Yes, same name", "difficulty": "Medium", "explanation": "Declaration merging", "category": "Interfaces"},
-    {"question": "Interface vs Type alias?", "options": ["Both similar", "Interface better", "Type more powerful", "Interface faster"], "answer": "Both similar", "difficulty": "Medium", "explanation": "Use case dependent", "category": "Interfaces"},
-    {"question": "How does a class use an interface?", "options": ["implements", "extends", "uses", "follows"], "answer": "implements", "difficulty": "Easy", "explanation": "class User implements Person", "category": "Interfaces"},
-    # 46-65: Classes
-    {"question": "How does a class inherit?", "options": ["extends", "implements", "inherits", "uses"], "answer": "extends", "difficulty": "Easy", "explanation": "class Dog extends Animal", "category": "Classes"},
-    {"question": "Modern private field syntax?", "options": ["#name", "private name", "Both", "_name"], "answer": "Both", "difficulty": "Medium", "explanation": "ES2022 (#) + TS (private)", "category": "Classes"},
-    {"question": "Are class members public by default?", "options": ["Yes", "No", "Only in constructor", "Only methods"], "answer": "Yes", "difficulty": "Easy", "explanation": "No keyword needed", "category": "Classes"},
-    {"question": "What does `protected` allow?", "options": ["Child class access", "Same class only", "No access", "All access"], "answer": "Child class access", "difficulty": "Medium", "explanation": "Inheritance safe", "category": "Classes"},
-    {"question": "How to define a static property?", "options": ["static count: number", "count: number", "const count", "#count"], "answer": "static count: number", "difficulty": "Easy", "explanation": "Accessed via Class.count", "category": "Classes"},
-    {"question": "What is an abstract class?", "options": ["abstract class Shape", "virtual class Shape", "interface Shape", "type Shape"], "answer": "abstract class Shape", "difficulty": "Medium", "explanation": "Must be extended", "category": "Classes"},
-    {"question": "Getter and setter?", "options": ["get/set methods", "Both", "Only get", "None"], "answer": "Both", "difficulty": "Easy", "explanation": "For encapsulation", "category": "Classes"},
-    {"question": "What are parameter properties?", "options": ["constructor(public name)", "constructor(name)", "Both", "None"], "answer": "constructor(public name)", "difficulty": "Hard", "explanation": "Shorthand for field + param", "category": "Classes"},
-    {"question": "When must you call `super()`?", "options": ["In child constructor", "Anywhere", "Never", "Optional"], "answer": "In child constructor", "difficulty": "Medium", "explanation": "Calls parent constructor", "category": "Classes"},
-    {"question": "Which are class decorators?", "options": ["@sealed", "@log", "@Component", "All"], "answer": "All", "difficulty": "Hard", "explanation": "Modify class behavior", "category": "Classes"},
-    # 66-85: Generics
-    {"question": "Generic function syntax?", "options": ["<T>(x: T): T", "<T> x: T", "T => T", "[T] x"], "answer": "<T>(x: T): T", "difficulty": "Medium", "explanation": "Type-safe reuse", "category": "Generics"},
-    {"question": "How to constrain a generic?", "options": ["T extends string", "T implements string", "T: string", "T < string"], "answer": "T extends string", "difficulty": "Medium", "explanation": "Limits possible types", "category": "Generics"},
-    {"question": "Default generic type?", "options": ["T = string", "T: string", "T ? string", "T | string"], "answer": "T = string", "difficulty": "Hard", "explanation": "Fallback if not provided", "category": "Generics"},
-    {"question": "What is a conditional type?", "options": ["T extends U ? X : Y", "T | U ? X : Y", "T & U => X", "T = U ? X : Y"], "answer": "T extends U ? X : Y", "difficulty": "Hard", "explanation": "Type-level if statement", "category": "Generics"},
-    {"question": "What does `infer` do?", "options": ["Extracts a type", "Creates a type", "Deletes a type", "Copies a type"], "answer": "Extracts a type", "difficulty": "Hard", "explanation": "From return or param", "category": "Generics"},
-    {"question": "What is a mapped type?", "options": ["{ [K in keyof T]: U }", "{ K in T: U }", "[K in keyof T] => U", "keyof T[U]"], "answer": "{ [K in keyof T]: U }", "difficulty": "Hard", "explanation": "Transforms object keys", "category": "Generics"},
-    {"question": "What does `keyof` return?", "options": ["Union of keys", "Values", "Both", "None"], "answer": "Union of keys", "difficulty": "Medium", "explanation": "type Keys = keyof User", "category": "Generics"},
-    {"question": "What does `Partial<T>` do?", "options": ["Makes all optional", "Makes all required", "Makes all readonly", "Makes all string"], "answer": "Makes all optional", "difficulty": "Medium", "explanation": "Built-in utility", "category": "Generics"},
-    {"question": "What does `Pick<T, K>` do?", "options": ["Selects properties", "Removes all", "Renames", "Copies"], "answer": "Selects properties", "difficulty": "Medium", "explanation": "Pick<User, 'name' | 'age'>", "category": "Generics"},
-    {"question": "What does `Omit<T, K>` do?", "options": ["Removes properties", "Removes all", "Renames", "Copies"], "answer": "Removes properties", "difficulty": "Medium", "explanation": "Omit<User, 'password'>", "category": "Generics"},
-    # 86-95: Enums
-    {"question": "Numeric enum starts from?", "options": ["0", "1", "A", "null"], "answer": "0", "difficulty": "Easy", "explanation": "Auto-incrementing", "category": "Enums"},
-    {"question": "How to define a string enum?", "options": ["Up = 'UP'", "Up: 'UP'", "Up => 'UP'", "Up == 'UP'"], "answer": "Up = 'UP'", "difficulty": "Easy", "explanation": "Explicit string values", "category": "Enums"},
-    {"question": "What is a `const enum`?", "options": ["Inlined at compile time", "Runtime object", "Both", "None"], "answer": "Inlined at compile time", "difficulty": "Hard", "explanation": "No JS object emitted", "category": "Enums"},
-    {"question": "Can enum members be computed?", "options": ["Yes, with expressions", "No", "String only", "Number only"], "answer": "Yes, with expressions", "difficulty": "Hard", "explanation": "Size = 'abc'.length", "category": "Enums"},
-    {"question": "Reverse mapping works for?", "options": ["Numeric enums", "String enums", "Both", "None"], "answer": "Numeric enums", "difficulty": "Medium", "explanation": "Color[0] === 'Red'", "category": "Enums"},
-    # 96-100: Advanced Topics
-    {"question": "What type is inferred for `let x = 'hi'`?", "options": ["string", "any", "unknown", "let"], "answer": "string", "difficulty": "Easy", "explanation": "Type inference", "category": "Inference"},
-    {"question": "Where does contextual typing help?", "options": ["Event handlers", "let variables", "function params", "interfaces"], "answer": "Event handlers", "difficulty": "Medium", "explanation": "e: MouseEvent inferred", "category": "Inference"},
-    {"question": "What makes a discriminated union?", "options": ["A common 'kind' property", "id property", "name property", "type property"], "answer": "A common 'kind' property", "difficulty": "Hard", "explanation": "Enables narrowing", "category": "Union"},
-    {"question": "How to create a user-defined type guard?", "options": ["x is string", "x: string", "x == string", "x === string"], "answer": "x is string", "difficulty": "Hard", "explanation": "Narrows type in if block", "category": "Guards"},
-    {"question": "What is a decorator factory?", "options": ["@log('msg')", "@log", "@log()", "@log[]"], "answer": "@log('msg')", "difficulty": "Hard", "explanation": "Returns a decorator function", "category": "Decorators"},
-]
+# Set page config
+st.set_page_config(page_title="TypeScript Quiz - 100 Questions", page_icon="🟦", layout="centered")
 
-# === CSS STYLING ===
+# Quiz data (your full 100 questions)
+quiz =[
+  {
+    "question": "What does the 'target' option specify in tsconfig.json?",
+    "options": ["The JavaScript version the TypeScript code is compiled to", "The target directory for compiled files", "The target browser", "The target platform"],
+    "answer": "The JavaScript version the TypeScript code is compiled to",
+    "difficulty": "Easy",
+    "explanation": "The 'target' in tsconfig.json specifies the ECMAScript version to compile to (e.g., ES5, ES6, ES2020).",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "Which flag enables strict type-checking?",
+    "options": ["strict", "noImplicitAny", "strictNullChecks", "alwaysStrict"],
+    "answer": "strict",
+    "difficulty": "Easy",
+    "explanation": "'strict: true' turns on all strict family options.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "What does 'outDir' control?",
+    "options": ["Directory where .js files are emitted", "Directory for source .ts files", "Directory for declaration files", "Directory for map files"],
+    "answer": "Directory where .js files are emitted",
+    "difficulty": "Easy",
+    "explanation": "'outDir' specifies the output folder for compiled JavaScript files.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "Which option generates .d.ts files?",
+    "options": ["declaration", "emitDeclarationOnly", "declarationMap", "sourceMap"],
+    "answer": "declaration",
+    "difficulty": "Easy",
+    "explanation": "Set 'declaration: true' to emit type declaration files.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "What is the default value of 'module' for modern projects?",
+    "options": ["CommonJS", "ESNext", "AMD", "System"],
+    "answer": "ESNext",
+    "difficulty": "Easy",
+    "explanation": "When 'target' is ES2015+, default module is 'ESNext'.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "Which flag skips type checking of declaration files?",
+    "options": ["skipLibCheck", "skipDefaultLibCheck", "noLib", "fastCheck"],
+    "answer": "skipLibCheck",
+    "difficulty": "Easy",
+    "explanation": "'skipLibCheck: true' speeds up compilation.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "What does 'noEmitOnError' do?",
+    "options": ["Prevents .js output if there are type errors", "Deletes previous output on error", "Emits only on zero errors", "Emits only declaration files on error"],
+    "answer": "Prevents .js output if there are type errors",
+    "difficulty": "Easy",
+    "explanation": "No JavaScript emitted on type errors.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "Which option enables source maps?",
+    "options": ["sourceMap", "inlineSourceMap", "mapRoot", "sourceRoot"],
+    "answer": "sourceMap",
+    "difficulty": "Easy",
+    "explanation": "'sourceMap: true' generates .map files.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "What is the purpose of 'rootDir'?",
+    "options": ["Defines the root folder for input files", "Defines the root folder for output", "Sets the project root for tsconfig", "Sets the root for node_modules"],
+    "answer": "Defines the root folder for input files",
+    "difficulty": "Easy",
+    "explanation": "Mirrors input structure in outDir.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "Which flag allows JavaScript files in the project?",
+    "options": ["allowJs", "checkJs", "emitJs", "includeJs"],
+    "answer": "allowJs",
+    "difficulty": "Easy",
+    "explanation": "'allowJs: true' enables .js imports.",
+    "category": "TS Compiler"
+  },
+  {
+    "question": "How do you annotate a variable as string?",
+    "options": ["let name: String", "let name: string", "let name = String", "let name: 'string'"],
+    "answer": "let name: string",
+    "difficulty": "Easy",
+    "explanation": "Use lowercase primitive types.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Correct array type annotation?",
+    "options": ["number[]", "Array<number>", "Both", "Neither"],
+    "answer": "Both",
+    "difficulty": "Easy",
+    "explanation": "Both syntaxes are equivalent.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "How to type a function parameter?",
+    "options": ["(x: number) => {}", "(x) => number {}", "function(x: number)", "function x(number)"],
+    "answer": "(x: number) => {}",
+    "difficulty": "Easy",
+    "explanation": "Arrow syntax annotates directly.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Type for 'null' and 'undefined'?",
+    "options": ["null | undefined", "void", "any", "unknown"],
+    "answer": "null | undefined",
+    "difficulty": "Easy",
+    "explanation": "Literal types for optional values.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Tuple annotation syntax?",
+    "options": ["[string, number]", "{0: string, 1: number}", "Array<string | number>", "Tuple<string, number>"],
+    "answer": "[string, number]",
+    "difficulty": "Easy",
+    "explanation": "Square brackets define tuples.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Correct 'any' usage?",
+    "options": ["let x: any", "let x = any", "let x: Any", "let x as any"],
+    "answer": "let x: any",
+    "difficulty": "Easy",
+    "explanation": "'any' disables type checking.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "'never' represents what?",
+    "options": ["Value that never occurs", "Function that never returns", "Both", "Empty type"],
+    "answer": "Both",
+    "difficulty": "Medium",
+    "explanation": "Impossible paths or infinite loops.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Dynamic keys object type?",
+    "options": ["{[key: string]: number}", "Record<string, number>", "Both", "Map<string, number>"],
+    "answer": "Both",
+    "difficulty": "Medium",
+    "explanation": "Record is a utility type.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Correct 'void' return?",
+    "options": ["() => void", "() => undefined", "Both", "() => null"],
+    "answer": "Both",
+    "difficulty": "Easy",
+    "explanation": "void allows undefined return.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Promise return type?",
+    "options": ["Promise<T>", "async T", "Future<T>", "Thenable<T>"],
+    "answer": "Promise<T>",
+    "difficulty": "Easy",
+    "explanation": "Standard async return type.",
+    "category": "Type Annotations"
+  },
+  {
+    "question": "Keyword to declare interface?",
+    "options": ["interface", "type", "class", "declare"],
+    "answer": "interface",
+    "difficulty": "Easy",
+    "explanation": "Defines object shape contract.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Can interfaces extend others?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "Use 'extends' keyword.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Optional property syntax?",
+    "options": ["?", "!", "*", "~"],
+    "answer": "?",
+    "difficulty": "Easy",
+    "explanation": "name?: string",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Readonly properties in interfaces?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "readonly id: number",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Function interface syntax?",
+    "options": ["interface Fn { (x: number): string }", "interface Fn = (x: number) => string", "Both", "Neither"],
+    "answer": "interface Fn { (x: number): string }",
+    "difficulty": "Medium",
+    "explanation": "Call signature inside interface.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Index signatures in interfaces?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "[key: string]: number",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Interface declaration merging?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "Same name merges members.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Hybrid interface example?",
+    "options": ["Call + properties", "Extends class", "With generics", "All"],
+    "answer": "Call + properties",
+    "difficulty": "Hard",
+    "explanation": "Can be called and have props.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Can interfaces extend classes?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "Inherits instance members.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Interface vs type merging?",
+    "options": ["Interfaces merge", "Types merge", "Both", "Neither"],
+    "answer": "Interfaces merge",
+    "difficulty": "Medium",
+    "explanation": "Only interfaces support merging.",
+    "category": "Interfaces"
+  },
+  {
+    "question": "Public property in class?",
+    "options": ["public name: string", "name: string", "Both", "private name: string"],
+    "answer": "Both",
+    "difficulty": "Easy",
+    "explanation": "Public is default.",
+    "category": "Classes"
+  },
+  {
+    "question": "'protected' means?",
+    "options": ["Subclass access", "Same class only", "Anywhere", "Same module"],
+    "answer": "Subclass access",
+    "difficulty": "Easy",
+    "explanation": "Visible in derived classes.",
+    "category": "Classes"
+  },
+  {
+    "question": "Readonly class fields?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "readonly name = 'TS'",
+    "category": "Classes"
+  },
+  {
+    "question": "Parameter property shorthand?",
+    "options": ["public constructor(public name: string) {}", "Manual this.name", "Both", "None"],
+    "answer": "Both",
+    "difficulty": "Medium",
+    "explanation": "Auto-declares field.",
+    "category": "Classes"
+  },
+  {
+    "question": "Implement interface in class?",
+    "options": ["implements", "extends", "uses", "inherits"],
+    "answer": "implements",
+    "difficulty": "Easy",
+    "explanation": "class User implements Person",
+    "category": "Classes"
+  },
+  {
+    "question": "Abstract class features?",
+    "options": ["Can't instantiate", "Abstract methods", "Both", "None"],
+    "answer": "Both",
+    "difficulty": "Medium",
+    "explanation": "Base with required overrides.",
+    "category": "Classes"
+  },
+  {
+    "question": "Static members typed?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "static version: string",
+    "category": "Classes"
+  },
+  {
+    "question": "super() calls?",
+    "options": ["Parent constructor", "Current constructor", "Interface", "Global"],
+    "answer": "Parent constructor",
+    "difficulty": "Easy",
+    "explanation": "Required in derived ctor.",
+    "category": "Classes"
+  },
+  {
+    "question": "Index signatures in classes?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Hard",
+    "explanation": "class Dict { [k: string]: number }",
+    "category": "Classes"
+  },
+  {
+    "question": "Class-level decorator?",
+    "options": ["@Component", "@Input", "@Output", "@HostListener"],
+    "answer": "@Component",
+    "difficulty": "Medium",
+    "explanation": "Applies to constructor.",
+    "category": "Classes"
+  },
+  {
+    "question": "Generic function syntax?",
+    "options": ["function id<T>(arg: T): T", "function id(arg: T): T", "<T>function id", "function id<T>: T"],
+    "answer": "function id<T>(arg: T): T",
+    "difficulty": "Easy",
+    "explanation": "<T> before parameters.",
+    "category": "Generics"
+  },
+  {
+    "question": "Constrain generic?",
+    "options": ["<T extends string>", "<T = string>", "<T: string>", "<T super string>"],
+    "answer": "<T extends string>",
+    "difficulty": "Easy",
+    "explanation": "Limits possible types.",
+    "category": "Generics"
+  },
+  {
+    "question": "Generic interface?",
+    "options": ["interface Box<T> { value: T }", "interface Box = <T>{}", "Both", "None"],
+    "answer": "interface Box<T> { value: T }",
+    "difficulty": "Easy",
+    "explanation": "Box<number>, Box<string>",
+    "category": "Generics"
+  },
+  {
+    "question": "Default generic type?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "class Cache<T = string>",
+    "category": "Generics"
+  },
+  {
+    "question": "keyof T returns?",
+    "options": ["Union of keys", "Array of keys", "Object", "String"],
+    "answer": "Union of keys",
+    "difficulty": "Medium",
+    "explanation": "keyof User to 'id' | 'name'",
+    "category": "Generics"
+  },
+  {
+    "question": "Mapped type syntax?",
+    "options": ["{ [P in keyof T]: U }", "{ P in keyof T: U }", "Both", "None"],
+    "answer": "{ [P in keyof T]: U }",
+    "difficulty": "Hard",
+    "explanation": "Transforms properties.",
+    "category": "Generics"
+  },
+  {
+    "question": "Conditional type?",
+    "options": ["T extends U ? X : Y", "T extends U to X", "T ? U : X", "then/else"],
+    "answer": "T extends U ? X : Y",
+    "difficulty": "Hard",
+    "explanation": "Type-level if/else.",
+    "category": "Generics"
+  },
+  {
+    "question": "Utility: extract return type?",
+    "options": ["ReturnType<T>", "Parameters<T>", "InstanceType<T>", "ThisType<T>"],
+    "answer": "ReturnType<T>",
+    "difficulty": "Medium",
+    "explanation": "ReturnType<typeof fn>",
+    "category": "Generics"
+  },
+  {
+    "question": "Generics in type aliases?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "type Pair<T> = [T, T]",
+    "category": "Generics"
+  },
+  {
+    "question": "What does 'infer' do?",
+    "options": ["Captures type in conditional", "Creates type", "Extends", "Merges"],
+    "answer": "Captures type in conditional",
+    "difficulty": "Hard",
+    "explanation": "Used in ReturnType implementation.",
+    "category": "Generics"
+  },
+  {
+    "question": "Numeric enum declaration?",
+    "options": ["enum Direction { Up, Down }", "enum = { Up }", "const enum", "type Direction"],
+    "answer": "enum Direction { Up, Down }",
+    "difficulty": "Easy",
+    "explanation": "Auto-increment from 0.",
+    "category": "Enums"
+  },
+  {
+    "question": "Explicit enum values?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "Red = 1, Green = 2",
+    "category": "Enums"
+  },
+  {
+    "question": "String enum?",
+    "options": ["String values", "Number values", "Both", "Const enum"],
+    "answer": "String values",
+    "difficulty": "Easy",
+    "explanation": "Info = 'INFO'",
+    "category": "Enums"
+  },
+  {
+    "question": "const enum effect?",
+    "options": ["Inlined at compile", "Runtime object", "No export", "Readonly"],
+    "answer": "Inlined at compile",
+    "difficulty": "Medium",
+    "explanation": "No runtime enum.",
+    "category": "Enums"
+  },
+  {
+    "question": "Reverse mapping?",
+    "options": ["Numeric only", "String only", "Both", "No"],
+    "answer": "Numeric only",
+    "difficulty": "Medium",
+    "explanation": "Direction[0] === 'Up'",
+    "category": "Enums"
+  },
+  {
+    "question": "Heterogeneous enum?",
+    "options": ["Mixed string/number", "With functions", "With objects", "Computed"],
+    "answer": "Mixed string/number",
+    "difficulty": "Hard",
+    "explanation": "Discouraged pattern.",
+    "category": "Enums"
+  },
+  {
+    "question": "Computed enum members?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "Name = 'file'.length",
+    "category": "Enums"
+  },
+  {
+    "question": "Enums are?",
+    "options": ["Types + values", "Only types", "Only values", "Neither"],
+    "answer": "Types + values",
+    "difficulty": "Medium",
+    "explanation": "Dual nature.",
+    "category": "Enums"
+  },
+  {
+    "question": "Type variable with enum?",
+    "options": ["let d: Direction", "let d = Direction", "Both", "as Direction"],
+    "answer": "let d: Direction",
+    "difficulty": "Easy",
+    "explanation": "Restricts to members.",
+    "category": "Enums"
+  },
+  {
+    "question": "preserveConstEnums does?",
+    "options": ["Keeps in .d.ts", "Deletes", "Converts to let", "Merges"],
+    "answer": "Keeps in .d.ts",
+    "difficulty": "Hard",
+    "explanation": "For declaration files.",
+    "category": "Enums"
+  },
+  {
+    "question": "Inferred type: let x = 10",
+    "options": ["number", "10", "any", "unknown"],
+    "answer": "number",
+    "difficulty": "Easy",
+    "explanation": "Widens literal.",
+    "category": "Type Inference"
+  },
+  {
+    "question": "const x = 10 infers?",
+    "options": ["10", "number", "any", "literal"],
+    "answer": "10",
+    "difficulty": "Medium",
+    "explanation": "Const preserves literal.",
+    "category": "Type Inference"
+  },
+  {
+    "question": "Function return inferred?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "Based on return expression.",
+    "category": "Type Inference"
+  },
+  {
+    "question": "Contextual typing?",
+    "options": ["From assignment context", "File context", "Module", "Compiler"],
+    "answer": "From assignment context",
+    "difficulty": "Medium",
+    "explanation": "Event handlers auto-typed.",
+    "category": "Type Inference"
+  },
+  {
+    "question": "Force wider inference?",
+    "options": ["Yes, assertion", "No"],
+    "answer": "Yes, assertion",
+    "difficulty": "Medium",
+    "explanation": "10 as number",
+    "category": "Type Inference"
+  },
+  {
+    "question": "Union type syntax?",
+    "options": ["string | number", "string & number", "string + number", "string || number"],
+    "answer": "string | number",
+    "difficulty": "Easy",
+    "explanation": "Value can be either.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Intersection type?",
+    "options": ["A & B", "A | B", "A + B", "A, B"],
+    "answer": "A & B",
+    "difficulty": "Easy",
+    "explanation": "Combines members.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Safe on union?",
+    "options": ["Common properties", "All", "None", "Optional only"],
+    "answer": "Common properties",
+    "difficulty": "Easy",
+    "explanation": "Only shared members.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Narrow union?",
+    "options": ["Yes, type guards", "No"],
+    "answer": "Yes, type guards",
+    "difficulty": "Easy",
+    "explanation": "typeof checks.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Discriminated union?",
+    "options": ["Common literal tag", "Union of interfaces", "Union of classes", "All"],
+    "answer": "Common literal tag",
+    "difficulty": "Medium",
+    "explanation": "kind: 'circle' | 'square'",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "never & string = ?",
+    "options": ["never", "string", "any", "unknown"],
+    "answer": "never",
+    "difficulty": "Hard",
+    "explanation": "Absorbs in intersection.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Intersections with primitives?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "string & 'hello' to 'hello'",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Extract union members?",
+    "options": ["Extract<T, U>", "T extends U ? T : never", "Both", "None"],
+    "answer": "Both",
+    "difficulty": "Hard",
+    "explanation": "Built-in + manual.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Exhaustive checking?",
+    "options": ["All cases handled", "Property check", "Runtime", "Loop"],
+    "answer": "All cases handled",
+    "difficulty": "Medium",
+    "explanation": "never in default.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "Distributive conditionals?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Hard",
+    "explanation": "Applies per union member.",
+    "category": "Union and Intersection Types"
+  },
+  {
+    "question": "typeof guard?",
+    "options": ["typeof x === 'string'", "x instanceof String", "x is string", "'length' in x"],
+    "answer": "typeof x === 'string'",
+    "difficulty": "Easy",
+    "explanation": "Primitives narrowing.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "instanceof guard?",
+    "options": ["x instanceof Date", "typeof x === Date", "x is Date", "Date in x"],
+    "answer": "x instanceof Date",
+    "difficulty": "Easy",
+    "explanation": "Class instances.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "'in' operator guard?",
+    "options": ["'name' in x", "x.has('name')", "x.name exists", "nameof x"],
+    "answer": "'name' in x",
+    "difficulty": "Easy",
+    "explanation": "Property existence.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "User-defined guard?",
+    "options": ["function isString(x): x is string", "returns boolean", "Both", "Generic"],
+    "answer": "function isString(x): x is string",
+    "difficulty": "Medium",
+    "explanation": "Predicate return type.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Generic type guards?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Medium",
+    "explanation": "Preserve type param.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Literal type guard?",
+    "options": ["x === 'admin'", "typeof x", "x is 'admin'", "A and C"],
+    "answer": "A and C",
+    "difficulty": "Medium",
+    "explanation": "Equality narrows.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Switch narrowing?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "Per case.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Null/undefined guard?",
+    "options": ["x != null", "x !== null && x !== undefined", "Both", "x is defined"],
+    "answer": "Both",
+    "difficulty": "Easy",
+    "explanation": "Non-null assertion !",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Assertion function?",
+    "options": ["asserts x is string", "assert(x: string)", "Both", "None"],
+    "answer": "asserts x is string",
+    "difficulty": "Hard",
+    "explanation": "Throws if false.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Guard arrays?",
+    "options": ["Yes, .filter(isString)", "No"],
+    "answer": "Yes, .filter(isString)",
+    "difficulty": "Medium",
+    "explanation": "Narrows array type.",
+    "category": "Type Guards"
+  },
+  {
+    "question": "Enable decorators flag?",
+    "options": ["experimentalDecorators", "enableDecorators", "decorators", "useDecorators"],
+    "answer": "experimentalDecorators",
+    "difficulty": "Easy",
+    "explanation": "Required in tsconfig.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Class decorator args?",
+    "options": ["1 (constructor)", "0", "2", "3"],
+    "answer": "1 (constructor)",
+    "difficulty": "Easy",
+    "explanation": "Function constructor.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Method decorator args?",
+    "options": ["(target, key, descriptor)", "(target, descriptor)", "(key, descriptor)", "(target, key)"],
+    "answer": "(target, key, descriptor)",
+    "difficulty": "Medium",
+    "explanation": "PropertyDescriptor.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Parameter decorators?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "@Inject() service",
+    "category": "Decorators"
+  },
+  {
+    "question": "Decorator composition?",
+    "options": ["@A @B", "Multiple on one", "Both", "Factory"],
+    "answer": "Both",
+    "difficulty": "Medium",
+    "explanation": "Applied bottom-up.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Decorator factory?",
+    "options": ["Returns decorator", "Creates classes", "Built-in", "None"],
+    "answer": "Returns decorator",
+    "difficulty": "Medium",
+    "explanation": "function log(prefix)",
+    "category": "Decorators"
+  },
+  {
+    "question": "Modify property initializer?",
+    "options": ["Yes, descriptor", "No"],
+    "answer": "Yes, descriptor",
+    "difficulty": "Hard",
+    "explanation": "Return new descriptor.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Metadata package?",
+    "options": ["reflect-metadata", "ts-metadata", "decorator-metadata", "meta-ts"],
+    "answer": "reflect-metadata",
+    "difficulty": "Medium",
+    "explanation": "With emitDecoratorMetadata.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Decorator execution order?",
+    "options": ["Bottom to top", "Top to bottom"],
+    "answer": "Bottom to top",
+    "difficulty": "Hard",
+    "explanation": "@A @B to B first.",
+    "category": "Decorators"
+  },
+  {
+    "question": "Decorators in plain TS?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "difficulty": "Easy",
+    "explanation": "Angular, NestJS, etc.",
+    "category": "Decorators"
+  }
+]
+# Ensure exactly 100 questions
+assert len(quiz) == 100, f"Expected 100 questions, got {len(quiz)}"
+
+# Initialize session state
+if 'quiz_state' not in st.session_state:
+    st.session_state.quiz_state = {
+        'quiz_id': str(uuid.uuid4()),
+        'start_time': None,
+        'current_question': 0,
+        'score': 0,
+        'answers': [],
+        'shuffled_questions': random.sample(quiz, len(quiz)),
+        'show_results': False,
+        'selected_option': None,
+        'submitted': False,
+        'time_limit': 60 * 60  # 60 minutes total
+    }
+
+state = st.session_state.quiz_state
+
+# CSS Styling
 st.markdown("""
 <style>
-:root {
-    --primary: #6b21a8;
-    --primary-hover: #8b5cf6;
-    --success: #34c759;
-    --danger: #ff3b30;
-    --warning: #ff9500;
-    --info: #007aff;
-    --dark: #1a1a3b;
-    --light: #f3e8ff;
-}
-body {
-    background: linear-gradient(135deg, var(--dark) 0%, #2c2c54 100%);
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-}
-.main-container {
-    background: #2c2c54;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    margin: 1rem auto;
-    max-width: 900px;
-    color: white;
-}
-.title {
-    text-align: center;
-    font-size: 2.5rem;
-    background: linear-gradient(90deg, var(--primary), var(--info));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-    font-weight: bold;
-}
-.stButton>button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    width: 100%;
-    margin: 0.5rem 0;
-    transition: all 0.3s ease;
-}
-.stButton>button:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-}
-.option-button {
-    background: rgba(107, 33, 168, 0.1) !important;
-    border: 2px solid var(--primary) !important;
-    text-align: left;
-}
-.selected-correct {
-    background: var(--success) !important;
-    color: white !important;
-    border-color: var(--success) !important;
-}
-.selected-wrong {
-    background: var(--danger) !important;
-    color: white !important;
-    border-color: var(--danger) !important;
-}
-.difficulty-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-    display: inline-block;
-    margin-right: 0.5rem;
-}
-.easy { background: var(--success); color: white; }
-.medium { background: var(--warning); color: white; }
-.hard { background: var(--danger); color: white; }
-.category-badge {
-    background: var(--info);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    display: inline-block;
-}
-.progress-container {
-    background: rgba(255,255,255,0.1);
-    border-radius: 0.5rem;
-    height: 10px;
-    margin: 1rem 0;
-    overflow: hidden;
-}
-.progress-fill {
-    background: linear-gradient(90deg, var(--primary), var(--info));
-    height: 100%;
-    border-radius: 0.5rem;
-    transition: width 0.3s ease;
-}
-.timer-display {
-    font-size: 1.5rem;
-    text-align: center;
-    background: rgba(255,255,255,0.1);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    font-weight: bold;
-}
-.feedback-box {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    font-weight: bold;
-    border-left: 4px solid;
-}
-.correct-feedback {
-    background: rgba(52, 199, 89, 0.2);
-    border-color: var(--success);
-    color: var(--success);
-}
-.wrong-feedback {
-    background: rgba(255, 59, 48, 0.2);
-    border-color: var(--danger);
-    color: var(--danger);
-}
-.stats-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1rem 0;
-}
-.stat-card {
-    background: rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: center;
-}
-.achievement-badge {
-    background: linear-gradient(135deg, var(--primary), var(--info));
-    color: white;
-    padding: 1rem;
-    border-radius: 1rem;
-    text-align: center;
-    margin: 1rem 0;
-    font-weight: bold;
-}
+    .big-font { font-size: 24px !important; font-weight: bold; }
+    .question-box { 
+        padding: 20px; 
+        border-radius: 15px; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .option-btn {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: left;
+        border: 2px solid #ddd;
+        transition: all 0.3s;
+    }
+    .option-btn:hover { border-color: #667eea; background: #f0f2ff; }
+    .correct { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+    .incorrect { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+    .progress-bar { height: 30px; border-radius: 15px; }
+    .stProgress > div > div > div > div { background-color: #667eea; }
 </style>
 """, unsafe_allow_html=True)
 
-# === FUNCTIONS ===
-def initialize_session_state():
-    if "quiz_data" not in st.session_state:
-        st.session_state.update({
-            "quiz_data": shuffle_quiz(quiz),
-            "score": 0,
-            "current_q": 0,
-            "start_time": None,
-            "answers": [None] * len(quiz),
-            "show_results": False,
-            "selected_option": None,
-            "feedback": None,
-            "time_left": 600,
-            "streak": 0,
-            "max_streak": 0,
-            "started": False,
-            "quiz_duration": 600
-        })
+# Header
+st.markdown("<h1 style='text-align: center; color: #2E86AB;'>🟦 TypeScript Mastery Quiz</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 18px;'>100 Questions • 60 Minutes • All Topics</p>", unsafe_allow_html=True)
 
-def shuffle_quiz(_quiz):
-    shuffled = random.sample(_quiz, len(_quiz))
-    for q in shuffled:
-        q["id"] = str(uuid.uuid4())
-        q["display_options"] = q["options"].copy()
-        random.shuffle(q["display_options"])
-    return shuffled
-
-def reset_quiz():
-    st.session_state.update({
-        "quiz_data": shuffle_quiz(quiz),
-        "score": 0,
-        "current_q": 0,
-        "start_time": None,
-        "answers": [None] * len(quiz),
-        "show_results": False,
-        "selected_option": None,
-        "feedback": None,
-        "time_left": 600,
-        "streak": 0,
-        "max_streak": 0,
-        "started": False
-    })
-
-def update_timer():
-    if st.session_state.started and not st.session_state.show_results and st.session_state.start_time:
-        elapsed = (datetime.now() - st.session_state.start_time).total_seconds()
-        st.session_state.time_left = max(600 - elapsed, 0)
-        if st.session_state.time_left <= 0:
-            st.session_state.show_results = True
-
-def get_achievement(score, max_streak, total):
-    percentage = (score / (total * 2)) * 100
-    if percentage >= 90: return "TypeScript Master"
-    elif percentage >= 80: return "TypeScript Expert"
-    elif percentage >= 70: return "TypeScript Pro"
-    elif percentage >= 60: return "Good Job"
-    else: return "Keep Practicing"
-
-# === MAIN APP ===
-def main():
-    initialize_session_state()
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
-    st.markdown('<h1 class="title">TypeScript Mastery Quiz</h1>', unsafe_allow_html=True)
-
-    if not st.session_state.started:
-        st.markdown("""
-        <div style="text-align: center; padding: 2rem;">
-            <h2>Bem-vindo ao Quiz TypeScript!</h2>
-            <p>Teste seus conhecimentos com <strong>100 questões</strong> sobre TypeScript</p>
-            <p><strong>Tempo:</strong> 10 minutos</p>
-            <p><strong>Tópicos:</strong> Compilador, Tipos, Interfaces, Classes, Generics, Enums e mais!</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("Iniciar Quiz", use_container_width=True, type="primary"):
-            st.session_state.started = True
-            st.session_state.start_time = datetime.now()
+# Start Quiz
+if not state['start_time']:
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("🚀 Start Quiz", use_container_width=True, type="primary"):
+            state['start_time'] = datetime.now()
             st.rerun()
 
-    else:
-        update_timer()
+    st.markdown("### Topics Covered:")
+    topics = list(set(q["category"] for q in quiz))
+    cols = st.columns(3)
+    for i, topic in enumerate(topics):
+        cols[i % 3].markdown(f"• **{topic}**")
 
-        if not st.session_state.show_results:
-            minutes, seconds = divmod(int(st.session_state.time_left), 60)
-            st.markdown(f'<div class="timer-display">Tempo: {minutes:02d}:{seconds:02d}</div>', unsafe_allow_html=True)
+    st.info("💡 You can skip questions and return later. Timer runs continuously.")
+    st.stop()
 
-            progress = (st.session_state.current_q + 1) / len(st.session_state.quiz_data)
-            st.markdown(f"""
-            <div style="display: flex; justify-content: space-between; margin: 0.5rem 0; font-size: 0.9rem;">
-                <span>Questão: {st.session_state.current_q + 1}/{len(quiz)}</span>
-                <span>Pontos: {st.session_state.score}</span>
-                <span>Sequência: {st.session_state.streak}</span>
-            </div>
-            <div class="progress-container">
-                <div class="progress-fill" style="width: {progress * 100}%"></div>
-            </div>
-            """, unsafe_allow_html=True)
+# Timer Logic
+if state['start_time']:
+    elapsed = (datetime.now() - state['start_time']).total_seconds()
+    remaining = max(0, state['time_limit'] - elapsed)
+    minutes = int(remaining // 60)
+    seconds = int(remaining % 60)
 
-            q = st.session_state.quiz_data[st.session_state.current_q]
+    if remaining <= 0:
+        state['show_results'] = True
+        st.rerun()
 
-            st.markdown(f"""
-            <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 0.75rem; margin: 1rem 0;">
-                <div style="margin-bottom: 1rem;">
-                    <span class="difficulty-badge {q['difficulty'].lower()}">{q['difficulty']}</span>
-                    <span class="category-badge">{q['category']}</span>
-                </div>
-                <p style="font-size: 1.2rem; line-height: 1.6; font-weight: 500;">{q['question']}</p>
-            </div>
-            """, unsafe_allow_html=True)
+    # Progress bar
+    progress = (state['current_question'] + 1) / len(quiz)
+    st.progress(progress, text=f"Question {state['current_question'] + 1}/100")
 
-            for opt in q["display_options"]:
-                key = f"opt_{q['id']}_{opt}"
-                is_selected = st.session_state.selected_option == opt
-                is_correct = opt == q["answer"]
+    # Timer display
+    st.markdown(f"""
+    <div style='text-align: center; padding: 10px; background: #ff6b6b; color: white; border-radius: 10px; font-size: 20px; font-weight: bold;'>
+        ⏱️ Time Remaining: {minutes:02d}:{seconds:02d}
+    </div>
+    """, unsafe_allow_html=True)
 
-                if st.button(
-                    opt,
-                    key=key,
-                    use_container_width=True,
-                    disabled=st.session_state.selected_option is not None,
-                    type="primary" if is_selected and is_correct else "secondary"
-                ):
-                    if st.session_state.selected_option is None:
-                        st.session_state.selected_option = opt
-                        correct = opt == q["answer"]
-                        st.session_state.feedback = f"{'Correto!' if correct else 'Incorreto'} {q['explanation']}"
-                        
-                        if correct:
-                            st.session_state.score += 2
-                            st.session_state.streak += 1
-                            st.session_state.max_streak = max(st.session_state.streak, st.session_state.max_streak)
-                        else:
-                            st.session_state.streak = 0
-                        
-                        st.session_state.answers[st.session_state.current_q] = opt
-                        st.rerun()
+# Current Question
+if not state['show_results']:
+    q = state['shuffled_questions'][state['current_question']]
+    
+    st.markdown(f"""
+    <div class='question-box'>
+        <div class='big-font'>Question {state['current_question'] + 1}</div>
+        <div style='margin: 15px 0; font-size: 18px;'>
+            <strong>Category:</strong> {q['category']} | <strong>Difficulty:</strong> {q['difficulty']}
+        </div>
+        <hr style='border: 1px solid rgba(255,255,255,0.3);'>
+        <p style='font-size: 22px; margin: 20px 0;'>{q['question']}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-            if st.session_state.feedback:
-                color = "correct-feedback" if "Correto" in st.session_state.feedback else "wrong-feedback"
-                st.markdown(f'<div class="feedback-box {color}">{st.session_state.feedback}</div>', unsafe_allow_html=True)
+    # Store selected option
+    if f"q_{state['current_question']}" not in st.session_state:
+        st.session_state[f"q_{state['current_question']}"] = None
 
-            col1, col2, col3 = st.columns([1, 2, 1])
-            with col1:
-                if st.session_state.current_q > 0 and st.button("Anterior", use_container_width=True):
-                    st.session_state.current_q -= 1
-                    st.session_state.selected_option = st.session_state.answers[st.session_state.current_q]
-                    st.session_state.feedback = None
-                    st.rerun()
+    selected = st.session_state[f"q_{state['current_question']}"]
 
-            with col2:
-                if st.button("Reiniciar Quiz", use_container_width=True, type="secondary"):
-                    reset_quiz()
-                    st.rerun()
-
-            with col3:
-                if st.button("Próxima", use_container_width=True):
-                    st.session_state.current_q += 1
-                    if st.session_state.current_q >= len(st.session_state.quiz_data):
-                        st.session_state.show_results = True
-                    else:
-                        st.session_state.selected_option = st.session_state.answers[st.session_state.current_q]
-                        st.session_state.feedback = None
-                    st.rerun()
-
-        else:
-            total = len(quiz) * 2
-            percentage = (st.session_state.score / total) * 100
-
-            st.markdown(f"""
-            <div style="text-align: center; padding: 2rem;">
-                <h2>Quiz Concluído!</h2>
-                <div class="achievement-badge">
-                    <h1 style="font-size: 3.5rem; margin: 0;">{st.session_state.score}/{total}</h1>
-                    <p style="font-size: 1.5rem; margin: 0.5rem 0;">{percentage:.1f}% de acertos</p>
-                </div>
-
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <h3>Maior Sequência</h3>
-                        <p style="font-size: 2rem; color: #ff9500; margin: 0.5rem 0;">{st.session_state.max_streak}</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Tempo Total</h3>
-                        <p style="font-size: 1.2rem; margin: 0.5rem 0;">10:00</p>
-                    </div>
-                </div>
-
-                <h2 style="margin: 2rem 0; color: #8b5cf6;">{get_achievement(st.session_state.score, st.session_state.max_streak, len(quiz))}</h2>
-            </div>
-            """, unsafe_allow_html=True)
-
-            if st.button("Fazer Novamente", use_container_width=True, type="primary"):
-                reset_quiz()
+    for i, option in enumerate(q['options']):
+        key = f"option_{state['current_question']}_{i}"
+        cols = st.columns([4, 1])
+        
+        with cols[0]:
+            if st.button(
+                option,
+                key=key,
+                use_container_width=True,
+                disabled=state.get('submitted', False)
+            ):
+                st.session_state[f"q_{state['current_question']}"] = option
+                selected = option
                 st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        with cols[1]:
+            if selected == option:
+                st.markdown("✅")
 
-if __name__ == "__main__":
-    st.set_page_config(page_title="TypeScript Quiz", layout="centered")
-    main()
+    # Show feedback if submitted
+    if state.get('submitted', False):
+        user_answer = state['answers'][-1]['user_answer']
+        correct = user_answer == q['answer']
+        
+        if correct:
+            st.success(f"🎉 Correct! +1 point")
+        else:
+            st.error(f"❌ Incorrect. The answer is: **{q['answer']}**")
+
+        with st.expander("📖 Explanation"):
+            st.write(q['explanation'])
+
+    # Navigation
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col1:
+        if st.button("⬅️ Previous", disabled=state['current_question'] == 0):
+            if state.get('submitted', False):
+                state['answers'].pop()
+            state['current_question'] -= 1
+            state['submitted'] = False
+            st.rerun()
+
+    with col2:
+        if not state.get('submitted', False):
+            if selected:
+                if st.button("✅ Submit Answer", use_container_width=True, type="primary"):
+                    state['answers'].append({
+                        'question_index': state['current_question'],
+                        'user_answer': selected,
+                        'correct': selected == q['answer']
+                    })
+                    if selected == q['answer']:
+                        state['score'] += 1
+                    state['submitted'] = True
+                    st.rerun()
+            else:
+                st.warning("Please select an answer before submitting.")
+        else:
+            if st.button("➡️ Next Question", use_container_width=True):
+                state['current_question'] += 1
+                state['submitted'] = False
+                st.rerun()
+
+    with col3:
+        if st.button("🏁 Finish Quiz", type="secondary"):
+            if len(state['answers']) < len(quiz):
+                if st.warning("You haven't answered all questions. Finish anyway?"):
+                    state['show_results'] = True
+                    st.rerun()
+            else:
+                state['show_results'] = True
+                st.rerun()
+
+# Results Page
+if state['show_results']:
+    st.balloons()
+    st.markdown("<h2 style='text-align: center;'>🎊 Quiz Complete! 🎊</h2>", unsafe_allow_html=True)
+    
+    score = state['score']
+    percentage = (score / len(quiz)) * 100
+    
+    st.markdown(f"""
+    <div style='text-align: center; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 20px; margin: 20px 0;'>
+        <h1>{score}/100</h1>
+        <h3>{percentage:.1f}% Correct</h3>
+        <p>Time taken: {timedelta(seconds=int((datetime.now() - state['start_time']).total_seconds()))}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Performance by category
+    category_stats = {}
+    for ans in state['answers']:
+        q_idx = ans['question_index']
+        q = state['shuffled_questions'][q_idx]
+        cat = q['category']
+        if cat not in category_stats:
+            category_stats[cat] = {'correct': 0, 'total': 0}
+        category_stats[cat]['total'] += 1
+        if ans['correct']:
+            category_stats[cat]['correct'] += 1
+
+    st.markdown("### 📊 Performance by Category")
+    for cat, stats in category_stats.items():
+        pct = (stats['correct'] / stats['total']) * 100
+        st.markdown(f"**{cat}**: {stats['correct']}/{stats['total']} ({pct:.0f}%)")
+
+    # Show incorrect answers
+    incorrect = [a for a in state['answers'] if not a['correct']]
+    if incorrect:
+        st.markdown("### ❌ Review Incorrect Answers")
+        for ans in incorrect:
+            q = state['shuffled_questions'][ans['question_index']]
+            with st.expander(f"Q{ans['question_index'] + 1}: {q['question'][:60]}..."):
+                st.write(f"**Your answer:** {ans['user_answer']}")
+                st.write(f"**Correct answer:** {q['answer']}")
+                st.info(q['explanation'])
+
+    # Restart
+    if st.button("🔄 Take Quiz Again", use_container_width=True):
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        st.rerun()
+
+# Footer
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: #666;'>Made with ❤️ using Streamlit | TypeScript Quiz v1.0</p>", unsafe_allow_html=True)
